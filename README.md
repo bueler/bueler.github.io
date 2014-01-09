@@ -1,4 +1,6 @@
 bueler.github.io
 ================
 
-trial webpage for bueler
+Webpage for bueler, to replace www.dms.uaf.edu/~bueler.
+
+See deployed version at [http://bueler.github.io](http://bueler.github.io)
