@@ -1,0 +1,805 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <title>Math 310 Numerical Analysis, Fall 2011, Bueler</title>
+    <meta name="GENERATOR" content="MSHTML 5.00.2920.0">
+    <meta name="Author" content="Ed Bueler">
+    <meta name="author" content="Ed Bueler">
+  </head>
+  <body style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);" alink="#ff0000"
+    link="#0000ee" vlink="#551a8b">
+    <center>
+      <h2><font color="#006600">Math 310 Numerical Analysis<br>
+        </font></h2>
+    </center>
+    <center>
+      <h3> <font color="#000099">Fall 2011<font size="-1">&nbsp; (CRN 75300</font></font><font
+          color="#000099"><font size="-1">)</font> &nbsp;&nbsp; <a href="../index.html">Ed
+            Bueler</a></font></h3>
+    </center>
+    <table style="width: 100%;" cols="2" cellpadding="10">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top; width: 20%;">
+            <div align="center">
+              <div align="left"><b> Ed Bueler <br>
+                  &nbsp;&nbsp; </b><a href="mailto:elbueler@alaska.edu">elbueler@alaska.edu</a><br>
+                &nbsp;&nbsp;&nbsp; 474-7693<br>
+                <div align="left"><b>&nbsp;&nbsp; </b>Chapman 301C<br>
+                  &nbsp;&nbsp;&nbsp; (<a href="../OffHrs.htm">office hours here</a>)
+                  <br>
+                  <br>
+                </div>
+                <center></center>
+                <b> Time &amp; place</b>:<br>
+                &nbsp;&nbsp;&nbsp; MWF 10:30--11:30<br>
+                &nbsp;&nbsp;&nbsp; Gruening 202<br>
+                <div style="text-align: center;">
+                  <div style="text-align: left;"><small><br>
+                      plus additional <span style="font-style: italic;">Matlab/Octave</span>
+                      sessions during 2nd,3rd,4th weeks<br>
+                    </small></div>
+                </div>
+                <br>
+                <small><span style="font-weight: bold;">Final Exam time &amp;
+                    place:</span></small><small><span style="font-weight: bold;">
+                  </span>Dec
+                  16, 10:15am--12:15, Gruening 202</small><br>
+                <b><br>
+                </b><small>Prior instance of same course:<br>
+                  &nbsp;&nbsp; <a href="Math310F10.htm">Math 310 Fall 2010</a></small><br>
+                <br>
+                <b>Texts</b>
+                <ul>
+                  <li><span style="color: rgb(0, 0, 0);">J. Epperson, <span style="font-style: italic;">An
+                        Introduction to Numerical Methods and
+                        Analysis</span>, rev. ed., 2007<br>
+                    </span></li>
+                  <li><span style="color: rgb(0, 0, 0);">supplementary (free
+                      online): <small><a href="http://www.mathworks.com/moler/index_ncm.html">Moler,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          <span style="font-style: italic;">Numerical Computing
+                            with
+                            Matlab (NCM),</span> SIAM Press 2004</a></small><br>
+                    </span></li>
+                </ul>
+                <span style="color: rgb(0, 0, 0);"> </span><br>
+                <span style="color: rgb(153, 51, 153);"></span><span style="color: rgb(153, 51, 153);"></span><a
+                  href="M310SyllF11.htm"><b>Syllabus</b></a><br>
+                <br>
+                HELP:<br>
+                <ul>
+                  <li><a href="MatlabEx.htm">Bueler's <span style="font-style: italic;">Matlab/Octave
+                        </span>help page</a></li>
+                  <li><a href="http://www.gnu.org/software/octave/">Octave
+                      website</a></li>
+                  <li><a href="http://www.mathworks.com/help/techdoc/">Matlab
+                      website</a><br>
+                  </li>
+                </ul>
+                <center> </center>
+                <center></center>
+                <br>
+                CODES:<br>
+                <ul>
+                  <li><span style="font-style: italic;">Matlab/Octave</span>
+                    programs and sessions for class:</li>
+                  <ul>
+                    <li><small><a href="plotpolysqrt.m">plotpolysqrt.m</a></small></li>
+                    <li><small><a href="edsqrt.m">edsqrt.m</a></small></li>
+                    <li><small><a href="bisectP1.m">bisectP1.m</a><br>
+                      </small></li>
+                    <li><a href="midpointP2.m"><small>midpointP2.m</small></a></li>
+                    <li><small><a href="horner.m">horner.m</a></small></li>
+                    <li><a href="newt4.m"><small>newt4.m</small></a></li>
+                    <li><small><a href="randsevenpoly.m">randsevenpoly.m</a></small></li>
+                    <li><small><a href="smoothpolyapprox.m">smoothpolyapprox.m</a></small></li>
+                    <li><small><a href="mybisect.m">mybisect.m</a></small></li>
+                    <li><small><a href="refinetrap.m">refinetrap.m</a></small></li>
+                    <li><a href="fastsqrt.m"><small>fastsqrt.m</small></a></li>
+                    <li><a href="mynewt.m"><small>mynewt.m</small></a></li>
+                    <li><a href="exer5newt.m"><small>exer5newt.m</small></a></li>
+                    <li><a href="secant0.m"><small>secant0.m</small></a></li>
+                    <li><a href="nthpow.m"><small>nthpow.m</small></a></li>
+                    <li><small><a href="nthroot.m">nthroot.m</a></small></li>
+                    <li><a href="trysecant.m"><small>trysecant.m</small></a></li>
+                    <li><small><a href="chebdemo.m">chebdemo.m</a></small></li>
+                    <li><a href="allsolve.m"><small>allsolve.m</small></a></li>
+                    <li><a href="polyget.m"><small>polyget.m</small></a></li>
+                    <li><small><a href="simptrapcos.m">simptrapcos.m</a></small></li>
+                    <li><a href="trap.m"><small>trap.m</small></a></li>
+                    <li><small><a href="romberg.m">romberg.m</a></small></li>
+                    <li><a href="fastromberg.m"><small>fastromberg.m</small></a></li>
+                    <li><small><a href="simpfres.m">simpfres.m</a></small></li>
+                    <li><small><a href="ge.m">ge.m</a></small></li>
+                    <li><small><a href="gelessnaive.m">gelessnaive.m</a></small></li>
+                    <li><a href="trisolve.m"><small>trisolve.m</small></a></li>
+                    <li><a href="gerrr.m"><small>gerrr.m</small></a></li>
+                    <li><small><a href="rombergmod.m">rombergmod.m</a></small></li>
+                    <li><a href="myeuler.m"><small>myeuler</small></a><small><a>.m</a></small></li>
+                    <li><small><br>
+                      </small></li>
+                  </ul>
+                  <li><a href="http://www.mathworks.com/moler/ncmfilelist.html">Moler's
+
+NCM
+                      codes</a><br>
+                  </li>
+                </ul>
+                <ul>
+                  <ul>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+          </td>
+          <td style="vertical-align: top; width: 80%;">
+            <center>
+              <h3>Schedule:<b><font size="-1"> </font></b><i><font size="-1">&nbsp;(</font></i><font
+                  style="color: rgb(204, 0, 0);" size="-1">version 12/12/2011</font><i><font
+                    size="-1">)</font></i></h3>
+            </center>
+            <table style="width: 100%;" border="1">
+              <tbody>
+                <tr>
+                  <td style="width: 15%; vertical-align: top; font-weight: bold; text-align: center;">Day</td>
+                  <td style="width: 10%; vertical-align: top; text-align: center;"><small><b><big>Sect</big></b><b><br>
+                      </b></small> </td>
+                  <td style="vertical-align: top; text-align: center;"> <b>Topic</b><br>
+                  </td>
+                  <td style="width: 50%; vertical-align: top; text-align: center;"><b>Assigned
+
+or
+                      Due<br>
+                    </b><small><small>(and more on what you need to know from
+                        lecture)</small></small><b><br>
+                    </b> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 9/2<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>1.1<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(0, 0, 0);"><small>calculus
+
+problems
+                      revisited<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small><span style="font-weight: bold;"><a
+                          href="M310F11_A1.pdf">Assignment #1</a> (<span style="color: rgb(204, 0, 0);">PDF</span>)</span></small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 9/5<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small style="color: rgb(204, 0, 0);">Labor
+                      Day</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small style="color: rgb(204, 0, 0);">
+                      no class</small> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 9/7<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small><br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>cont<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small><br>
+                    </small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 9/9<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small><br>
+                    </small> </td>
+                  <td style="vertical-align: top;"><small>Taylor's theorem</small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 9/12<br>
+                    </small></td>
+                  <td style="vertical-align: top;"> <br>
+                  </td>
+                  <td style="vertical-align: top;"><small>Taylor examples</small>
+                  </td>
+                  <td style="vertical-align: top;"><small><span style="text-decoration: line-through;">A#1
+                        DUE</span></small><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 9/14<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>cont<br>
+                    </small> </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);"><small>A#1
+                        DUE</small><br>
+                      <br>
+                    </span><small><span style="font-weight: bold;"><a href="M310F11_A2.pdf">Assignment
+                          #2</a> (<span style="color: rgb(204, 0, 0);">PDF</span>)</span></small><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 9/16<br>
+                    </small></td>
+                  <td style="vertical-align: top;"> <small><br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>cont; sqrt method
+                      that uses how computers represent numbers<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><a href="awkward_sqrt.pdf"><small
+                        style="font-style: italic; font-weight: bold;">An
+                        awkward first method
+                        for computing square root using only + and &#8727;</small></a><small><span
+                        style="font-weight: bold;"> (<span style="color: rgb(204, 0, 0);">PDF</span>)</span></small><br>
+                    &nbsp; <small><a href="plotpolysqrt.m">plotpolysqrt.m</a><br>
+                      &nbsp; <a href="edsqrt.m">edsqrt.m</a></small><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 9/19<br>
+                    </small></td>
+                  <td style="vertical-align: top;"> <small>1.3</small></td>
+                  <td style="vertical-align: top;"><small>computer
+                      representation of numbers</small> </td>
+                  <td style="vertical-align: top;"><small><small><big>from
+                          solutions to A#1:<br>
+                          &nbsp; <a href="bisectP1.m">bisectP1.m</a><br>
+                          &nbsp; <a href="midpointP2.m">midpointP2.m</a></big><br>
+                      </small>from in-class session:<br>
+                      &nbsp; <a href="class19sept.m">class19sept.m</a><br>
+                    </small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 9/21<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>1.5</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>cont.; and another
+                      Taylor example<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small><small><br>
+                      </small></small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 9/23<br>
+                    </small></td>
+                  <td style="vertical-align: top;"> <small>2.1</small><br>
+                  </td>
+                  <td style="vertical-align: top;"> <small>Horner's rule and
+                      Matlab/Octave functions</small><small><br>
+                    </small></td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);"><small>A#2
+                        DUE</small><br>
+                    </span><small>example from in class:<br>
+                      &nbsp; <a href="horner.m">horner.m</a>&nbsp;&nbsp; (save
+                      as "horner.m"
+                      in current directory;&nbsp; type "&gt;&gt; help horner" to
+                      start)</small><span style="font-weight: bold; color: rgb(204, 0, 0);"><br>
+                    </span> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 9/26<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small style="color: rgb(51, 204, 0);">Bueler
+                      away</small><br>
+                    <small>online lecture = view PDF slides </small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small><a href="polybasics.pdf"><span
+                          style="font-style: italic; font-weight: bold;">How to
+                          put a polynomial
+                          through points</span></a><span style="font-weight: bold;">
+                        (<span style="color: rgb(204, 0, 0);">PDF</span>)<br>
+                      </span>from the slides:<br>
+                      &nbsp; <a href="newt4.m">newt4.m</a></small><small><span
+                        style="font-weight: bold;"><br>
+                      </span></small><small><span style="font-weight: bold;"><a
+                          href="M310F11_A3.pdf">Assignment #3 </a></span></small><small><span
+                        style="font-weight: bold;">(<span style="color: rgb(204, 0, 0);">PDF</span>)</span></small>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 9/28<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small style="color: rgb(51, 204, 0);">Bueler
+                      away<br>
+                    </small><small>cont</small><small style="color: rgb(51, 204, 0);"><br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>same; please start
+                      doing Assignment #3</small> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 9/30</small></td>
+                  <td style="vertical-align: top;"><small><br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>summary of what
+                      appears on "How to put ..." slides, and the assignment</small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 10/3</small></td>
+                  <td style="vertical-align: top;"><small>2.4</small></td>
+                  <td style="vertical-align: top;"><small>linear interpolation</small></td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);"><small>A#3
+                        DUE</small><br>
+                    </span><small><small><big>from solutions to A#3:<br>
+                          &nbsp; <a href="randsevenpoly.m">randsevenpoly.m</a><br>
+                          &nbsp; <a href="smoothpolyapprox.m">smoothpolyapprox.m</a><a
+                            href="randsevenpoly.m"><br>
+                          </a></big></small></small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 10/5</small></td>
+                  <td style="vertical-align: top;"><small><br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>cont<br>
+                    </small> </td>
+                  <td style="vertical-align: top;"><small><span style="font-weight: bold;"><a
+                          href="M310F11_A4.pdf">Assignment #4 </a></span></small><small><span
+                        style="font-weight: bold;">(<span style="color: rgb(204, 0, 0);">PDF</span>)</span></small>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 10/7</small></td>
+                  <td style="vertical-align: top;"><small>2.5</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>trapezoid rule</small>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 10/10</small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>cont<br>
+                    </small> </td>
+                  <td style="vertical-align: top;"><small>from in-class
+                      session:<br>
+                      &nbsp; </small><a href="class10oct.m"><small>class10oct.m</small></a><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 10/12</small></td>
+                  <td style="vertical-align: top;"><small>3.1</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>bisection</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>from in-class
+                      session:<br>
+                      &nbsp; <a href="mybisect.m">mybisect.m</a></small> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 10/14</small></td>
+                  <td style="vertical-align: top;"><small>3.2</small> </td>
+                  <td style="vertical-align: top;"><small>Newton's method</small>
+                  </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);"><small>A#4
+                        DUE</small><br>
+                    </span><small>from in-class session:<br>
+                      &nbsp; <a href="class14oct.m">class14oct.m</a></small><br>
+                    <small>from solutions to A#4:<br>
+                      &nbsp; <a href="refinetrap.m">refinetrap.m</a><br>
+                      &nbsp; <a href="mybisect.m">mybisect.m</a></small><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 10/17<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>3.5</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>error formula for
+                      Newton's method<br>
+                    </small> </td>
+                  <td style="vertical-align: top;"><small><span style="font-weight: bold;"><a
+                          href="M310F11_A5.pdf">Assignment #5<small> </small></a></span><span
+                        style="font-weight: bold;">(<span style="color: rgb(204, 0, 0);">PDF</span>)</span></small><big>
+                    </big></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 10/19<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>3.6</small> </td>
+                  <td style="vertical-align: top;"><small>convergence of
+                      Newton's method</small> </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 10/21<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>cont</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 10/24<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>3.3, 3.7</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>how to stop Newton;
+                      square roots for real</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>from in-class
+                      session:<br>
+                      &nbsp; <a href="fastsqrt.m"><span style="text-decoration: underline;">fastsqrt.m</span></a><br>
+                      <br>
+                      <big><a href="M310F11_midstudy.pdf">Midterm exam study
+                          guide</a> </big></small><span style="font-weight: bold;">(<span
+                        style="color: rgb(204, 0, 0);">PDF</span>)</span><small><br>
+                    </small> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 10/26<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>review;<br>
+                      square roots cont.</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);"><small>A#5
+                        DUE</small><br>
+                    </span><span class="Apple-style-span" style="border-collapse: separate; color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; font-size: medium;"><span
+                        class="Apple-style-span" style="color: rgb(204, 0, 0); font-size: 13px;">(make
+                        yourself a copy
+                        of what you turn in; I will distribute solutions
+                        immediately)</span></span><br>
+                    <small>from solutions to A#5:<br>
+                      &nbsp; <a href="mynewt.m">mynewt.m<br>
+                      </a>&nbsp; <a href="exer5newt.m">exer5newt.m</a><br>
+                      &nbsp; <a href="secant0.m">secant0.m</a><br>
+                      &nbsp; <a href="nthpow.m">nthpow.m</a><br>
+                      &nbsp; <a href="nthroot.m">nthroot.m</a><br>
+                    </small> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 10/28<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">MIDTERM
+                      EXAM<br>
+                      (in class)<br>
+                    </span><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">MIDTERM
+                      EXAM<br>
+                      (in class)</span><small><small><big><br>
+                          <big><a href="M310F11_midstudy.pdf">Midterm exam study
+                              guide</a> </big></big></small><big><span style="font-weight: bold;">(<span
+                            style="color: rgb(204, 0, 0);">PDF</span>)</span></big></small>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 10/31<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>3.8</small> </td>
+                  <td style="vertical-align: top;"><small>secant method<br>
+                    </small> </td>
+                  <td style="vertical-align: top;"><small>from in-class
+                      session:<br>
+                      &nbsp; <a href="trysecant.m">trysecant.m</a></small><br>
+                    <small>notes: </small><small style="font-style: italic;"><br>
+                      &nbsp; (1) Subsection 3.10.3 shows secant method has order
+                      of
+                      convergence p = (1+sqrt(5))/2 = 1.618...<br>
+                      &nbsp; (2) Subsection 3.10.5 shows how to combine secant
+                      method with
+                      bisection to get a "hybrid" method which is robust and
+                      fast.<br>
+                      &nbsp; (3) Matlab/Octaves's</small><small> fzero </small><small
+                      style="font-style: italic;">is a hybrid called "Brent's
+                      method"</small><small style="font-style: italic;"> like
+                      that in subsection 3.10.5.<br>
+                    </small> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 11/2<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>4.1</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>polynomial
+                      interpolation </small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small><span style="font-weight: bold;"><a
+                          href="M310F11_A6.pdf">Assignment #6 </a></span></small><small><span
+                        style="font-weight: bold;">(<span style="color: rgb(204, 0, 0);">PDF</span>)</span></small><br>
+                    <small><span style="font-style: italic;"></span></small> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 11/4<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>4.3</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>error in polynomial
+                      interpolation</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>from in-class
+                      session:<br>
+                      &nbsp; <a href="class4nov.m">class4nov.m</a></small><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 11/7<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>cont</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>from in-class
+                      session:<br>
+                      &nbsp; <a href="chebdemo.m">chebdemo.m</a></small><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 11/9<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>4.2</small> </td>
+                  <td style="vertical-align: top;"><small>Newton's divided
+                      differences</small> </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 11/11<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>5.1, 5.2</small> </td>
+                  <td style="vertical-align: top;"><small>what definite
+                      integrals mean; improving the trapezoid rule</small> </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);"><small>A#6
+                        DUE<br>
+                      </small></span><small>from solutions to A#6:<br>
+                      &nbsp; <a href="allsolve.m">allsolve.m</a><br>
+                      &nbsp; <a href="polyget.m">polyget.m</a><br>
+                    </small> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 11/14<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>5.3</small> </td>
+                  <td style="vertical-align: top;"><small>Simpson's rule</small>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 11/16<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>5.4<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>cont; midpoint rule<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><a href="M310F11_A7.pdf"><small><span
+                          style="font-weight: bold;">Assignment #7</span></small></a><small><span
+                        style="font-weight: bold;"> (<span style="color: rgb(204, 0, 0);">PDF</span>)</span></small>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 11/18<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>cont</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>from in-class
+                      session:<br>
+                      &nbsp; <a href="simptrapcos.m">simptrapcos.m</a></small><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 11/21<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>Romberg integration</small>
+                  </td>
+                  <td style="vertical-align: top;"><a href="fastromberg.m"><br>
+                    </a> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 11/23<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>cont<br>
+                    </small> </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);"><small>A#7
+                        DUE<br>
+                      </small></span><small>from solutions to A#7:<br>
+                      &nbsp; <a href="simpfres.m">simpfres.m</a></small><br>
+                    <small>from in-class session:<br>
+                      &nbsp; <a href="class23nov.m">class23nov.m</a><br>
+                      &nbsp; <a href="trap.m">trap.m</a><br>
+                      &nbsp; <a href="romberg.m">romberg.m</a>&nbsp;&nbsp;&nbsp;
+                      % calls
+                      trap.m</small><a><br>
+                      <small>&nbsp; </small></a><small><a href="fastromberg.m">fastromberg.m</a></small><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 11/25</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small><span style="color: rgb(204, 0, 0);">Thanksgiving
+                        break</span><br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small><span style="color: rgb(204, 0, 0);">no
+                        class</span><br>
+                    </small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 11/28<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>7.1, 7.2</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>linear systems and
+                      Gaussian elimination<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><a href="M310F11_A8.pdf"><small><span
+                          style="font-weight: bold;">Assignment #8</span></small></a><small><span
+                        style="font-weight: bold;"> (<span style="color: rgb(204, 0, 0);">PDF</span>)<br>
+                      </span></small><small>from in-class session:<br>
+                      &nbsp; </small><a href="class28nov.m"><small>class28nov.m</small></a></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 11/30<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>7.3</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>cont; operation
+                      counts<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>from in-class
+                      session, but completed:<br>
+                      &nbsp; <a href="ge.m">ge.m</a><br>
+                    </small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 12/2<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>cont.<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small><br>
+                    </small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 12/5<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>partial pivoting<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small><span style="text-decoration: line-through;">A#8
+                        DUE</span><br>
+                      from in-class session, but completed<br>
+                      (this code *does* do partial pivoting):<br>
+                      &nbsp; </small><small><a href="gelessnaive.m">gelessnaive.m</a></small>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Wed 12/7<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>6.1</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>ODE IVP<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);"><small>A#8
+                        DUE&nbsp;
+                        REVISED DATE!<br>
+                      </small></span><small>from solutions to A#8:<br>
+                      &nbsp; <a href="trisolve.m">trisolve.m</a><br>
+                      &nbsp; <a href="gerrr.m">gerrr.m</a><br>
+                      &nbsp; <a href="rombergmod.m">rombergmod.m</a><br>
+                    </small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 12/9<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small>2.3, 6.2</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>review for final,
+                      and<br>
+                      Euler's method<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small><small><big><big><a href="M310F11_final_study.pdf">Final
+                              Exam study guide</a> </big></big></small><big><span
+                          style="font-weight: bold;">(<span style="color: rgb(204, 0, 0);">PDF</span>)</span></big></small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Mon 12/12<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>cont<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><small><span style="color: rgb(0, 153, 0);">last
+                        day of instruction<br>
+                      </span></small><small>from in-class session:<br>
+                      &nbsp; </small><a href="myeuler.m"><small>myeuler</small></a><small><a>.m</a></small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>Fri 12/16<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">FINAL
+                      EXAM</span><br style="font-weight: bold; color: rgb(204, 0, 0);">
+                    <span style="font-weight: bold; color: rgb(204, 0, 0);">10:15am-12:15</span><br>
+                    <span style="color: rgb(204, 0, 0);">(in-class)</span><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">FINAL
+                      EXAM</span><br style="font-weight: bold; color: rgb(204, 0, 0);">
+                    <span style="font-weight: bold; color: rgb(204, 0, 0);">10:15am-12:15</span><span
+                      style="color: rgb(204, 0, 0);"><br>
+                      (in-class; no notes; no book; no calculator)</span> </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <font size="-1"><a href="http://get.adobe.com/reader/">Download Adobe's
+        Acrobat Reader</a> for free to view <font color="#cc0000"><b>PDF</b></font>
+      files.</font> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://www.cs.uaf.edu/cgi-bin/doc-info.prl">doc
+      info</a><br>
+    <br>
+  </body>
+</html>
