@@ -1,0 +1,930 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=us-ascii" http-equiv="content-type">
+    <meta name="generator" content="HTML Tidy for Linux (vers 25 March
+      2009), see www.w3.org">
+    <title>Math 421 (Bueler) Fall 2011</title>
+    <meta name="GENERATOR" content="MSHTML 5.00.2920.0">
+    <meta name="Author" content="Ed Bueler">
+    <meta name="author" content="Bueler">
+  </head>
+  <body style="background-color: rgb(255, 255, 255); color: rgb(0, 0,
+    0);" alink="#ff0000" link="#0000ee" vlink="#551a8b">
+    <center>
+      <h1><font color="#006600">Math 421 Applied Analysis</font></h1>
+    </center>
+    <center>
+      <h3><font color="#000099">Fall 2011 <font size="-1">&nbsp; (CRN 75305)</font>,
+          &nbsp;&nbsp; <a href="../index.html">Ed Bueler</a></font></h3>
+      Thanks for a great semester!<br>
+      <br>
+    </center>
+    <table cols="2" cellpadding="10" width="99%">
+      <tbody>
+        <tr>
+          <td valign="top" width="30%">
+            <div align="center">
+              <div align="left"><b>Ed Bueler</b><br>
+                &nbsp; <a href="mailto:elbueler@alaska.edu">elbueler@alaska.edu</a><br>
+                &nbsp; 474-7693<br>
+                <div align="left"><b>Office</b>: Chapman 301C (<a href="../OffHrs.htm">hours</a>)<br>
+                  <br>
+                </div>
+                <b>Class times and rooms</b>:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp; MWF 9:10--10:10 GRUE 202<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-style: italic; color: rgb(204, 0, 0);">note:
+                  starts &amp; ends</span><br style="font-style: italic; color:
+                  rgb(204, 0, 0);">
+                <span style="font-style: italic; color: rgb(204, 0, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+5
+
+
+minutes
+                  early on MWF!</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp; Tu 9:45--10:45 CHAP 106<br>
+                <b><br>
+                  Texts</b>:
+                <ul>
+                  <li><span style="color: rgb(0, 153, 0);"><span style="font-weight: bold;">Schey</span>,</span>
+                    <span style="font-style: italic; color: rgb(0, 153,
+                      0);">Div, Grad, Curl and All That</span><span style="color: rgb(0, 153,
+                      0);">, 4th edition Norton 2005</span><br>
+                  </li>
+                  <li><span style="color: rgb(153, 51, 153);"><span style="font-weight: bold;">Farlow</span>,</span>
+                    <span style="font-style: italic; color: rgb(153, 51,
+                      153);">Partial Differential Equations for Scientists and
+                      Engineers</span><span style="color: rgb(153, 51,
+                      153);">, Dover 1993</span><br>
+                  </li>
+                </ul>
+                <a href="M421SyllF11.htm"><b>Syllabus Here</b></a><br>
+                <br>
+                Prior course: <a href="Math421F07.htm">Math 421 Fall 2007</a><br>
+                <br>
+                <div align="left">
+                  <div align="left"><span style="font-weight: bold;">Two Parts
+                      of Course:</span><br>
+                    <ul>
+                      <li>from <span style="color: rgb(0, 153, 0);
+                          font-weight: bold;">Schey</span>: vector calculus (=
+                        surface integrals, div, line integrals, curl, laplacian,
+                        potentials, grad, directional derivatives)</li>
+                      <li>from <span style="color: rgb(153, 51, 153);
+                          font-weight: bold;">Farlow</span>: boundary value
+                        problems for partial differential equations, separation
+                        of variables, and Fourier series</li>
+                    </ul>
+                  </div>
+                </div>
+                <br>
+                LINKS:<br>
+                <ul>
+                  <li><a href="http://archives.math.utk.edu/topics/multivariableCalculus.html">Multivariable
+Calculus
+page
+at
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      <span style="font-style: italic;">Math Archives</span></a><br>
+                  </li>
+                  <li><a href="http://archives.math.utk.edu/topics/partialDiffEq.html">PDE
+page
+                      at <span style="font-style: italic;">Math Archives</span></a><br>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </td>
+          <td valign="top">
+            <center>
+              <h3>&nbsp;Schedule: <i><font size="-1">&nbsp;(<span style="color: rgb(204, 0, 0);"></span></font></i><i><font
+                    size="-1"><span style="color: rgb(204, 0, 0);">version
+                      12/18/11 FINAL</span>)</font></i></h3>
+            </center>
+            <table style="width: 100%;" border="1">
+              <tbody>
+                <tr>
+                  <td valign="top" width="10%">
+                    <h4>Day</h4>
+                  </td>
+                  <td valign="top" width="10%"><b>Text Chapter</b><br>
+                  </td>
+                  <td valign="top" width="30%"><b>Topic</b><br>
+                  </td>
+                  <td valign="top" width="50%"><b>Assigned or Due</b><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top"><small>F
+                      9/2<br>
+                    </small></td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">I<br>
+                  </td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">introduction<br>
+                    vector functions (fields)<br>
+                  </td>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top"><span
+                      style="font-weight: bold;">Assignment #1</span>:<br>
+                    &nbsp;&nbsp; <span style="font-style: italic;">I</span> (pp
+                    8--9): 1aefh, 2, 3ac, 4, 5<br>
+                    &nbsp;&nbsp; <span style="font-style: italic;">II</span>
+                    (pp 52--53): 1abe, 2<br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>M 9/5<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="color:
+                      rgb(204, 0, 0); font-style: italic;"><span style="color: rgb(51, 204, 0);">no
+                        class: Labor Day</span><br>
+                    </span></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top"
+                    width="10%"><small>T 9/6<br>
+                    </small></td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">I</td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">electric fields (as
+                    example)<br>
+                  </td>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top">
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top"><small>W
+                      9/7<br>
+                    </small></td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">II<br>
+                  </td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">cont; surfaces<br>
+                    <br>
+                  </td>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top">
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top"><small>F
+                      9/9<br>
+                    </small></td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">II</td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">unit normal vector
+                    fields<br>
+                  </td>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top"><span
+                      style="text-decoration:
+                      line-through;">A #1 Due</span><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top"><small>M
+                      9/12<br>
+                    </small></td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">II</td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">cont<br>
+                  </td>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top">
+                    <span style="font-weight: bold;
+                      color: rgb(204, 0, 0);">A #1 Due<br>
+                    </span><span style="font-weight: bold;">Assignment #2</span>:<br>
+                    <span style="font-style: italic;">&nbsp;&nbsp; II</span> (pp
+                    52--58): 4ac, 5ac, 8, 10ab,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+11,
+
+
+13ab,
+                    14abeg,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+16b,
+
+
+17,
+                    19, 20<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top"><small>T
+                      9/13<br>
+                    </small></td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">II</td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">surface integrals<br>
+                  </td>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top">
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top"><small>W
+                      9/14<br>
+                    </small></td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">II</td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">Gauss' law; flux </td>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top">
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255);" valign="top"><small>F
+                      9/16<br>
+                    </small></td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">II</td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 153, 0);" valign="top">cont<br>
+                  </td>
+                  <td style="background-color: rgb(255, 255, 255);
+                    color: rgb(0, 0, 0);" valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top"><small>M 9/19<br>
+                    </small></td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">II<br>
+                  </td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">divergence</td>
+                  <td valign="top"> <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top"><small>T 9/20<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">II<br>
+                  </td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">div in other
+                    coordinates</td>
+                  <td valign="top"><span style="text-decoration:
+                      line-through;">A #2 Due</span> </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%"><small>W 9/21<br>
+                    </small></td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">II<br>
+                  </td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">divergence
+                    theorem </td>
+                  <td valign="top"><span style="font-weight: bold;
+                      color: rgb(204, 0, 0);"></span><span style="text-decoration: line-through;">A
+                      #2 Due</span> </td>
+                </tr>
+                <tr>
+                  <td valign="top"><small>F 9/23<br>
+                    </small></td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">III<br>
+                  </td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">cont.<br>
+                  </td>
+                  <td valign="top"><span style="font-weight: bold;
+                      color: rgb(204, 0, 0);">A #2 Due&nbsp; RE-REVISED DATE!<br>
+                      <br>
+                    </span><span style="font-weight: bold;">Assignment #3</span>:<br>
+                    &nbsp; II&nbsp;(pp 58--62): 22, 23ac, 24, 25,<br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 27ab<br>
+                    &nbsp; III&nbsp;(pp 104--105): 2, 3abch, 4ab,<br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 6, 7<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%"><small>M 9/26<br>
+                    </small></td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">III<br>
+                  </td>
+                  <td style="color: rgb(0, 153, 0);" valign="top"><span style="color: rgb(204, 0, 0); font-style: italic;"></span>line
+                    integrals<br>
+                    path independence<br>
+                    <small><span style="color: rgb(204, 0, 0);
+                        font-style: italic;">(Bueler away; subst.)</span></small><br>
+                  </td>
+                  <td valign="top"><small><small><br>
+                      </small></small></td>
+                </tr>
+                <tr>
+                  <td valign="top"><small>T 9/27<br>
+                    </small></td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">III<br>
+                  </td>
+                  <td style="color: rgb(0, 153, 0);" valign="top"><span style="color: rgb(204, 0, 0); font-style: italic;"></span>curl<br>
+                    curl in other coords<br>
+                    <small><span style="color: rgb(204, 0, 0);
+                        font-style: italic;">(Bueler away; subst.)</span></small><br>
+                  </td>
+                  <td style="font-weight: bold;" valign="top"><span style="font-weight: normal;"></span><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%"><small>W 9/28<br>
+                    </small></td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">III<br>
+                  </td>
+                  <td style="color: rgb(0, 153, 0);" valign="top"><span style="color: rgb(204, 0, 0); font-style: italic;"></span>cont.<br>
+                    <small><span style="color: rgb(204, 0, 0);
+                        font-style: italic;">(Bueler away; subst.)</span></small><br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top"><small>F 9/30<br>
+                    </small></td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">II</td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">divergence
+                    thm cont<br>
+                  </td>
+                  <td valign="top"><small><small><br>
+                      </small></small> </td>
+                </tr>
+                <tr>
+                  <td valign="top"><small>M 10/3<br>
+                    </small></td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">II<br>
+                  </td>
+                  <td style="color: rgb(0, 153, 0);" valign="top">cont.<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>T 10/4<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">III<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">line integrals, curl<br>
+                  </td>
+                  <td style="vertical-align: top;"><small><small> </small></small>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>W 10/5<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">III<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">cont; curl in cylindrical</td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold;">Assignment
+                      #4</span>:<br>
+                    &nbsp; III (<small><small>pp 105--112</small></small>): 9,
+                    10a, 12, 14, 15a,<br>
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; 19, 20, 22a<br>
+                    &nbsp; IV&nbsp;(<small><small>pp 144--149</small></small>):
+                    1a, 1bc, 2acdg, 3, 4a,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+8,
+                    9, 10, 15<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>F 10/7<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">III</td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">Stoke's theorem </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">A
+                      #3 Due</span> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>M 10/10<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">III</td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">cont<br>
+                  </td>
+                  <td style="vertical-align: top;"><small><small><br>
+                      </small></small> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>T 10/11<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">IV</td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">path independence; gradients;<br>
+                    potentials</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>W 10/12<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">IV</td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">Laplace eqn<br>
+                    finding potentials</td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);"></span><span
+                      style="text-decoration: line-through;">A #4 Due</span> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>F 10/14<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">Review</td>
+                  <td style="vertical-align: top; color: rgb(0, 153,
+                    0);">review;<br>
+                    problems from IV</td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">A
+                      #4 Due (REVISED DATE)<br>
+                    </span><small><span style="color: rgb(204, 0, 0);">(make
+                        yourself a copy of what you turn in; I will distribute
+                        solutions immediately)</span></small><span style="font-weight: bold; color: rgb(204, 0, 0);"><br>
+                    </span> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>M 10/17<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(204, 0,
+                    0);">Exam<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(204, 0,
+                    0);">Vector calculus Exam<br>
+                    (in-class exam; covers Schey)<br>
+                  </td>
+                  <td style="vertical-align: top;"><a style="font-weight: bold;"
+                      href="DCGATsolns_F07.pdf"><br>
+                    </a></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>T 10/18<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 1<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">types of PDEs;<br>
+                    wave equation<br>
+                  </td>
+                  <td style="vertical-align: top;"> <small><small><br>
+                      </small></small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>W 10/19</small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="color:
+                      rgb(153, 51, 153);">cont.</span><br>
+                  </td>
+                  <td style="vertical-align: top;"><small>from in-class session:<br>
+                      &nbsp; <a href="wavemovie.m">wavemovie.m</a></small><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>F 10/21</small></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="color:
+                      rgb(153, 51, 153);">cont</span><br>
+                  </td>
+                  <td style="vertical-align: top; font-weight: bold;"><a href="M421F11_A5.pdf">Assignment
+                      #5</a> (<span style="color: rgb(204, 0, 0);">PDF</span>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>M 10/24</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 2<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">heat equation<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>T 10/25</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 3, L 4<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">derivation of heat eqn<br>
+                  </td>
+                  <td style="vertical-align: top;"> <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>W 10/26</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);"><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">cont<br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);"><br>
+                    </span></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>F 10/28</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 5<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">separation of variables<br>
+                    Fourier sine series </td>
+                  <td style="vertical-align: top; text-decoration:
+                    line-through;">A #5 Due </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>M 10/31</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">cont; variation</td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">A
+                      #5 Due<br>
+                    </span><small>from in-class session:<br>
+                      &nbsp; <a href="showexpheat.m">showexpheat</a><a href="showexpheat.m">.m</a></small><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>T 11/1</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">review<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">review of trig integrals</td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold;">Assignment
+                      #6</span>:<br>
+                    &nbsp; Lesson 4:&nbsp; 2<br>
+                    &nbsp; Lesson 5:&nbsp; 3, 4, 5<br>
+                    &nbsp; Lesson 6:&nbsp; 2, 3<br>
+                    &nbsp; Lesson 7:&nbsp; 1, 2<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>W 11/2</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 6<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">nonhomogeneous BCs<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>F 11/4</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L6<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">cont<br>
+                  </td>
+                  <td style="vertical-align: top;"><small><small><br>
+                      </small></small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>M 11/7</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">review<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">review of ODEs<br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);"></span><br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>T 11/8</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 7</td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">new eigenfunction problems</td>
+                  <td style="vertical-align: top; text-decoration:
+                    line-through;">A #6 Due </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>W 11/9</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 7<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">cont<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>F 11/11<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 8 </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">more transformations </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">A
+                      #6 Due</span><br>
+                    <span style="text-decoration: line-through;">Midterm Exam<br>
+                    </span><small>from in-class session:<br>
+                      &nbsp; <a href="tanroots.m">tanroots.m</a></small><span style="text-decoration: line-through;"><br>
+                    </span></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>M 11/14</small><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);"><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">in-class work: start A#7 in public<br>
+                  </td>
+                  <td style="vertical-align: top;"><a href="M421F11_A7.pdf">Assignment
+                      #7</a> (<span style="color: rgb(204, 0, 0);">PDF</span>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>T 11/15<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 9<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">eigenfunction expansions </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>W 11/16</small><br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">cont<br>
+                    review for exam</td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">A
+                      #7 Due</span> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>F 11/18<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(204, 0,
+                    0);">Exam<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(204, 0,
+                    0);">Midterm Exam (on PDEs; in class exam)<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(204, 0,
+                    0);">Midterm Exam </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>M 11/21</small> </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 20</td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">vibrating string</td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>T 11/22</small></td>
+                  <td style="vertical-align: top;"><span style="color:
+                      rgb(153, 51, 153);">L16, L17, L18</span><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="color:
+                      rgb(153, 51, 153);">cont.;<br>
+                      recalling D'Alembert's solution; space-time diagram</span><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="color:
+                      rgb(255, 102, 0);"></span><span style="color:
+                      rgb(255, 0, 0); font-weight: normal;"> </span><a href="M421F11_A8.pdf">Assignment
+                      #8</a> (<span style="color: rgb(204, 0, 0);">PDF</span>) </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>W 11/23</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L11</td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">Fourier Series<br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="color:
+                      rgb(255, 0, 0); font-weight: normal;"><br>
+                    </span></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>F 11/25</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);"><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(51, 204,
+                    0);"><span style="font-style: italic;">no class:
+                      Thanksgiving break</span> </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>M 11/28</small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);"><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">cont.<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>T 11/29<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);"><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">frequency spectrum and complex Fourier series<br>
+                  </td>
+                  <td style="vertical-align: top;"><small>from in-class session:<br>
+                      &nbsp; </small><a href="showfourier.m"><small>showfourier.m</small></a><br>
+                    <small>the "applet" I showed in class:</small><br>
+                    &nbsp; <a href="http://www.falstad.com/fourier/">www.falstad.com/fourier/</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>W 11/30<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);"><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">Fourier transform </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">A
+                      #8 Due<br>
+                    </span><a href="M421F11_A9.pdf">Assignment #9</a> (<span style="color: rgb(204, 0, 0);">PDF</span>)
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>F 12/2<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);"><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">cont<br>
+                  </td>
+                  <td style="vertical-align: top;"><a style="font-weight: bold;"
+                      href="M421_Final_F07.pdf"><br>
+                    </a></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>M 12/5<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 12 </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">solution to heat equation by F. transforms and
+                    convolution </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>T 12/6<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);"><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">cont </td>
+                  <td style="vertical-align: top;"><a href="M421F11_finalexam.pdf">FINAL
+                      EXAM (take-home)</a> (<span style="color: rgb(204, 0,
+                      0);">PDF</span>) </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>W 12/7<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">L 31<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">Laplacian; in polar coordinates<br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">A
+                      #9 Due</span> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>F 12/9<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);"> L 33<br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(153, 51,
+                    153);">Dirichlet problem on a disc<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small>M 12/12<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><span style="color:
+                      rgb(153, 51, 153);">L 30</span> </td>
+                  <td style="vertical-align: top;"><span style="color:
+                      rgb(153, 51, 153);">cont; vibrating drum head</span> </td>
+                  <td style="vertical-align: top;">last day of instruction<br>
+                    <br>
+                    <a href="E1b_final_note.pdf">note on E1(b)&amp;(c) on Final
+                      Exam</a> (<span style="color: rgb(204, 0, 0);">PDF</span>)
+                    <br>
+                    <small><br>
+                      from in-class session:<br>
+                      &nbsp; </small><a href="bidisc.m"><small>bidisc.m</small></a><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><small><span style="font-weight: bold; color: rgb(204, 0,
+                        0);">Thursday</span><br style="font-weight:
+                        bold; color: rgb(204, 0, 0);">
+                      <span style="font-weight: bold; color: rgb(204, 0,
+                        0);">12/15</span><br>
+                      (revised)<br>
+                    </small></td>
+                  <td style="vertical-align: top; color: rgb(255, 0,
+                    0);"><span style="color: rgb(204, 0, 0);">FINAL</span><br>
+                  </td>
+                  <td style="vertical-align: top; color: rgb(255, 0,
+                    0);"><span style="color: rgb(204, 0, 0);">TAKE HOME FINAL</span><br
+                      style="color: rgb(204, 0, 0);">
+                    <span style="color: rgb(204, 0, 0);"> DUE at 5pm</span><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="color:
+                      rgb(255, 0, 0); font-weight: normal;"><span style="color: rgb(0, 0, 0);"></span>
+                    </span><span style="color: rgb(204, 0, 0);">TAKE HOME FINAL</span><br
+                      style="color: rgb(204, 0, 0);">
+                    <span style="color: rgb(204, 0, 0);">DUE at 5pm in my office
+                      box (Chapman 101)<br>
+                    </span><a href="M421F11_solnsFinal.pdf">solutions to Final
+                      Exam</a> (<span style="color: rgb(204, 0,
+                      0);">PDF</span>)<br>
+                    <small>from these solns:<br>
+                      &nbsp; <a href="compareheat.m">compareheat.m</a><br>
+                      &nbsp; <a href="squaredrums.m">squaredrums.m</a></small><span
+                      style="color: rgb(204, 0, 0);"><br>
+                    </span></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="http://www.cs.uaf.edu/cgi-bin/doc-info.prl">doc info</a><br>
+    <br>
+  </body>
+</html>
