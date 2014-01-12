@@ -1,0 +1,630 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <!-- saved from url=(0044)http://www.cs.uaf.edu/~bueler/Math412S03.htm -->
+    <title>Math 401 (Bueler) Fall 2013</title>
+    <meta content="MSHTML 5.00.2920.0" name="GENERATOR">
+    <meta content="Ed Bueler" name="Author">
+    <meta content="Bueler" name="author">
+    <meta content="web page for Math 401 Introduction to Real Analysis" name="description">
+  </head>
+  <body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" alink="#ff0000"
+    link="#0000ee" vlink="#551a8b">&nbsp;
+    <center><big style="color: rgb(0, 102, 0); font-weight: bold;"><big><big>Math
+401
+            Introduction to Real Analysis</big></big></big><br>
+    </center>
+    <center>
+      <h3><font color="#000099">Fall 2013, <a href="../index.html">Ed Bueler</a></font></h3>
+      <br>
+      <big style="color: rgb(204, 0, 0);"><span style="font-weight: bold;"></span></big></center>
+    <table cols="2" cellpadding="10" width="99%">
+      <tbody>
+        <tr>
+          <td valign="top" width="30%">
+            <div align="center">
+              <div align="left"><b> Ed Bueler</b><br>
+                <a href="mailto:elbueler@alaska.edu">elbueler@alaska.edu</a>
+                &nbsp;&nbsp; x7693<br>
+                <b>Office</b>: Chapman 301C (<a href="../OffHrs.htm">hours here</a>)
+                <br>
+                <center></center>
+                <b> Class time</b>: 9:15--10:15 MWF<big style="font-weight: bold;"><span
+                    style="color: rgb(204, 0, 0);"></span></big><br>
+                <b>Classroom</b>: Brooks 104A<br>
+                <br>
+                <b> Text</b>: Ken Ross, <span style="font-style: italic;">Elementary
+Analysis:
+                  The Theory of Calculus</span>, 2nd ed. Springer 2013<br>
+                <span style="font-weight: bold;"><br>
+                  Grader:</span><br>
+                &nbsp;&nbsp; Kris Kilpatrick<br>
+                &nbsp;&nbsp; in MathLab (= Chapman 305)<br>
+                &nbsp; &nbsp; &nbsp; Sat and Sun 8am - 10:30am<br>
+                <br>
+                <big><a href="M401F13syllabus.htm"><b>Syllabus</b></a></big><br>
+                <br>
+                <span style="font-weight: bold;">LaTeX:</span>&nbsp; In this
+                class, we'll use LaTeX to typeset solutions. I recommend David
+                Maxwell's installation guides:<br>
+                <ul>
+                  <li><a href="http://www.dms.uaf.edu/%7Emaxwell/AY2011/math215/LatexInstallationWindows.pdf">Latex
+Installation
+                      for Windows</a></li>
+                  <li><a href="http://www.dms.uaf.edu/%7Emaxwell/AY2011/math215/LatexInstallationMac.pdf">Latex
+Installation
+                      for Mac OS X</a></li>
+                </ul>
+                (See me if you use Linux; it is easier.) Then download this file
+                into a
+                good location:<br>
+                <ul>
+                  <li><a href="Sample401Proof.tex">Sample401Proof.tex</a></li>
+                </ul>
+                When you successfully PDFLaTeX you get<br>
+                <ul>
+                  <li><a href="Sample401Proof.pdf">Sample401Proof.pdf</a>.</li>
+                </ul>
+                When you successfully LaTeX it you get<br>
+                <ul>
+                  <li><a href="Sample401Proof.dvi">Sample401Proof.dvi</a> </li>
+                </ul>
+                David
+                also wrote nice LaTeX notes:
+                <ul>
+                  <li><a href="http://www.dms.uaf.edu/%7Emaxwell/AY2011/math215/BeginningLatex.pdf">Beginning
+                      Latex</a></li>
+                </ul>
+                <br>
+                <center></center>
+                LINKS:<br>
+                <ul>
+                  <li>What is the harmonic series in its musical context?&nbsp;
+                    <a href="http://en.wikipedia.org/wiki/Harmonic_series_%28music%29">See
+                      here.</a><br>
+                  </li>
+                  <li>I've asserted in lecture that computer-verifiable proofs
+                    of all of math is a goal of some people, since <a href="http://en.wikipedia.org/wiki/Principia_Mathematica">Bertrand
+                      Russell in 1910</a>.&nbsp; The webpage <a href="http://us.metamath.org/mpegif/mmset.html">metamath.org</a>
+                    is such a modern project.</li>
+                  <li>Because you can do anything you want to
+                    digital representations, at metamath.org you can also <a href="http://us.metamath.org/mpegif/mmmusic.html">turn
+                      proofs into music</a>.&nbsp; Likewise, you can <a href="http://www.mimg.ucla.edu/faculty/miller_jh/gene2music/home.html">turn
+                      genetic sequences into music</a>.<br>
+                    <a href="http://comjnl.oxfordjournals.org/content/3/1/23.full.pdf+html"><span
+                        style="font-style: italic;"></span></a></li>
+                  <li>Comments on alternative <a href="http://mathoverflow.net/questions/4023/text-for-an-introductory-real-analysis-course">real
+analysis
+                      texts</a><br>
+                  </li>
+                  <li>Wikipedia
+                    page: <a href="http://en.wikipedia.org/wiki/List_of_real_analysis_topics">"List
+                      of real analysis topics"</a></li>
+                  <li><a href="http://www.dms.uaf.edu/%7Ebueler/nodiffM.htm">Matlab
+source
+                      for a nowhere differentiable function</a><br>
+                  </li>
+                </ul>
+                <center></center>
+              </div>
+            </div>
+          </td>
+          <td valign="top">
+            <center>
+              <h3>&nbsp;<span style="font-style: italic;"></span>Schedule:<b><font
+                    size="-1"> </font></b><i><font size="-1">&nbsp;(<span style="color: black;">version
+                      8 December</span>)</font></i></h3>
+              <span style="font-weight: bold; color: rgb(204, 0, 0);"></span> </center>
+            <table style="width: 100%;" border="1">
+              <tbody>
+                <tr>
+                  <td valign="top" width="10%">
+                    <h4>Day</h4>
+                  </td>
+                  <td valign="top" width="10%"><b>Sections</b><br>
+                    (in text)<br>
+                  </td>
+                  <td valign="top" width="40%"> <b>Topic</b><br>
+                  </td>
+                  <td valign="top" width="20%"><b>Assigned or Due</b><br>
+                    (links are <font color="#cc0000">PDF</font>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Fri 9/6<br>
+                  </td>
+                  <td valign="top">1<br>
+                  </td>
+                  <td valign="top">review: natural numbers and induction<br>
+                  </td>
+                  <td valign="top"><a href="M401F13_A1_merged.pdf"><big>Assignment
+                        #1</big></a> (<font color="#cc0000">PDF</font>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Mon 9/9<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">cont.<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Wed 9/11<br>
+                  </td>
+                  <td valign="top">3<br>
+                  </td>
+                  <td valign="top">axioms for ordered fields (both rationals
+                    and reals are that)<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Fri 9/13<br>
+                  </td>
+                  <td valign="top" width="10%">2<br>
+                  </td>
+                  <td valign="top" width="40%">rational zeros </td>
+                  <td valign="top" width="20%"><span style="text-decoration: line-through;">A#1
+                      DUE</span><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Mon 9/16<br>
+                  </td>
+                  <td style="vertical-align: top;">4<br>
+                  </td>
+                  <td style="vertical-align: top;">real numbers are complete
+                    (unlike rationals)<br>
+                    <a href="finitesetsmax.pdf">note on finite sets and maxima</a><br>
+                  </td>
+                  <td style="vertical-align: top;"><big style="font-weight: bold; color: rgb(204, 0, 0);">A#1
+                      DUE<br>
+                    </big><a href="M401F13_A2.pdf"><big>Assignment
+                        #2</big></a> (<font color="#cc0000">PDF</font>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Wed 9/18<br>
+                  </td>
+                  <td valign="top" width="10%"><br>
+                  </td>
+                  <td valign="top" width="40%">cont.<br>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Fri 9/20<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">cont.<br>
+                  </td>
+                  <td style="vertical-align: top;"><big style="font-weight: bold; color: rgb(204, 0, 0);"><br>
+                    </big> </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Mon 9/23<br>
+                  </td>
+                  <td valign="top" width="10%">5<br>
+                    6<br>
+                  </td>
+                  <td valign="top" width="40%">use of the symbols "&#8734;" and "-&#8734;"<br>
+                    construction of R<br>
+                  </td>
+                  <td valign="top" width="20%"><big style="font-weight: bold; color: rgb(204, 0, 0);">A#2
+                      DUE<br>
+                    </big><a href="M401F13_A3.pdf"><big>Assignment
+                        #3</big></a> (<font color="#cc0000">PDF</font>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Wed 9/25<br>
+                  </td>
+                  <td style="vertical-align: top;">7<br>
+                  </td>
+                  <td style="vertical-align: top;">sequences and convergence </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Fri 9/27<br>
+                  </td>
+                  <td style="vertical-align: top;">8<br>
+                  </td>
+                  <td style="vertical-align: top;">cont.<br>
+                  </td>
+                  <td style="vertical-align: top; font-weight: bold; color: rgb(51, 0, 51); text-decoration: line-through;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Mon 9/30<br>
+                  </td>
+                  <td valign="top">9<br>
+                  </td>
+                  <td valign="top">limit rules<br>
+                  </td>
+                  <td valign="top"><big style="font-weight: bold; color: rgb(204, 0, 0);">A#3
+                      DUE<br>
+                    </big><a href="M401F13_A4.pdf"><big>Assignment
+                        #4</big></a> (<font color="#cc0000">PDF</font>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Wed 10/2<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">cont.<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Fri 10/4<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">cont.<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Mon 10/7<br>
+                  </td>
+                  <td valign="top" width="10%">10<br>
+                  </td>
+                  <td valign="top" width="40%">monotone sequences<br>
+                    <span style="text-decoration: line-through;">
+                      MIDTERM I in class</span> </td>
+                  <td valign="top" width="20%"><big style="font-weight: bold; color: rgb(204, 0, 0);">A#4
+                      DUE</big> </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Wed 10/9<br>
+                  </td>
+                  <td valign="top" width="10%"><br>
+                  </td>
+                  <td valign="top" width="40%"><span style="font-weight: bold; color: rgb(204, 0, 0);"></span><span
+                      style="font-weight: bold; color: rgb(204, 0, 0);">MIDTERM
+                      I in class<br>
+                      &nbsp; covers sections 1--9<br>
+                    </span> </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Fri 10/11<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">lim sup &amp; lim inf </td>
+                  <td style="vertical-align: top;"><a href="M401F13_A5.pdf"><big>Assignment
+                        #5</big></a> (<font color="#cc0000">PDF</font>) </td>
+                </tr>
+                <tr>
+                  <td valign="top">Mon 10/14<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                  <td valign="top">Cauchy sequences </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Wed 10/16<br>
+                  </td>
+                  <td style="vertical-align: top;">11<br>
+                  </td>
+                  <td style="vertical-align: top;">subsequences </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Fri 10/18<br>
+                  </td>
+                  <td valign="top" width="10%">12<br>
+                  </td>
+                  <td valign="top" width="40%">cont.&nbsp; (read section 12;
+                    section 13 is skipped)<br>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Mon 10/21<br>
+                  </td>
+                  <td valign="top">14<br>
+                  </td>
+                  <td valign="top">series<br>
+                  </td>
+                  <td valign="top"><big style="font-weight: bold; color: rgb(204, 0, 0);">A#5
+                      DUE<br>
+                    </big><a href="M401F13_A6.pdf"><big>Assignment
+                        #6</big></a> (<font color="#cc0000">PDF</font>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Wed 10/23<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">cont.<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Fri 10/25<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">cont.<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Mon 10/28<br>
+                  </td>
+                  <td valign="top"> <br>
+                  </td>
+                  <td valign="top"> cont.<br>
+                  </td>
+                  <td style="text-decoration: line-through;" valign="top">A#6
+                    DUE </td>
+                </tr>
+                <tr>
+                  <td valign="top">Wed 10/30<br>
+                  </td>
+                  <td valign="top">15, 16 </td>
+                  <td valign="top">alternating series and decimals </td>
+                  <td valign="top"><big style="font-weight: bold; color: rgb(204, 0, 0);">A#6
+                      DUE<br>
+                    </big><a href="M401F13_A7.pdf"><big>Assignment
+                        #7</big></a> (<font color="#cc0000">PDF</font>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Fri 11/1<br>
+                  </td>
+                  <td valign="top" width="10%">17<br>
+                  </td>
+                  <td valign="top" width="40%">continuity<br>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Mon 11/4<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                  <td valign="top">cont.<br>
+                  </td>
+                  <td valign="top"><a href="M401F13_A8.pdf"><big>Assignment
+                        #8</big></a> (<font color="#cc0000">PDF</font>) </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Wed 11/6<br>
+                  </td>
+                  <td valign="top" width="10%">18<br>
+                  </td>
+                  <td valign="top" width="40%">properties of continuous
+                    functions<br>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Fri 11/8<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">cont.<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Mon 11/11<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="text-decoration: line-through;">MIDTERM
+                      II in class<br>
+                    </span>cont.<span style="text-decoration: line-through;"><br>
+                    </span>
+                  </td>
+                  <td style="vertical-align: top;"><big style="font-weight: bold; color: rgb(204, 0, 0);">A#7
+                      DUE (firm)<br>
+                    </big><small>(I'll hand out solns in class)</small><big style="font-weight: bold; color: rgb(204, 0, 0);"><br>
+                    </big> </td>
+                </tr>
+                <tr>
+                  <td valign="top">Wed 11/13<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                  <td valign="top"><span style="font-weight: bold; color: rgb(204, 0, 0);">MIDTERM
+                      II<br>
+                      in class; covers sections 10-17</span> </td>
+                  <td valign="top"><small><a href="M401F13_midterm2.pdf">Midterm
+                        2</a> (<font color="#cc0000">PDF</font>)<br>
+                      <a href="M401F13_solns_midterm2.pdf">solns to Midterm 2</a>
+                      (<font color="#cc0000">PDF</font>) </small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Fri 11/15<br>
+                  </td>
+                  <td style="vertical-align: top;">19<br>
+                  </td>
+                  <td style="vertical-align: top;">
+                    uniform continuity </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Mon 11/18<br>
+                  </td>
+                  <td valign="top" width="10%">20<br>
+                  </td>
+                  <td valign="top" width="40%">limits of functions<br>
+                  </td>
+                  <td valign="top" width="20%"><big style="font-weight: bold; color: rgb(204, 0, 0);">A#8
+                      DUE<br>
+                    </big><a href="M401F13_A9.pdf"><big>Assignment
+                        #9</big></a> (<font color="#cc0000">PDF</font>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Wed 11/20<br>
+                  </td>
+                  <td valign="top" width="10%">23<br>
+                  </td>
+                  <td valign="top" width="40%">power series<br>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Fri 11/22<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">[cont]<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Mon 11/25<br>
+                  </td>
+                  <td style="vertical-align: top;">24<br>
+                  </td>
+                  <td style="vertical-align: top;">uniform convergence<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Wed 11/27<br>
+                  </td>
+                  <td valign="top" width="10%">25<br>
+                  </td>
+                  <td valign="top">more<br>
+                  </td>
+                  <td valign="top" width="20%"><big style="font-weight: bold; color: rgb(204, 0, 0);">A#9
+                      DUE<br>
+                    </big><a href="M401F13_A10.pdf"><big>Assignment
+                        #10</big></a> (<font color="#cc0000">PDF</font>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Fri 11/29<br>
+                  </td>
+                  <td valign="top" width="10%"><br>
+                  </td>
+                  <td valign="top"><span style="color: rgb(0, 153, 0);">Thanksgiving
+Break:
+                      no class</span><br>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="10%">Mon 12/2<br>
+                  </td>
+                  <td valign="top" width="10%"><br>
+                  </td>
+                  <td valign="top">[cont]<br>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Wed 12/4<br>
+                  </td>
+                  <td valign="top">28<br>
+                  </td>
+                  <td valign="top">derivatives<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Fri 12/6<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"> [cont]<br>
+                  </td>
+                  <td style="vertical-align: top;"><big style="font-weight: bold; color: rgb(204, 0, 0);">A#10
+                      DUE</big> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">Mon 12/9<br>
+                  </td>
+                  <td style="vertical-align: top;">29<br>
+                  </td>
+                  <td style="vertical-align: top;">mean value theorem<br>
+                    (<a href="M401F13_final.pdf">take-home final here</a>)<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Wed 12/11<br>
+                  </td>
+                  <td valign="top">32<br>
+                  </td>
+                  <td valign="top">Riemann integral<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Fri 12/13<br>
+                  </td>
+                  <td valign="top">33<br>
+                  </td>
+                  <td valign="top">[cont]<br>
+                    (last day of lecture)<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">Thurs 12/19<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                  <td valign="top"><span style="font-weight: bold; color: rgb(204, 0, 0);">TAKE-HOME
+                      FINAL
+                      EXAM<br>
+                      &nbsp;&nbsp; due in my office box (Chapman 101)<br>
+                      &nbsp;&nbsp; at 5pm<br>
+                    </span> </td>
+                  <td style="color: rgb(204, 0, 0); font-weight: bold;" valign="top"><br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <font size="-1"><a href="http://www.adobe.com/products/acrobat/readstep.html">Download
+Adobe's
+        Acrobat Reader</a> for free to view <font color="#cc0000"><b>PDF</b></font>
+      files.</font><br>
+    <br>
+  </body>
+</html>

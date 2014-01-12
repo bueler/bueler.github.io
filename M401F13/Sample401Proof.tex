@@ -1,0 +1,54 @@
+\documentclass{amsart}
+
+% Include any special packages you might use.  Uncomment the
+% following to use Times as the default font insteand of
+% TeX's default font of Computer Modern.
+\usepackage{times,txfonts}
+
+\newcommand{\exer}[1]{\noindent \textbf{Exercise #1}. \,}
+
+% If you want, you can make new commands, e.g. the following
+% which uses \Ints to make a blackboard-bold Z.
+%
+% \newcommand\Ints{\mathbb{Z}}
+
+%%%% Main document starts here.
+
+\begin{document}
+
+\noindent \textbf{Author:} Ed Bueler
+\medskip
+
+\noindent \textbf{Date:} 1 September 2013
+\bigskip\bigskip
+
+\exer{6.66} The square root of 2 is irrational.
+\medskip
+
+\begin{proof}
+Suppose to the contrary that $\sqrt{2}$ is rational. Then
+there are integers $a$ and $b$ with no common factors such that 
+\begin{equation*}
+\sqrt{2} = \frac{a}{b}.
+\end{equation*}
+Squaring this equation we find that
+\begin{equation} \label{step1}
+2 b^2 = a^2.
+\end{equation}
+Hence $2$ divides $a^2$ and therefore $a^2$ is even.  
+If $a$ were odd, then $a^2$ would also be odd, which it is not, so we conclude
+that $a$ is even.  So $a=2k$ for some integer $k$.  It follows from equation
+\eqref{step1} that 
+\begin{align*}
+  2 b^2 &= (2k)^2\\
+        &= 4 k^2.
+\end{align*}
+Hence
+\begin{equation*}
+b^2 = 2 k^2.
+\end{equation*}
+Arguing as before we see that $b^2$, and thus also $b$ itself, must be even.
+So $2$ is a common factor of $a$ and $b$, which is a contradiction.
+\end{proof}
+
+\end{document}
