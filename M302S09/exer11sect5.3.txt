@@ -1,0 +1,41 @@
+For #11 in section 5.3:
+
+The table in the back of the book is just wrong.  It should say:
+
+i    t_i    y_i
+1    0.250  0.75000
+2    0.500  0.62500
+3    0.750  0.57353
+4    1.000  0.56360
+
+Correctly used, the Java applet (http://www.csun.edu/~hcmth018/SysEu.html)
+gets these correct numbers.
+
+I checked them myself with this low-tech use of Matlab/Octave.
+(Use the up-arrow key.  That is, I only entered interesting stuff once
+and then hit up-arrow and return three more times.):
+
+
+>> t = 0, y = 1,v = -1
+t = 0
+y =  1
+v = -1
+>> h = 0.25
+h =  0.25000
+>> ynew = y + h*(v); vnew = v + h*((y-v)/(1+t*t)); y = ynew, v=vnew, t = t + h
+y =  0.75000
+v = -0.50000
+t =  0.25000
+>> ynew = y + h*(v); vnew = v + h*((y-v)/(1+t*t)); y = ynew, v=vnew, t = t + h
+y =  0.62500
+v = -0.20588
+t =  0.50000
+>> ynew = y + h*(v); vnew = v + h*((y-v)/(1+t*t)); y = ynew, v=vnew, t = t + h
+y =  0.57353
+v = -0.039706
+t =  0.75000
+>> ynew = y + h*(v); vnew = v + h*((y-v)/(1+t*t)); y = ynew, v=vnew, t = t + h
+y =  0.56360
+v =  0.058412
+t =  1
+
