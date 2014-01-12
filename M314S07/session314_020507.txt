@@ -1,0 +1,72 @@
+%-- 2/05/07 10:34 AM --%
+A=[0 -3 0; -1 8 4; 2 -1 0]
+inv(A)
+B=inv(A)
+A*B
+B*A
+B
+format rat
+B
+format short
+plot([1 2 3 4 5], [3 1 -5 6 7])
+plot([1 2 3 4 5], [3 1 -5 6 7],'o')
+plot([1 2 3 4 5], [3 1 -5 6 7],'o-')
+plot([1 2 3 4 5], [3 1 -5 6 7],'d-')
+help plot
+A=magic(2)
+A=eye(2)
+Azeros(2)
+A=zeros(2)
+A=hilb(2)
+A=rand(2)
+A=magic(2)
+x=[3; 1]
+A*x
+plot([3 6], [1 14],'o')
+axis([0 10 -1 20])
+theta = 0 : pi/10 : 2*pi
+[cos(theta); sin(theta)]
+XY=[cos(theta); sin(theta)]
+plot(XY(1,:),XY(2,:),'o')
+axis equal
+OUT=A*XY
+hold on
+plot(OUT(1,:),OUT(2,:),'t')
+plot(OUT(1,:),OUT(2,:),'*')
+hold off
+figure
+A=rand(2)
+OUT2=A*XY
+plot(XY(1,:),XY(2,:),'o')
+hold on
+plot(OUT2(1,:),OUT2(2,:),'*')
+hold off
+axis equal
+A=[4 7; 9 4]
+inv(A)
+A=[2 3; 4 6]
+inv(A)
+figure
+OUT3=A*XY
+XY
+plot(XY(1,:),XY(2,:),'o')
+hold on
+plot(OUT3(1,:),OUT3(2,:),'*')
+hold off
+axis equal
+svd(A)
+A=rand(2)
+svd(A)
+close all
+clear all
+th=-3*pi/4, A = [cos(th) -sin(th); sin(th) cos(th)]
+[1 1 0; 0 2 2]
+pts=[1 1 0; 0 2 2]
+plot(pts(1,:),pts(2,:))
+axis([-5 5 -5 5])
+grid on
+out=A*pts
+hold on, plot(pts(1,:),pts(2,:)), hold off
+hold on, plot(out(1,:),out(2,:)), hold off
+axis equal
+grid off
