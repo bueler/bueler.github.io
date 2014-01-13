@@ -1,157 +1,146 @@
 <!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
 <html>
-<head>
-  <meta http-equiv="Content-Type"
- content="text/html; charset=iso-8859-1">
-  <meta name="GENERATOR"
- content="Mozilla/4.76 [en] (Win98; U) [Netscape]">
-  <title>ddec: a Matlab suite for stability charts of ODEs and DDEs</title>
-  <meta name="author" content="Ed Bueler">
-  <meta name="description"
- content="documentation and codes for DDE stability charts">
-</head>
-<body
- style="background-image: url(file:///C:/Documents%20and%20Settings/print/Desktop/WebPage/turningsoft.jpg); color: rgb(0, 0, 0);"
- alink="#0000ee" link="#0000ee" vlink="#551a8b">
-<h1>
-<center> <font color="#333399"><font
- face="Courier New, Courier, monospace">ddec</font><font
- face="Courier New, Courier, monospace"></font></font></center>
-</h1>
-<h3>
-<center>A <span style="font-style: italic;">Matlab</span> suite for
-stability sharts and other information on linear, periodic ODEs and
-DDEs.<br>
-<span style="font-style: italic;">version 1.0</span> </center>
-</h3>
-<div align="center">These codes should be regarded as
-pre-release.&nbsp; Use at your own risk.&nbsp; It is no longer actively
-maintained.<br>
-</div>
-<h4><font color="#333399">Documentation:</font></h4>
-<ul>
-  <font style="color: rgb(0, 0, 153);" color="#000000">
-  <li>Bueler, E., <a href="ddectutor.pdf"><span
- style="font-style: italic;">Guide to </span>ddec<span
- style="font-style: italic;">: Stability of linear, periodic DDEs using
-the </span>ddec<span style="font-style: italic;"> suite</span></a>,
-2005.<span style="color: rgb(0, 0, 153);"></span><font color="#333399">
-(134 KB, </font><font color="#cc0000">PDF</font><font color="#333399">)</font>
-  </li>
-  <li>Bueler, E., <a href="http://link.aip.org/link/?SNA/45/2510"><span
- style="font-style: italic;">Error bounds for approximate eigenvalues
-of periodic-coefficient linear delay differential equations</span></a>,
-SIAM J. Num. Analysis<span style="color: rgb(51, 51, 153);"> </span><font
- style="color: rgb(51, 51, 153);" color="#333399"> <span
- style="font-weight: bold;">45</span> (6), 2510--2536, 2007.</font> </li>
-  <li>Bueler, E., <a href="http://arxiv.org/abs/math.NA/0409464"><span
- style="font-style: italic;">Chebyshev
-collocation for linear, periodic ordinary and delay differential
-equations: a posteriori estimates</span></a>, 2004 (<a
- href="http://arxiv.org/abs/math.NA/0409464">arxiv.org/abs/math.NA/0409464</a>).</li>
-  </font>
-  <li><span style="color: rgb(0, 0, 153);">Bueler, E., E. A.
-Butcher,
-and </span><span style="color: rgb(0, 0, 153);">V. Averina</span><span
- style="color: rgb(0, 0, 153);">, <a href="siamCSE05.pdf"><span
- style="font-style: italic;">Reliable stability charts for linear
-periodic delay differential equations</span></a>, SIAM CSE05, Orlando,
-Feb.
-2005.</span><font color="#333399">
-(slides; 131 KB, </font><font color="#cc0000">PDF</font><font
- color="#333399">)</font></li>
-  <font style="color: rgb(0, 0, 153);" color="#000000"> </font>
-  <li><span style="color: rgb(0, 0, 153);">Bueler, E., V.
-Averina, and
-E. A. Butcher, &#8220;Periodic Linear DDEs: Collocation Approximation to the
-Monodromy Operator,&#8221; SIAM annual meeting,, Portland, OR, July 12-16,
-2004.&nbsp; Slides:</span><font color="#333399"> <a href="siamtalk.pdf"><i>Collocation
-approximation of the monodromy
-operator for linear, periodic DDEs</i></a> (341 KB, </font><font
- color="#cc0000">PDF</font><font color="#333399">)</font></li>
-  <font color="#000000"> </font>
-</ul>
-<h4><font color="#333399">package:</font></h4>
-version 1.0:&nbsp;&nbsp; <a href="DDEC020905.zip">DDEC020905.zip</a><br>
-(includes all tools and examples below)<br>
-<br>
-<table
- style="margin-left: auto; margin-right: auto; text-align: left; width: 506px; height: 272px;"
- border="0" cellpadding="2" cellspacing="2">
-  <tbody>
-    <tr>
-      <td style="vertical-align: top;">
-      <h4><font><font color="#333399">tools:</font></font></h4>
-      <ul>
-        <li><a href="ddecchart.m">ddecchart</a></li>
-        <li><a href="ddeccheb.m">ddeccheb</a></li>
-        <li><a href="ddecestm.m">ddecestm</a></li>
-        <li><a href="ddeceval.m">ddeceval</a></li>
-        <li style="text-align: left;"><a href="ddecget.m">ddecget</a></li>
-        <li><a href="ddecinfo.m">ddecinfo</a><br>
+  <head>
+    <meta content="text/html; charset=iso-8859-1" http-equiv="content-type">
+    <meta name="GENERATOR" content="Mozilla/4.76 [en] (Win98; U) [Netscape]">
+    <title>ddec: a Matlab suite for stability charts of ODEs and DDEs</title>
+    <meta name="author" content="Ed Bueler">
+    <meta name="description" content="documentation and codes for DDE stability charts">
+  </head>
+  <body style="background-image: url(file:///C:/Documents%20and%20Settings/print/Desktop/WebPage/turningsoft.jpg); color: rgb(0, 0, 0);"
+    alink="#0000ee" link="#0000ee" vlink="#551a8b">
+    <h1>
+      <center> <font color="#333399"><font face="Courier New, Courier, monospace">ddec</font><font
+            face="Courier New, Courier, monospace"></font></font></center>
+    </h1>
+    <h3>
+      <center>A <span style="font-style: italic;">Matlab</span> suite for
+        stability sharts and other information on linear, periodic ODEs and
+        DDEs.<br>
+        <span style="font-style: italic;">version 1.0</span> </center>
+    </h3>
+    <div align="center">These codes should be regarded as
+      pre-release (alpha).&nbsp; Use at your own risk.&nbsp; It is no longer
+      actively
+      maintained.<br>
+    </div>
+    <h4><font color="#333399">Documentation:</font></h4>
+    <ul>
+      <font style="color: rgb(0, 0, 153);" color="#000000">
+        <li>Bueler, E., <a href="ddectutor.pdf"><span style="font-style: italic;">Guide
+              to </span>ddec<span style="font-style: italic;">: Stability of
+              linear, periodic DDEs using
+              the </span>ddec<span style="font-style: italic;"> suite</span></a>,
+          2005.<span style="color: rgb(0, 0, 153);"></span><font color="#333399">
+            (134 KB, </font><font color="#cc0000">PDF</font><font color="#333399">)</font>
         </li>
-        <li><a href="ddecivp.m">ddecivp</a></li>
-        <li><a href="ddecplotx.m">ddecplotx</a></li>
-        <li><a href="ddecspect.m">ddecspect</a></li>
-        <li><a href="ddecset.m">ddecset</a></li>
-        <li><a href="ddecU.m">ddecU</a></li>
-      </ul>
-      </td>
-      <td style="width: 50%; vertical-align: top;">
-      <h4><font><font><font><font color="#333399">example descriptor
-m-files:</font></font></font></font></h4>
-      <ul>
-        <li><a href="excontrol.m">excontrol</a></li>
-        <li><a href="exmil.m">exmil</a></li>
-        <li><a href="exmathieu.m">exmathieu</a></li>
-        <li><a href="exscal.m">exscal</a></li>
-        <li><a href="exscalonep.m">exscalonep</a></li>
-        <li><a href="exturn.m">exturn</a></li>
-      </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<br>
-<h4><font><font color="#333399">examples of use:</font></font></h4>
-<ul>
-  <li><span style="color: rgb(51, 51, 153);">Butcher, E. A., P.
-Nindujarla and E.
-Bueler, </span><a style="color: rgb(51, 51, 153);"
- href="http://www.dms.uaf.edu/%7Ebueler/longbeachpaperfinal.pdf"><span
- style="font-style: italic;">Stability of up- and down-milling using a
-Chebyshev collocation method</span></a><span
- style="color: rgb(51, 51, 153);">, proceedings of ASME DETC 2005,
-September 2005, Long Beach, CA.</span><font color="#333399"> (547<font
- color="#333399"> KB, </font><font color="#cc0000">PDF</font><font
- color="#333399">)</font></font></li>
-  <li><font color="#333399">Averina, K., I. Kolmanovsky, A. Gibson,
-G. Song and E. Bueler, <span style="font-style: italic;"><a
- href="AKGSBv10.pdf">Analysis and
-control of delay-dependent
-behavior of engine air-to-fuel ratio</a>, </span>for submission to the
-ASME World Congress, Orlando, Florida, November, 2005. (295<font
- color="#333399"> KB, </font><font color="#cc0000">PDF</font><font
- color="#333399">)</font></font></li>
-  <li><span style="color: rgb(0, 0, 153);">Nindujarla, P., </span><a
- style="color: rgb(0, 0, 153);" href="PraveenSlides.pdf"><span
- style="font-style: italic;">Stability of Milling using the Chebyshev
-Collocation Method</span></a><span style="color: rgb(0, 0, 153);">,
-M.S. Mechanical Engineering Thesis defense, December 2, 2004.&nbsp;</span>
-(<font color="#333399">2.1 MB, </font><font color="#cc0000">PDF</font><font
- color="#333399">)</font></li>
-</ul>
-Work supported by the National Science
-Foundation under Grant #0114500. &nbsp;Any opinions, findings,
-conclusions or recommendations expressed in this material are those of
-the author(s) and do not necessarily reflect the views of the National
-Science Foundation.
-<hr width="100%">&nbsp;<a
- href="http://www.cs.uaf.edu/cgi-bin/doc-info.prl"> doc info</a>
-&nbsp;&nbsp; email Ed Bueler (<a href="mailto:elbueler@alaska.edu">elbueler@alaska.edu</a>
-) for questions and
-comments on this website. <br>
-<br>
-<br>
-</body>
+        <li>Bueler, E., <span style="font-style: italic;">Error bounds for
+            approximate eigenvalues
+            of periodic-coefficient linear delay differential equations</span>,
+          SIAM J. Num. Analysis<span style="color: rgb(51, 51, 153);"> </span><font
+            style="color: rgb(51, 51, 153);" color="#333399"> <span style="font-weight: bold;">45</span>
+            (6), 2510--2536, 2007.</font> </li>
+        <li>Bueler, E., <a href="http://arxiv.org/abs/math.NA/0409464"><span style="font-style: italic;">Chebyshev
+collocation
+              for linear, periodic ordinary and delay differential
+              equations: a posteriori estimates</span></a>, 2004 (<a href="http://arxiv.org/abs/math.NA/0409464">arxiv.org/abs/math.NA/0409464</a>).</li>
+      </font>
+      <li><span style="color: rgb(0, 0, 153);">Bueler, E., E. A.
+          Butcher,
+          and </span><span style="color: rgb(0, 0, 153);">V. Averina</span><span
+          style="color: rgb(0, 0, 153);">, <a href="siamCSE05.pdf"><span style="font-style: italic;">Reliable
+              stability charts for linear
+              periodic delay differential equations</span></a>, SIAM CSE05,
+          Orlando,
+          Feb.
+          2005.</span><font color="#333399">
+          (slides; 131 KB, </font><font color="#cc0000">PDF</font><font color="#333399">)</font></li>
+      <font style="color: rgb(0, 0, 153);" color="#000000"> </font>
+      <li><span style="color: rgb(0, 0, 153);">Bueler, E., V.
+          Averina, and
+          E. A. Butcher, &#8220;Periodic Linear DDEs: Collocation Approximation to the
+          Monodromy Operator,&#8221; SIAM annual meeting,, Portland, OR, July 12-16,
+          2004.&nbsp; Slides:</span><font color="#333399"> <a href="siamtalk.pdf"><i>Collocation
+approximation
+              of the monodromy
+              operator for linear, periodic DDEs</i></a> (341 KB, </font><font
+          color="#cc0000">PDF</font><font color="#333399">)</font></li>
+      <font color="#000000"> </font>
+    </ul>
+    <h4><font color="#333399">package:</font></h4>
+    version 1.0:&nbsp;&nbsp; <a href="DDEC020905.zip">DDEC020905.zip</a><br>
+    (includes all tools and examples below)<br>
+    <br>
+    <table style="margin-left: auto; margin-right: auto; text-align: left; width: 506px; height: 272px;"
+      border="0" cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top;">
+            <h4><font><font color="#333399">tools:</font></font></h4>
+            <ul>
+              <li><a href="ddecchart.m">ddecchart</a></li>
+              <li><a href="ddeccheb.m">ddeccheb</a></li>
+              <li><a href="ddecestm.m">ddecestm</a></li>
+              <li><a href="ddeceval.m">ddeceval</a></li>
+              <li style="text-align: left;"><a href="ddecget.m">ddecget</a></li>
+              <li><a href="ddecinfo.m">ddecinfo</a><br>
+              </li>
+              <li><a href="ddecivp.m">ddecivp</a></li>
+              <li><a href="ddecplotx.m">ddecplotx</a></li>
+              <li><a href="ddecspect.m">ddecspect</a></li>
+              <li><a href="ddecset.m">ddecset</a></li>
+              <li><a href="ddecU.m">ddecU</a></li>
+            </ul>
+          </td>
+          <td style="width: 50%; vertical-align: top;">
+            <h4><font><font><font><font color="#333399">example descriptor
+                      m-files:</font></font></font></font></h4>
+            <ul>
+              <li><a href="excontrol.m">excontrol</a></li>
+              <li><a href="exmil.m">exmil</a></li>
+              <li><a href="exmathieu.m">exmathieu</a></li>
+              <li><a href="exscal.m">exscal</a></li>
+              <li><a href="exscalonep.m">exscalonep</a></li>
+              <li><a href="exturn.m">exturn</a></li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <h4><font><font color="#333399">examples of use:</font></font></h4>
+    <ul>
+      <li><span style="color: rgb(51, 51, 153);">Butcher, E. A., P.
+          Nindujarla and E.
+          Bueler, </span><a style="color: rgb(51, 51, 153);" href="../papers/longbeachpaperfinal.pdf"><span
+            style="font-style: italic;">Stability of up- and down-milling using
+            a
+            Chebyshev collocation method</span></a><span style="color: rgb(51, 51, 153);">,
+          proceedings of ASME DETC 2005,
+          September 2005, Long Beach, CA.</span><font color="#333399"> (547<font
+            color="#333399"> KB, </font><font color="#cc0000">PDF</font><font color="#333399">)</font></font></li>
+      <li><font color="#333399">Averina, K., I. Kolmanovsky, A. Gibson,
+          G. Song and E. Bueler, <span style="font-style: italic;">Analysis and
+            control of delay-dependent
+            behavior of engine air-to-fuel ratio, </span>for submission to the
+          ASME World Congress, Orlando, Florida, November, 2005.<font color="#333399"><br>
+          </font></font></li>
+      <li><span style="color: rgb(0, 0, 153);">Nindujarla, P., </span><span style="color: rgb(0, 0, 153);"><span
+            style="font-style: italic;">Stability of Milling using the Chebyshev
+            Collocation Method</span></span><span style="color: rgb(0, 0, 153);">,
+          M.S. Mechanical Engineering Thesis defense, December 2, 2004.</span><font
+          color="#333399"><br>
+        </font></li>
+    </ul>
+    Work supported by the National Science
+    Foundation under Grant #0114500. &nbsp;Any opinions, findings,
+    conclusions or recommendations expressed in this material are those of
+    the author(s) and do not necessarily reflect the views of the National
+    Science Foundation.
+    <hr width="100%">email Ed Bueler (<a href="mailto:elbueler@alaska.edu">elbueler@alaska.edu</a>
+    ) for questions and
+    comments on this website. <br>
+    <br>
+    <br>
+  </body>
 </html>
