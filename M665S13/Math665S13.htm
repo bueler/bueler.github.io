@@ -1,0 +1,945 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <!-- saved from url=(0044)http://www.cs.uaf.edu/~bueler/Math412S03.htm -->
+    <title>Math 665 (Bueler) Spring 2013</title>
+    <meta content="MSHTML 5.00.2920.0" name="GENERATOR">
+    <meta content="Ed Bueler" name="Author">
+    <meta content="Bueler" name="author">
+  </head>
+  <body alink="#ff0000" bgcolor="#ffffff" link="#0000ee" text="#000000" vlink="#551a8b">&nbsp;
+    <center>
+      <big style="color: rgb(0, 102, 0); font-weight: bold;"><big><big>Math 665
+            Numerical Linear
+            Algebra<br>
+            <small>(Topics in Graduate Mathematics)</small></big></big></big><br>
+    </center>
+    <center>
+      <h3><font color="#000099">Spring 2013, <a href="../index.html">Ed Bueler</a></font></h3>
+      <big style="color: rgb(204, 0, 0);"><span style="font-weight: bold;">Thanks
+          for a great semester!<br>
+          Solutions to the Final are available on paper (and see codes at
+          bottom).</span></big><br>
+      <br>
+    </center>
+    <table cols="2" cellpadding="10" width="99%">
+      <tbody>
+        <tr>
+          <td valign="top" width="30%">
+            <div align="center">
+              <div align="left"><b> Ed Bueler</b><br>
+                <a href="mailto:elbueler@alaska.edu">elbueler@alaska.edu</a>
+                &nbsp;&nbsp; x7693<br>
+                <b>Office</b>: Chapman 301C (<a href="../OffHrs.htm">hours here</a>)
+                <br>
+                <center></center>
+                <b> Class time</b>: MWF<big style="font-weight: bold;"> <span style="color: rgb(204, 0, 0);">1:10--2:10pm</span></big><br>
+                <b>Classroom</b>: Reichardt 204<br>
+                <b> Text</b>: Trefethen and Bau, <i>Numerical Linear Algebra</i>,
+                <a href="http://www.siam.org/catalog/">SIAM Press</a>
+                1997.<br>
+                <br>
+                <a href="M665S13syllabus.htm"><b>Syllabus</b></a> and <a href="advert_M665_S13.pdf"><b>Advertisement</b></a><br>
+                <center> <br>
+                </center>
+                <div align="left"> PARTS OF COURSE:<br>
+                  <center></center>
+                </div>
+                <center>
+                  <table border="1" cellpadding="2" cellspacing="2" width="100%">
+                    <tbody>
+                      <tr>
+                        <td valign="top">A<br>
+                        </td>
+                        <td valign="top">matrix/vector manipulations<br>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td valign="top">B<br>
+                        </td>
+                        <td valign="top"> abstract and geometric linear algebra</td>
+                      </tr>
+                      <tr>
+                        <td valign="top">C<br>
+                        </td>
+                        <td valign="top">SVD<br>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td valign="top">D<br>
+                        </td>
+                        <td valign="top">QR and least squares<br>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td valign="top">E<br>
+                        </td>
+                        <td valign="top">conditioning and
+                          stability<br>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td valign="top">F<br>
+                        </td>
+                        <td valign="top">systems of equations<br>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td valign="top">G<br>
+                        </td>
+                        <td valign="top">computing eigenvalues<br>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td valign="top">H<br>
+                        </td>
+                        <td valign="top">iterative methods<br>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </center>
+                <center></center>
+                <br>
+                MATLAB/Octave/pylab:<br>
+                <ul>
+                  <li><a href="compare_MOP_S13.pdf"><span style="font-style: italic;">comparison
+                        handout</span></a> (<font color="#cc0000">PDF</font>) </li>
+                  <li><a href="ortho.m">ortho.m</a>&nbsp; <a href="ortho.py">ortho.py</a><br>
+                  </li>
+                  <li><a href="hello.m">hello.m</a>&nbsp;&nbsp; <a href="hello.py">hello.py</a></li>
+                  <li><a href="mgs.m">mgs.m</a>&nbsp;&nbsp; <a href="mgs.py">mgs.py</a></li>
+                </ul>
+                LINKS:<br>
+                <ul>
+                  <li><a href="http://www.mathworks.com/">Matlab</a>: great but
+                    not free.&nbsp;
+                    Available at UAF through OIT-maintained site license.</li>
+                  <li><a href="MatlabEx.htm">old Matlab/Octave help page</a></li>
+                  <li><a href="http://www.gnu.org/software/octave/">Octave: <small>(http://www.gnu.org/software/octave/)</small></a>
+                    is a reliable free alternative to Matlab.&nbsp; Octave
+                    should work exactly the same as Matlab for this
+                    class.&nbsp; Linux: use package manager.&nbsp; Windows and
+                    MacOSX: see <a href="http://octave.sourceforge.net"><small>http://octave.sourceforge.net</small></a>
+                    for binaries.</li>
+                  <li>pylab = <small>python + ipython + scipy + matplotlib</small>:&nbsp;
+Packages
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <a href="http://www.scipy.org/">scipy</a> and <a href="http://matplotlib.sourceforge.net/">matplotlib</a>,
+                    and the <a href="http://ipython.scipy.org/">ipython</a>
+                    shell, allow the powerful
+                    language <a href="http://www.python.org/">Python</a> can do
+                    everything
+                    needed for this class.&nbsp; Recommended if you already use
+                    Python.<br>
+                  </li>
+                  <li>Cleve Moler, <a href="http://www.mathworks.com/company/newsletters/news_notes/clevescorner/oct02_cleve.html"><i>The
+                        World's
+                        Largest
+                        Matrix
+                        Computation</i></a></li>
+                  <li>I find the PBS NOVA episode <a href="http://video.google.com/videoplay?docid=-645400195311132956#"><span
+                        style="font-style: italic;">Why the Towers Fell</span></a>
+                    very
+                    interesting for what it says about computer modeling in the
+                    1970s and
+                    1980s.&nbsp; At that time, models of the combined effect of
+                    fast moving
+                    fluid and fire, and
+                    the effects on fireproofing of steel structures, was beyond
+                    the
+                    abilities of numerical simulations available to
+                    engineers.&nbsp; (See
+                    the <a href="http://www.pbs.org/wgbh/nova/transcripts/2907_wtc.html">transcript
+                      of
+                      this
+                      NOVA
+                      episode</a> and search for "mathematical models".)<i><br>
+                    </i></li>
+                </ul>
+                <br>
+                Texts for related courses:<br>
+                <div align="left">
+                  <center> </center>
+                </div>
+                <ul>
+                  <li>Golub &amp; van Loan, <i>Matrix Computations</i></li>
+                  <li>Higham, <i>Accuracy and Stability of Numerical Algorithms</i></li>
+                </ul>
+                Background books:<br>
+                <div align="left">
+                  <center> </center>
+                </div>
+                <ul>
+                  <li>Strang, <i>Linear Algebra and Its Applications</i></li>
+                  <li><a href="http://www.mathworks.com/moler/chapters.html">Moler,
+                      <i>Numerical Computing with MATLAB</i></a></li>
+                  <li>Burden &amp; Faires, <i>Numerical Analysis</i></li>
+                  <li><a href="http://www.nr.com/">Press et al, <i>Numerical
+                        Recipes</i></a></li>
+                </ul>
+                Some readable papers:<br>
+                <ul>
+                  <li>Axler (1995), <a href="http://www.jstor.org/stable/pdfplus/2975348.pdf"><span
+                        style="font-style: italic;">Down with determinants!</span></a><br>
+                  </li>
+                  <li>Golub and Kahan (1965), <a href="http://www.jstor.org/stable/pdfplus/2949777.pdf"><span
+                        style="font-style: italic;">Calculating the singular
+                        values and pseudo-inverse of a matrix</span></a><br>
+                  </li>
+                  <li>Householder (1958), <a href="http://dl.acm.org/ft_gateway.cfm?id=320947&amp;ftid=52186&amp;dwn=1&amp;CFID=194424584&amp;CFTOKEN=86807693"><span
+                        style="font-style: italic;">Unitary triangularization of
+                        a nonsymmetric matrix</span></a><br>
+                  </li>
+                  <li>Moler (2003), <a style="font-style: italic;" href="http://epubs.siam.org/doi/pdf/10.1137/S00361445024180">19
+                      dubious ways ... 25 years later</a></li>
+                  <li>Page, Brin, et al (1999), <a href="http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf"><span
+                        style="font-style: italic;">The PageRank citation
+                        ranking</span></a></li>
+                  <li>Rice (1966), <span style="font-style: italic;"><a href="http://www.jstor.org/stable/pdfplus/2949623.pdf">A
+                        theory of condition</a><br>
+                    </span></li>
+                  <li>Townsend and Trefethen (2013), <a href="http://eprints.maths.ox.ac.uk/1670/1/NA-13-02.pdf"><span
+                        style="font-style: italic;">Gaussian elimination as an
+                        iterative algorithm</span></a></li>
+                  <li>Turing (1948), <span style="font-style: italic;"><a href="http://qjmam.oxfordjournals.org/content/1/1/287.full.pdf+html">Rounding-off
+                        errors in matrix processes</a><br>
+                    </span></li>
+                  <li>Wilkerson (1960), <a href="http://comjnl.oxfordjournals.org/content/3/1/23.full.pdf+html"><span
+                        style="font-style: italic;">Householder's method for the
+                        solution of the algebraic eigenproblem</span></a><br>
+                    <span style="font-style: italic;"></span></li>
+                </ul>
+                <center></center>
+              </div>
+            </div>
+          </td>
+          <td valign="top">
+            <center>
+              <h3>&nbsp;<span style="font-style: italic;"></span>Schedule:<b><font
+                    size="-1"> </font></b><i><font size="-1">&nbsp;(<span style="color: black;">version
+                      10 May</span>)</font></i></h3>
+              <span style="font-weight: bold; color: rgb(204, 0, 0);"></span> </center>
+            <table border="1" width="100%">
+              <tbody>
+                <tr>
+                  <td valign="top" width="7%"><b>Part</b><br>
+                  </td>
+                  <td valign="top" width="10%">
+                    <h4>Day</h4>
+                  </td>
+                  <td valign="top" width="10%"><b>Lecture</b><br>
+                    (in text)<br>
+                  </td>
+                  <td valign="top" width="40%"> <b>Topic</b><br>
+                  </td>
+                  <td valign="top" width="20%"><b>Assigned or Due</b><br>
+                    (links are <font color="#cc0000">PDF</font>)<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">A<br>
+                  </td>
+                  <td valign="top">Fri 1/18<br>
+                  </td>
+                  <td valign="top">1<br>
+                  </td>
+                  <td valign="top">introduction </td>
+                  <td valign="top"><a href="M665S13_A1.pdf">Assignment #1</a> </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">Mon 1/21<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="color: rgb(0, 153, 0);">Alaska
+                      Civil Rights Day (no class)</span><br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">A<br>
+                  </td>
+                  <td valign="top">Wed 1/23<br>
+                  </td>
+                  <td valign="top">1<br>
+                  </td>
+                  <td valign="top">intro to
+                    Matlab/Octave<br>
+                    <a href="class23jan.m">class23jan.m</a><br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">A<br>
+                  </td>
+                  <td valign="top" width="10%">Fri 1/25<br>
+                  </td>
+                  <td valign="top" width="10%">1<br>
+                  </td>
+                  <td valign="top" width="40%"><span style="color: rgb(204, 0, 0);"></span>cont.<br>
+                    <a href="randomdets.m">randomdets.m</a><br>
+                    <a href="mydatafit.m">mydatafit.m</a><br>
+                    <a href="rungeexample.m">rungeexample.m</a><br>
+                  </td>
+                  <td valign="top" width="20%"><span style="text-decoration: line-through; font-weight: bold;">A#1
+                      Due</span><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">B<br>
+                  </td>
+                  <td style="vertical-align: top;">Mon 1/28<br>
+                  </td>
+                  <td style="vertical-align: top;">1<br>
+                  </td>
+                  <td style="vertical-align: top;">matrix-vector multiplication,
+                    matrix product, bases, matrices, vector spaces and
+                    examples, linear operators </td>
+                  <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">A#1
+                      Due</span><small> </small></td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">B<br>
+                  </td>
+                  <td valign="top" width="10%">Wed 1/30<br>
+                  </td>
+                  <td valign="top" width="10%">2<br>
+                  </td>
+                  <td valign="top" width="40%">inner product, adjoint,
+                    hermitian, orthogonal, unitary </td>
+                  <td valign="top" width="20%"><big><small><a href="M665S13_A2.pdf">Assignment
+                          #2</a><br>
+                        and&nbsp; <a href="proofadviceM665.pdf">proof advice</a></small><br>
+                    </big></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">B<br>
+                  </td>
+                  <td style="vertical-align: top;">Fri 2/1<br>
+                  </td>
+                  <td style="vertical-align: top;">2<br>
+                  </td>
+                  <td style="vertical-align: top;">cont.<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">B<br>
+                  </td>
+                  <td valign="top" width="10%">Mon 2/4<br>
+                  </td>
+                  <td valign="top" width="10%">3<br>
+                  </td>
+                  <td valign="top" width="40%">norms of vectors and matrices </td>
+                  <td style="font-weight: bold; text-decoration: line-through;"
+                    valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">B<br>
+                  </td>
+                  <td style="vertical-align: top;">Wed 2/6<br>
+                  </td>
+                  <td style="vertical-align: top;">3<br>
+                  </td>
+                  <td style="vertical-align: top;">cont. </td>
+                  <td style="vertical-align: top;"><big style="color: rgb(204, 0, 0);"><span
+                        style="font-weight: bold;"><small>A#2 Due</small><br>
+                      </span></big><a href="M665S13_A3.pdf">Assignment #3</a><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">B<br>
+                  </td>
+                  <td style="vertical-align: top;">Fri 2/8<br>
+                  </td>
+                  <td style="vertical-align: top;">3<br>
+                  </td>
+                  <td style="vertical-align: top;">cont.; and <a href="normmanifesto.pdf">matrix
+                      norm essentials</a> <small>(<font color="#cc0000">PDF</font>)</small><br>
+                    from solns to A#2:<br>
+                    &nbsp; <a href="fourballs.m">fourballs.m</a><br>
+                    from in class:<br>
+                    &nbsp; <a href="normtest.m">normtest.m</a><br>
+                    <small></small> </td>
+                  <td style="vertical-align: top; font-weight: bold; color: rgb(51, 0, 51); text-decoration: line-through;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">B<br>
+                  </td>
+                  <td valign="top">Mon 2/11<br>
+                  </td>
+                  <td valign="top">3<br>
+                  </td>
+                  <td valign="top">cont.<br>
+                    <small></small> </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">C<br>
+                  </td>
+                  <td style="vertical-align: top;">Wed 2/13<br>
+                  </td>
+                  <td style="vertical-align: top;">4<br>
+                  </td>
+                  <td style="vertical-align: top;">the singular value
+                    decomposition (SVD)<br>
+                    from solns to A#3 and in-class:<br>
+                    &nbsp; <a href="showmatnaive.m">showmatnaive.m</a><br>
+                    &nbsp; <a href="showmat.m">showmat.m</a><small><br>
+                      <big>&nbsp; <a href="svdframes.m">svdframes.m</a></big><br>
+                    </small></td>
+                  <td style="vertical-align: top;"><big style="color: rgb(204, 0, 0);"><span
+                        style="font-weight: bold;"><small>A#3 Due</small><br>
+                      </span><small><a href="M665S13_A4.pdf">Assignment #4</a></small></big><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">C<br>
+                  </td>
+                  <td style="vertical-align: top;">Fri 2/15<br>
+                  </td>
+                  <td style="vertical-align: top;">4<br>
+                  </td>
+                  <td style="vertical-align: top;"> SVD cont.; SVD existence
+                    theorem<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">C<br>
+                  </td>
+                  <td valign="top" width="10%">Mon 2/18<br>
+                  </td>
+                  <td valign="top" width="10%">4<br>
+                  </td>
+                  <td valign="top" width="40%"> cont.<br>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">C<br>
+                  </td>
+                  <td valign="top" width="10%">Wed 2/20<br>
+                  </td>
+                  <td valign="top" width="10%">5<br>
+                  </td>
+                  <td valign="top" width="40%"> applications of SVD</td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">C<br>
+                  </td>
+                  <td style="vertical-align: top;">Fri 2/22<br>
+                  </td>
+                  <td style="vertical-align: top;">5<br>
+                  </td>
+                  <td style="vertical-align: top;">cont.<a href="detail.mat"></a><br>
+                  </td>
+                  <td style="vertical-align: top;"><big><big style="color: rgb(204, 0, 0);"><span
+                          style="font-weight: bold;"></span></big></big><span style="text-decoration: line-through; font-weight: bold;">A#4
+                      Due</span><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">C<br>
+                  </td>
+                  <td valign="top">Mon 2/25<br>
+                  </td>
+                  <td valign="top">5<br>
+                  </td>
+                  <td valign="top"> compression of images; from in-class:<br>
+                    &nbsp; <a href="detail.mat">detail.mat</a><br>
+                    &nbsp; <a href="akdist.m">akdist.m</a><br>
+                  </td>
+                  <td valign="top"><big style="color: rgb(204, 0, 0);"><span style="font-weight: bold;"><small>A#4
+                          Due<br>
+                        </small></span></big><a href="M665S13_A5.pdf">Assignment
+                      #5</a><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">D<br>
+                  </td>
+                  <td style="vertical-align: top;">Wed 2/27<br>
+                  </td>
+                  <td style="vertical-align: top;">6<br>
+                  </td>
+                  <td style="vertical-align: top;"> projectors<br>
+                    from solutions to A#4:<br>
+                    &nbsp; <a href="epsrank.m">epsrank.m</a><br>
+                    &nbsp; <a href="svdhello.m">svdhello.m</a><br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">D<br>
+                  </td>
+                  <td valign="top" width="10%">Fri 3/1<br>
+                  </td>
+                  <td valign="top" width="10%">6<br>
+                  </td>
+                  <td valign="top" width="40%">cont.<br>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">D<br>
+                  </td>
+                  <td valign="top">Mon 3/4<br>
+                  </td>
+                  <td valign="top">7<br>
+                  </td>
+                  <td valign="top"> Gram-Schmidt process and QR
+                    factorization
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">D<br>
+                  </td>
+                  <td style="vertical-align: top;">Wed 3/6<br>
+                  </td>
+                  <td style="vertical-align: top;">7<br>
+                  </td>
+                  <td style="vertical-align: top;"> cont.<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">D<br>
+                  </td>
+                  <td style="vertical-align: top;">Fri 3/8<br>
+                  </td>
+                  <td style="vertical-align: top;">8<br>
+                  </td>
+                  <td style="vertical-align: top;">modified
+                    Gram-Schmidt/operation count</td>
+                  <td style="vertical-align: top;"><big><big style="color: rgb(204, 0, 0);"><span
+                          style="font-weight: bold;"><small><small>A#5 Due</small><br>
+                          </small></span></big></big><a href="M665S13_A6.pdf">Assignment
+                      #6</a><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">D<br>
+                  </td>
+                  <td valign="top">3/11--3/15<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                  <td valign="top"><span style="color: rgb(51, 204, 0); font-weight: bold;">SPRING
+                      BREAK</span><br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">D<br>
+                  </td>
+                  <td valign="top">Mon 3/18<br>
+                  </td>
+                  <td valign="top">8<br>
+                  </td>
+                  <td valign="top">cont.<br>
+                    from solutions to A#5:<br>
+                    &nbsp; <a href="newton3ex.m">newton3ex.m</a><br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">D<br>
+                  </td>
+                  <td valign="top" width="10%">Wed 3/20<br>
+                  </td>
+                  <td valign="top" width="10%">10<br>
+                  </td>
+                  <td valign="top" width="40%"><span style="font-style: italic;"></span>
+                    orthogonal triangulation; Householder reflections</td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">D<br>
+                  </td>
+                  <td valign="top">Fri 3/22<br>
+                  </td>
+                  <td valign="top">11<br>
+                  </td>
+                  <td valign="top">least squares (by QR, SVD and normal eqns)<span
+                      style="font-style: italic;"></span> </td>
+                  <td valign="top"><big style="color: rgb(204, 0, 0);"><span style="font-weight: bold;"><small>A#6
+                          Due</small></span></big><big style="color: rgb(204, 0, 0);"><br>
+                      <small><a href="M665S13_A7.pdf">Assignment #7</a></small></big>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">D<br>
+                  </td>
+                  <td valign="top" width="10%">Mon 3/25<br>
+                  </td>
+                  <td valign="top" width="10%">11<br>
+                  </td>
+                  <td valign="top" width="40%"><span style="text-decoration: line-through;">MIDTERM
+                      QUIZ</span> (rescheduled to Fri 3/29)<br>
+                    cont.<span style="font-style: italic;"><br>
+                    </span>from solutions to A#6:<br>
+                    &nbsp; <a href="legendreerr.m">legendreerr.m</a><span style="font-style: italic;"><br>
+                    </span> </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">E<br>
+                  </td>
+                  <td style="vertical-align: top;">Wed 3/27<br>
+                  </td>
+                  <td style="vertical-align: top;">12<br>
+                  </td>
+                  <td style="vertical-align: top;">
+                    conditioning <span style="font-style: italic;">of problems</span>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">Fri 3/29<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><font color="#cc0000">MIDTERM
+                      QUIZ: in class</font><small style="color: rgb(204, 0, 0);"><br>
+                      focus on: definitions, statements of
+                      theorems, basic geometrical ideas, basic applications of
+                      theorems<br>
+                      covers Lectures 1-11 except 9<br>
+                    </small></td>
+                  <td style="vertical-align: top;"><a href="M665S13midReview.pdf">review
+                      topics for midterm quiz</a><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">E<br>
+                  </td>
+                  <td valign="top">Mon 4/1<br>
+                  </td>
+                  <td valign="top">12<br>
+                  </td>
+                  <td valign="top">cont.<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">E<br>
+                  </td>
+                  <td style="vertical-align: top;">Wed 4/3<br>
+                  </td>
+                  <td style="vertical-align: top;">12<br>
+                  </td>
+                  <td style="vertical-align: top;">cont.<br>
+                    for A#8:<br>
+                    &nbsp;&nbsp; <a href="circu.m">circu.m</a><span style="font-style: italic;"></span></td>
+                  <td style="vertical-align: top;"><big style="color: rgb(204, 0, 0);"><span
+                        style="font-weight: bold;"><small>A#7 Due<br>
+                        </small></span></big><a href="M665S13_A8.pdf">Assignment
+                      #8</a><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">E<br>
+                  </td>
+                  <td valign="top" width="10%">Fri 4/5<br>
+                  </td>
+                  <td valign="top" width="10%">13<br>
+                  </td>
+                  <td valign="top" width="40%">floating point arithmetic<br>
+                    from solutions to A#7:<br>
+                    &nbsp; <a href="house.m">house.m</a><br>
+                    &nbsp; <a href="formQ.m">formQ.m</a><br>
+                    &nbsp; <a href="polycos.m">polycos.m</a><br>
+                    &nbsp; <a href="randnexper.m">randnexper.m</a><br>
+                    &nbsp; <a href="assemble.m">assemble.m</a><br>
+                    &nbsp; <a href="comparebvp.m">comparebvp.m</a><span style="font-style: italic;"></span><span
+                      style="font-style: italic;"></span><br>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">E<br>
+                  </td>
+                  <td valign="top" width="10%">Mon 4/8<br>
+                  </td>
+                  <td valign="top" width="10%"> 14<br>
+                  </td>
+                  <td valign="top" width="40%"> stability and backward
+                    stability <span style="font-style: italic;">of algorithms</span>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">E<br>
+                  </td>
+                  <td style="vertical-align: top;">Wed 4/10</td>
+                  <td style="vertical-align: top;">15<br>
+                  </td>
+                  <td style="vertical-align: top;">more on backward stability
+                    (Theorem 15.1 is Fundamental Theorem of Numerical Analysis
+                    ... sort of)<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">E<br>
+                  </td>
+                  <td style="vertical-align: top;">Fri 4/12</td>
+                  <td style="vertical-align: top;">15<br>
+                  </td>
+                  <td style="vertical-align: top;">more<br>
+                  </td>
+                  <td style="vertical-align: top;"><big style="color: rgb(204, 0, 0);"><span
+                        style="font-weight: bold;"><small>A#8 Due<br>
+                        </small></span></big><a href="M665S13_A9.pdf">Assignment
+                      #9</a><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">E<br>
+                  </td>
+                  <td valign="top" width="10%">Mon 4/15
+                  </td>
+                  <td valign="top" width="10%">15 </td>
+                  <td valign="top">more<br>
+                    from solns to A#8:<br>
+                    &nbsp; <a href="polydetail.m">polydetail.m</a><br>
+                    &nbsp; <a href="elevenfigs.m">elevenfigs.m</a><br>
+                    &nbsp; <a href="plotevectors.m">plotevectors.m</a><br>
+                    &nbsp; <a href="checkeigs.m">checkeigs.m</a><br>
+                  </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">E<br>
+                  </td>
+                  <td valign="top" width="10%">Wed 4/17
+                  </td>
+                  <td valign="top" width="10%">17<br>
+                  </td>
+                  <td valign="top">backward stability of back-substitution </td>
+                  <td valign="top" width="20%"><big><big style="color: rgb(204, 0, 0);"><span
+                          style="font-weight: bold;"><small><br>
+                          </small></span></big></big>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">E<br>
+                  </td>
+                  <td valign="top" width="10%">Fri 4/19
+                  </td>
+                  <td valign="top" width="10%">16<br>
+                  </td>
+                  <td valign="top">backward stability of Householder QR </td>
+                  <td valign="top" width="20%"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">F<br>
+                  </td>
+                  <td valign="top">Mon 4/22<br>
+                  </td>
+                  <td valign="top">20<br>
+                  </td>
+                  <td valign="top">Gauss elimination (=GE) as LU </td>
+                  <td style="text-decoration: line-through;" valign="top"><big><small>A#9
+                        Due</small></big><small> </small></td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;">F<br>
+                  </td>
+                  <td style="vertical-align: top;">Wed 4/24<br>
+                  </td>
+                  <td style="vertical-align: top;">21<br>
+                  </td>
+                  <td style="vertical-align: top;"> GE with w. partial pivoting<a
+                      href="turing1948_review.pdf"></a><br>
+                    from solns to A#9:<br>
+                    &nbsp; <a href="svdstabletest.m">svdstabletest.m</a><br>
+                    &nbsp; <a href="naivege.m">naivege.m</a><br>
+                    &nbsp; <a href="naivegeouter.m">naivegeouter.m</a><br>
+                    for project:<br>
+                    &nbsp; - electronic form of paper is on list<br>
+                    &nbsp;&nbsp;&nbsp; at far left<br>
+                    &nbsp; - <a href="blankreview.tex">blankreview.tex</a><br>
+                    &nbsp; - <a href="turing1948_review.pdf">sample review</a><br>
+                  </td>
+                  <td style="vertical-align: top;"><big><big style="color: rgb(204, 0, 0);"><span
+                          style="font-weight: bold;"><small><small>A#9 Due</small><br>
+                          </small></span></big></big><big style="color: rgb(204, 0, 0);"><a
+                        href="project_assign.pdf">Project: review two papers</a><br>
+                    </big><a href="turing1948_review.pdf"></a><br>
+                    <big><big style="color: rgb(204, 0, 0);"><span style="font-weight: bold;"><small>
+                          </small></span></big></big>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;">Fri 4/26<br>
+                  </td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                  <td style="vertical-align: top;"><span style="color: rgb(51, 204, 0); font-weight: bold;">springfest,
+                      no class</span></td>
+                  <td style="vertical-align: top;"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">F<br>
+                  </td>
+                  <td valign="top">Mon 4/29<br>
+                  </td>
+                  <td valign="top">22, 23<br>
+                  </td>
+                  <td valign="top">stability of GE<br>
+                    in class:<br>
+                    &nbsp; <a href="growthfactor.m">growthfactor.m</a><br>
+                  </td>
+                  <td valign="top"><a href="M665S13_final.pdf"><big>Take-home
+                        Final Exam</big></a><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">F<br>
+                  </td>
+                  <td valign="top">Wed 5/1<br>
+                  </td>
+                  <td valign="top">23<br>
+                  </td>
+                  <td valign="top"> Cholesky<br>
+                  </td>
+                  <td valign="top"><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">G<br>
+                  </td>
+                  <td valign="top">Fri 5/3<br>
+                  </td>
+                  <td valign="top">24, 25<br>
+                  </td>
+                  <td valign="top"> eigenvalues, Schur decomposition, spectral
+                    theorem<a href="rqi.m"></a><br>
+                  </td>
+                  <td style="color: rgb(204, 0, 0); font-weight: bold;" valign="top"><big
+                      style="text-decoration: line-through; font-weight: normal;">Project
+                      Due</big><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%">G<br>
+                  </td>
+                  <td valign="top" width="10%">Mon 5/6<br>
+                  </td>
+                  <td valign="top" width="10%">26, 28<br>
+                  </td>
+                  <td valign="top"><small style="font-style: italic; color: rgb(204, 0, 0);">last
+                      day of
+                      instruction</small><br>
+                    inverse and Rayleigh iteration for
+                    eigenvalues of matrices; reduction to tridiagonal<br>
+                    in class:<br>
+                    &nbsp; <a href="powertries.m">powertries.m</a><br>
+                    &nbsp; <a href="colorsphere.m">colorsphere.m</a><br>
+                    &nbsp; <a href="rqi.m">rqi.m</a><br>
+                  </td>
+                  <td style="font-weight: bold; color: rgb(204, 0, 0);" valign="top"
+                    width="20%"><big>Project Due (revised)</big>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top" width="7%"><br>
+                  </td>
+                  <td valign="top" width="10%">Thurs 5/9<br>
+                  </td>
+                  <td valign="top" width="10%"><br>
+                  </td>
+                  <td valign="top"><span style="font-weight: bold; color: rgb(204, 0, 0);">TAKE-HOME
+                      FINAL DUE</span><br style="color: rgb(204, 0, 0);">
+                    <span style="font-size: medium; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; display: inline ! important; float: none; color: rgb(204, 0, 0);">Due
+                      in my box NOON Thursday, May 9<br>
+                    </span>
+                    from solns to Final:<br>
+                    &nbsp; <a href="fitxinv.m">fitxinv.m</a><br>
+                    &nbsp; <a href="mywilkinson.m">mywilkinson.m</a><br>
+                  </td>
+                  <td style="font-weight: bold; color: rgb(204, 0, 0);" valign="top"
+                    width="20%"><big>Take-home Final Due Thurs 5/9 at 12 noon<br>
+                    </big>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <font size="-1"><a href="http://www.adobe.com/products/acrobat/readstep.html">Download
+Adobe's
+        Acrobat Reader</a> for free to view <font color="#cc0000"><b>PDF</b></font>
+      files.</font><br>
+    <br>
+  </body>
+</html>
