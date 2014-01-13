@@ -7,72 +7,59 @@
   </head>
   <body>
     <h3 style="text-align: center;"><big style="color: rgb(204, 0, 0);"><big>The
-          Math 692 one-page Matlab FEM code
-          challenge</big></big><br>
+          Math 692 one-page Matlab FEM code challenge</big></big><br>
     </h3>
     <div style="text-align: center;"><span style="font-style: italic;"><span style="font-style: italic;">
           Ed Bueler, version 5/8/05<br>
         </span></span></div>
     <br>
     <ul>
-      To encourage student and faculty involvement in Math 692, I propose
-      the following challenge:
+      To encourage student and faculty involvement in Math 692, I propose the
+      following challenge:
     </ul>
     <table style="text-align: left; margin-right: auto; margin-left: auto; color: rgb(0, 153, 0); width: 80%; font-weight: bold;"
       border="0" cellpadding="2" cellspacing="2">
       <tbody>
         <tr>
-          <td style="vertical-align: top;"> Write a Matlab code to solve a
-            PDE (or closely related)
-            problem by
-            (some variant of) the FEM. <br>
+          <td style="vertical-align: top;"> Write a Matlab code to solve a PDE
+            (or closely related) problem by (some variant of) the FEM. <br>
             <br>
-            The code must fit on <span style="color: rgb(204, 0, 0);">one
-              page</span>.&nbsp; Specifically,
-            let's say that a page is 60 lines and each line is at most 90
-            characters.&nbsp;&nbsp; Documentation and comments are encouraged
-            and
-            they
-            do not count
-            in the one-page limit. <br>
+            The code must fit on <span style="color: rgb(204, 0, 0);">one page</span>.&nbsp;
+            Specifically, let's say that a page is 60 lines and each line is at
+            most 90 characters.&nbsp;&nbsp; Documentation and comments are
+            encouraged and they do not count in the one-page limit. <br>
             <br>
-            One is allowed to
-            use
-            any part of standard Matlab 7.0 or earlier.&nbsp; The
-            codes may build upon each other; codes may use any code which has
-            already
-            been submitted (see the list below).&nbsp;
-            Furthermore, input functions can be built as needed at the command
-            line
-            (anonymous or "inline" ).&nbsp;&nbsp; One must be reasonable in what
-            needs to
-            be built at the command line to run the program.&nbsp; One is not
-            allowed to call FEMLAB or other major toolboxes. </td>
+            One is allowed to use any part of standard Matlab 7.0 or
+            earlier.&nbsp; The codes may build upon each other; codes may use
+            any code which has already been submitted (see the list
+            below).&nbsp; Furthermore, input functions can be built as needed at
+            the command line (anonymous or "inline" ).&nbsp;&nbsp; One must be
+            reasonable in what needs to be built at the command line to run the
+            program.&nbsp; One is not allowed to call FEMLAB or other major
+            toolboxes. </td>
         </tr>
       </tbody>
     </table>
     <br>
     Submissions should be sent by email to Bueler:&nbsp;&nbsp; <a href="mailto:elbueler@alaska.edu">elbueler@alaska.edu</a>
-    &nbsp;&nbsp;&nbsp;
-    Multiple entries are encouraged.&nbsp; One need not be officially
-    registered for Math 692 or even be
-    affiliated with UAF to be eligible.<br>
+    &nbsp;&nbsp;&nbsp; Multiple entries are encouraged.&nbsp; One need not be
+    officially registered for Math 692 or even be affiliated with UAF to be
+    eligible.<br>
     <br>
-    The tool which motivated this challenge was a one page mesh generator
-    which appeared in <span style="font-style: italic;">SIAM Review</span>
-    this year.&nbsp; In fact, the challenge is only feasible with such a
+    The tool which motivated this challenge was a one page mesh generator which
+    appeared in <span style="font-style: italic;">SIAM Review</span> this
+    year.&nbsp; In fact, the challenge is only feasible with such a
     program.&nbsp; The entries below all suppose that the &nbsp; <span style="font-style: italic;">distmesh</span>&nbsp;
-    collection of
-    m-files is available in Matlab.&nbsp; Go to<br>
-    <div style="text-align: center;"><a href="http://www-math.mit.edu/%7Epersson/mesh/">http://www-math.mit.edu/%7Epersson/mesh/</a><br>
+    collection of m-files is available in Matlab.&nbsp; Go to<br>
+    <div style="text-align: center;"><a href="http://www-math.mit.edu/%7Epersson/mesh/">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      </a><a href="http://persson.berkeley.edu/distmesh/">http://persson.berkeley.edu/distmesh/</a>
     </div>
     to download these codes.<br>
     <br>
     <span style="font-style: italic; color: #cc0000;">NOTE January 2014: </span>All
     the codes below are now hosted at<br>
-    <div style="text-align: center;">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
-      <a href="https://github.com/bueler/fem-code-challenge">https://github.com/bueler/fem-code-challenge</a><br>
+    <div style="text-align: center;"> <a href="https://github.com/bueler/fem-code-challenge">https://github.com/bueler/fem-code-challenge</a><br>
       <div style="text-align: left;">Thus the links below are all broken.</div>
     </div>
     <div style="text-align: left;">
@@ -82,41 +69,38 @@
         <li><big><span style="color: rgb(0, 0, 0);"><span style="font-weight: bold; color: rgb(204, 0, 0);">UPDATE</span>
               (author</span>: <span style="font-weight: bold;">Bueler</span>,&nbsp;
 code:
-            poissonv2.m,&nbsp;
-            more documentation: poissonv2.pdf
-            ) <span style="color: rgb(0, 0, 0);"><span style="color: rgb(204, 0, 0); font-weight: bold;"></span></span></big><br>
+            poissonv2.m,&nbsp; more documentation: poissonv2.pdf ) <span style="color: rgb(0, 0, 0);"><span
+                style="color: rgb(204, 0, 0); font-weight: bold;"></span></span></big><br>
           <big><span style="color: rgb(0, 0, 0);"></span></big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: <span style="font-weight: bold;">Truffer</span>,&nbsp;
 code:
             fixmesh.m)</big></li>
         <li><big>(author: </big><big><span style="font-weight: bold;">Truffer</span></big><big>,&nbsp;
 code:
-            colinge.m</big><big>,&nbsp;
-            more documentation: [J. Colinge and J. Rappaz, "A strongly nonlinear
-            problem arising in glaciology," <span style="font-style: italic;">Mathematical
-Modelling
-              and Numerical Analysis</span>, Volume 33 (2), pp 395-406,
-            1999]</big><big>)</big></li>
+            colinge.m</big><big>,&nbsp; more documentation: [J. Colinge and J.
+            Rappaz, "A strongly nonlinear problem arising in glaciology," <span
+              style="font-style: italic;">Mathematical
+              Modelling and Numerical Analysis</span>, Volume 33 (2), pp
+            395-406, 1999]</big><big>)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);"><span style="font-weight: bold; color: rgb(204, 0, 0);">UPDATE</span>
             </span></big><big><span style="color: rgb(0, 0, 0);"></span></big><big><span
               style="color: rgb(0, 0, 0);">(author</span>: <span style="font-weight: bold;">Maxwell</span>,&nbsp;
 code:
             edgelist.m)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: </big><big><span
-              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp;
-            code: refine.m)</big></li>
+              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp; code:
+            refine.m)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: </big><big><span
-              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp;
-            code: bdyrefine.m)</big></li>
+              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp; code:
+            bdyrefine.m)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: <span style="font-weight: bold;">Bueler</span>,&nbsp;
 code:
             trinorms.m)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);"><span style="font-weight: bold; color: rgb(204, 0, 0);">UPDATE</span>
             </span></big><big><span style="color: rgb(0, 0, 0);">(author</span>:
-            <span style="font-weight: bold;">Bueler</span>,&nbsp;
-            code: poissonDN.m,&nbsp; more documentation: poissoncont.pdf,
-            convergence test
-            programs: testDNsq.m, testDNsqmix.m, testDNtent.m)<span style="color: rgb(0, 0, 0);"><span
+            <span style="font-weight: bold;">Bueler</span>,&nbsp; code:
+            poissonDN.m,&nbsp; more documentation: poissoncont.pdf, convergence
+            test programs: testDNsq.m, testDNsqmix.m, testDNtent.m)<span style="color: rgb(0, 0, 0);"><span
                 style="color: rgb(204, 0, 0); font-weight: bold;"><br>
               </span></span></big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: <span style="font-weight: bold;">Bueler</span>,&nbsp;
@@ -130,14 +114,12 @@ code:
             asm_poisson.m</big><big>)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: <span style="font-weight: bold;">Kallen-Brown</span>,&nbsp;
 code:
-            vcycle.m</big><big>,&nbsp;
-            more documentation: [</big><big><span style="font-style: italic;">see
+            vcycle.m</big><big>,&nbsp; more documentation: [</big><big><span style="font-style: italic;">see
 below
               for </span>fmg.m])</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: <span style="font-weight: bold;">Kallen-Brown</span>,&nbsp;
 code:
-            fmg.m</big><big>,
-            convergence/speed test script: domg.m</big><big>,&nbsp;
+            fmg.m</big><big>, convergence/speed test script: domg.m</big><big>,&nbsp;
             more documentation: [(i)&nbsp; A. Brandt, P. Oswald, K. Stuben, <span
               style="font-style: italic;">Multigrid</span>, Academic Press,
             2001;&nbsp; (ii) Y. Saad, <span style="font-style: italic;">Iterative
@@ -147,62 +129,56 @@ Methods
 code:
             obstacle.m, more documentation: [obstacleDOC.pdf])</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: </big><big><span
-              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp;
-            code: srefine.m)</big></li>
+              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp; code:
+            srefine.m)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: </big><big><span
-              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp;
-            code: findinterior.m)</big></li>
+              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp; code:
+            findinterior.m)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: </big><big><span
-              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp;
-            code: poissonv3.m)</big></li>
+              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp; code:
+            poissonv3.m)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: </big><big><span
-              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp;
-            code: apost.m)</big></li>
+              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp; code:
+            apost.m)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: </big><big><span
-              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp;
-            code: <span style="text-decoration: underline;">adapt_poisson</span>.m)</big></li>
+              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp; code:
+            <span style="text-decoration: underline;">adapt_poisson</span>.m)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: </big><big><span
-              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp;
-            code: heat.m)</big></li>
+              style="font-weight: bold;">Maxwell</span></big><big>,&nbsp; code:
+            heat.m)</big></li>
         <li><big><span style="color: rgb(0, 0, 0);">(author</span>: </big><big><span
-              style="font-weight: bold;">Nicolsky</span></big><big>,&nbsp;
-            code: inverse_Poisson.m)</big></li>
+              style="font-weight: bold;">Nicolsky</span></big><big>,&nbsp; code:
+            inverse_Poisson.m)</big></li>
       </ul>
       <br>
       <div style="text-align: left;">
         <h2><span style="font-style: italic;">Pre-</span>Entries:<br>
         </h2>
       </div>
-      <big>
-      </big>
+      <big> </big>
       <ul>
         <big> </big>
         <li><big><span style="color: rgb(0, 0, 0);"><span style="font-weight: bold; color: rgb(204, 0, 0);">UPDATE</span>
             </span></big><big>(author: <span style="font-weight: bold;">Persson
-              &amp; Strang</span>,&nbsp;
-            code:&nbsp; distmesh2d_noplot.m</big>)</li>
-        <li><big>(author: <span style="font-weight: bold;"><a href="http://www.mit.edu/%7Epersson/">Persson</a>
+              &amp; Strang</span>,&nbsp; code:&nbsp; distmesh2d_noplot.m</big>)</li>
+        <li><big>(author: <span style="font-weight: bold;"><a href="http://persson.berkeley.edu/">Persson</a>
               &amp; <a href="http://www-math.mit.edu/%7Egs/">Strang</a></span>,&nbsp;
 code:&nbsp;
-            <a href="http://www.cs.uaf.edu/%7Ebueler/distmesh2d.m">distmesh2d.m</a>,
-          </big><big>more
-            documentation:</big><big> <a href="http://www-math.mit.edu/%7Epersson/mesh/persson04mesh.pdf">persson04mesh.pdf</a>&nbsp;
-[P.-O.
-Persson
-            and G.
-            Strang, "A Simple Mesh Generator in MATLAB," <span style="font-style: italic;">SIAM
-              Review</span>, Volume 46 (2), pp.
-            329-345, June 2004</big>])</li>
+            distmesh2d.m, </big><big>more documentation:</big><big>
+            persson04mesh.pdf&nbsp;
+            [P.-O.
+            Persson and G. Strang, "A Simple Mesh Generator in MATLAB," <span style="font-style: italic;">SIAM
+              Review</span>, Volume 46 (2), pp. 329-345, June 2004</big>])</li>
       </ul>
       The following do not conform to the rules in various ways, but are
       interesting none-the-less:<br>
       <h2><span style="font-style: italic;">Hyper</span>-Entries:</h2>
       <ul>
-        <li><big>(author: </big><big><span style="font-weight: bold;"><a href="http://www.mit.edu/%7Epersson/">Persson</a>
+        <li><big>(author: </big><big><span style="font-weight: bold;"><a href="http://persson.berkeley.edu/">Persson</a>
               &amp; <a href="http://www-math.mit.edu/%7Egs/">Strang</a></span></big><big>,&nbsp;
 code:&nbsp;
-            <a href="distmeshnd.m">distmeshnd.m</a>, </big><big>more
-            documentation:</big><big> <a href="http://www-math.mit.edu/%7Epersson/mesh/persson04mesh.pdf">persson04mesh.pdf</a></big>)</li>
+            distmeshnd.m, </big><big>more documentation:</big><big>
+            persson04mesh.pdf</big>)</li>
       </ul>
       <br>
     </div>
