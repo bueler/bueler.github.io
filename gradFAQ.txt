@@ -1,0 +1,116 @@
+*******************************************************************
+
+On Wed, May 12, 2010 at 10:00 AM, you wrote:
+> I just have a quick latex question: what "verbatim" settings do you use to
+> get the framed code snippets into your documents?
+>
+> Thanks,
+> SNIPPETS NEED FRAMES
+
+To: SNIPPETS
+Subject: frames
+
+I use the "fancyvrb" package and define a new command:
+
+\usepackage{fancyvrb}
+\newcommand{\mfile}[1]{
+\begin{quote}
+\bigskip
+\VerbatimInput[frame=single,label=\fbox{\normalsize \textsl{\,#1\,}},fontfamily=courier,fontsize=\scriptsize]{#1}
+\end{quote}
+}
+
+\mfile{runperiodic.m}
+
+Ed
+
+
+*******************************************************************
+
+
+At 03:20 PM 3/9/2005 -0900, you wrote:
+Is a copy of TeX available to students through the university?
+As I'm sure you are aware, wordpad doesn't turn out to be the best
+application for typing mathematics.
+
+DESPERATELY SEEKING GOOD TYPESETTING
+
+
+
+To: DESPERATELY
+Subject: TeX
+
+It's free.  For Windows you will find two links on my
+home page, one to
+http://miktex.org/
+for a TeX distribution and one to
+http://www.winedt.com/
+for a really good editor (shareware).  Both of these are Windows
+things; for Linux there are even better free options but I am not
+the one to ask.
+
+Ed
+
+
+
+********************************************************************
+
+
+At 12:26 PM 3/10/2005 -0900, you wrote:
+I had a Matlab question unrelated to the class that I was hoping
+you could help me with. I have a dataset that contains glacier
+elevation h at a distance x along a flow line. In order to use
+this data to extract thickness estimates I need to have data points
+that are spaced a specified distance and I was using a cubic spline
+interpolation to get these points, but this is giving me problems,
+and I would like to take the dataset and just get a linear
+interpolation between each data point and then sample this
+interpolation at the points I need for proper spacing. Is there a
+built-in Matlab function which will perform this or do I need to
+take the time to write my own code?
+
+
+Thanks
+
+GLACIOLOGIST STUCK IN ICE
+
+
+
+To: STUCK
+Subject: Re: matlab help
+
+Yes.  It's  interp1, as in
+
+>> x=[0.0 0.1 0.4 0.7 1.0 1.5]
+>> H=[45 34 44 50 50 63]
+>> xx=0:0.01:1.5;
+>> HH=interp1(x,H,xx);
+>> plot(x,H,'o',xx,HH,'.')
+
+This gives values of  H  on the regularly spaced grid with  dx =0.01.
+The last command shows that linear interpolation has been used.
+The same command   interp1  can be used for cubic spline interpolation:
+
+>> HH=interp1(x,H,xx,'spline');
+>> plot(x,H,'o',xx,HH,'.')
+
+Other options are possible.  See also
+spline
+interp2
+interp3
+for related functions.
+
+
+Ed
+
+
+PS:  To first approximation, NEVER write your own code.
+In fact, the following equation applies:
+
+F(desired code) = F(MATLAB builtin)
+  + F'(MATLAB builtin) (doable at command line)
+  + (1/2) F''(MATLAB builtin) (doable at command line)^2
+  + (1/3!) F'''(your own code using as much MATLAB builtin as possible)
+        (doable at command line)^3
+
+
