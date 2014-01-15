@@ -1,236 +1,235 @@
-<!DOCTYPE HTML PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
 <html>
-<head>
-  <meta http-equiv="Content-Type"
- content="text/html; charset=ISO-8859-1">
-  <meta name="GENERATOR"
- content="Mozilla/4.76 [en] (Win98; U)
+  <head>
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+    <meta name="GENERATOR" content="Mozilla/4.76 [en] (Win98; U)
       [Netscape]">
-  <meta name="Author" content="Ed Bueler">
-  <title>Math 615 Syllabus Spring 2014 (Bueler)</title>
-</head>
-<body>
-<center>
-<h2>Math 615 Numerical Analysis of Differential Equations</h2>
-</center>
-<center>
-<h3><a href="http://bueler.github.io">Ed Bueler</a>,<font
- color="#000000"> Spring 2014 UAF  FIXME</font></h3>
-<small style="color: rgb(204, 0, 0);"><span style="font-style: italic;">revised
-syllabus</span></small><br>
-<span
- style="font-style: italic; font-weight: bold; color: rgb(204, 0, 0);"></span><br>
-</center>
-<table cols="2" width="100%">
-  <tbody>
-    <tr>
-      <td>Instructor:&nbsp;&nbsp;&nbsp;&nbsp; Ed
-Bueler&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chapman 301C<br>
-Phone: 474-7693&nbsp;&nbsp; eMail: elbueler@alaska.edu<br>
-Office Hours:&nbsp; <a href="../OffHrs.htm">bueler.github.io/OffHrs.htm</a><br>
-      </td>
-      <td valign="top" align="right">Class Time: MWF 1:00--2:00<br>
-Classroom: <big style="color: rgb(204, 0, 0);"><span
- style="font-weight: bold;">Reichardt 204</span></big>. <br>
-Web Site: <a href="http://bueler.github.io">bueler.github.io</a></td>
-    </tr>
-  </tbody>
-</table>
-<br>
-<b><font size="+1">Course Description:</font></b>&nbsp; 3.0
-credits.&nbsp; Methods for numerically approximating partial
-differential equations (PDEs) and related problems on computers; PDEs
-are the underlying structure for most problems of flow, fields,
-thermodynamics, deformation, quantum fields, curvature, etc. &nbsp;
-Mathematical analysis of these numerical methods.&nbsp; Practical and
-abstract approaches to this numerical analysis:&nbsp; (i) how are these
-methods implemented, verified, and used?&nbsp; (ii) why are they stable
-and do we know in advance that they converge?<br>
-<br>
-Most classtime will be lecture, with <span style="font-style: italic;">Matlab/Octave/Pylab
-(=MOP)</span> demonstrations whenever I can fit them in.&nbsp; I will
-help you started with <span style="font-style: italic;">MOP</span>,
-but you must show initiative in learning to do actual numerical
-computation.&nbsp; Homework assignments and a student-chosen project
-will include actual implementation in <span style="font-style: italic;">MOP</span>.<br>
-<br>
-Abstract but precise thought is essential in order to understand the
-choices among numerical methods one faces in solving major
-problems.&nbsp; Thus all homework assignments will have mathematical
-exercises, and in these you will be asked to "show" and "prove".&nbsp;
-Formal proof style is not important, but you'll need to give clear
-presentations of sufficiently-general logical arguments.<br>
-<br>
-The emphasis is on finite difference methods.&nbsp; I will only gloss
-spectral methods, finite elements, finite volume methods.&nbsp; We will
-think in terms of vectors and matrices, and not be satisfied with lots
-of numbers from a computer program.&nbsp; Instead of a list of finite
-difference schemes, for instance, we will seek the underlying linear
-algebra structure.&nbsp; The course will include some real nonlinear
-examples, for which one uses a sequence of approximating linear
-problems.<br>
-<br>
-<b><font size="+1">Goals:&nbsp;</font></b> At the end this course you
-will not be a professional numerical analyst.&nbsp; But you will be
-able to evaluate and use many numerical tools for solving scientific
-and engineering problems, and you will be able to code some of the
-basic methods (i.e. for the purpose of prototyping more serious
-solutions).&nbsp; Furthermore you will have the mathematical start
-needed to take the next steps to learn the finite element method,
-spectral methods, parallel-izable matrix methods.<br>
-<br style="font-weight: bold;">
-<big><span style="font-weight: bold;">Calendar:</span></big>&nbsp; A
-day-to-day tentative schedule for the semester is at&nbsp;<a
- href="Math615S12.htm">www.dms.uaf.edu/~bueler/Math615S12.htm</a>.<br>
-<br>
-<b><big>Prerequisites:</big>&nbsp;</b> <span
- style="font-style: italic;">Informally: </span>undergraduate ordinary
-differential equations, undergraduate linear algebra, exposure to the
-basic ideas of numerical analysis, and exposure to Fourier series and
-separation of variables (for solving the classical linear PDE boundary
-value problems).&nbsp; Also some exposure to computer programming.<span
- style="font-style: italic;">&nbsp; Formally</span>: The prerequisites
-are<span style="font-style: italic;"></span> MATH 302, MATH 310, MATH
-314, and MATH 421 or permission of the instructor.&nbsp; CS 201 and
-MATH 422 are not specifically needed, though they are nice things to
-know.<br>
-<br>
-<b><big>Textbook:</big>&nbsp;</b> The <span style="font-weight: bold;">required</span>
-text is K. Morton and D. Mayers, <span style="font-style: italic;">Numerical
+    <meta name="Author" content="Ed Bueler">
+    <title>Math 615 Syllabus Spring 2014 (Bueler)</title>
+  </head>
+  <body>
+    <center>
+      <h2>Math 615 Numerical Analysis of Differential Equations</h2>
+    </center>
+    <center>
+      <h3><font color="#000000">Spring 2014 UAF</font></h3>
+      <h2><span style="color: #cc0000;">DRAFT</span></h2>
+      <small style="color: rgb(204, 0, 0);"><span style="font-style: italic;"></span></small>
+      <span style="font-style: italic; font-weight: bold; color: rgb(204, 0, 0);"></span><br>
+    </center>
+    <table cols="2" width="100%">
+      <tbody>
+        <tr>
+          <td>Instructor:&nbsp;&nbsp;&nbsp;&nbsp; <strong>Ed
+              Bueler</strong><br>
+            Phone: 474-7693 <br>
+            eMail: elbueler@alaska.edu<br>
+            Office: <strong></strong> Chapman 301C, hours at <a href="../OffHrs.htm">bueler.github.io/OffHrs.htm</a><br>
+          </td>
+          <td align="right" valign="top">Class Time: MWF 1:00--2:00<br>
+            Classroom: <big>Reichardt 204</big> <br>
+            Web Site: <a href="http://bueler.github.io">bueler.github.io</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <b><font size="+1">Course Description:</font></b>&nbsp; 3.0
+    credits.&nbsp; We cover methods for numerically-approximating partial
+    differential equations (PDEs) and related problems on computers, plus some
+    coverage of numerical methods for ordinary differential equations
+    (ODEs).&nbsp; PDEs
+    are the underlying structure for most problems of flow, fields,
+    thermodynamics, deformation, quantum mechanics, but also finance and
+    population dynamics. &nbsp; We do mathematical analysis of these numerical
+    methods, with both practical and
+    abstract approaches to this numerical analysis:&nbsp; (i) how are these
+    methods implemented, verified, and used?&nbsp; (ii) when are they stable?
+    and&nbsp; (iii) do we know in advance that they converge?<br>
+    <br>
+    Classes will have lectures including <span style="font-style: italic;">Matlab</span>
+    demonstrations whenever I can fit them in.&nbsp; I will
+    help you started with <span style="font-style: italic;">Matlab</span>,
+    but you must show initiative in learning how to do actual numerical
+    computation.&nbsp; Homework assignments and a student-chosen project
+    will include actual implementations in <span style="font-style: italic;">Matlab</span>.&nbsp;
+    Abstract and precise thought is, however, also essential to make
+    choices among numerical methods for solving major
+    problems.&nbsp; Thus all homework assignments will have mathematical
+    exercises, and in these you will be asked to "show" and "prove".&nbsp;
+    Formal proof style is not important, but you'll need to give clear
+    presentations of sufficiently-general logical arguments.<br>
+    <br>
+    The emphasis is on finite difference methods for PDEs.&nbsp; I will only
+    gloss
+    ODE methods and spectral methods, finite elements, and finite volume methods
+    for PDEs.&nbsp; We will
+    think in terms of vectors and matrices.&nbsp; We will not be satisfied with
+    lots
+    of numbers or even pretty pictures from a computer program.&nbsp; Instead we
+    will be concerned with the degree to which our numbers represent what we
+    claim they model.&nbsp; We will seek the underlying linear
+    algebra structure PDE problems.&nbsp; The course will include some real
+    nonlinear
+    examples, for which one uses a sequence of approximating linear
+    problems.<br>
+    <br>
+    <b><font size="+1">Goals:&nbsp;</font></b> At the end this course you
+    will not be a professional numerical analyst.&nbsp; But you will be
+    able to evaluate and use many numerical tools for solving scientific
+    and engineering problems, and you will be able to code some of the
+    basic methods (i.e. for the purpose of prototyping more serious
+    solutions).&nbsp; Furthermore you will have the mathematical start
+    needed to take the next steps to learn the finite element method,
+    spectral methods, matrix methods, and broader scientific computing.<br>
+    <br style="font-weight: bold;">
+    <big><span style="font-weight: bold;">Calendar and Course Webpage:</span></big>&nbsp;
+    A
+    day-to-day tentative schedule for the semester is at the course webpage <a
+      href="http://bueler.github.io/M615S14/Math614S14.htm">bueler.github.io/M615S14/Math614S14.htm</a>.<br>
+    <br>
+    <b><big>Prerequisites:</big>&nbsp;</b> <span style="font-style: italic;">Informally:
+      </span>undergraduate ordinary
+    differential equations, undergraduate linear algebra, exposure to the
+    basic ideas of numerical analysis, and exposure to Fourier series and
+    separation of variables (for solving the classical linear PDE boundary
+    value problems).&nbsp; Also some exposure to computer programming.<span style="font-style: italic;">&nbsp;
+      Formally</span>: The prerequisites
+    are<span style="font-style: italic;"></span> MATH 302, MATH 310, MATH
+    314, and MATH 421 or permission of the instructor.&nbsp; CS 201 and
+    MATH 422 are not specifically needed, though they are nice things to
+    know.<br>
+    <br>
+    <b><big>Textbook:</big>&nbsp;</b> The <span style="font-weight: bold;">required</span>
+    text is K. Morton and D. Mayers, <span style="font-style: italic;">Numerical
 
 Solution
-of Partial Differential Equations</span>, 2nd ed. Cambridge
-Univ. Press 2005. There are other textbooks on numerical analysis of
-PDEs, but I actually <span style="font-style: italic;">like</span>
-this one.&nbsp; We will cover chapters 1, 2, 3, 4, first half of 5,
-some of 6, and a little of 7.&nbsp; Four other texts are recommended,
-of which two are freely available online a page at a time.&nbsp; See <a
- href="Math615S10.htm">www.dms.uaf.edu/~bueler/Math615S12.htm</a><br>
-<span style="font-weight: bold;"></span><br>
-<b><font size="+1">Your Grade = Homework + Project</font></b><b><font
- size="+1"> + Midterm</font></b><b><font size="+1">:</font></b>&nbsp; <b>Fifty
-percent</b> of the course, and the grade, will be based on nearly <b>weekly
-homework
-assignments</b>, including on the last assignment which will
-be worth double and which is a modest <span style="font-weight: bold;">take-home
-
-final
-exam</span>.&nbsp; Here is where you will learn the mathematics
-and gain breadth and perspective.&nbsp; You will be asked to think
-abstractly on some problems and to use <i>MOP</i> on many
-others.&nbsp;&nbsp; (For <span style="font-style: italic;">MOP</span>
-problems expect to make a program about a half-page long.)<br>
-<br>
-It is assumed that students in this class have in mind<span
- style="font-style: italic;">, </span><i>or can acquire, </i>specific
-modelling problems in applied fields which can be used for a <span
- style="font-weight: bold;">project</span>.&nbsp;&nbsp; These will
-mostly, but not exclusively, be PDE problems.&nbsp; Students often use
-a simplification of a thesis/dissertation project, for instance.&nbsp;
-I am eager to help and advise on choosing and refining such
-problems.&nbsp; <span style="font-weight: bold;">Thirty-five</span><b>
-percent</b> of the grade in the course will be on the project.&nbsp;
-Two project assignments will be given, the first part a preparatory
-stage due midsemester, and the remainder due at finals time.&nbsp; Both
-mathematical analysis and actual numerical computation are required on
-your project.<br>
-<br>
-Finally, there will be a one-hour in-class <span
- style="font-weight: bold;">midterm exam</span> worth only <span
- style="font-weight: bold;">fifteen percent</span> of the course
-grade.&nbsp; The purpose is to give a midsemester opportunity to review
-basics before expanding our goals in the second half.<br>
-<table cols="3">
-  <tbody>
-    <tr>
-      <td>The <b>course grade</b> will be determined by from
-homework+project+midterm according to the schedule at right&nbsp;
----&gt;<br>
-I will use plus/minus grades as indicated. </td>
-      <td style="text-align: right; width: 20%;"><small><b>Percent</b><br>
-      </small><small>91 --100 %<br>
-&nbsp; </small><small>88 --&nbsp; 90 %</small><br>
-      <small>84 --&nbsp; 87 %</small><small><br>
-&nbsp; 76 --&nbsp; 83 %</small><small><br>
-73 --&nbsp; 75 %</small><small><br>
-&nbsp; 69 --&nbsp; 72 %<br>
-&nbsp; </small><small>61 --&nbsp; 68 %<br>
-&nbsp; </small><small>57 --&nbsp; 60 %</small><small><br>
-&nbsp; 41 --&nbsp; 56 %<br>
-&nbsp; </small><small>0 --&nbsp; 40 %</small><small><br>
-      </small></td>
-      <td style="text-align: right; width: 20%;"><small><b>Grade</b><br>
-      </small><small>A<br>
-A-<br>
-B+<br>
-B<br>
-B-<br>
-C+<br>
-C<br>
-C-<br>
-D<br>
-      </small><small>F</small></td>
-    </tr>
-  </tbody>
-</table>
-<big><b><br>
-Policies and makeup exams:</b></big>&nbsp;&nbsp; The department has
-specific policies on incompletes, late withdrawals, and early final
-examinations, etc; see <a
- href="http://www.dms.uaf.edu/dms/Policies.html">http://www.dms.uaf.edu/dms/Policies.html</a>.&nbsp;
+of
+      Partial Differential Equations</span>, 2nd ed. Cambridge
+    Univ. Press 2005. There are other textbooks on numerical analysis of
+    PDEs, but I actually <span style="font-style: italic;">like</span>
+    this one.&nbsp; We will cover chapters 1, 2, 3, 4, first half of 5,
+    some of 6, and a little of 7.&nbsp; Four other texts are recommended,
+    of which two are freely available online a page at a time.&nbsp; See <a href="Math615S10.htm">www.dms.uaf.edu/~bueler/Math615S12.htm</a><br>
+    <span style="font-weight: bold;"></span><br>
+    <b><font size="+1">Your Grade = Homework + Project</font></b><b><font size="+1">
+        + Midterm</font></b><b><font size="+1">:</font></b>&nbsp; <b>Fifty
+      percent</b> of the course, and the grade, will be based on nearly <b>weekly
+      homework
+      assignments</b>, including on the last assignment which will
+    be worth double and which is a modest <span style="font-weight: bold;">take-home
+      final
+      exam</span>.&nbsp; Here is where you will learn the mathematics
+    and gain breadth and perspective.&nbsp; You will be asked to think
+    abstractly on some problems and to use <i>MOP</i> on many
+    others.&nbsp;&nbsp; (For <span style="font-style: italic;">MOP</span>
+    problems expect to make a program about a half-page long.)<br>
+    <br>
+    It is assumed that students in this class have in mind<span style="font-style: italic;">,
+    </span><i>or can acquire, </i>specific
+    modelling problems in applied fields which can be used for a <span style="font-weight: bold;">project</span>.&nbsp;&nbsp;
+    These will
+    mostly, but not exclusively, be PDE problems.&nbsp; Students often use
+    a simplification of a thesis/dissertation project, for instance.&nbsp;
+    I am eager to help and advise on choosing and refining such
+    problems.&nbsp; <span style="font-weight: bold;">Thirty-five</span><b>
+      percent</b> of the grade in the course will be on the project.&nbsp;
+    Two project assignments will be given, the first part a preparatory
+    stage due midsemester, and the remainder due at finals time.&nbsp; Both
+    mathematical analysis and actual numerical computation are required on
+    your project.<br>
+    <br>
+    Finally, there will be a one-hour in-class <span style="font-weight: bold;">midterm
+      exam</span> worth only <span style="font-weight: bold;">fifteen percent</span>
+    of the course
+    grade.&nbsp; The purpose is to give a midsemester opportunity to review
+    basics before expanding our goals in the second half.<br>
+    <table cols="3">
+      <tbody>
+        <tr>
+          <td>The <b>course grade</b> will be determined by from
+            homework+project+midterm according to the schedule at right&nbsp;
+            ---&gt;<br>
+            I will use plus/minus grades as indicated. </td>
+          <td style="text-align: right; width: 20%;"><small><b>Percent</b><br>
+            </small><small>91 --100 %<br>
+              &nbsp; </small><small>88 --&nbsp; 90 %</small><br>
+            <small>84 --&nbsp; 87 %</small><small><br>
+              &nbsp; 76 --&nbsp; 83 %</small><small><br>
+              73 --&nbsp; 75 %</small><small><br>
+              &nbsp; 69 --&nbsp; 72 %<br>
+              &nbsp; </small><small>61 --&nbsp; 68 %<br>
+              &nbsp; </small><small>57 --&nbsp; 60 %</small><small><br>
+              &nbsp; 41 --&nbsp; 56 %<br>
+              &nbsp; </small><small>0 --&nbsp; 40 %</small><small><br>
+            </small></td>
+          <td style="text-align: right; width: 20%;"><small><b>Grade</b><br>
+            </small><small>A<br>
+              A-<br>
+              B+<br>
+              B<br>
+              B-<br>
+              C+<br>
+              C<br>
+              C-<br>
+              D<br>
+            </small><small>F</small></td>
+        </tr>
+      </tbody>
+    </table>
+    <big><b><br>
+        Policies and makeup exams:</b></big>&nbsp;&nbsp; The department has
+    specific policies on incompletes, late withdrawals, and early final
+    examinations, etc; see <a href="http://www.dms.uaf.edu/dms/Policies.html">http://www.dms.uaf.edu/dms/Policies.html</a>.&nbsp;
 You
 
 are
-covered by the UAF Honor Code.&nbsp; I will work with the Office of
-Disabilities Services (208 Whitman, 474-5655) to provide reasonable
-accommodation to student with disabilities.<br>
-<p><b><font size="+1">Programming in the course:</font></b>&nbsp; You
-will use <i><a href="http://www.mathworks.com/">Matlab</a></i>, <a
- href="http://www.gnu.org/software/octave/"><span
- style="font-style: italic;">Octave</span></a>, or <span
- style="font-style: italic;">Pylab</span> (=<a
- href="http://www.python.org/"><span style="font-style: italic;">Python</span></a>+<a
- href="http://www.scipy.org/SciPy"><span style="font-style: italic;">scipy</span></a>+<a
- href="http://matplotlib.sourceforge.net/"><span
- style="font-style: italic;">matplotlib</span></a>), called "<span
- style="font-style: italic;">MOP</span>" from now on.&nbsp; <span
- style="font-style: italic;">Matlab</span> is commercial while <span
- style="font-style: italic;">Octave</span> and <span
- style="font-style: italic;">Pylab</span> are free and open
-source.&nbsp; <span style="font-style: italic;">Octave</span> a clone
-of <span style="font-style: italic;">Matlab</span> so the same
-programs will run in either.&nbsp; Programs in <i>Matlab</i> and <i>Octave</i>
-(and occasionally <i>Pylab</i>) will appear on my website.&nbsp; These
-can be used in homework problems and in projects. Copious resources are
-available for learning <span style="font-style: italic;">Matlab/Octave/Pylab</span>.&nbsp;
+covered
+    by the UAF Honor Code.&nbsp; I will work with the Office of
+    Disabilities Services (208 Whitman, 474-5655) to provide reasonable
+    accommodation to student with disabilities.<br>
+    <p><b><font size="+1">Programming in the course:</font></b>&nbsp; You
+      will use <i><a href="http://www.mathworks.com/">Matlab</a></i>, <a href="http://www.gnu.org/software/octave/"><span
+          style="font-style: italic;">Octave</span></a>, or <span style="font-style: italic;">Pylab</span>
+      (=<a href="http://www.python.org/"><span style="font-style: italic;">Python</span></a>+<a
+        href="http://www.scipy.org/SciPy"><span style="font-style: italic;">scipy</span></a>+<a
+        href="http://matplotlib.sourceforge.net/"><span style="font-style: italic;">matplotlib</span></a>),
+      called "<span style="font-style: italic;">MOP</span>" from now on.&nbsp; <span
+        style="font-style: italic;">Matlab</span> is commercial while <span style="font-style: italic;">Octave</span>
+      and <span style="font-style: italic;">Pylab</span> are free and open
+      source.&nbsp; <span style="font-style: italic;">Octave</span> a clone
+      of <span style="font-style: italic;">Matlab</span> so the same
+      programs will run in either.&nbsp; Programs in <i>Matlab</i> and <i>Octave</i>
+      (and occasionally <i>Pylab</i>) will appear on my website.&nbsp; These
+      can be used in homework problems and in projects. Copious resources are
+      available for learning <span style="font-style: italic;">Matlab/Octave/Pylab</span>.&nbsp;
 See
 
 my
-modest <span style="font-style: italic;">Matlab/Octave </span>tutorial
-and
-
-links
-page (<a href="http://www.math.uaf.edu/%7Ebueler/MatlabEx.htm">www.math.uaf.edu/~bueler/MatlabEx.htm</a>).<br>
-</p>
-<p><i>MOP</i> are languages designed to do numerical analysis
-coursework.&nbsp; Mathematical and graphical inputs and outputs are
-easily manipulated.&nbsp; Matrices appearing in problems can be easily
-analyzed.&nbsp; Many of the operations appearing in numerical problems
-are natural and quick in <i>MOP</i>, and require much more work in
-compiled languages like <i>C</i> or <i>FORTRAN</i>.&nbsp; Even
-established compiled-language programmers will find it a desirable
-prototyping tool.</p>
-<p>Students with <i>no</i> programming experience, or fear of fiddling
-around at a command line, will have a harder time.&nbsp; The
-programming experienced in Math 310 is sufficient as preparation,
-however, as is any computer science programming course.&nbsp; Students
-who are well-established and secure in programming are encouraged to
-learn both <span style="font-style: italic;">Matlab/Octave</span> and <span
- style="font-style: italic;">Pylab</span>.&nbsp; Other compiled
-languages (e.g. <span style="font-style: italic;">C</span> and <span
- style="font-style: italic;">FORTRAN</span>) could be used but at very
-significant disadvantage; the programs are longer and harder to
-understand.<br>
-</p>
-</body>
+modest
+      <span style="font-style: italic;">Matlab/Octave </span>tutorial
+      and
+      links
+      page (<a href="http://www.math.uaf.edu/%7Ebueler/MatlabEx.htm">www.math.uaf.edu/~bueler/MatlabEx.htm</a>).<br>
+    </p>
+    <p><i>MOP</i> are languages designed to do numerical analysis
+      coursework.&nbsp; Mathematical and graphical inputs and outputs are
+      easily manipulated.&nbsp; Matrices appearing in problems can be easily
+      analyzed.&nbsp; Many of the operations appearing in numerical problems
+      are natural and quick in <i>MOP</i>, and require much more work in
+      compiled languages like <i>C</i> or <i>FORTRAN</i>.&nbsp; Even
+      established compiled-language programmers will find it a desirable
+      prototyping tool.</p>
+    <p>Students with <i>no</i> programming experience, or fear of fiddling
+      around at a command line, will have a harder time.&nbsp; The
+      programming experienced in Math 310 is sufficient as preparation,
+      however, as is any computer science programming course.&nbsp; Students
+      who are well-established and secure in programming are encouraged to
+      learn both <span style="font-style: italic;">Matlab/Octave</span> and <span
+        style="font-style: italic;">Pylab</span>.&nbsp; Other compiled
+      languages (e.g. <span style="font-style: italic;">C</span> and <span style="font-style: italic;">FORTRAN</span>)
+      could be used but at very
+      significant disadvantage; the programs are longer and harder to
+      understand.<br>
+    </p>
+  </body>
 </html>
