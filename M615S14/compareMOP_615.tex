@@ -1,0 +1,80 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in, head=1in]{geometry}
+
+\usepackage{fancyvrb,xspace}
+\usepackage[pdftex,colorlinks=true,urlcolor=blue]{hyperref}
+
+\parindent=0in
+\parskip=0.5\baselineskip
+
+%\fvset{fontsize=\small, numbers=left} 
+\DefineShortVerb{\|}
+
+\newcommand{\mfile}[1]{
+\begin{quote}
+\VerbatimInput[frame=single,framesep=3mm,label=\fbox{\normalsize \textsl{\,#1\,}},fontfamily=courier,fontsize=\scriptsize]{#1}
+\end{quote}
+}
+
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Octave}{\textsc{Octave}\xspace}
+\newcommand{\python}{\textsc{Python}\xspace}
+\newcommand{\ipython}{\textsc{ipython}\xspace}
+\newcommand{\pylab}{\textsc{pylab}\xspace}
+\newcommand{\scipy}{\textsc{scipy}\xspace}
+
+\begin{document}
+
+\title{Comparison of \textsc{Matlab}, \textsc{Octave}, and \textsc{pylab}}
+
+\author{Ed Bueler}
+
+\date{\today.}
+
+\maketitle
+\normalsize
+
+\newcommand{\hrf}[2]{\href{#1}{\texttt{#2}}}
+
+\Matlab (\hrf{http://www.mathworks.com/}{www.mathworks.com}) was designed by Cleve Moler for teaching numerical linear algebra.  It has become a powerful programming language and engineering tool.  It should not be confused with the city in Bangladesh (\hrf{http://en.wikipedia.org/wiki/Matlab_Upazila}{en.wikipedia.org/wiki/Matlab$\_$Upazila}).
+
+But I like free, open source software.  There are free alternatives to \Matlab, and they'll work well for this course.  First, \Octave is a \Matlab clone.  The examples below work in an identical way in \Matlab and in \Octave.\footnote{Incompatibilities between \Octave and \Matlab are a reportable \Octave bug.}  I will mostly use \Octave myself for teaching, but I'll test examples in both \Octave and \Matlab.  To download \Octave, go to 
+\hrf{http://www.gnu.org/software/octave/}{www.gnu.org/software/octave}.
+
+Second, the \scipy (\hrf{http://www.scipy.org/}{www.scipy.org}) and \pylab (\hrf{http://matplotlib.sourceforge.net/}{matplotlib.sourceforge.net}) libraries give the general-purpose interpreted language \python (\hrf{http://python.org/}{python.org}) all of \Matlab functionality plus quite a bit more.  This combination is called \pylab.  Using it with the \textsc{ipython} interactive shell (\hrf{http://ipython.scipy.org/moin/}{ipython.scipy.org}) gives the most \Matlab-like experience.  However, the examples below hint at the computer language differences and the different modes of thought, between \Matlab/\Octave and \python.  Students who already use \python, or have computer science inclinations, will like this option.
+
+On the next page are two algorithms each in \Matlab/\Octave form (left column) and \pylab form (right column).  To download these examples, follow links at the class page
+
+\centerline{\hrf{http://www.dms.uaf.edu/~bueler/Math615S12.htm}{www.dms.uaf.edu/$\sim$bueler/Math615S12.htm}.}
+
+Here are some brief ``how-to'' comments for the \Matlab/\Octave examples: \texttt{expint.m} is a \emph{script}.  A script is run by starting \Matlab/\Octave, either in the directory containing the examples, or with a change to the ``path''.  Then type the name of the script at the prompt, without the ``.m'':
+
+\verb|>> expint|
+
+\noindent The second algorithm \verb|bis.m| is a \emph{function} which needs inputs.  At the prompt enter
+\begin{Verbatim}
+>> f = @(x) cos(x) - x
+>> bis(0,1,f)
+\end{Verbatim}
+for example.  Doing \verb|help expint| or \verb|help bis| shows the block of comments as documentation.
+
+For the \python versions:  Type \verb|run expint.py| at the \ipython prompt or \verb|python expint.py| or \verb|./expint.py|.  Note that a script like \texttt{expint.py} is made executable by adding a ``shebang'' in the first line (``\texttt{\#!/usr/bin/env python}'') and adding executable permissions (do: \texttt{chmod a+x expint.py}).  For the function \verb|bis.py|, run \python or \ipython and do: \verb|from bis import bis|.  In \ipython you can then do \verb|bis?| to get documentation for that function, and run the example as shown in the docstring.
+
+\vfill
+
+
+\newpage
+\vfill
+
+\begin{tabular}{ll}
+\hspace{-0.45in}\parbox{3.6in}{\mfile{expint.m}} & \hspace{-0.4in}\parbox{3.8in}{\mfile{expint.py}}
+\end{tabular}
+
+\begin{tabular}{ll}
+\hspace{-0.45in}\parbox{3.6in}{\mfile{bis.m}} & \hspace{-0.4in}\parbox{3.8in}{\mfile{bis.py}}
+\end{tabular}
+
+\vfill
+
+\end{document}
+
