@@ -22,6 +22,7 @@
 \newcommand{\ipython}{\textsc{ipython}\xspace}
 \newcommand{\pylab}{\textsc{pylab}\xspace}
 \newcommand{\scipy}{\textsc{scipy}\xspace}
+\newcommand{\matplotlib}{\textsc{matplotlib}\xspace}
 
 \begin{document}
 
@@ -42,13 +43,13 @@
 But I like free, open source software.  There are free alternatives to \Matlab, and they'll work well for this course.  First, \Octave is a \Matlab clone.  The examples below work in an identical way in \Matlab and in \Octave.  I will mostly use \Octave myself for teaching, but I'll test examples in both \Octave and \Matlab.  To download \Octave, go to 
 \hrf{http://www.gnu.org/software/octave/}{www.gnu.org/software/octave}.
 
-Second, the \scipy (\hrf{http://www.scipy.org/}{www.scipy.org}) and \pylab (\hrf{http://matplotlib.sourceforge.net/}{matplotlib.sourceforge.net}) libraries give the general-purpose interpreted language \python (\hrf{http://python.org/}{python.org}) all of \Matlab functionality plus quite a bit more.  This combination is called \pylab.  Using it with the \textsc{ipython} interactive shell (\hrf{http://ipython.scipy.org/moin/}{ipython.scipy.org}) gives the most \Matlab-like experience.  However, the examples below hint at the computer language differences and the different modes of thought between \Matlab/\Octave and \python.  Students who already use \python will like this option.
+Second, the \scipy (\hrf{http://www.scipy.org/}{www.scipy.org}) and \matplotlib (\hrf{http://matplotlib.org/}{matplotlib.org}) libraries give the general-purpose interpreted language \python (\hrf{http://python.org/}{python.org}) all of \Matlab functionality plus quite a bit more.  This combination is called \pylab.  Using it with the \textsc{ipython} interactive shell (\hrf{http://ipython.org/}{ipython.org}) gives the most \Matlab-like experience.  However, the examples below hint at the computer language differences and the different modes of thought between \Matlab/\Octave and \python.  Students who already use \python will like this option.
 
 On the next page are two algorithms each in \Matlab/\Octave form (left column) and \pylab form (right column).  To download these examples, follow links at the class page
 
 \centerline{\hrf{http://bueler.github.io/M615S14/}{bueler.github.io/M615S14/}.}
 
-Here are some brief ``how-to'' comments for the \Matlab/\Octave examples: \texttt{expint.m} is a \emph{script}.  A script is run by starting \Matlab/\Octave, either in the directory containing the examples, or with a change to the ``path''.  Then type the name of the script at the prompt, without the ``.m'':
+Here are some brief ``how-to'' comments for the \Matlab/\Octave examples: \texttt{expint.m} is a \emph{script}.  A script is run by starting \Matlab/\Octave, usually in the directory containing the script you want to run.  Then type the name of the script at the prompt, without the ``.m'':
 
 \verb|>> expint|
 
@@ -59,7 +60,7 @@ Here are some brief ``how-to'' comments for the \Matlab/\Octave examples: \textt
 \end{Verbatim}
 for example.  Doing \verb|help expint| or \verb|help bis| shows the block of comments as documentation.
 
-For the \python versions:  Type \verb|run expint.py| at the \ipython prompt or \verb|python expint.py| or \verb|./expint.py| at a shell prompt.  For the function \verb|bis.py|, run \python or \ipython and do: \verb|from bis import bis|.  In \ipython you can then do \verb|bis?| to get documentation for that function, and run the example as shown in the docstring.
+For the \python versions:  Type \verb|run expint.py| at the \ipython prompt or \verb|python expint.py| at a shell prompt.  For the function \verb|bis.py|, run \python or \ipython and do: \verb|from bis import bis|.  In \ipython you can type \verb|bis?| to get documentation for that function, and run the example as shown in the docstring.
 
 \vfill
 
