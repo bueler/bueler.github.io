@@ -34,10 +34,10 @@ function fluxlimiter(J,nu,k,init)
 % time integration; see (1.12) in H&V (2003).  Note nu = dt / dx.
 %
 % Example:
-%    >> fluxlimiter(50,0.5,1,'square')
-%    >> fluxlimiter(50,0.33,1,'hump')
-%    >> fluxlimiter(100,0.33,10,'square')
-%    >> fluxlimiter(100,0.33,10,'hump')
+%    >> figure(1),  fluxlimiter(50,0.5,1,'square')
+%    >> figure(2),  fluxlimiter(50,0.33,1,'hump')
+%    >> figure(3),  fluxlimiter(100,0.33,10,'square')
+%    >> figure(4),  fluxlimiter(100,0.33,10,'hump')
 
 if nargin<1,  J = 50;   end
 if nargin<2,  nu = 0.5;   end
@@ -77,7 +77,7 @@ elseif all(init=='hump')
 end
 
 % four numerical schemes
-figure(1), clf
+clf
 tstr = {'upwind','Lax-Wendroff','flux limiter (Euler)','flux limiter (RK2)'};
 for fig=1:4
       u = uinit;
