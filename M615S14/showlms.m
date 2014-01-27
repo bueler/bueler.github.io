@@ -1,9 +1,12 @@
 function showlms(u,L)
 % SHOWLMS  Plot the state of the linear mass-spring system.  Input u
-% is displacement of the N free masses.
+% is displacement of the N free masses where N = length(u).  Input L
+% is total length.  For example,
+%   >> showlms([-0.1 0.1 -0.1 -0.2],2.0)
+% This function is called by LMS.
 
-M = length(u);         % number of free masses
-dx = L / (M + 1);
+N = length(u);         % number of free masses
+dx = L / (N + 1);
 xe = dx:dx:L-dx;       % equilibrium (spring relaxed) locations of masses
 x = u + xe;            % locations of masses
 xx = [0 x L];        % locations of masses including endpoints
@@ -23,14 +26,14 @@ ms = 101;              % points to plot in a spring
 ps = 4;                % number of bumps per spring
 xs = linspace(0,1,ms);
 ys = (L/100) * abs(sin(2*pi*ps*xs)) - (L/200);
-for j = 1:M+1
+for j = 1:N+1
   lspring = xx(j+1) - xx(j);  % length of spring
   plot(xx(j) + lspring * xs,ys,'k-','linewidth',1.0)
 end
 
 % show axis and ticks for equilibrium locations
 plot([0 L],[-3*z -3*z],'k','linewidth',2.0)
-for j = 1:M
+for j = 1:N
   plot([xe(j) xe(j)],[-2.7*z,-3.3*z],'k','linewidth',2.0)
 end
 hold off
