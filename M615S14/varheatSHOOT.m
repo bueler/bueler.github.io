@@ -1,12 +1,11 @@
-function [x,u,q] = varheatSHOOTmat()
+function [x,u,q] = varheatSHOOT()
 % Set up and solve, by nonlinear shooting, a "serious" linear
 % two-point BVP for equilibrium temperature distribution in a rod.
 % The terms correspond to variable conductivity, constant
 % chemical-reaction-created heat, and variable externally-introduced heat.
 % Uses bisection to solve target boundary equation  u(3) = 0.
-% ** Matlab version: uses ode45 **
 % Example:
-%   >> [x,u,q] = varheatSHOOTmat();
+%   >> [x,u,q] = varheatSHOOT();
 
 L = 3;
 k = @(x) 0.5 * atan((x-1.0) * 20.0) + 1.0;
