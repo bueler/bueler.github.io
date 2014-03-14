@@ -33,7 +33,7 @@ dt = 0.5 * dx^2 / k;     % so  mu = 1/2
 N = ceil(tf / dt);
 dt = tf / N;             % so  N dt = tf  exactly and  mu <= 1/2
 mu = k * dt / dx^2;
-fprintf('  doing N=%d steps of length dt=%.3f, with mu=%.3f\n',N,dt,mu)
+fprintf('  doing N=%d steps of length dt=%.3e, with mu=%.3f\n',N,dt,mu)
 
 % time-dependent stuff allocated
 t = dt * (0:N);
@@ -81,11 +81,13 @@ for n = 1:N
   uexact = c2 * cos(2 * pi * x) + c5 * cos(5 * pi * x);
   err(n+1) = max(abs(U - uexact));
 end
+fprintf('  maximum error = %.3e\n',max(err))
+fprintf('  energy drift  = %.3e\n',abs(H(end)-H(1)))
 
 figure
 subplot(4,1,1:2)
 plot(x,U,'ko-'),  xlabel('x'),  title('approx to u(x,t_f)'), grid on
 subplot(4,1,3)
-semilogy(t,err,'k'),  xlabel('t'),  ylabel('max |U - u|'),  grid on
+semilogy(t(2:end),err(2:end),'k'),  xlabel('t'),  ylabel('max |U - u|'),  grid on
 subplot(4,1,4)
 plot(t,H,'k'),  xlabel('t'),  ylabel('energy'),  grid on
