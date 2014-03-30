@@ -4,7 +4,7 @@ function adaptiveb(J,tf)
 % using adaptive time-stepping, where b(x,t), C=1/3, the domain, and
 % the initial conditions are all hard-coded.
 % Usage:
-%   adaptive(J,tf)
+%   adaptiveb(J,tf)
 % uses J spatial grid points.  tf is a vector of times at which to
 % report; the run starts at t=0 and ends at t=tf(end).
 % Example:
@@ -15,6 +15,7 @@ U = x.*(1-x);                   % fixed initial condition
 
 % fixed b(x,t):
 b = @(x,t) (1/30) * (2 + sin(4 * pi * x)) + 3 * exp(-30 * (t-2).^2);
+
 maxn = 100000;                  % stop in any case if maxn steps
 t = 0;
 tlist = [t];                    % start a list of the time steps we took
@@ -28,19 +29,19 @@ plot(x,U,'b','linewidth',2.0);
 xlabel x,  ylabel U,  grid on,  axis(box)
 hold on
 
-indtf = 1;                      % current goal is tf(indtf)
+indtf = 1;                      % current report goal is tf(indtf)
 for n=1:maxn                    % because of "break" below, this is like
                                 % a "while" loop, but protected: not infinite
   if t >= tf(end),  break,  end % normal exit
-  % first show current solution if we are at a tf
+  % first show current solution if we are at a tf(.) reporting goal
   if abs(t - tf(indtf)) < 1.0e-10
     figure(2),  plot(x,U,'linewidth',2.0)
+    indtf = indtf + 1;          % next reporting goal
   end
   % now compute stable dt
-  dt = dx * dx / (2 * max(b(x,t)));  % so  (dt/dx^2) (max_j b(x_j,t_n)) = 1/2
-  if t+dt >= tf(indtf)
+  dt = dx * dx / (2 * max(b(x,t))); % so  (dt/dx^2) (max_j b(x_j,t_n)) = 1/2
+  if t + dt >= tf(indtf)
     dt = tf(indtf) - t;         % shorten if arriving at a tf
-    indtf = indtf+1;
   end
   % now take one step of explicit scheme
   mu = dt / (dx * dx);
