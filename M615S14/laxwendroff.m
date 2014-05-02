@@ -17,7 +17,7 @@ a0 = -2;
 g = @(x) sin(5*x) + 1;
 
 dx = 2 / JJ;  x = -1:dx:1;             % JJ+1 points
-dt = min(dx / abs(a0), tf);            % |nu|=1  <==>  dt = dx/a0
+dt = min(0.9 * dx / abs(a0), tf);      % |nu|=0.9  <==>  dt = 0.9*dx/a0
 NN = ceil(tf / dt);  dt = tf / NN;
 nu = a0 * dt / dx;
 fprintf('  laxwendroff:  for dx = %.5f, CFL gives dt = %.3f and nu = %.3f.\n',...
@@ -25,7 +25,7 @@ fprintf('  laxwendroff:  for dx = %.5f, CFL gives dt = %.3f and nu = %.3f.\n',..
 
 U = g(x);
 Unew = zeros(size(U));
-Uplot = zeros(NN,JJ+1);  Uplot(1,:) = U;
+Uplot = zeros(NN+1,JJ+1);  Uplot(1,:) = U;
 Uexact = Uplot;
 cm1 = 0.5 * nu * (1+nu);
 c0  = 1 - nu^2;
@@ -36,7 +36,7 @@ for n = 1:NN
   Unew(JJ+1) = 0;                      % upstream boundary condition
   U = Unew;
   Uplot(n+1,:) = U;
-  tnew = (n+1)*dt;
+  tnew = n*dt;
   inside = (x < 1 + a0 * tnew);
   Uexact(n+1,inside) = g(x(inside) - a0 * tnew);
 end

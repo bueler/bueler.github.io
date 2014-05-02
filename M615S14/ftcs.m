@@ -38,7 +38,7 @@ for n = 1:NN
   Unew(JJ+1) = 0;                      % upstream boundary condition
   U = Unew;
   Uplot(n+1,:) = U;
-  tnew = (n+1)*dt;
+  tnew = n*dt;
   inside = (x < 1 + a0 * tnew);
   Uexact(n+1,inside) = g(x(inside) - a0 * tnew);
 end
