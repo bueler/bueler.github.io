@@ -35,3 +35,5 @@ Now you can use the alias to open the file
 
     $ tw myfile.txt
 
+When using linux I do something very similar.
+
