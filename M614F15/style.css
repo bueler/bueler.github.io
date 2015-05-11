@@ -1,0 +1,24 @@
+/*
+CSS for twbf.github.io 
+*/
+
+body{
+  font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+h1 {
+  /* color:#FF3232; */
+  text-align:center;
+  /* font-size:3em; */
+}
+h2 {
+  /* color:#5F1644; */
+  text-align:center;
+}
+/*
+table {
+    border-collapse: collapse;
+}
+th,td{
+  padding:10px;
+}
+*/
