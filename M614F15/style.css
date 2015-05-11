@@ -4,21 +4,28 @@ CSS for twbf.github.io
 
 body{
   font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size:90%;
 }
+
 h1 {
-  /* color:#FF3232; */
   text-align:center;
-  /* font-size:3em; */
 }
+
 h2 {
-  /* color:#5F1644; */
   text-align:center;
 }
-/*
+
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
+  width: 90%;
 }
-th,td{
-  padding:10px;
+
+th,td {
+  padding:2px;
+  text-align: left;
 }
-*/
+
+th {
+  font-size: 125%;
+}
+
