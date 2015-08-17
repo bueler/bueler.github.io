@@ -16,11 +16,13 @@
 
 <h2>Fall 2015, UAF</h2>
 
-<table style="width:99%;" cellpadding="10">
-    <col style="width:30%;">
-    <col style="width:70%;">
+<center>
+
+<table style="width:99%;">
+    <col style="width:15%;">
+    <col style="width:40%;">
     <tr>
-      <td style="vertical-align: top;">
+      <td style="vertical-align: top;  padding-right:40px;">
 
         <div align="left">
         <span style="font-weight: bold;">Ed Bueler</span>:&nbsp; 474-7693<br>
@@ -31,22 +33,73 @@
         <span style="font-weight: bold;">Class times and rooms</span>:<br>
         MWF 9:15--10:15&nbsp; Bunnell 410<br><br>
 
-        <span style="font-weight: bold;">CRN</span>:&nbsp; 78256<br><br>
+        <span style="font-weight: bold;">CRN</span>:&nbsp; 78256<br>
+
+        <h3><a href="syllabus.htm">Syllabus</a>  &nbsp; and &nbsp;  <a href="advert.htm">Advertisement</a></h3>
+        <br>
+
+      <span style="font-weight: bold;">Parts of the course:</span><br><br>
+      <table border="1" cellpadding="2" cellspacing="2" width="100%">
+          <tr>
+            <td valign="top">A<br>
+            </td>
+            <td valign="top">matrix/vector manipulations<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">B<br>
+            </td>
+            <td valign="top"> abstract and geometric linear algebra</td>
+          </tr>
+          <tr>
+            <td valign="top">C<br>
+            </td>
+            <td valign="top">SVD<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">D<br>
+            </td>
+            <td valign="top">QR and least squares<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">E<br>
+            </td>
+            <td valign="top">conditioning and
+              stability<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">F<br>
+            </td>
+            <td valign="top">systems of equations<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">G<br>
+            </td>
+            <td valign="top">computing eigenvalues<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">H<br>
+            </td>
+            <td valign="top">iterative methods<br>
+            </td>
+          </tr>
+      </table>
+      <br><br>
 
         <span style="font-weight: bold;">Required text</span>: L. Trefethen and D. Bau, <span style="font-style: italic;">Numerical Linear Algebra</span>, SIAM Press 1997.  (<span style="font-style: italic;"><a href="http://bookstore.siam.org/ot50/">$65 at bookstore.siam.org</a></span>)<br><br>
 
-        Three other texts are <span style="font-weight: bold;">recommended</span>.&nbsp; The first is both freely-available online and a great Matlab tutorial.  The second is a standard reference for numerical linear algebra.  The third would be a natural next course if you were to do research in this area:</small> 
+        Three other texts are <span style="font-weight: bold;">recommended</span>.&nbsp; The first is a great Matlab tutorial which is freely-available online.  The second is a standard reference for numerical linear algebra.  The third would work for a next course if you want to do research in this area:</small> 
         <ul>
           <li>C. Moler, <span style="font-style: italic;">Numerical
             Computing with MATLAB</span>, SIAM Press 2004; free at <a href="http://www.mathworks.com/moler/">www.mathworks.com/moler/</a></li>
           <li>G. Golub & C. van Loan, <span style="font-style: italic;">Matrix Computations</span>, 4th Ed., Johns Hopkins U. Press 2013</li>
           <li>N. Higham, <span style="font-style: italic;">Accuracy and Stability of Numerical Algorithms</span>, SIAM Press 2002</li>
         </ul>
-        <br>
-
-        <h3><a href="syllabus.htm">Syllabus</a></h3>
-
-        <h3><a href="advert.htm">Advertisement</a></h3>
 
         <br>
         <span style="font-weight: bold;">Matlab/Octave codes:</span><br> 
@@ -72,295 +125,345 @@
         </div>
       </td>
 
-
-      <td style="width: 70%; vertical-align: top;">
+      <td style="vertical-align: top;">
         <center><h4>Schedule: (version 15 August)</h4></center>
 
 <!--     BIG TABLE HERE:  -->
 
-<table style="width:100%;" border="1">
+<table border="1">
+    <col style="width:5%;">
     <col style="width:15%;">
     <col style="width:15%;">
     <col style="width:55%;">
-    <col style="width:15%;">
+    <col style="width:10%;">
     <tr>
+        <th>Part</th>
         <th>Day</th>
         <th>Section</th>
         <th>Topic</th>
         <th>Assigned/Due</th>
     </tr>
     <tr>
+        <td>A</td>
         <td>Fri 9/4</td>
-        <td></td>
+        <td>1</td>
         <td>introduction by example<br>
             <a href="../compareMOP.pdf"><span style="font-style: italic;">MATLAB/Octave/pylab</span> compared</a></td>
         <td><a href="A1.pdf">Assignment #1</a></td>
     </tr>
     <tr>
+        <td></td>
         <td>Mon 9/7</td>
         <td></td>
         <td><span style="color: rgb(0, 153, 0);">no class: Labor Day</span></td>
         <td></td>
     </tr>
     <tr>
+        <td>A</td>
         <td>Wed 9/9</td>
-        <td></td>
-        <td></td>
+        <td>1</td>
+        <td>intro to Matlab/Octave</td>
         <td></td>
     </tr>
     <tr>
+        <td>A</td>
         <td>Fri 9/11</td>
-        <td></td>
+        <td>1</td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>B</td>
         <td>Mon 9/14</td>
-        <td></td>
-        <td></td>
+        <td>1</td>
+        <td>matrix-vector multiplication, matrix product, bases, matrices, vector spaces and examples, linear operators</td>
         <td></td>
     </tr>
     <tr>
+        <td>B</td>
         <td>Wed 9/16</td>
-        <td></td>
-        <td></td>
+        <td>2</td>
+        <td>inner product, adjoint, hermitian, orthogonal, unitary</td>
         <td></td>
     </tr>
     <tr>
+        <td>B</td>
         <td>Fri 9/18</td>
-        <td></td>
-        <td></td>
+        <td>2</td>
+        <td>cont.</td>
         <td></td>
     </tr>
     <tr>
+        <td>B</td>
         <td>Mon 9/21</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>B</td>
         <td>Wed 9/23</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>B</td>
         <td>Fri 9/25</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>B</td>
         <td>Mon 9/28</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>C</td>
         <td>Wed 9/30</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>C</td>
         <td>Fri 10/2</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>C</td>
         <td>Mon 10/5</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>C</td>
         <td>Wed 10/7</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>C</td>
         <td>Fri 10/9</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>C</td>
         <td>Mon 10/12</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>D</td>
         <td>Wed 10/14</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>D</td>
         <td>Fri 10/16</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>D</td>
         <td>Mon 10/19</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>D</td>
         <td>Wed 10/21</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>D</td>
         <td>Fri 10/23</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>D</td>
         <td>Mon 10/26</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>D</td>
         <td>Wed 10/28</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>D</td>
         <td>Fri 10/30</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>E</td>
         <td>Mon 11/2</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>E</td>
         <td>Wed 11/4</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td></td>
         <td>Fri 11/6</td>
         <td></td>
-        <td></td>
+        <td><span style="color: DarkRed;">MIDTERM QUIZ?</span></td>
         <td></td>
     </tr>
     <tr>
+        <td>E</td>
         <td>Mon 11/9</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>E</td>
         <td>Wed 11/11</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>E</td>
         <td>Fri 11/13</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>E</td>
         <td>Mon 11/16</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>E</td>
         <td>Wed 11/18</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>F</td>
         <td>Fri 11/20</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>F</td>
         <td>Mon 11/23</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>F</td>
         <td>Wed 11/25</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td></td>
         <td>Fri 11/27</td>
         <td></td>
         <td><span style="color: rgb(0, 153, 0);">no class: Thanksgiving Holiday</span></td>
         <td></td>
     </tr>
     <tr>
+        <td>F</td>
         <td>Mon 11/30</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>G</td>
         <td>Wed 12/2</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>G</td>
         <td>Fri 12/4</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>G</td>
         <td>Mon 12/7</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>H</td>
         <td>Wed 12/9</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>H</td>
         <td>Fri 12/11</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td>H</td>
         <td>Mon 12/14</td>
         <td></td>
         <td></td>
         <td></td>
     </tr>
     <tr>
+        <td></td>
         <td>FIXME</td>
         <td></td>
         <td><span style="color: DarkRed;">FINAL EXAM</span></td>
         <td></td>
     </tr>
+
 </table>
+    </td>
+</table>
+</center>
 
 </body>
 </html>
