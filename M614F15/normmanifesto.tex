@@ -44,14 +44,36 @@
 \bigskip\bigskip\bigskip\bigskip\bigskip
 \LARGE
 \begin{itemize}
-\setlength\itemsep{2em}
-\item Matrix norms have vector norm \alert{properties} plus $\|A B\|\le \|A\|\|B\|$.
-\item Only \alert{four} norms to know: $\|\cdot\|_1$, $\|\cdot\|_2$, $\|\cdot\|_\infty$, and $\|\cdot\|_{\mathrm{Frob}}$.
-\item Three have easy \alert{formulas} ($1,\infty,\mathrm{Frob}$).
+\setlength\itemsep{1em}
+\item Matrix norms have vector norm \alert{properties}:
+  \begin{itemize}
+  \item[$\circ$] $\|A\| \ge 0$ and $\|A\|=0 \,\implies \,A=0$
+  \item[$\circ$] $\|A+B\| \le \|A\| + \|B\|$
+  \item[$\circ$] $\|\alpha A\| = |\alpha|\,\|A\|$
+  \end{itemize}
+\item Induced norms, and the Frobenius norm, have additional \alert{multiplicative} property
+  \begin{itemize}
+  \item[$\circ$] $\|A B\|\le \|A\|\|B\|$
+  \end{itemize}
+\item Only \alert{four} norms to know:
+  $$\|\cdot\|_1, \quad \|\cdot\|_2, \quad \|\cdot\|_\infty, \quad \|\cdot\|_{\mathrm{Frob}}$$
+\item Three have \alert{easy-to-compute formulas} ($1,\infty,\mathrm{Frob}$).
 \item Three are \alert{induced} from vector norms ($1,2,\infty$).
-\item \alert{Usually} $\rho(A)<\|A\|$ for all norms.  But \alert{always} $\rho(A)\le \|A\|$ for any norm.
-\item $\|\cdot\|_2$ norm best for \alert{hermitian}.  One reason: if $A^*=A$ then $\rho(A)=\|A\|_2$.
-\item \alert{Iteration} $v, Av, A^2v, \dots$ converges if and only if $\rho(A)<1$.  Thus \emph{if} $\|A\|<1$ \emph{then} convergence.  Not conversely!
+\item Induced norms have $\rho(A)\le \|A\|$.
+  \begin{itemize}
+  \item[$\circ$] But \alert{expect} $\rho(A)<\|A\|$ in general, and sometimes $\rho(A)\ll\|A\|$.
+  \end{itemize}
+\item $\|\cdot\|_2$ norm best for \alert{Euclidean ideas} and \alert{hermitian/normal matrices}.  Reasons: 
+  \begin{itemize}
+  \item[$\circ$]  $\|QA\|_2 = \|A\|_2$ if $Q$ is unitary ($Q^* Q = I$).
+  \item[$\circ$]  $\sigma_1(A) = \|A\|_2$.
+  \item[$\circ$]  If $A^*=A$ then $\rho(A)=\|A\|_2$.
+  \end{itemize}
+\item \alert{Iteration} $v, Av, A^2v, \dots$ converges if and only if
+    $$\rho(A)<1.$$
+  \begin{itemize}
+  \item[$\circ$] Thus \alert{if} $\|A\|<1$ \alert{then} convergence.  Not conversely!
+  \end{itemize}
 \end{itemize}
 
 \end{document}
