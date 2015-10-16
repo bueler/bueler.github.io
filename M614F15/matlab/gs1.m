@@ -1,6 +1,6 @@
 function z = gs1(A,b,x0,N)
-% GS1  Do N steps of Gauss-Seidel iteration.  Implemented using Matlab
-% tools including backslash.
+% GS1  Do N steps of Gauss-Seidel iteration.  Implemented using
+% Matlab tools including backslash.
 % Usage:
 %   >> z = gs1(A,b,x0,N)
 
