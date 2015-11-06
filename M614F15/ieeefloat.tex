@@ -1,55 +1,93 @@
-\documentclass{amsart}
+\documentclass[11pt]{amsart}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.75in} 
+\addtolength{\evensidemargin}{-.75in}
+\addtolength{\topmargin}{-.4in}
+\addtolength{\textwidth}{1.6in}
+\addtolength{\textheight}{.75in}
 
-\usepackage{verbatim}
-\usepackage{color}
+\renewcommand{\baselinestretch}{1.05}
+
+\usepackage{verbatim,fancyvrb}
+
 \usepackage{palatino}
 
-% inclusion/figure macros
-\usepackage{graphicx}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
 
-\usepackage{amsmath}
+\newcommand{\mtt}{\texttt}
+\usepackage{alltt,xspace}
+\newcommand{\mfile}[1]
+{\medskip\begin{quote}\scriptsize \begin{alltt}\input{#1.m}\end{alltt} \normalsize\end{quote}\medskip}
+
+\usepackage[final]{graphicx}
+\newcommand{\mfigure}[1]{\includegraphics[height=2.5in,
+width=3.5in]{#1.eps}}
+\newcommand{\regfigure}[2]{\includegraphics[height=#2in,
+keepaspectratio=true]{#1.eps}}
+\newcommand{\widefigure}[3]{\includegraphics[height=#2in,
+width=#3in]{#1.eps}}
+
+\usepackage{amssymb}
 
 \usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=blue, citecolor=red, urlcolor=blue]{hyperref}
 
 % macros
-\newcommand{\bQ}{\mathbf{Q}}
-\newcommand{\bg}{\mathbf{g}}
 \newcommand{\br}{\mathbf{r}}
-\newcommand{\bu}{\mathbf{u}}
-\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bv}{\mathbf{v}}
 \newcommand{\bx}{\mathbf{x}}
-\newcommand{\complex}{\mathbf{C}}
-\newcommand{\Div}{\nabla\cdot}
-\newcommand{\DivH}{\nabla_H\cdot}
-\newcommand{\ddx}[1]{\frac{\partial #1}{\partial x}}
-\newcommand{\ddy}[1]{\frac{\partial #1}{\partial y}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
 \newcommand{\eps}{\epsilon}
 \newcommand{\grad}{\nabla}
-\newcommand{\gradH}{\nabla_H}
-\newcommand{\ip}[2]{\left<#1,#2\right>}
 \newcommand{\lam}{\lambda}
 \newcommand{\lap}{\triangle}
-%\newcommand{\qed}{\emph{ q.e.d.}}
-\newcommand{\real}{\mathbf{R}}
-\newcommand{\vf}{\varphi}
-%\renewcommand{\note}[1]{\tiny{\textbf{NOTE: #1}.}}
 
-\newcommand{\alert}[1]{{\color{red} #1}}
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+
+%\renewcommand{\det}{\operatorname{det}}
+\newcommand{\onull}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\prob}[1]{\bigskip\noindent\textbf{#1.}\quad }
+\newcommand{\exer}[2]{\prob{Exercise #2 in Lecture #1}}
+
+\newcommand{\pts}[1]{(\emph{#1 pts}) }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\quad }
+\newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
+
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+
+\DefineVerbatimEnvironment{mVerb}{Verbatim}{numbersep=2mm,
+frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
+
 
 \begin{document}
+\scriptsize \noindent Math 614 Numerical Linear Algebra (Bueler) \hfill 4 November, 2015
+\normalsize
 
-\huge
-\centerline{IEEE 754: What it means for humanity}
+\medskip\bigskip
+\Large\centerline{IEEE 754: What it means for humanity}
 
-\Large
+\large
 \centerline{(and us, too)}
+
+\bigskip
+\normalsize
 
 \thispagestyle{empty}
 
-\bigskip\bigskip\bigskip\bigskip\bigskip
-\Large
+\bigskip
 
-The textbook\footnote{L.~Trefethen and D. Bau, \emph{Numerical Linear Algebra}, SIAM Press, 1997.} has an idealized view of floating point, but let me lay out the basics of the real standard.
+The textbook\footnote{L.~Trefethen and D. Bau, \emph{Numerical Linear Algebra}, SIAM Press, 1997.} has an idealized view of floating point, but I think it is a good idea to lay out the basics of the \emph{real} standard.
 
 
 \begin{itemize}
@@ -58,7 +96,7 @@ The textbook\footnote{L.~Trefethen and D. Bau, \emph{Numerical Linear Algebra}, 
 
  \centerline{\url{en.wikipedia.org/wiki/IEEE_floating_point}}
 
-\item As in the textbook, every representable number is of either form
+\item Every representable number is of either form
     $$(-1)^s \times c \times \beta^q$$
 for $s\in\{0,1\}$ and integers $\beta,c,q$ where
 \begin{gather*}
@@ -70,69 +108,56 @@ where
     $$\pm \frac{m}{\beta^t} \times \beta^e,$$
 FIXME
 
-\item There are several standard formats but the three that matter here are
+\item There are several standard formats but the three that matter most all have $\beta=2$.  
 
-\begin{tabular}{lllllllll}
-
+\medskip
+\small
+\begin{tabular}{lllllll}
+name & common name & $p$ & exponent bits & exponent bias & $E_{min}$ & $E_{max}$ \\ \hline
+%
+binary32 &
+single &
+24 &
+8 &
+$2^7-1=127$ &
+-126 &
++127 \\
+%
+binary64 &
+double &
+53 &
+11 &
+$2^{10}-1=1023$ &
+-1022 &
++1023 \\
+%
+binary128 &
+quadruple &
+113 &
+15 &
+$2^{14}-1=16383$ &
+-16382 &
++16383
 \end{tabular}
 
-\begin{comment}
-<tr>
-<th>Name</th>
-<th>Common name</th>
-<th>Base</th>
-<th>Digits</th>
-<th>Decimal<br />
-digits</th>
-<th>Exponent<br />
-bits</th>
-<th>Decimal<br />
-E max</th>
-<th>Exponent<br />
-bias<sup id="cite_ref-DAE_4-0" class="reference"><a href="#cite_note-DAE-4"><span>[</span>4<span>]</span></a></sup></th>
-<th>E min</th>
-<th>E max</th>
-</tr>
-
-<tr>
-<td><a href="/wiki/Single_precision_floating-point_format" title="Single precision floating-point format" class="mw-redirect">binary32</a></td>
-<td>Single precision</td>
-<td align="right">2</td>
-<td align="right">24</td>
-<td align="right">7.22</td>
-<td align="right">8</td>
-<td align="right">38.23</td>
-<td>2<sup>7</sup>−1=127</td>
-<td align="right">−126</td>
-<td align="right">+127</td>
-</tr>
-
-<tr>
-<td><a href="/wiki/Double_precision_floating-point_format" title="Double precision floating-point format" class="mw-redirect">binary64</a></td>
-<td>Double precision</td>
-<td align="right">2</td>
-<td align="right">53</td>
-<td align="right">15.95</td>
-<td align="right">11</td>
-<td align="right">307.95</td>
-<td>2<sup>10</sup>−1=1023</td>
-<td align="right">−1022</td>
-<td align="right">+1023</td>
-</tr>
-
-<tr>
-<td><a href="/wiki/Quadruple_precision_floating-point_format" title="Quadruple precision floating-point format" class="mw-redirect">binary128</a></td>
-<td>Quadruple precision</td>
-<td align="right">2</td>
-<td align="right">113</td>
-<td align="right">34.02</td>
-<td align="right">15</td>
-<td align="right">4931.77</td>
-<td>2<sup>14</sup>−1=16383</td>
-<td align="right">−16382</td>
-<td align="right">+16383</td>
-</tr>
-\end{comment}
+\begin{tabular}{llll}
+name & decimal digits & decimal $E_{max}$ & decimal $E_{min}$ \\ \hline
+%
+binary32 &
+7.22 &
+38.23 &
+-37.93 \\
+%
+binary64 &
+15.95 &
+307.95 &
+-307.65 \\
+%
+binary128 &
+34.02 &
+4931.77 &
+-4931.47
+\end{tabular}
 
 \end{itemize}
 
