@@ -1,0 +1,7 @@
+ieeefloat.pdf
+
+*.aux
+*.log
+*.out
+*.synctex.gz
+

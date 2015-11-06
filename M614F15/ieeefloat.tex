@@ -1,0 +1,140 @@
+\documentclass{amsart}
+
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{palatino}
+
+% inclusion/figure macros
+\usepackage{graphicx}
+
+\usepackage{amsmath}
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=blue, citecolor=red, urlcolor=blue]{hyperref}
+
+% macros
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bg}{\mathbf{g}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\complex}{\mathbf{C}}
+\newcommand{\Div}{\nabla\cdot}
+\newcommand{\DivH}{\nabla_H\cdot}
+\newcommand{\ddx}[1]{\frac{\partial #1}{\partial x}}
+\newcommand{\ddy}[1]{\frac{\partial #1}{\partial y}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\gradH}{\nabla_H}
+\newcommand{\ip}[2]{\left<#1,#2\right>}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+%\newcommand{\qed}{\emph{ q.e.d.}}
+\newcommand{\real}{\mathbf{R}}
+\newcommand{\vf}{\varphi}
+%\renewcommand{\note}[1]{\tiny{\textbf{NOTE: #1}.}}
+
+\newcommand{\alert}[1]{{\color{red} #1}}
+
+\begin{document}
+
+\huge
+\centerline{IEEE 754: What it means for humanity}
+
+\Large
+\centerline{(and us, too)}
+
+\thispagestyle{empty}
+
+\bigskip\bigskip\bigskip\bigskip\bigskip
+\Large
+
+The textbook\footnote{L.~Trefethen and D. Bau, \emph{Numerical Linear Algebra}, SIAM Press, 1997.} has an idealized view of floating point, but let me lay out the basics of the real standard.
+
+
+\begin{itemize}
+\setlength\itemsep{1em}
+\item See the wikipedia page
+
+ \centerline{\url{en.wikipedia.org/wiki/IEEE_floating_point}}
+
+\item As in the textbook, every representable number is of either form
+    $$(-1)^s \times c \times \beta^q$$
+for $s\in\{0,1\}$ and integers $\beta,c,q$ where
+\begin{gather*}
+0 \le c \le \beta^p-1
+\end{gather*}
+where
+
+\item To convert to the form in the textbook,
+    $$\pm \frac{m}{\beta^t} \times \beta^e,$$
+FIXME
+
+\item There are several standard formats but the three that matter here are
+
+\begin{tabular}{lllllllll}
+
+\end{tabular}
+
+\begin{comment}
+<tr>
+<th>Name</th>
+<th>Common name</th>
+<th>Base</th>
+<th>Digits</th>
+<th>Decimal<br />
+digits</th>
+<th>Exponent<br />
+bits</th>
+<th>Decimal<br />
+E max</th>
+<th>Exponent<br />
+bias<sup id="cite_ref-DAE_4-0" class="reference"><a href="#cite_note-DAE-4"><span>[</span>4<span>]</span></a></sup></th>
+<th>E min</th>
+<th>E max</th>
+</tr>
+
+<tr>
+<td><a href="/wiki/Single_precision_floating-point_format" title="Single precision floating-point format" class="mw-redirect">binary32</a></td>
+<td>Single precision</td>
+<td align="right">2</td>
+<td align="right">24</td>
+<td align="right">7.22</td>
+<td align="right">8</td>
+<td align="right">38.23</td>
+<td>2<sup>7</sup>−1=127</td>
+<td align="right">−126</td>
+<td align="right">+127</td>
+</tr>
+
+<tr>
+<td><a href="/wiki/Double_precision_floating-point_format" title="Double precision floating-point format" class="mw-redirect">binary64</a></td>
+<td>Double precision</td>
+<td align="right">2</td>
+<td align="right">53</td>
+<td align="right">15.95</td>
+<td align="right">11</td>
+<td align="right">307.95</td>
+<td>2<sup>10</sup>−1=1023</td>
+<td align="right">−1022</td>
+<td align="right">+1023</td>
+</tr>
+
+<tr>
+<td><a href="/wiki/Quadruple_precision_floating-point_format" title="Quadruple precision floating-point format" class="mw-redirect">binary128</a></td>
+<td>Quadruple precision</td>
+<td align="right">2</td>
+<td align="right">113</td>
+<td align="right">34.02</td>
+<td align="right">15</td>
+<td align="right">4931.77</td>
+<td>2<sup>14</sup>−1=16383</td>
+<td align="right">−16382</td>
+<td align="right">+16383</td>
+</tr>
+\end{comment}
+
+\end{itemize}
+
+\end{document}
+
