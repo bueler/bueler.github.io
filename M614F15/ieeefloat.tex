@@ -69,21 +69,22 @@ frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
 \medskip\bigskip
 \Large\centerline{IEEE 754: What it means for your computer, and humanity}
 
-\bigskip
+\bigskip\bigskip
 \normalsize
 
 \thispagestyle{empty}
 
+The textbook\footnote{L.~Trefethen and D. Bau, \emph{Numerical Linear Algebra}, SIAM Press, 1997.} has an idealized view of floating point, which I think is wise.  But, in this separate document, I think it is a good idea to lay out the basics of how the \emph{real} standard is \emph{actually} implemented on a computer.
+
 \bigskip
-
-The textbook\footnote{L.~Trefethen and D. Bau, \emph{Numerical Linear Algebra}, SIAM Press, 1997.} has an idealized view of floating point, but I think it is a good idea to lay out the basics of how the \emph{real} standard is \emph{actually} implemented on a computer.
-
 \begin{itemize}
-%\setlength\itemsep{1em}
-\item Computer memories are organized into \emph{bytes}, that is, groups of 8 \emph{bits}.\footnote{``bit'' = binary digit}  A bit is the irreducible atom of memory, which is in either of two states $\{0,1\}$.  Integers are represented on computers using 1, 2, 4, or 8 bytes, thus 8, 16, 32, or 64 bits.  But the IEEE 754 standard is in how real numbers are approximately represented in memory, that is, how \emph{floating point} numbers are represented.  It is a form of scientific notation, but, critically, using only finitely-many bits, and representing only a finite subset of real numbers.
+\setlength\itemsep{1em}
+\item Computer memories are organized into \emph{bytes}, that is, groups of 8 \emph{bits}.\footnote{``bit'' = binary digit}  A bit is the irreducible atom of memory, which is in either of two states $\{0,1\}$.  You should know that \emph{integers} are represented on computers using 1, 2, 4, or 8 bytes, thus 8, 16, 32, or 64 bits.
 
-\item The two best-known floating point representations use 32 (\texttt{single}) and 64 (\texttt{double}) bits.  In \texttt{single}, the number
-       $$x = (-1)^s \, \left(1.d_1 d_2 d_3 \dots d_{23}\right)_{2} \times 2^{\left(e_1\dots e_8\right)_2 - 127}$$
+\item The IEEE 754 standard is about how \emph{real} numbers are approximately represented in memory, that is, how \emph{floating point} numbers are represented.  ``Floating point'' is essentially just scientific notation, but using only finitely-many bits and thus representing only a finite subset of real numbers.
+
+\item The two best-known floating point representations use 32 (``\texttt{single}'') and 64 (``\texttt{double}'') bits.  In \texttt{single}, the number
+       $$x = (-1)^s \times \left(1.d_1 d_2 d_3 \dots d_{23}\right)_{2} \times 2^{\left(e_1\dots e_8\right)_2 - 127}$$
 is represented by 32 bits this way:
 
 \medskip
@@ -99,10 +100,11 @@ is represented by 32 bits this way:
     }
     \end{tikzpicture}
 
-\item  In \texttt{double}, the number
-       $$x = (-1)^s \, \left(1.d_1 d_2 d_3 \dots d_{52}\right)_{2} \times 2^{\left(e_1\dots e_{11}\right)_2 - 1023}$$
+\noindent In \texttt{double}, the number
+       $$x = (-1)^s \times \left(1.d_1 d_2 d_3 \dots d_{52}\right)_{2} \times 2^{\left(e_1\dots e_{11}\right)_2 - 1023}$$
 is represented by 64 bits this way:
 
+\medskip
     \begin{tikzpicture}[scale=0.6]
     \draw[xstep=1.0,ystep=1.0,gray,thin] (0.0,0.0) grid (25.0,1.0);
     \node at (0.5,0.5) {\scriptsize $s$};
@@ -117,49 +119,60 @@ is represented by 64 bits this way:
     \node at (24.5,0.5) {\scriptsize $d_{52}$};
     \end{tikzpicture}
 
-\item The IEEE 754 standard is slightly more abstract than the concrete way the bits are arranged above.  The standard, or rather the textbook's clearer description of it, says that every representable \emph{nonzero} number is of the form
+\item Note that the ``$1.$'' in the above \texttt{single} and  \texttt{double} representations, which appears before the $d_i$ bits, is always there.  Thus it is not represented!  It is called the ``implicit leading bit''.
+
+\item The IEEE 754 standard is slightly more abstract than the concrete way the bits are arranged above.  The standard says that every representable \emph{nonzero} number is of the form
 \begin{equation}
-(-1)^s \times \frac{m}{\beta^{t-1}} \times \beta^e  \label{ieeeform}
+x = (-1)^s \times \frac{m}{\beta^{t-1}} \times \beta^e  \label{ieeeform}
 \end{equation}
-for fixed positive integer $\beta$ (the \emph{base}) and $t$ (the \emph{precision}) and $s\in\{0,1\}$ (the \emph{sign}) and integer $m$ (the \emph{mantissa}) and integer $e$ (the \emph{exponent}) which depend on (and determine) $x$.  These satisfy
+for fixed positive integers $\beta$ (the \emph{base}) and $t$ (the \emph{precision}).  The other numbers, namely $s\in\{0,1\}$ (the \emph{sign}), the integer $m$ (the \emph{mantissa}), and the integer $e$ (the \emph{exponent}), depend on, and determine, $x$.  These satisfy
 \begin{gather}
 \beta^{t-1} \le m \le \beta^t - 1, \label{ieeeconstraint} \\
 e_{min} \le e \le e_{max}. \notag
 \end{gather}
-In particular, unlike the system $\mathbf{F}$ in the textbook, there are only finitely-many allowed values of the exponent $e$, and (of course) only finitely may representable floating point numbers.
 
-\item In IEEE 754 there are five basic formats, but two of these are (oddly enough) decimal standards and rarely used.  The three that matter most are binary, that is, they all have base $\beta=2$.  They use 32, 64, or 128 bits, and we have already shown how the first two appear in memory.  In terms of form \eqref{ieeeform}, they follow this table:
+\item Unlike the system $\mathbf{F}$ in the textbook, in IEEE and other actual floating-point representations there are only finitely-many allowed values of the exponent $e$, and thus only finitely-many representable floating point numbers.
+
+\item In IEEE 754 there are five basic formats, but two of these are (oddly enough) \emph{decimal} standards with $\beta=10$, and rarely used.
+
+\item The three IEEE 754 basic formats that matter most are \emph{binary}, that is, they all have base $\beta=2$.  They use 32, 64, or 128 bits, respectively.  We have already shown how the first two appear in memory.  In terms of form \eqref{ieeeform} and constraints \eqref{ieeeconstraint}, they follow this table:
 
 \medskip
 \small
 \begin{tabular}{lllllll}
-name     & common name & precision $t$ & exponent bits & exponent bias & $E_{min}$ & $E_{max}$ \\ \hline
+name     & common name & precision $t$ & exponent bits & exponent bias & $e_{min}$ & $e_{max}$ \\ \hline
 binary32 &    \texttt{single} & 24 &  8 &     $2^7-1=127$ &  -126 &  +127 \\
 binary64 &    \texttt{double} & 53 & 11 & $2^{10}-1=1023$ & -1022 & +1023 \\
 binary128 &\texttt{quadruple} &113 & 15 &$2^{14}-1=16383$ &-16382 &+16383
 \end{tabular}
+\normalsize
+\medskip
 
-\item If you convert the above binary description to decimal you get:
+\item If you convert the above binary description to decimal you get these heuristic values:
 
+\medskip
+\small
 \begin{tabular}{llll}
-name & decimal digits & decimal $E_{max}$ & decimal $E_{min}$ \\ \hline
-binary32 &
-7.22 &
-38.23 &
--37.93 \\
-%
-binary64 &
-15.95 &
-307.95 &
--307.65 \\
-%
-binary128 &
-34.02 &
-4931.77 &
--4931.47
+name & decimal precision & decimal $e_{max}$ & decimal $e_{min}$ \\ \hline
+binary32 & 7.22 & 38.23 & -37.93 \\
+binary64 & 15.95 & 307.95 & -307.65 \\
+binary128 & 34.02 & 4931.77 & -4931.47
 \end{tabular}
+\normalsize
+\medskip
 
-\item Note ``IEEE'' stands for ``Institute of Electrical and Electronic Engineers''.  For more on IEEE 754 see the wikipedia page
+\item Regarding the exponent, if all bits $e_i$ are zero or all are one then the number has special meaning.  That is, for normal numbers in \texttt{single} the standard requires
+   $$\left(e_1\dots e_8\right)_2 \in \{1,2,\dots,254\}$$
+and in \texttt{double} the standard requires
+   $$\left(e_1\dots e_{11}\right)_2 \in \{1,2,\dots,2046\}.$$
+
+\item Representing the number zero, which  is \emph{not} in form \eqref{ieeeform}, is an example of ``special meaning.''  It is done by setting all bits other than $s$ to zero.  Oddly enough, this means ``$+0$'' and ``$-0$'' both exist on our computers as separate representations.
+
+\item Also there are representations of $+\infty$ and $-\infty$, of things that are ``not a number'' (``\texttt{NaN}''), and of ``subnormal'' numbers.  For subnormal numbers, in the \texttt{single} representation $\left(e_1\dots e_8\right)_2 = 0$ but not all bits $d_i$ are zero.
+
+\item The IEEE 754 standard also addresses the rounding errors which occur with operations (addition, multiplication, etc.).  In essence, the goal is that axiom (13.7) applies.  But this is beyond my scope.
+
+\item Note ``IEEE'' stands for ``Institute of Electrical and Electronics Engineers''.  For more on IEEE 754 see the wikipedia page
 
  \centerline{\url{en.wikipedia.org/wiki/IEEE_floating_point}}
 
