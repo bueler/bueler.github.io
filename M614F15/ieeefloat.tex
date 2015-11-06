@@ -10,7 +10,7 @@
 
 \usepackage{verbatim,fancyvrb}
 
-\usepackage{palatino}
+\usepackage{tikz,palatino,amssymb}
 
 \newtheorem*{thm}{Theorem}
 \newtheorem*{defn}{Definition}
@@ -23,15 +23,7 @@
 \newcommand{\mfile}[1]
 {\medskip\begin{quote}\scriptsize \begin{alltt}\input{#1.m}\end{alltt} \normalsize\end{quote}\medskip}
 
-\usepackage[final]{graphicx}
-\newcommand{\mfigure}[1]{\includegraphics[height=2.5in,
-width=3.5in]{#1.eps}}
-\newcommand{\regfigure}[2]{\includegraphics[height=#2in,
-keepaspectratio=true]{#1.eps}}
-\newcommand{\widefigure}[3]{\includegraphics[height=#2in,
-width=#3in]{#1.eps}}
-
-\usepackage{amssymb}
+%\usepackage[final]{graphicx}
 
 \usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=blue, citecolor=red, urlcolor=blue]{hyperref}
 
@@ -75,10 +67,7 @@ frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
 \normalsize
 
 \medskip\bigskip
-\Large\centerline{IEEE 754: What it means for humanity}
-
-\large
-\centerline{(and us, too)}
+\Large\centerline{IEEE 754: What it means for your computer, and humanity}
 
 \bigskip
 \normalsize
@@ -87,62 +76,73 @@ frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
 
 \bigskip
 
-The textbook\footnote{L.~Trefethen and D. Bau, \emph{Numerical Linear Algebra}, SIAM Press, 1997.} has an idealized view of floating point, but I think it is a good idea to lay out the basics of the \emph{real} standard.
-
+The textbook\footnote{L.~Trefethen and D. Bau, \emph{Numerical Linear Algebra}, SIAM Press, 1997.} has an idealized view of floating point, but I think it is a good idea to lay out the basics of how the \emph{real} standard is \emph{actually} implemented on a computer.
 
 \begin{itemize}
-\setlength\itemsep{1em}
-\item See the wikipedia page
+%\setlength\itemsep{1em}
+\item Computer memories are organized into \emph{bytes}, that is, groups of 8 \emph{bits}.\footnote{``bit'' = binary digit}  A bit is the irreducible atom of memory, which is in either of two states $\{0,1\}$.  Integers are represented on computers using 1, 2, 4, or 8 bytes, thus 8, 16, 32, or 64 bits.  But the IEEE 754 standard is in how real numbers are approximately represented in memory, that is, how \emph{floating point} numbers are represented.  It is a form of scientific notation, but, critically, using only finitely-many bits, and representing only a finite subset of real numbers.
 
- \centerline{\url{en.wikipedia.org/wiki/IEEE_floating_point}}
+\item The two best-known floating point representations use 32 (\texttt{single}) and 64 (\texttt{double}) bits.  In \texttt{single}, the number
+       $$x = (-1)^s \, \left(1.d_1 d_2 d_3 \dots d_{23}\right)_{2} \times 2^{\left(e_1\dots e_8\right)_2 - 127}$$
+is represented by 32 bits this way:
 
-\item Every representable number is of either form
-    $$(-1)^s \times c \times \beta^q$$
-for $s\in\{0,1\}$ and integers $\beta,c,q$ where
-\begin{gather*}
-0 \le c \le \beta^p-1
-\end{gather*}
-where
+\medskip
+\hspace{-30mm}
+    \begin{tikzpicture}[scale=0.6]
+    \draw[xstep=1.0,ystep=1.0,gray,thin] (0.0,0.0) grid (32.0,1.0);
+    \node at (0.5,0.5) {\scriptsize $s$};
+    \foreach \x in {1,...,8} {
+      \node at (0.5 + \x * 1.0,0.5) {\scriptsize $e_{\x}$};
+    }
+    \foreach \x in {1,...,23} {
+      \node at (8.5 + \x * 1.0,0.5) {\scriptsize $d_{\x}$};
+    }
+    \end{tikzpicture}
 
-\item To convert to the form in the textbook,
-    $$\pm \frac{m}{\beta^t} \times \beta^e,$$
-FIXME
+\item  In \texttt{double}, the number
+       $$x = (-1)^s \, \left(1.d_1 d_2 d_3 \dots d_{52}\right)_{2} \times 2^{\left(e_1\dots e_{11}\right)_2 - 1023}$$
+is represented by 64 bits this way:
 
-\item There are several standard formats but the three that matter most all have $\beta=2$.  
+    \begin{tikzpicture}[scale=0.6]
+    \draw[xstep=1.0,ystep=1.0,gray,thin] (0.0,0.0) grid (25.0,1.0);
+    \node at (0.5,0.5) {\scriptsize $s$};
+    \foreach \x in {1,...,11} {
+      \node at (0.5 + \x * 1.0,0.5) {\scriptsize $e_{\x}$};
+    }
+    \foreach \x in {1,...,10} {
+      \node at (11.5 + \x * 1.0,0.5) {\scriptsize $d_{\x}$};
+    }
+    \node at (22.5,0.5) {\scriptsize $\dots$};
+    \node at (23.5,0.5) {\scriptsize $d_{51}$};
+    \node at (24.5,0.5) {\scriptsize $d_{52}$};
+    \end{tikzpicture}
+
+\item The IEEE 754 standard is slightly more abstract than the concrete way the bits are arranged above.  The standard, or rather the textbook's clearer description of it, says that every representable \emph{nonzero} number is of the form
+\begin{equation}
+(-1)^s \times \frac{m}{\beta^{t-1}} \times \beta^e  \label{ieeeform}
+\end{equation}
+for fixed positive integer $\beta$ (the \emph{base}) and $t$ (the \emph{precision}) and $s\in\{0,1\}$ (the \emph{sign}) and integer $m$ (the \emph{mantissa}) and integer $e$ (the \emph{exponent}) which depend on (and determine) $x$.  These satisfy
+\begin{gather}
+\beta^{t-1} \le m \le \beta^t - 1, \label{ieeeconstraint} \\
+e_{min} \le e \le e_{max}. \notag
+\end{gather}
+In particular, unlike the system $\mathbf{F}$ in the textbook, there are only finitely-many allowed values of the exponent $e$, and (of course) only finitely may representable floating point numbers.
+
+\item In IEEE 754 there are five basic formats, but two of these are (oddly enough) decimal standards and rarely used.  The three that matter most are binary, that is, they all have base $\beta=2$.  They use 32, 64, or 128 bits, and we have already shown how the first two appear in memory.  In terms of form \eqref{ieeeform}, they follow this table:
 
 \medskip
 \small
 \begin{tabular}{lllllll}
-name & common name & $p$ & exponent bits & exponent bias & $E_{min}$ & $E_{max}$ \\ \hline
-%
-binary32 &
-single &
-24 &
-8 &
-$2^7-1=127$ &
--126 &
-+127 \\
-%
-binary64 &
-double &
-53 &
-11 &
-$2^{10}-1=1023$ &
--1022 &
-+1023 \\
-%
-binary128 &
-quadruple &
-113 &
-15 &
-$2^{14}-1=16383$ &
--16382 &
-+16383
+name     & common name & precision $t$ & exponent bits & exponent bias & $E_{min}$ & $E_{max}$ \\ \hline
+binary32 &    \texttt{single} & 24 &  8 &     $2^7-1=127$ &  -126 &  +127 \\
+binary64 &    \texttt{double} & 53 & 11 & $2^{10}-1=1023$ & -1022 & +1023 \\
+binary128 &\texttt{quadruple} &113 & 15 &$2^{14}-1=16383$ &-16382 &+16383
 \end{tabular}
+
+\item If you convert the above binary description to decimal you get:
 
 \begin{tabular}{llll}
 name & decimal digits & decimal $E_{max}$ & decimal $E_{min}$ \\ \hline
-%
 binary32 &
 7.22 &
 38.23 &
@@ -158,6 +158,10 @@ binary128 &
 4931.77 &
 -4931.47
 \end{tabular}
+
+\item Note ``IEEE'' stands for ``Institute of Electrical and Electronic Engineers''.  For more on IEEE 754 see the wikipedia page
+
+ \centerline{\url{en.wikipedia.org/wiki/IEEE_floating_point}}
 
 \end{itemize}
 
