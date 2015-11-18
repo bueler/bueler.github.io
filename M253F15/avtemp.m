@@ -4,8 +4,8 @@
 %   "(integrate 70 - 0.1 ((x-15)^2+(y-10)^2+(z-5)^2) from x=0 to x=30 and y=0 to y=20 and z=0 to z=10)/6000"
 % generated answer 58 1/3.
 
-%Nx = 30;   Ny = 20;   Nz = 10;   % each dV is one cubic foot
-Nx = 360;  Ny = 240;  Nz = 120;  % each dV is one cubic inch;  WARNING: takes much more than a minute
+Nx = 30;   Ny = 20;   Nz = 10;   % each dV is one cubic foot
+%Nx = 360;  Ny = 240;  Nz = 120;  % each dV is one cubic inch;  WARNING: takes much more than a minute
 
 f = @(x,y,z) 70 - 0.1 * ((x-15)^2 + (y-10)^2 + (z-5)^2);
 
