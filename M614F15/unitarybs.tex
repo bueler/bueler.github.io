@@ -1,0 +1,124 @@
+\documentclass[12pt]{amsart}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.55in} 
+\addtolength{\evensidemargin}{-.55in}
+\addtolength{\topmargin}{-.2in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\textheight}{.4in}
+
+\renewcommand{\baselinestretch}{1.05}
+
+\usepackage{verbatim,fancyvrb}
+
+\usepackage{tikz,palatino,amssymb}
+
+\newtheorem*{thm}{Theorem 16.0}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\mtt}{\texttt}
+\usepackage{alltt,xspace}
+\newcommand{\mfile}[1]
+{\medskip\begin{quote}\scriptsize \begin{alltt}\input{#1.m}\end{alltt} \normalsize\end{quote}\medskip}
+
+%\usepackage[final]{graphicx}
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=blue, citecolor=red, urlcolor=blue]{hyperref}
+
+% macros
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+
+%\renewcommand{\det}{\operatorname{det}}
+\newcommand{\onull}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\prob}[1]{\bigskip\noindent\textbf{#1.}\quad }
+\newcommand{\exer}[2]{\prob{Exercise #2 in Lecture #1}}
+
+\newcommand{\pts}[1]{(\emph{#1 pts}) }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\quad }
+\newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
+
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+
+\DefineVerbatimEnvironment{mVerb}{Verbatim}{numbersep=2mm,
+frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
+
+\newcommand{\ema}{\emach}
+\newcommand{\emach}{\eps_{\!_{\text{m}}}}
+
+
+\begin{document}
+\scriptsize \noindent Math 614 Numerical Linear Algebra (Bueler) \hfill 30 November, 2015
+\normalsize
+
+\medskip\bigskip
+\Large
+\centerline{Multiplication by a unitary matrix is backward-stable}
+
+\bigskip\medskip
+\normalsize
+
+\thispagestyle{empty}
+
+This is an idea which I think should have been in the text\footnote{Trefethen \& Bau, \emph{Numerical Linear Algebra}, SIAM Press, 1997.} itself, and not just in Exercise 16.1 (a).  Its proof uses an idea not seen in other ``show the algorithm is backward-stable'' arguments.  We start in an unexpected way, by bounding the forward error $\|\tilde f(A)-f(A)\|$.  Then the combination of unitarity and linearity allows us to transfer the forward error to a backward error $\|\tilde A - A\|$ using an input $\tilde A$ for which $\tilde f(A) = f(\tilde A)$.
+
+\medskip
+\begin{thm}
+Fix $Q\in\CC^{m\times m}$ unitary.  On a computer satisfying (13.5) and (13.7), the obvious matrix-matrix multiplication algorithm is backward-stable for the problem
+    $$f(A) = QA, \qquad A\in\CC^{m\times n}.$$
+\end{thm}
+
+\begin{proof}
+Each entry of the product $QA$ is an inner product $g(y)=x^*y$.  The obvious algorithm for inner products is backward stable, so that $\tilde g(y) = g(\tilde y)$ where $\tilde y = y + \delta y$ with $\|\delta y\|_2 \le c(m) \ema \|y\|_2$ with some constant $c(m)$ independent of $y$ and $\ema$.
+
+Consider the $i,j$ entry of the product $QA$.  To apply the above idea, let $x = q_i^*$ be the $i$th row of $Q$ and denote the $j$th column of $A$ by $a_j$ as usual.  Note that a row of a unitary matrix has unit $2$-norm.  By the Cauchy-Schwarz inequality,
+\begin{align*}
+|\tilde f(A)_{ij} - f(A)_{ij}| &= |\tilde g(a_j) - g(a_j)| = |q_i^* (a_j + \delta a_j) - q_i^* a_j|\\
+  &= |q_i^* \delta a_j| \le \|q_i^*\|_2 \|\delta a_j\|_2 = \|\delta a_j\|_2 \le c(m) \ema \|a_j\|_2.
+\end{align*}
+In this calculation ``$\delta a_j$'' actually varies with (depends on) both $i$ and $j$, but the final bound is independent of $i$.
+
+This entry-wise bound can be advanced to a Frobenius norm bound.  That is,
+\begin{align*}
+\|\tilde f(A) - f(A)\|_F^2 &= \sum_{\begin{smallmatrix} i=1,\dots,m \\ j=1,\dots,n \end{smallmatrix}}|\tilde f(A)_{ij} - f(A)_{ij}|^2 \le \sum_{i,j} c(m)^2 \ema^2 \|a_j\|_2^2 \\
+   &= m\, c(m)^2 \ema^2 \sum_{j} \|a_j\|_2^2 = m\, c(m)^2 \ema^2 \|A\|_F^2.
+\end{align*}
+Note that the sum over $i$ simply gives a factor of $m$ and that $\sum_{j=1}^n \|a_j\|_2^2 = \|A\|_F^2$.  Thus
+    $$\|\tilde f(A) - f(A)\|_F \le \sqrt{m}\, c(m) \ema \|A\|_F.$$
+
+Now we change tacks and describe the forward error as a backward error.  Let
+    $$\delta A = Q^*(\tilde f(A) - f(A))$$
+so that $Q \delta A = \tilde f(A) - f(A)$.  Observe that
+    $$\tilde f(A) = \tilde f(A) - f(A) + f(A) = Q \delta A + QA = Q (A+\delta A).$$
+Let $\tilde A=A+\delta A$.  We have
+    $$\tilde f(A) = f(\tilde A).$$
+
+We now show that the backward error $\|\tilde A - A\|_F$ is relatively small by using the unitary invariance of the Frobenius norm:
+\begin{align*}
+\frac{\|\tilde A - A\|_F}{\|A\|_F} &= \frac{\|\delta A\|_F}{\|A\|_F} = \frac{\|Q\delta A\|_F}{\|A\|_F} = \frac{\|\tilde f(A) - f(A)\|_F}{\|A\|_F} \\
+   &\le \frac{\sqrt{m} C(m) \ema \|A\|_F}{\|A\|_F} = \sqrt{m}\, c(m) \ema.
+\end{align*}
+\end{proof}
+
+Not only have we shown that multiplication by a unitary is backward stable, we also provide a meaningful constant.  That is, given the constant $c(m)$ for the $2$-norm backward-stability of the inner product, we have
+    $$\frac{\|\tilde A - A\|_F}{\|A\|_F} \le C(m) \ema  \qquad \text{for} \qquad C(m) = \sqrt{m}\, c(m).$$
+\end{document}
+
