@@ -18,4 +18,4 @@ for k = 1:n
     W(:,k) = [zeros(k-1,1); v]; 
     A(k:m,k:n) = A(k:m,k:n) - 2 * v * (v' * A(k:m,k:n));
 end
-R = A(1:n,1:n);
+R = triu(A(1:n,1:n));
