@@ -1,9 +1,10 @@
 function zout = vismult(z1,z2,both)
 % VISMULT  Visualize complex multiplication.  With third argument,
-% also shows addition parallelogram.  Examples:
-% >> vismult(1+i,2)
-% >> vismult(1+i,2,'both')
-% >> vismult(2+i,-3+2i,'both')
+% also shows addition parallelogram.
+% Examples:
+%   >> vismult(1+i,2)
+%   >> vismult(1+i,2,'both')
+%   >> vismult(2+i,-3+2i,'both')
 
 L = max([abs(z1) abs(z2) abs(z1+z2) abs(z1*z2) 1.3]);
 plot([-L L],[0 0],'k')
