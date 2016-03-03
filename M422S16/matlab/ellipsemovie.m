@@ -1,4 +1,4 @@
-function ellipsemovie
+function ellipsemovie(saveext)
 % ELLIPSEMOVIE Visualize function
 %               1
 %   f(z) = z + ---
@@ -7,8 +7,16 @@ function ellipsemovie
 % into ellipses with foci +-2 (w-plane).  Shows unit disc in z-plane (pink)
 % and foci of ellipses in w-plane.  Compare Exercises 6 and 7 in section II.6
 % of Gamelin.
+%
+% Example:
+%   >> ellipsemovie
+% Example with saved files, plus commands to generate gif:
+%   >> ellipsemovie('.png')  % generates files 000xx.png
+%   >> exit
+%   $ convert -resample 20x20 -delay 10 -loop 0 *.png ellipsemovie.gif
 
 L = 4.1;
+if nargin < 1,  saveext = '';  end
 
 % parameterize circle
 theta = linspace(0,2*pi,201);
@@ -38,8 +46,13 @@ hw = plot(A*x,B*y,'k','linewidth',2.0);
 plot([-2 2],[0 0],'k.','markersize',10.0)  % foci of ellipses
 
 % redraw at successive radii, for a movie
-while true
-    for r = [0.24:0.02:1 1.05:.05:2 2.1:.1:4]
+rlist = [0.24:0.02:1 1.05:.05:2 2.1:.1:4];
+while true  % loop forever (if not saving)
+    for j = 1:length(rlist)
+        r = rlist(j);
+        if length(saveext) > 0
+            print(sprintf('%05d%s',j,saveext));
+        end
         % circle in z-plane
         x = r * cos(theta);
         y = r * sin(theta);
@@ -52,6 +65,7 @@ while true
         set(hw, 'YData', B*y)
         sleep(0.1)
     end
+    if length(saveext) > 0,  break,  end
 end
 
 end  % function ellipsemovie
