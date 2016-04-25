@@ -1,9 +1,9 @@
 function f = bumpy(theta,N)
 %BUMPY A continuous nowhere-differentiable function.
 %                         __
-%                        \  | N     S m         m
-%            f(theta) =   >        A       cos(A  theta).
-%                        /__| m=0
+%                        \  N     S m       m
+%            f(theta) =   )      A     cos(A  theta).
+%                        /__m=0
 %
 % for particular values A,S.  Default N = 100.
 % Example on which to zoom in:

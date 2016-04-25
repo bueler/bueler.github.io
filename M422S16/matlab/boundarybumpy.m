@@ -1,17 +1,17 @@
-% BUMPYBOUNDARY  Generate surface plot of analytic function on disc with
-% boundary values that are the nowhere-differentiable function in BUMPY.
-% The function is a power series
+% BUMPYBOUNDARY  Surface plot of analytic function on disc with boundary values
+% that are the nowhere-differentiable function in BUMPY.  The function is a
+% power series
 %                         __
-%                        \  | inf
-%                f(z) =   >        a_k z^k
-%                        /__| k=0
+%                        \  inf
+%                f(z) =   )      a_k z^k
+%                        /__k=0
 %
-% and the surface plot shows the real part  u(x,y).  Note the boundary values
-% are thought of as a Fourier series because
+% The surface plot shows the real part  u(x,y).  The boundary values
+% are a Fourier series:
 %                         __
-%                        \  | inf
-%   Re f(e^{i theta}) =   >        a_k cos(k theta)
-%                        /__| k=0
+%                        \  inf
+%   Re f(e^{i theta}) =   )      a_k cos(k theta)
+%                        /__k=0
 
 r = 0:.02:1;
 theta = -pi:pi/200:pi;
