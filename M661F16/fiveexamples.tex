@@ -10,7 +10,10 @@
 
 \usepackage{verbatim,fancyvrb}
 
-\usepackage{tikz,palatino,amssymb}
+\usepackage{palatino,amssymb}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 
 \newtheorem*{thm}{Theorem 16.0}
 \newtheorem*{defn}{Definition}
@@ -116,6 +119,34 @@ You saw this kind of problem in Calculus I.  This one is hard to do by hand so i
 
 \medskip
 \item (\texttt{tsp})  \quad 
+
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw}]
+    \node (A) at (-0.5,0) {A};
+    \node (F) at (0,3)    {F};
+    \node (J) at (2,-1)   {J};
+    \node (N) at (-3,3)   {N};
+    \node (S) at (3,-3)   {S};
+    \node (W) at (3,1)    {W} ;
+\end{scope}
+
+\begin{scope}[every node/.style={fill=white},
+              every edge/.style={draw=black,very thick}]
+    \path (A) edge node {$100$} (F);
+    \path (A) edge node {$100$} (J);
+    \path (A) edge node {$150$} (N);
+    \path (A) edge[bend right=50] node {$250$} (S);
+    \path (A) edge node {$150$} (W);
+    %\path (F) edge node {$150$} (J);
+    \draw[very thick] (F.east) .. controls (3,4) and (6,0) .. (J.east) node[midway] {$150$};
+    \path (F) edge node {$200$} (N);
+    %\path (F) edge node {$300$} (S);
+    \draw[very thick] ([yshift=1mm] F.east) .. controls (4,5) and (7,-1) .. (S.east) node[midway] {$300$};
+    \path (F) edge node {$250$} (W);
+    \path (J) edge node {$200$} (S);
+    \path (J) edge node {$200$} (W);
+\end{scope}
+\end{tikzpicture}
 
 \medskip
 \item (\texttt{beam})  \quad 
