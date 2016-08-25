@@ -111,7 +111,7 @@ You may write the same problem as an inequality-constrained optimization in form
 	$$\min_{x\in\RR} f(x) \qquad \text{subject to }\quad \begin{matrix} x \ge 0 \\ 2 - x \ge 0\end{matrix}$$
 In this standard form, $\mathcal{E}=\emptyset$, $\mathcal{I}=\{1,2\}$, $c_1(x)=x$, and $c_2(x)=2-x$.  However, I assert no particular benefit to this standardized form in this case.
 
-You saw such problems in Calculus I.  This one is hard to do by hand; it benefits from some programming and visualization using \Matlab.  Start your solution by plotting $f(x)$ on the given interval; you'll know something close to the solution just from that picture.
+You saw such problems in Calculus I.  This one is hard to do by hand; it benefits from some programming and visualization using \Matlab.  Of course one may plot $f(x)$ on the given interval; one gets close to the solution just from a picture.
 
 
 \medskip
@@ -135,7 +135,7 @@ Suppose we believe that this data can be fit by a function of the for $g(x) = c_
 where we define the objective function to be
 	$$f(c) = \frac{1}{2} \sum_{j=1}^{11} \left(g(x_j) - y_j\right)^2 = \frac{1}{2} \sum_{j=1}^{11} \left(c_1 + c_2 x_j + c_3 e^{-5 x_j} - y_j\right)^2.$$
 
-This problem is already in form (1.1) from the textbook, with $c = \left[c_1,c_2,c_3\right]$ an unknown vector of coefficients in $\RR^3$, and with no constraints ($\mathcal{E}=\emptyset,\mathcal{I}=\emptyset$).  Here $x_j,y_j$ are the data, with $x_j = 0.1 (j-1)$ regularly-spaced.  Note we are \emph{not} finding $x_j$ or $y_j$ values in the minimization process; these values merely determine the objective function.  Also note that the overall factor of $1/2$ in defining the function $f(\bc)$ is just a convenience for differentiating.\footnote{\dots a hint about the standard algorithms for finding the minimum.}
+This problem is already in form (1.1) from the textbook, with $c = \left[c_1,c_2,c_3\right]$ an unknown vector of coefficients in $\RR^3$, and with no constraints ($\mathcal{E}=\emptyset,\mathcal{I}=\emptyset$).  Here $x_j,y_j$ are the data, with $x_j = 0.1 (j-1)$ regularly-spaced.  Note we are \emph{not} finding $x_j$ or $y_j$ values in the minimization process; these values merely determine the objective function.  Also note that the overall factor of $1/2$ in defining the function $f(c)$ is just a convenience for differentiating.\footnote{This is a hint about the standard algorithms for finding the minimum.}
 
 \medskip
 \item (\texttt{salmon})  \quad Ed and Thomas caught 21 salmon, and all will be filleted.  Of these, $x_1$ will be eaten fresh, which requires 2 time units per fish.  Then $x_2$ will be vacuum-packed and frozen (3 time units per fish) and another $x_3$ will be smoked, vacuum-packed, and frozen (4 time units per fish).  Thus the total amount of processing time is $2 x_1 + 3 x_2 + 4 x_3$.  However, at most 2 fish can be eaten fresh before they go bad, and at most 10 fish can be smoked in the time allowed.
