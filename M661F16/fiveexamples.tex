@@ -72,7 +72,7 @@ frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
 
 
 \begin{document}
-\scriptsize \noindent Math 661 Optimization (Bueler) \hfill 23 August, 2016
+\scriptsize \noindent Math 661 Optimization (Bueler) \hfill 29 August, 2016
 \normalsize
 
 \medskip\bigskip
@@ -89,9 +89,9 @@ There are three goals in starting the course with examples:
 \begin{enumerate}
 \item To suggest how optimization can come from real-world applications.
 \item To allow you to create, for yourself, some of the basic theoretical and numerical ideas for how to solve such problems.
-\item To provide examples on which to practice/learn \Matlab\footnote{Or \Octave, which runs the same programs.  Or you can use other languages such as \Python, but I will only provide \Matlab/\Octave examples.} programming.
+\item To provide examples on which to practice/learn \Matlab/\Octave\footnote{You may use other languages such as \Python, but I will only provide \Matlab/\Octave examples and solutions.} programming.
 \end{enumerate}
-While the textbook\footnote{Nocedal \& Wright, \emph{Numerical Optimization}, 2nd ed., 2006} does not give any fleshed-out examples, the authors, and other such experts, have of course been exposed to many of them.
+While the textbook\footnote{J.~Nocedal \& S.~Wright, \emph{Numerical Optimization}, 2nd ed., 2006} does not give any fleshed-out examples, the authors, and other such experts, have of course been exposed to many of them.
 
 Regarding goal 2), your method may be ``brute force'' or inefficient \dots \emph{that is just fine!}  The textbook and the rest of the content of the course will make more sense if you see that brute force approaches are the starting point of later elegant algorithms.
 
@@ -177,10 +177,10 @@ This problem is not in standard form (1.1), but an easy exercise on A \#1 asks y
 \end{tikzpicture}
 
 \medskip
-This is an example of the famous \emph{traveling salesperson problem}.  If $x$ denotes a valid (``feasible'') seven-letter string (itinerary) then we may define the objective function $f(x)$ to be the cost of that itinerary; thus $f(x)$ is defined using the edge weights.  Though finding a feasible itinerary is seemingly nontrivial, at least for complicated graphs, one may add in all remaining edges with large weights so that any itinerary $x$ is feasible with well-defined cost $f(x)$.
+This is an example of the famous \emph{traveling salesperson problem}.  If $x$ denotes a feasible seven-letter string (itinerary) then we may define the objective function $f(x)$ to be the cost of that itinerary; thus $f(x)$ is defined using the edge weights.  Finding a feasible itinerary is generally nontrivial---it corresponds to finding a \emph{Hamiltonian cycle}---in fact one may add in all remaining edges with large weights so that any itinerary $x$ is feasible with well-defined cost $f(x)$.
 
 The problem \emph{could} be written
-	$$\min_{x \text{ is valid itinerary}} f(x)$$
+	$$\min_{x \text{ is feasible itinerary}} f(x)$$
 but this does \emph{not} mean it is in standard form (1.1) because there is no sensible way to treat the possible inputs as ``$x \in \RR^n$.''  This is a \emph{discrete optimization} problem, not a continuous problem as covered in form (1.1) and the textbook generally.
 
 \medskip
