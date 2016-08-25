@@ -61,6 +61,8 @@
 \newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
 
 \newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Octave}{\textsc{Octave}\xspace}
+\newcommand{\Python}{\textsc{Python}\xspace}
 
 \DefineVerbatimEnvironment{mVerb}{Verbatim}{numbersep=2mm,
 frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
@@ -82,18 +84,18 @@ frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
 
 \thispagestyle{empty}
 
-Starting this course with five examples makes sense.  The textbook\footnote{Nocedal \& Wright, \emph{Numerical Optimization}, 2nd ed., 2006} does not give any such fleshed-out examples, but all the experts have been exposed to many such examples.
-
-There are three goals in starting this way:
+There are three goals in starting the course with examples:
 \renewcommand{\labelenumi}{\arabic{enumi})}
 \begin{enumerate}
 \item To suggest how optimization can come from real-world applications.
 \item To allow you to create, for yourself, some of the basic ideas theoretical and numerical ideas for how to solve such problems.
-\item To provide examples on which to practice/learn \Matlab\footnote{Or Octave, which runs the same programs.  Or you can use other languages such as Python.} programming.
+\item To provide examples on which to practice/learn \Matlab\footnote{Or \Octave, which runs the same programs.  Or you can use other languages such as \Python, but I will only provide \Matlab/\Octave examples.} programming.
 \end{enumerate}
-On goal 2), your method \emph{may be ``brute force'' or inefficient \dots which is just fine!}
+While the textbook\footnote{Nocedal \& Wright, \emph{Numerical Optimization}, 2nd ed., 2006} does not give any fleshed-out examples, the authors and other such experts have been exposed to many of them.
 
-Assignment \#1 is based on these examples.  (Later Assignments will be largely based on textbook exercises, but I'll add my own problems and examples when needed.)  Note that each example has a ``code name'' like ``\texttt{calcone}'' which I will use to name my corresponding \Matlab code (``\texttt{calcone.m}'') when I hand out solutions to A \#1.
+On goal 2), your method may be ``brute force'' or inefficient \dots \emph{that is just fine!}  The textbook and the rest of the content of the course will make more sense if you see that brute force approaches are the starting point of later elegant algorithms.
+
+Assignment \#1 is based on these examples.  (Later Assignments will be largely based on textbook exercises, but I'll add my own problems and examples when needed.)  Note that each example has a ``code name'' like ``\texttt{fit}'' which I will use to name my corresponding \Matlab code (``\texttt{fit.m}'') when I hand out solutions to A \#1.
 
 \bigskip
 \renewcommand{\labelenumi}{\Roman{enumi}. \quad}
@@ -122,13 +124,11 @@ y & 4.914 & 3.666 & 2.289 & 1.655 & 1.029 & 0.739 & 0.393 & 0.090 & -0.197 & -0.
 
 \bigskip
 \begin{center}
-\includegraphics[width=0.6\textwidth]{fitdata}
+\includegraphics[width=0.5\textwidth]{fitdata}
 \end{center}
 
 \medskip
-Suppose we believe that this data can be fit by a function of the form
-	$$g(x) = c_1 + c_2 x + c_3 e^{-5 x}.$$
-If the sense of ``fit'' is that the sum of the squares of the misfits should be as small as possible then we would solve
+Suppose we believe that this data can be fit by a function of the for $g(x) = c_1 + c_2 x + c_3 e^{-5 x}$.  If the sense of ``fit'' is that the sum of the squares of the misfits should be as small as possible then we would solve
 	$$\min_{c \in \RR^3} f(c)$$
 where we define the objective function to be
 	$$f(c) = \frac{1}{2} \sum_{j=1}^{11} \left(g(x_j) - y_j\right)^2 = \frac{1}{2} \sum_{j=1}^{11} \left(c_1 + c_2 x_j + c_3 e^{-5 x_j} - y_j\right)^2.$$
@@ -140,12 +140,12 @@ This problem is already in form (1.1) from the textbook, with $c = \left[c_1,c_2
 
 Finding $x_1,x_2,x_3$ to minimize the total processing time means solving this constrained problem with $f(x) = 2 x_1 + 3 x_2 + 4 x_3$:
 	$$\min_{x\in\RR^3} f(x) \qquad \text{subject to }\quad \begin{matrix} x_1 + x_2 + x_3 = 21 \\ 0 \le x_1 \le 2 \\ 0 \le x_2 \\ 0 \le x_3 \le 10 \end{matrix}$$
-
-This problem is not quite in standard form (1.1) because the inequality constraints are not all in the form ``$c_i(x) \ge 0$.''  An easy exercise on Assignment \#1 asks you to put it in standard form.
+This problem is not in standard form (1.1), but an easy exercise on A \#1 asks you to put all of the inequality constraints in the form ``$c_i(x) \ge 0$'' to make it so.
 
 \medskip
 \item (\texttt{tsp})  \quad Jill sells amazing devices which make your brain absorb math more easily.  To sell these devices she plans to visit cities A, F, J, N, W starting and ending at city S.  Some pairs of cities have connecting flights and some do not; the one-way costs of the various flights are shown below in a \emph{graph} with costs (``weights'') on each connection (``edge'').  It is clear to Jill that she should visit each city exactly once, except for returning to S at the end, so a possible itinerary is expressible as a seven letter string like ``SANFWJS.''
 
+\vspace{-5mm}
 \begin{tikzpicture}[scale=0.9]
 \begin{scope}[every node/.style={circle,thick,draw}]
     \node (A) at (-0.5,0) {A};
@@ -174,6 +174,7 @@ This problem is not quite in standard form (1.1) because the inequality constrai
 \end{scope}
 \end{tikzpicture}
 
+\medskip
 This is an example of the famous \emph{traveling salesperson problem}.  If $x$ denotes a seven-letter sting containing valid connecting flights, an itinerary, then we may define the objective function $f(x)$ to be the cost of that itinerary.  Thus $f(x)$ is defined using the edge weights below.  Note that finding even one valid (``feasible'') itinerary may already be nontrivial, at for more complicated graphs.
 
 The problem \emph{could} be written
@@ -181,7 +182,27 @@ The problem \emph{could} be written
 but this does \emph{not} mean it is in standard form (1.1).  There is no sensible way to treat the possible inputs $x$ as ``$x \in \RR^n$,'' even with constraints, as written in (1.1).  That is, the traveling salesperson problem is a \emph{discrete optimization} problem, not a continuous optimization problem.
 
 \medskip
-\item (\texttt{beam})  \quad 
+\item (\texttt{beam})  \quad A new tent design requires bending a pole to go from one corner of the tent to another while also having certain heights at particular distances.  Note that the corners of the tent are on the ground.  We want to know the shape of the pole, which is modeled as a \emph{beam} in standard engineering language, so that the fabric can be cut to reach the pole and be taut below it.
+
+To be specific, the length of the tent along the ground is $\pi$ length units.  We seek a function $y=h(x)$, defined on the interval $x\in[0,\pi]$, for the height of the pole above the ground.  This function must be at least twice-differentiable and satisfy $h(0)=0$ and $h(\pi)=0$.  The theory of beams says that actual shape will be the minimizer
+    $$\min_h I[h]$$
+where
+    $$I[h] = \frac{1}{2} \int_0^\pi |h''(x)|^2\,dx$$
+is called the objective \emph{functional} because its input $h$ is itself a function from an (infinite-dimensional) vector space of functions.
+
+The following inequalities give locations where the heights are constrained:
+\begin{align*}
+0.9 &\le h(1) \le 1.1 \\
+1.2 &\le h(2) \le 1.4 \\
+0.4 &\le h(3) \le 0.6
+\end{align*}
+The figure below does not show the shape of the tent pole, i.e.~it does not show the \emph{solution} of the minimization problem, but it does show a \emph{feasible} $h(x)$ which has the right differentiability and which satisfies the (inequality) constraints.
+
+\bigskip
+\begin{center}
+\includegraphics[width=0.6\textwidth]{beamgates}
+\end{center}
+
 \end{enumerate}
 
 \end{document}
