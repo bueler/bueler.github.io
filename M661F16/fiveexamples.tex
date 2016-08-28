@@ -131,7 +131,7 @@ y & 4.914 & 3.666 & 2.289 & 1.655 & 1.029 & 0.739 & 0.393 & 0.090 & -0.197 & -0.
 \end{center}
 
 \medskip
-Suppose we believe that this data can be fit by a function of the for $g(x) = c_1 + c_2 x + c_3 e^{-5 x}$.  If the sense of ``fit'' is that the sum of the squares of the misfits should be as small as possible then we would solve
+Suppose we believe that this data can be fit by a function of the form $g(x) = c_1 + c_2 x + c_3 e^{-5 x}$.  If the sense of ``fit'' is that the sum of the squares of the misfits should be as small as possible then we would solve
 	$$\min_{c \in \RR^3} f(c)$$
 where we define the objective function to be
 	$$f(c) = \frac{1}{2} \sum_{j=1}^{11} \left(g(x_j) - y_j\right)^2 = \frac{1}{2} \sum_{j=1}^{11} \left(c_1 + c_2 x_j + c_3 e^{-5 x_j} - y_j\right)^2.$$
@@ -185,13 +185,11 @@ The problem \emph{could} be written
 but this does \emph{not} mean it is in standard form (1.1) because there is no sensible way to treat the possible inputs as ``$x \in \RR^n$.''  This is a \emph{discrete optimization} problem, not a continuous problem as covered in form (1.1) and the textbook generally.
 
 \medskip
-\item (\texttt{beam})  \quad A new tent design requires bending a pole to go from one corner of the tent to another while also having certain heights at particular locations.  Note that the corners of the tent, and thus the ends of the pole, are on the ground.  We want to know the shape of the pole, which is modeled as a \emph{beam} in standard engineering language, so that fabric can be cut to reach the pole and yet be taut below it.
+\item (\texttt{beam})  \quad A new tent design requires bending a pole to go from one corner of the tent to another while also having certain heights at particular locations.  Note that the corners of the tent, and the ends of the pole, are on the ground.  The pole is modeled as a \emph{beam} in standard engineering language.  We want to know the shape of the pole so as to determine (1) its (arc) length and (2) how fabric can be cut to reach the pole and yet be taut below it.
 
 To be specific, the length of the tent along the ground is $\pi$ length units.  We seek a function $y=h(x)$, defined on the interval $x\in[0,\pi]$, for the height of the pole above the ground.  This function must be at least twice-differentiable and satisfy $h(0)=0$ and $h(\pi)=0$.  The theory of beams says that actual bent shape will be the minimizing solution $h$ of
-    $$\min_h I[h]$$
-where
-    $$I[h] = \frac{1}{2} \int_0^\pi |h''(x)|^2\,dx$$
-is called the objective \emph{functional}.  The input $h$ is itself a function from an (infinite-dimensional) vector space of functions.
+    $$\min_h I[h] \qquad \text{where} \qquad I[h] = \frac{1}{2} \int_0^\pi |h''(x)|^2\,dx.$$
+Here $I$ is called the objective \emph{functional}.  The input $h$ into $I$ is itself a function from an (infinite-dimensional) vector space of functions.
 
 The following particular inequalities, shown in the figure below, give locations where the heights are constrained:
 \begin{align*}
