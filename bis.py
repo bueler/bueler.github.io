@@ -3,9 +3,12 @@ def bis(a,b,f):
     f(x) = 0
   with initial bracket [a,b].
   example (after "from bis import bis"):
-    def f(x): return cos(x) - x   # define fcn
-    r = bis(0.0,1.0,f)            # find root
-    print(r); print(f(r))         # confirm"""
+
+    def f(x):
+        from math import cos
+        return cos(x) - x
+    r = bis(0.0,1.0,f)            
+    print(f(r))                   """
 
   if f(a) * f(b) > 0.0:
     print "not a bracket!"; return
