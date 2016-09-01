@@ -1,7 +1,6 @@
-% TSP  Setup and solve traveling salesperson problem
+% TSP  Setup and solve a traveling salesperson problem
 
 label = ['A' 'F' 'J' 'N' 'S' 'W'];
-
 edgew = [ -1 100 100 150 250 150;  % A
          100  -1 150 200 300 250;  % F
          100 150  -1  -1 200 200;  % J
@@ -16,31 +15,29 @@ p = [5*ones(N,1) perms(notS) 5*ones(N,1)];   % start and end in Seattle
 
 % print one case on a single line
 printcase = @(a, p, s) ...
-    fprintf('%s  %c%c%c%c%c%c%c : %d\n', a, label(p(1)),label(p(2)),label(p(3)), ...
+    fprintf('%s  %c%c%c%c%c%c%c : %d\n',
+            a, label(p(1)),label(p(2)),label(p(3)), ...
             label(p(4)),label(p(5)),label(p(6)),label(p(7)), s);
 
-% evaluate cost of each (valid) permutation
+% evaluate cost of each (feasible) permutation
 mincost = 1.0e100;  % bigger than any
 for j = 1:N
-    % s gets -1 (invalid) or cost of path
-    s = 0;
+    C = 0;          % C = cost of path (or -1)
     for k = 1:6
-        ce = edgew(p(j,k),p(j,k+1));
-        if ce < 0
-            s = -1;
+        w = edgew(p(j,k),p(j,k+1));
+        if w < 0
+            C = -1;
             break
         else
-            s = s + ce;
+            C = C + w;
         end
     end
-    % report valid case, and update optimal
-    if (s > 0)
-        printcase('feasible  ',p(j,:),s)
-        if s < mincost
+    if (C > 0)      % report if feasible; update optimal
+        printcase('feasible  ',p(j,:),C)
+        if C < mincost
+            mincost = C;
             minp = p(j,:);
-            mincost = s;
         end
     end
 end
-printcase('optimal   ',minp,mincost)
-
+printcase('optimal   ',minp,mincost) 
