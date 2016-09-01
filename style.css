@@ -38,12 +38,12 @@ img {
 
 
 a:link {   /* unvisited link */
-    color: Navy;
+    color: MediumBlue;
     text-decoration: none;
 }
 
 a:visited {
-    color: DarkSlateBlue;
+    color: Navy;
     text-decoration: none;
 }
 
