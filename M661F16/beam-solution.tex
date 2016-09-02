@@ -99,24 +99,24 @@ This set is linearly-independent; that is, on cannot write one element of $S$, s
     $$f(x) = x (\pi-x) = \sum_{k=1}^\infty a_k \sin k x \in \mathcal{X}.$$
 But one cannot (exactly) write this $f(x)$ without an infinite sum.
 
-Despite being infinite-dimensional, this kind of beam problem is completely standard in the engineering and physics literature; it is a problem in the \emph{calculus of variations}.  Because of the infinite-dimensionality, only an approximation of the solution can be computed in a finite amount of solution time.\footnote{Actually, this approximate-only status already holds for problem \texttt{calcone}, which is in one-dimension.  In theory the exact solutions of \texttt{fit}, \texttt{salmon}, and \texttt{tsp} are all possible in finite time.  Do you see why for \texttt{fit}?}
+Despite being infinite-dimensional, this kind of beam problem is completely standard in the engineering and physics literature; it is a problem in the \emph{calculus of variations}.  Because of the infinite-dimensionality, only an approximation of the solution can be computed in a finite amount of solution time.\footnote{Actually, this approximate-only status already holds for problem \texttt{calcone}, which is in 1D.  In theory the exact solutions of \texttt{fit}, \texttt{salmon}, and \texttt{tsp} are all possible in finite time.}
 
-The problem is constrained, however, so the solution cannot be just anywhere in the infinite-dimensional vector space $\mathcal{X}$.  The solution lives in an infinite-dimensional convex\footnote{A few points extra credit for proving it is convex.} subset of $\mathcal{X}$:
+The problem is constrained, however, so the solution cannot be just anywhere in the infinite-dimensional vector space $\mathcal{X}$.  The solution lives in an infinite-dimensional convex subset of $\mathcal{X}$:
     $$\mathcal{K} = \left\{f \in \mathcal{X} \,:\, 0.9 \le f(1) \le 1.1 \text{ and } 1.2 \le f(2) \le 1.4 \text{ and } 0.4 \le f(3) \le 0.6\right\}.$$
 This is the \emph{feasible set}.  It is like a polyhedron; it is a \emph{polytope} in $\mathcal{X}$.
 
 For now we just want a method that finds an acceptable approximate solution, even if by brute-force.  So we restrict our functions to a five-dimensional (5D)\footnote{It can be $N$ dimensional for any $N$ \dots but the number of (search) grid points goes up exponentially with $N$!  The value $N=5$ represents a trial-and-error-determined compromise between answer quality and execution time.  Strategies in Chapter 16 will overcome this difficulty.} space of truncated Fourier sine series:
     $$\mathcal{X}_5 = \RR^5 = \{[c_1\, c_2\, c_3\, c_4\, c_5]\},$$
-where $c\in \mathcal{X}_5$ represents the function $h(x) = \sum_{k=1}^5 c_k \sin k x \in \mathcal{X}$. Using trigonometry we can calculate $I[h]$ for a function $h(x)$ from $\mathcal{X}_5$ \emph{exactly}:
+where $c\in \mathcal{X}_5$ represents the function $h(x) = \sum_{k=1}^5 c_k \sin k x \in \mathcal{X}$. Using trigonometry we can \emph{exactly} compute $I[h]$ for a function $h(x)$ corresponding to $c\in \mathcal{X}_5$:
 \small
 \begin{align*}
 I[h] &= \frac{1}{2} \int_0^\pi |h''(x)|^2\,dx = \frac{1}{2} \int_0^\pi \left(- \sum_{k=1}^5 k^2 c_k \sin k x\right)^2\,dx = \frac{1}{2} \sum_{j=1}^5  \sum_{k=1}^5 c_j c_k j^2 k^2 \int_0^\pi \sin j x\sin k x\,dx \\
      &= \frac{1}{4} \sum_{j=1}^5  \sum_{k=1}^5 c_j c_k j^2 k^2 \int_0^\pi \cos((j-k) x) - \cos((j+k) x)\,dx = \frac{1}{4} \sum_{j=1}^5  \sum_{k=1}^5 c_j c_k j^2 k^2 \left(\pi \delta_{jk} - 0\right) = \frac{\pi}{4} \sum_{k=1}^5 k^4 c_k^2.
 \end{align*}
 \normalsize
-(This calculation, which uses the identity $\sin\alpha\sin\beta = \frac{1}{2} \cos(\alpha-\beta) -  \frac{1}{2} \cos(\alpha+\beta)$, will not surprise those who have used Fourier series before.)  The constraint ``$0.9 \le h(1) \le 1.1$'' can be enforced in $\mathcal{X}_5$ by using the formula $h(x) = \sum_{k=1}^5 c_k \sin k x$ and evaluating at $x=1$, and similarly for $x=2,3$.
+(This calculation, which uses the identity $\sin\alpha\sin\beta = \frac{1}{2} \cos(\alpha-\beta) -  \frac{1}{2} \cos(\alpha+\beta)$, will not surprise those who have used Fourier series.)
 
-The approximating 5D optimization problem is now in a form close to (1.1) from the textbook:
+The constraint ``$0.9 \le h(1) \le 1.1$'' can be enforced in $\mathcal{X}_5$ by using the formula $h(x) = \sum_{k=1}^5 c_k \sin k x$ and evaluating at $x=1$.  Thus the approximating 5D optimization problem is now (essentially) in form (1.1) from the textbook:
     $$\min_{c \in \RR^5} I_5(c) \qquad \text{ subject to } \qquad \begin{matrix}
     0.9 \le \sum_{k=1}^5 c_k \sin k   \le 1.1 \\
     1.2 \le \sum_{k=1}^5 c_k \sin 2 k \le 1.4 \\
@@ -124,9 +124,9 @@ The approximating 5D optimization problem is now in a form close to (1.1) from t
     \end{matrix}$$
 where
     $$I_5(c) = \frac{\pi}{4} \sum_{k=1}^5 k^4 c_k^2.$$
-This is called a \emph{quadratic programming problem}; see Chapter 16 of the textbook.  Let $\mathcal{K}_5 \subset \RR^5$ be the (convex) set where the constraints are satisfied; this is the \emph{feasible} set for the approximate optimization problem.  Our problem is now a constrained, 5D version of the unconstrained 3D problem \texttt{fit}.
+This is called a \emph{quadratic programming problem} because $I_5(c)$ is quadratic in $c$ and the constraints are linear in $c$; see textbook Chapter 16.  Our problem is now a constrained, 5D version of the unconstrained 3D problem \texttt{fit}.
 
-We do not know, however, which of the inequality constraints is active (i.e.~the inequality is equality) when $c$ is the solution of the problem.  Taking partial derivatives of $I_5$ and setting them to zero just yields $c=0$, which does not satisfy the constraints, so $c=0$ is not the solution.  We do not know the shape, in five dimensions, of the subset of $\RR^5$ which satisfies the constraints; it is a 5D polytope.  Thus we will solve the five-dimensional problem by brute force, searching on a grid of points inside a box in $\RR^5$, in the hope that we cover enough of the constrained set to get near the minimum.  Only trial-and-error can make this possible.
+We do not know, however, which of the inequality constraints is active (i.e.~the inequality is equality) when $c$ is the solution of the problem.  The subset of $\RR^5$ which satisfies the constraints, though it is a 5D polytope, is not clear enough to only look at feasible points.  Thus we will solve the our 5D problem by brute force, searching on a grid of points inside a box in $\RR^5$, in the hope that we cover enough of the constrained set to include points near the minimum.  Only trial-and-error can make this possible.
 
 The proposed box, based on trial-and-error, is
 	$$\mathcal{B}_5 = \left\{0 \le c_1 \le 2, \,
@@ -134,8 +134,7 @@ The proposed box, based on trial-and-error, is
 	                         -0.5 \le c_3 \le 0.5, \,
 	                         -0.2 \le c_4 \le 0.2, \,
 	                         -0.2 \le c_5 \le 0.2\right\}.$$
-
-The code below puts a grid with a given spacing on this box and then evaluates $I_5(c)$ at every point on the grid.  I have also posted a code \texttt{plotbeam.m} which plots the tent pole corresponding to a given $c\in \RR^5$.  Running the code with a grid of sufficient coarseness to give a reasonable execution time, namely a few minutes, looks like
+The code below puts a grid with a given spacing on this box.  At each grid point $c$ it checks feasibility (i.e.~constraints) and, if feasible, it evaluates $I_5(c)$ for that point.  Running the code with a grid of sufficient coarseness to give a reasonable execution time, namely a few minutes, looks like
 
 \medskip
 \begin{Verbatim}[fontfamily=courier,fontsize=\scriptsize]
@@ -144,11 +143,12 @@ The code below puts a grid with a given spacing on this box and then evaluates $
 z =  5.8316
 h =
   1.40000  -0.30000  0.15000  -0.05000  0.05000
->> plotbeam(h)
 \end{Verbatim}
 
 \medskip
-\noindent Thus $c_1=1.4$, $c_2=-0.3$, $c_3=0.15$, $c_4=-0.05$, and $c_5=0.05$ from this brute-force search, giving minimum value $I_5(c)=5.8316$.  (During the run the code shows characters \texttt{.}/\texttt{o}/\texttt{*} for progress made so far, including the best solution so far; this is not shown.)  The last ``\texttt{plotbeam}'' command plots the figure at the end, which I believe is pretty close to the solution!
+\noindent During the run the code shows characters \texttt{.}/\texttt{o}/\texttt{*} for progress made so far, indicating when it finds feasible solutions and the best solution so far; this is not shown.
+
+Thus $c_1=1.4$, $c_2=-0.3$, $c_3=0.15$, $c_4=-0.05$, and $c_5=0.05$ is the solution from this brute-force search, giving minimum value $I_5(c)=5.8316$.  I have also posted a code \texttt{plotbeam.m} which plots the tent pole corresponding to a given $c\in \RR^5$.  The command ``\texttt{plotbeam(h)}'' plots the figure at the end, which I believe is pretty close to the solution!
 
 \bigskip
 
