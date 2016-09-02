@@ -1,0 +1,147 @@
+\documentclass[11pt]{amsart}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.55in} 
+\addtolength{\evensidemargin}{-.55in}
+\addtolength{\topmargin}{-.2in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\textheight}{.4in}
+
+\renewcommand{\baselinestretch}{1.1}
+
+\usepackage{verbatim,fancyvrb,xspace}
+
+\usepackage{palatino,amssymb}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+\newtheorem*{thm}{Theorem 16.0}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+\usepackage{xspace}
+
+\newcommand{\mfile}[2]{\bigskip
+\begin{quote}
+\VerbatimInput[frame=single,framesep=3mm,label=\fbox{\normalsize \textsl{\,#2\,}},fontfamily=courier,fontsize=\scriptsize]{#1}
+\end{quote}
+}
+
+%\usepackage[final]{graphicx}
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=blue, citecolor=red, urlcolor=blue]{hyperref}
+
+% macros
+\newcommand{\bc}{\mathbf{c}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+
+%\renewcommand{\det}{\operatorname{det}}
+\newcommand{\onull}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\prob}[1]{\bigskip\noindent\textbf{#1.}\quad }
+\newcommand{\exer}[2]{\prob{Exercise #2 in Lecture #1}}
+
+\newcommand{\pts}[1]{(\emph{#1 pts}) }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\quad }
+\newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
+
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Octave}{\textsc{Octave}\xspace}
+\newcommand{\Python}{\textsc{Python}\xspace}
+
+\DefineVerbatimEnvironment{mVerb}{Verbatim}{numbersep=2mm,
+frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
+
+\newcommand{\ema}{\emach}
+\newcommand{\emach}{\eps_{\!_{\text{m}}}}
+
+
+\begin{document}
+\scriptsize \noindent Math 661 Optimization (Bueler) \hfill 1 September, 2016
+\normalsize
+
+\medskip\bigskip
+\Large
+\centerline{A brute-force solution to problem ``\texttt{beam}''}
+
+\bigskip\medskip
+\normalsize
+
+\thispagestyle{empty}
+
+As noted in the ``Five example optimization problems'' handout, problem \texttt{beam} is intrinsically infinite-dimensional.
+
+Indeed, the set of possible inputs to the functional $I[h]$ is the set of functions
+    $$\mathcal{X} = \left\{f \,:\, f'' \text{ is square-integrable on }, [0,\pi] \text{ and also } f(0)=f(\pi)=0\right\}.$$
+This is clearly a real vector space of functions, so that, for example, given any pair of functions $f_1,f_2 \in \mathcal{X}$, and any real numbers $a_1,a_2$, the linear combination $a_1 f_1 + a_2 f_2$ is also in $\mathcal{X}$.
+
+Why is $\mathcal{X}$ infinite-dimensional, you say?  The answer is that you cannot specify each element using a fixed, finite number of coefficients.\footnote{If it were possible, the number of such coefficients would be the dimension of $\mathcal{X}$.}  For example, and as a hint about the solution method adopted below, the following infinite list of functions live in $\mathcal{X}$:
+    $$S = \{\sin x, \sin 2 x, \sin 3 x, \sin 4 x, \dots\} \subset \mathcal{X}.$$
+This set is linearly-independent; that is, on cannot write $\sin k x$ exactly as a finite linear combination of other elements of the set $S$.
+
+Additional evidence that $\mathcal{X}$ is infinite-dimensional comes from knowing about Fourier series.  For example, the function $f(x) = x (\pi-x)$ is in $\mathcal{X}$ and, on the other hand, there are coefficients $a_k$ so that\footnote{A few points extra credit will be given to anyone who computes the coefficients $a_k$ exactly, and then plots a finite Fourier sum $f_N(x) = \sum_{k=1}^N a_k \sin k x$ showing that the computed coefficients are likely to be correct.}
+    $$f(x) = x (\pi-x) = \sum_{k=1}^\infty a_k \sin k x \in \mathcal{X}.$$
+One cannot exactly write this $f(x)$ without an infinite sum.
+
+Despite being infinite-dimensional, this kind of beam problem is completely standard in the engineering and physics literature.  Because of the infinite-dimensionality, only an approximation of the solution is possible in finite solution time.\footnote{Actually, this approximate-only status already holds for problem \texttt{calcone}, which is in one-dimension.  In theory the exact solutions of \texttt{fit}, \texttt{salmon}, and \texttt{tsp} are all possible in finite time.  Do you see why for \texttt{fit}?}  At the end of this document I will describe how the engineering literature would solve the unconstrained problem, and thereby point out that the field of optimization is simply an extension of the calculus and the calculus of variations.
+
+The problem is constrained, however, so the solution cannot be just anywhere in the infinite-dimensional vector space $\mathcal{X}$.  The solution lives in an infinite-dimensional convex\footnote{A few points extra credit for proving it is convex.} subset of $\mathcal{X}$:
+    $$\mathcal{K} = \left\{f \in \mathcal{X} \,:\, 0.9 \le f(1) \le 1.1 \text{ and } 1.2 \le f(2) \le 1.4 \text{ and } 0.4 \le f(3) \le 0.6\right\}.$$
+This is the \emph{feasible set}.  It is like a polyhedron; it is a \emph{polytope} in $\mathcal{X}$.
+
+For now we just want a method that finds an acceptable approximate solution, even if by brute-force.  So we restrict our functions to a five-dimensional\footnote{It should be clear that it can be $N$ dimensional \dots but the number of (search) grid points to cover it goes up exponentially with $N$!  The value $N=5$ represents a trial-and-error determined compromise between answer quality and execution time.  That is a typical compromise in applied mathematics generally \dots} space of truncated Fourier sine series:
+    $$\mathcal{X}_5 = \RR^5 = \{[c_1\, c_2\, c_3\, c_4\, c_5]\}$$
+where $c\in \mathcal{X}_5$ represents the function $h(x) = \sum_{k=1}^5 c_k \sin k x \in \mathcal{X}$.
+
+Because we know trigonometric identities and integrals, we can calculate $I[h]$ for a function $h(x)$ from $\mathcal{X}_5$ \emph{exactly}:
+\small
+\begin{align*}
+I[h] &= \frac{1}{2} \int_0^\pi |h''(x)|^2\,dx = \frac{1}{2} \int_0^\pi \left(- \sum_{k=1}^5 k^2 c_k \sin k x\right)^2\,dx = \frac{1}{2} \sum_{j=1}^5  \sum_{k=1}^5 c_j c_k j^2 k^2 \int_0^\pi \sin j x\sin k x\,dx \\
+     &= \frac{1}{4} \sum_{j=1}^5  \sum_{k=1}^5 c_j c_k j^2 k^2 \int_0^\pi \cos((j-k) x) - \cos((j+k) x)\,dx = \frac{1}{4} \sum_{j=1}^5  \sum_{k=1}^5 c_j c_k j^2 k^2 \left(\pi \delta_{jk} - 0\right) = \frac{\pi}{4} \sum_{k=1}^5 k^4 c_k^2.
+\end{align*}
+\normalsize
+(This calculation, which uses the identity $\sin\alpha\sin\beta = \frac{1}{2} \cos(\alpha-\beta) -  \frac{1}{2} \cos(\alpha+\beta)$, will not surprise those who have used Fourier series before.)
+
+The constraint ``$0.9 \le h(1) \le 1.1$'' can be enforced in $\mathcal{X}_5$ by using the formula $h(x) = \sum_{k=1}^5 c_k \sin k x$ and evaluating at $x=1$, and similarly for $x=2,3$.
+
+Thus the approximating five-dimensional optimization problem is
+    $$\min_{c \in \RR^5} I_5(c) \qquad \text{ subject to } \qquad \begin{matrix}
+    0.9 \le \sum_{k=1}^5 c_k \sin k   \le 1.1 \\
+    1.2 \le \sum_{k=1}^5 c_k \sin 2 k \le 1.4 \\
+    0.4 \le \sum_{k=1}^5 c_k \sin 3 k \le 0.6
+    \end{matrix}$$
+where
+    $$I_5(c) = \frac{\pi}{4} \sum_{k=1}^5 k^4 c_k^2.$$
+This is called a \emph{quadratic programming problem}; see Chapter 16 of the textbook.  Let $\mathcal{K}_5 \subset \RR^5$ be the (convex) set where the constraints are satisfied; the \emph{feasible} set for the approximate optimization problem.\footnote{This problem is now a constrained, five-dimensional version of the unconstrained three-dimensional problem \texttt{fit}.}
+
+We do not know, however, which of the constraints is active.  Taking partial derivatives of $I_5$ and setting them to zero just yields $c=0$, which does not satisfy the constraints.  And we do not know the shape, in five dimensions, of the subset of $\RR^5$ which satisfies the constraints; it is a five-dimensional polytope.
+
+We will solve the five-dimensional problem by brute force, searching on a grid of points inside a box in $\RR^5$, in the hope that we cover enough of the constrained set to get near the minimum.  Only trial-and-error can make this possible.  
+
+FIXME
+
+\bigskip
+
+\mfile{matlab/beam.m}{beam.m}
+
+
+\end{document}
+
