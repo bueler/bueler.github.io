@@ -23,7 +23,7 @@
 
 \usepackage{xspace}
 
-\newcommand{\mfile}[2]{\bigskip
+\newcommand{\mfile}[2]{
 \begin{quote}
 \VerbatimInput[frame=single,framesep=3mm,label=\fbox{\normalsize \textsl{\,#2\,}},fontfamily=courier,fontsize=\scriptsize]{#1}
 \end{quote}
@@ -87,14 +87,12 @@ frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
 
 \thispagestyle{empty}
 
-As noted in the ``Five example optimization problems'' handout, problem \texttt{tsp} is intrinsically a discrete optimization problem.  In fact it is a \emph{combinatorial} and graph-theoretic optimization problem.  Such problems are a topic in MATH 663 Graph Theory.
-
-For that reason, and also because \texttt{tsp} fits neither with the continuous optimization problems of the rest of the course, nor the techniques in the textbook, I will not cover it further.  Beyond the brute-force solution \texttt{tsp.m} on the next page, that is!  \emph{There is no claim that this code represents a good approach}, but it does solve the problem.  Please see a course or book on combinatorial optimization or graph theory for more information on this kind of problem.
+As noted in the ``Five example optimization problems'' handout, problem \texttt{tsp} is intrinsically a discrete optimization problem.  In fact it is a \emph{combinatorial} and graph-theoretic optimization problem.  Such problems are a topic in MATH 663 Graph Theory.  For that reason, and also because \texttt{tsp} fits neither with the continuous optimization problems of the rest of the course, nor the techniques in the textbook, we will not cover it further in MATH 661 Optimization, beyond the brute-force solution \texttt{tsp.m} on this document.  \emph{There is no claim that this code represents a good approach}, but it does solve the problem.  Please see a course or book on combinatorial optimization or graph theory for more information on this kind of problem.
 
 The \Matlab/\Octave code \texttt{tsp.m} starts with a generally-useful and basic idea, namely that one may represent an edge-weighted graph\footnote{A \emph{graph} is a collection of vertices with \emph{edges} which can be defined as pairs of vertices.  It is one of the basic objects of (discrete) mathematics.} by a \emph{matrix}.  First, the vertices (cities) $A,F,J,N,S,W$ have indices $1,2,3,4,5,6$, respectively, in this data structure.  Then the matrix $M=$ \texttt{edgew} has entry $m_{ij}=-1$ if there is no flight between city (vertex) $i$ and city $j$; otherwise $m_{ij}$ is the cost of the flight from city $i$ to city $j$.
 
 If the seven-city itinerary $p = i_1\,i_2\,i_3\,i_4\,i_5\,i_6\,i_7$ is feasible, in the sense that the corresponding flights exist, then the cost of $p$ is the sum of the six flights,
-    $$C(p) = a_{i_1\, i_2} + a_{i_2\, i_3} + a_{i_3\, i_4} + a_{i_4\, i_5} + a_{i_5\, i_6} + a_{i_6\, i_7} = \sum_{k=1}^6 a_{i_k\,i_{k+1}}.$$
+    $$C(p) = m_{i_1\, i_2} + m_{i_2\, i_3} + m_{i_3\, i_4} + m_{i_4\, i_5} + m_{i_5\, i_6} + m_{i_6\, i_7} = \sum_{k=1}^6 m_{i_k\,i_{k+1}}.$$
 This cost is computed by a \texttt{for} loop:
 
 \medskip
@@ -112,12 +110,19 @@ This cost is computed by a \texttt{for} loop:
 \end{Verbatim}
 
 \medskip
-\noindent Note that if the itinerary is not feasible we ``\texttt{break}'' out of the \texttt{for} loop and move on to the next case.
+\noindent If the itinerary is not feasible we ``\texttt{break}'' out of the \texttt{for} loop and move to the next case.
 
-The above explains how to find the optimal itinerary, given a way of generating all the feasible ones.  How do we do that?  The brute force approach here is to pre-generate all itineraries by using \Matlab/\Octave's \texttt{perms} function, which generates all possible permutations of a given vector.\footnote{This aspect of the solution avoids having to generate a better data structure for holding a graph.}  In this case the possible itineraries start and end in city $S$, so we generate the permutations of the other cities ($[1\,2\,3\,4\,6]$) and then prepend and append $S=5$.  Then, in a big \texttt{for} loop, we test whether the itinerary is feasible.
+The above explains how to find the optimal itinerary among the feasible ones.  How to generate all feasible itineraries?  The brute force approach here is to pre-generates all itineraries using \Matlab/\Octave's \texttt{perms} function, which generates all permutations of a given vector.  Because the itineraries start and end in city $S$, we generate the permutations of the other cities ($[1\,2\,3\,4\,6]$) and then prepend and append $S=5$.  Then, in a big \texttt{for} loop, we test whether the itinerary is feasible and compute its cost if so.  Note the small anonymous function \texttt{printcase}, taking three arguments, whose only purpose is to print out an itinerary.  Running the code finds only four feasible itineraries and identifies one of the two optimal solutions:
 
-Note that there is a small anonymous function \texttt{printcase}, taking three arguments, whose only purpose is to print out an itinerary.  We print the ones that are feasible and then, at the end, we print the first of the optimal itineraries.
-
+\medskip
+\begin{Verbatim}[fontfamily=courier,fontsize=\scriptsize]
+>> tsp
+feasible    SANFWJS : 1250
+feasible    SFNAWJS : 1200
+feasible    SJWANFS : 1200
+feasible    SJWFNAS : 1250
+optimal     SFNAWJS : 1200
+\end{Verbatim}
 \bigskip
 
 \mfile{matlab/tsp.m}{tsp.m}

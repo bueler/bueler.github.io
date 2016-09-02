@@ -9,13 +9,12 @@ edgew = [ -1 100 100 150 250 150;  % A
          150 250 200  -1  -1  -1]; % W
 
 % generate permutations
-notS = [1 2 3 4 6];   % not including Seattle
+notS = [1 2 3 4 6];   % not including S
 N = factorial(5);     % this many permutations of notS
-p = [5*ones(N,1) perms(notS) 5*ones(N,1)];   % start and end in Seattle
+p = [5*ones(N,1) perms(notS) 5*ones(N,1)];   % start and end in S
 
 % print one case on a single line
-printcase = @(a, p, s) ...
-    fprintf('%s  %c%c%c%c%c%c%c : %d\n',
+printcase = @(a, p, s)  fprintf('%s  %c%c%c%c%c%c%c : %d\n', ...
             a, label(p(1)),label(p(2)),label(p(3)), ...
             label(p(4)),label(p(5)),label(p(6)),label(p(7)), s);
 
