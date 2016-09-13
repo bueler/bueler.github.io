@@ -11,6 +11,7 @@ b = 0.5;
 if df(a) * df(b) > 0,  error('not bracket'),  end
 
 % bisection search for f'(x)=0
+tol = 0.5e-6;
 while abs(b - a) > tol
     c = (a + b) / 2
     if df(c) * df(a) < 0
