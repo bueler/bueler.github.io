@@ -8,11 +8,11 @@ df = @(x) 2.0 * (x.^2 + cos(x)) .* (2.0 * x - sin(x)) ...
 % need to start with [a,b] which brackets single solution to f'(x)=0
 a = 0.0;
 b = 0.5;
-if df(a) * df(b) > 0,  error('not bracket'),  end
 
 % bisection search for f'(x)=0
 tol = 0.5e-6;
-while abs(b - a) > tol
+while b - a > tol
+    % [a b]   % uncomment to see current bracket
     c = (a + b) / 2
     if df(c) * df(a) < 0
         b = c;

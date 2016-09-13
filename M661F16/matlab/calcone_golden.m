@@ -14,7 +14,7 @@ d = a + (b - a) / phi;
 
 % golden section search for min f
 tol = 0.5e-6;
-while d - c > tol
+while b - a > tol
     % [a c d b]   % uncomment to see current bracket
     if f(c) < f(d)
         b = d;
