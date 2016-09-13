@@ -10,6 +10,6 @@ ddf = @(x) 2.0 * (2.0 * x - sin(x)) .* (2.0 * x - sin(x)) ...
 
 format long       % show 16 digits
 x = 0.5           % initial estimate
-for k = 1:5       % Newton's method ... so fast that this gives 16 digits
+for k = 1:5       % Newton's method ... 5 steps gives 16 digits
     x = x - df(x) / ddf(x)
 end
