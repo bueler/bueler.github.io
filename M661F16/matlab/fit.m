@@ -1,6 +1,6 @@
 % FIT  Find least squares fit, of shifted exponential form, to noisy data.
-% Use mostly by-hand analysis of minimizing 3-variable quadratic function by
-% computing the gradient (df) and solving a linear system (df(c) = 0).
+% Use mostly by-hand analysis to minimize a 3-variable quadratic function by
+% computing the gradient (df) and then solving a linear system (df(c) = 0).
 
 % the data
 x = [0.000 0.100 0.200 0.300 0.400 0.500 0.600 0.700  0.800  0.900  1.000];
