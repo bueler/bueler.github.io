@@ -32,9 +32,8 @@ function alphak = bt(xk,pk,f,dfxk, ...
 % Example 2 ... see pits.m:
 %    >> x = [1.5 0.5]';
 %    >> [fx dfx Hfx] = pits(x);
-%    >> p = Hfx \ (- dfx);         % Newton step vector
-%    >> alpha = bt(x,p,@pits,dfx)
-%    >> x = x + alpha * p          % next step ... repeat steps as desired
+%    >> p = - dfx;  alpha = bt(x,p,@pits,dfx)         % alpha = 0.0625 for SD
+%    >> p = - Hfx \ dfx;  alpha = bt(x,p,@pits,dfx)   % alpha = 1 for Newton
 
 Dk = dfxk' * pk;
 if Dk >= 0.0
@@ -42,9 +41,9 @@ if Dk >= 0.0
 end
 
 % set defaults according to which inputs are missing
-if nargin < 6,  alphabar = 1.0;  end
-if nargin < 7,  c = 1.0e-4;  end
-if nargin < 8,  rho = 0.5;  end
+if nargin < 5,  alphabar = 1.0;  end
+if nargin < 6,  c = 1.0e-4;  end
+if nargin < 7,  rho = 0.5;  end
 
 % implement Algorithm 3.1
 alphak = alphabar;
