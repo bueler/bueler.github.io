@@ -41,7 +41,7 @@ for k = 1:maxiters
     if norm(dfxk) < tol          % absolute tolerance on gradient f
         break
     end
-    pk = - Hfxk \ dfxk;          % nontrivial Newton step: \ = Gauss elim
+    pk = - Hfxk \ dfxk;          % nontrivial Newton step; \ is Gauss elim
     if dfxk' * pk < 0.0
          alphak = bt(xk,pk,f,dfxk);
     else
