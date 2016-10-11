@@ -1,0 +1,194 @@
+\documentclass[12pt]{amsart}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.5in}
+\addtolength{\evensidemargin}{-.5in}
+\addtolength{\topmargin}{-0.5in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\textheight}{1.0in}
+\newcommand{\normalspacing}{\renewcommand{\baselinestretch}{1.05}
+        \tiny\normalsize}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+\usepackage{amssymb,fancyvrb,xspace}
+\usepackage{palatino}
+
+\usepackage[final]{graphicx}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,arrows.meta}
+
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=black, citecolor=red, urlcolor=red]{hyperref}
+
+% macros
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bn}{\mathbf{n}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\bT}{\mathbf{T}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\Div}{\nabla\cdot}
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+\newcommand{\RR}{\mathbb{R}}
+
+\newcommand{\prob}[1]{\bigskip\noindent\large\textbf{#1}.\,\normalsize }
+\newcommand{\ppart}[1]{\textbf{(#1)}\,\, }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\,\, }
+
+\newcommand{\pts}[1]{\scriptsize [#1 points] \normalsize}
+
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+
+
+\begin{document}
+\scriptsize \phantom{bob} \vspace{-0.3in}
+\noindent Math 661 Optimization \, (Bueler) \hfill  \today
+\normalsize\bigskip
+\normalspacing
+
+\Large\centerline{\textbf{About your project}}
+\normalsize
+
+\bigskip\medskip
+\thispagestyle{empty}
+\normalspacing
+
+\subsection*{Goals and expectations} Your goals on this project is to find one or two problems in form (1.1):
+    $$\min_{x\in \RR^n} \quad \text{subject to} \quad \begin{matrix}
+                                                      c_i(x) = 0, & i \in \mathcal{E}, \\
+                                                      c_i(x) \ge 0, & i \in \mathcal{I},
+                                                      \end{matrix}$$
+Then you will find an algorithm (or algorithms) to solve the problems numerically, and then demonstrate and analyze the results.
+
+Both actual numerical computation \emph{and} mathematical/rigorous analysis are \emph{required} on your project.
+
+Your project may be application-driven (\emph{choose the problems first}) or algorithm-driven (\emph{choose the algorithm first}).  In either case you will implement the algorithm in \Matlab, or other language, and apply your code to the problems.  Then you will analyze the results using theorems---from the textbook or other references--and provide more empirical analysis of the error and timing from the algorithm.  Such analysis is important; it will be the part where it is clear that you have absorbed the ideas in the course.
+
+Both the problem(s) and the algorithm(s) are important, and one of my jobs will be to help you choose them.  But the main job I have is to help you \emph{not} bite off too much!  It is very easy to get lost in the application itself, the algorithmic details, or in difficulties with codes or analysis.
+
+
+\subsection*{Due dates} There are two due dates for the project:
+
+\medskip
+\begin{itemize}
+\item[\underline{I = Skeleton:}]  Version I is due Friday 4 November at the start of class.  It will really be a \emph{proposal} for a project, but in the form of an incomplete draft of the project.  Please follow the section headings and format suggested below, perhaps using the posted/emailed \LaTeX\xspace file.  This would be a good time to use a version control system, so that your efforts grow in an organized manner.
+
+In your draft you will surely have incomplete sections, but it is necessary for the introductory material to have a lot of content, and it is best if no part is completely blank.  What you submit needs to be complete enough for me to give informed and helpful advice.  My advice might be about how to limit the difficulty of the project, or guide it towards closer agreement with the ideas in the class.  It is possible I can suggest resources to help.
+
+The total length should be perhaps 5 to 7 pages.  The total time you spend on this part should be at most 10 hours.
+
+\medskip
+\item[\underline{II = Complete:}]  On Monday 12 December at 5pm you will submit the complete project as version II.  It will have the form suggested below, already drafted as version I, but all parts will be completed.
+
+The total length must be 20 pages or less; I will not accept it if it is more than 20 pages.  The total time spent on version II of the project should be at most 20 hours.
+\end{itemize}
+
+
+\newpage
+\subsection*{Choosing a topic}  Here are three approaches:
+
+\subsubsection*{Approach 1: Talk to an advisor and/or do something related to your thesis}  You can talk to me, but it will take a while for me to know what you are interested in.  It would be better for you to talk to your thesis advisor if you already have one.  It is reasonable to ask ``are there optimization problems related to my expected thesis''?  Broadly-speaking these might relate to optimal design or parameter fitting, or to algorithms which already arise in your field of interest.  There may be a paper to read about optimization in your fieldt.
+
+\subsubsection*{Approach 2: Inspiration from Wikipedia page on mathematical optimization}  If the above does not apply to you, I stongly-suggest you start with this next approach, unless you have a clear desire and plan already.  Namely, see the ``Applications'' section of
+
+   \centerline{\href{https://en.wikipedia.org/wiki/Mathematical_optimization}{\texttt{en.wikipedia.org/wiki/Mathematical\_optimization}}}
+
+\noindent This page is that it has good links to both example applications and to sub-fields of the rather broad and diffuse area called ``optimization.''
+
+\subsubsection*{Approach 3: Investigate skipped material from Nocedal \& Wright}  It is practically true that there are an infinite number of topics you could choose from the textbook.  (It is more of an encyclopedia, not really a textbook that fits in a semester.)  Please \emph{do} choose a section if you roughly understand the basic idea \emph{and} you find it interesting.  Otherwise, however, please \emph{do not} just choose a section at random as a starting point for a project.  The Wikipedia page on \emph{mathematical optimization} is a much better starting point if you do not already have an idea.
+
+The following bulleted list gives sections of Nocedal \& Wright that:
+\renewcommand{\labelenumi}{\roman{enumi})}
+\begin{enumerate}
+\item I plan to either skip entirely in lecture and homework, or address partially/lightly,
+\item \emph{and} which contain algorithmic ideas that might make good starting points.
+\end{enumerate}
+Here's the bulleted list:
+\begin{itemize}
+\item 3.4, 3.5
+\item 4.1, 4.2, 4.3, 4.4, 4.5
+\item 6.2, 6.3, 6.4
+\item 7.1, 7.2, 7.3, 7.4
+\item 8.2
+\item 9.2, 9.3, 9.4, 9.6
+\item 10.3, 10.4
+\item 11.2, 11.3
+\item 12.5, 12.6, 12.9
+\item 13.3, 13.4, 13.5, 13.6, 13.7
+\item 14.1, 14.2, 14.3
+\item 15.4, 15.5
+\item 16.1, 16.2, 16.3, 16.5, 16.6, 16.7
+\item 17.1, 17.2, 17.3, 17.4
+\item 18.1, 18.2, 18.3, 18.4, 18.5, 18.6
+\item 19.2, 19.3, 19.4, 19.5, 19.6
+\end{itemize}
+
+\newpage
+\subsection*{Structure of the project}  Here is a rough flow-chart.  (Use the material on the next page for the correct section headings.)
+
+\bigskip
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw,
+    text width=4.5em, text centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw,
+    text width=9em, text badly centered, rounded corners, minimum height=4em]
+\tikzstyle{bigblock} = [rectangle, draw,
+    text width=24em, text badly centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -{Latex[length=3mm, width=2mm]}]
+
+\begin{center}
+\begin{tikzpicture}[node distance=2.4cm, auto, font=\small]
+    % decide
+    \node [decision] (decide) {is your project driven by?};
+
+    % algorithm sequence
+    \node [block, below left of=decide, node distance=4cm] (introalg) {introduce algorithm(s)};
+    \path [line] (decide.west) -- node [near start, left] {algorithm} (introalg.north);
+    \node [block, below of=introalg] (algpseudo) {give pseudocode(s)};
+    \path [line] (introalg) -- (algpseudo);
+    \node [block, below of=algpseudo] (algexamples) {propose two or more examples for testing};
+    \path [line] (algpseudo) -- (algexamples);
+
+    % application sequence
+    \node [block, below right of=decide, node distance=4cm] (introapp) {introduce application};
+    \path [line] (decide.east) -- node [near start] {application} (introapp.north);
+    \node [block, below of=introapp] (appexamples) {describe typical examples};
+    \path [line] (introapp) -- (appexamples);
+    \node [block, below of=appexamples] (appcompare) {describe two or more algorithms; give pseudocodes};
+    \path [line] (appexamples) -- (appcompare);
+
+    % merge and continue
+    \node [block, below of=decide, node distance=10.5cm] (implement) {implement algorithms in \Matlab etc.};
+    \path [line] (algexamples) -- (implement);
+    \path [line] (appcompare) -- (implement);
+    \node [block, below of=implement] (results) {demonstrate runs on example(s); show results};
+    \path [line] (implement) -- (results);
+    \node [bigblock, below of=results] (analysis) {analysis: \begin{itemize}
+       \item convergence: e.g.~state theorems; compare rates
+       \item performance: e.g.~count operations; show timing
+       \end{itemize}     };
+    \path [line] (results) -- (analysis);
+    \node [block, below of=analysis] (conclude) {what you would do next? conclude};
+    \path [line] (analysis) -- (conclude);
+\end{tikzpicture}
+\end{center}
+
+
+\end{document}
