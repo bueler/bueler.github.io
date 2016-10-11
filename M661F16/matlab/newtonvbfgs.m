@@ -21,12 +21,12 @@ for j = 1:NBFGS
 end
 
 % plot
-semilogy(1:NNEWT,errNEWT,'ko;Newton;')
-hold on,  semilogy(1:NBFGS,errBFGS,'k*;BFGS;'), hold off
+semilogy(1:NNEWT,errNEWT,'ko')
+hold on,  semilogy(1:NBFGS,errBFGS,'k*'), hold off
 grid on
 xlabel k
 ylabel('error |x_k - x^*|')
-legend()
+legend('Newton','BFGS')
 set(gca,'ytick',10.^(-12:2:0))
 set(gca,'yticklabel',{'10^-12','10^-10','10^-8','10^-6','10^-4','10^-2','1'})
 
