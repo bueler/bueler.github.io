@@ -1,5 +1,5 @@
 % NEWTONVBFGS  Compare error norms coming from NEWTONBT and BFGSNAIVE on
-% on ROSENBROCK example.
+% on the ROSENBROCK example.
 
 x0 = [1.2 1.2]';
 xstar = [1.0 1.0]';   % exact minimizer
@@ -20,13 +20,10 @@ for j = 1:NBFGS
     errBFGS(j) = norm(xlist(:,j)-xstar);
 end
 
-% plot
+% plot using log scaling on y axis
 semilogy(1:NNEWT,errNEWT,'ko')
 hold on,  semilogy(1:NBFGS,errBFGS,'k*'), hold off
-grid on
-xlabel k
-ylabel('error |x_k - x^*|')
+grid on,  xlabel k,  ylabel('error |x_k - x^*|')
 legend('Newton','BFGS')
 set(gca,'ytick',10.^(-12:2:0))
 set(gca,'yticklabel',{'10^-12','10^-10','10^-8','10^-6','10^-4','10^-2','1'})
-
