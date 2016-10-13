@@ -1,7 +1,7 @@
 function [f, df] = cable(x,n,C);
-% CABLE Objective function associated to a problem of the minimum energy of
-% a hanging cable.  An understandable example of where we want the dimension
-% of the input x is as large as possible.
+% CABLE Objective function associated to a problem of minimum energy of
+% a hanging cable.  This example is a case in which we want the dimension
+% of the input x to be as large as possible.
 %
 % Usage:      [f, df] = cable(x,n,C)
 % where
@@ -12,13 +12,14 @@ function [f, df] = cable(x,n,C);
 %     C  = constant (weight per unit length of cable)
 %
 % Example:
-%   >> x = [-1 -2 -1]';
-%   >> [f, df] = cable(x,3,1)
+%   >> x = [-1 -2 -1]';          % i.e. dimension = 3
+%   >> [f, df] = cable(x,3,10)
 % Example where we use CABLE in optimization code SDBT:
-%   >> x0 = [-1 -2 -1]';
-%   >> f = @(x) cable(x,3,1);
-%   >> f(x0)                    % check this makes sense
+%   >> x0 = [-0.5 -1 -1 -1 -0.5]';   % dimension 5
+%   >> f = @(x) cable(x,5,10);
+%   >> f(x0)                         % confirm f(x) works in dim=5
 %   >> [xk, xklist, alphaklist] = sdbt(x0,f,1.0e-4)
+%   >> h = 1/6;  plot(h:h:1-h,xk')   % show result as cable
 
 x = x(:);   % force into column
 if length(x) ~= n,  error('input x must be of dimension n');  end
