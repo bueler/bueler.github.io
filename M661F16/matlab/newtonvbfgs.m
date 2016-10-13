@@ -3,7 +3,6 @@
 
 x0 = [1.2 1.2]';
 %x0 = [-1.2 1.0]';    % alternative initial iterate
-
 xstar = [1.0 1.0]';   % exact minimizer
 
 % run Newton and get errors
