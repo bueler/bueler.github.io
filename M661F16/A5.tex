@@ -1,0 +1,161 @@
+\documentclass[12pt]{amsart}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.6in} 
+\addtolength{\evensidemargin}{-.6in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textwidth}{1.3in}
+\addtolength{\textheight}{1.1in}
+
+\renewcommand{\baselinestretch}{1.1}
+
+%\usepackage{verbatim,fancyvrb}
+\usepackage{xspace}
+\usepackage{palatino}
+
+\usepackage{listings}             % Include the listings-package
+\lstset{language=Matlab}          % Set your language
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+\usepackage[final]{graphicx}
+\newcommand{\mfigure}[1]{\includegraphics[height=2.5in,
+width=3.5in]{#1.eps}}
+\newcommand{\regfigure}[2]{\includegraphics[height=#2in,
+keepaspectratio=true]{#1.eps}}
+\newcommand{\widefigure}[3]{\includegraphics[height=#2in,
+width=#3in]{#1.eps}}
+
+\usepackage{amssymb}
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=black, citecolor=red, urlcolor=red]{hyperref}
+
+% macros
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+
+%\renewcommand{\det}{\operatorname{det}}
+\newcommand{\onull}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\cond}{\operatorname{cond}}
+
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Octave}{\textsc{Octave}\xspace}
+\newcommand{\Python}{\textsc{Python}\xspace}
+
+\newcommand{\prob}[1]{\medskip\noindent\textbf{#1}\quad }
+
+\newcommand{\chapexers}[2]{\prob{Chapter #1, pages #2, Exercises:}}
+\newcommand{\exer}[1]{\prob{Exercise #1}}
+
+\newcommand{\pts}[1]{(\emph{#1 pts}) }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\quad }
+\newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=ellipse,draw,inner sep=2pt] (char) {#1};}}
+
+
+\begin{document}
+\scriptsize \noindent Math 661 Optimization (Bueler) \hfill \today
+\normalsize
+
+\medskip
+
+\Large\centerline{\textbf{Assignment \#5}}
+\large
+\medskip
+
+\centerline{\textbf{Due Friday 21 October at the start of class}}
+
+\normalsize
+
+\thispagestyle{empty}
+
+\bigskip
+
+\noindent Please read and understood as much as you can of Chapter 3 in the textbook (Nocedal \& Wright).  Read sections 5.1 and 6.1 because it will help us get the context of current material.  Do the following Problems.
+
+\bigskip
+
+\prob{Problem P10.}  Show that if formula (2.19) is used then (2.17) holds.  (\emph{See page 24.})
+
+
+\prob{Problem P11.}  Show formula (3.27) in the text (page 43).  That is, suppose that $Q$ is symmetric positive definite, the weighted norm is $\|x\|_Q = (x^\top Q x)^{1/2}$, the objective function is $f(x) = \frac{1}{2} x^\top Q x - b^\top x$, and $x^*$ denotes the unique minimizer of $f$.  Show that
+    $$\frac{1}{2} \|x - x^*\|_Q^2 = f(x) - f(x^*).$$
+
+
+\prob{Problem P12.}  \ppart{a} The Sherman-Morrison-Woodbury formula is (A.27) on page 612.  Ignoring how they thought it up in the first place, show that it is true.  That is, assume $A \in \RR^{n\times n}$ is invertible.  Let $a,b \in \RR^n$ and define a rank-one update $\tilde A = A + a b^\top$.  Show that if $\tilde A$ is invertible then its inverse is given by
+\begin{equation}
+    \tilde A^{-1} = A^{-1} - \frac{A^{-1} a b^\top A^{-1}}{1 + b^\top A^{-1} a}.  \label{SMW}
+\end{equation}
+(\emph{Hint}:  You need only show that the given formula \emph{is} the inverse.  We assume an inverse exists, and we know---this is in linear algebra---that there is at most one inverse.)
+
+\epart{b}  As a special case, show that if $I - u v^\top$ is invertible then $\left(I- u v^\top\right)^{-1} = I + r u v^\top$ where $r = 1 / (1 - v^\top u)$.  Also describe how to determine if $I - u v^\top$ is invertible by doing an initial computation with $u$ and $v$.
+
+\epart{c}  Write a short and efficient pseudocode, or running \Matlab code, that implements the Sherman-Morrison-Woodbury formula \eqref{SMW} in form ``\texttt{B = SMW(Ainv,a,b)}'', where the output \texttt{B} is the matrix $\tilde A^{-1}$.  (Assume $A^{-1}=$ \texttt{Ainv} is already available.)  How many floating point operations are needed?  (\emph{Hint}:  Do matrix-vector products first.  Store temporary quantities as needed.  Explain why your operation count is minimal.)
+
+
+\prob{Problem P13.}  Suppose $u_1,\dots,u_k\in \RR^n$ are orthonormal, so that $u_i^\top u_j = 0$ if $i\ne j$ and $u_i^\top u_i = \|u_i\|^2 = 1$.  (Note that this implies $k\le n$; why?)  Let $c_1,\dots,c_k\in \RR$.  Define a matrix $A\in\RR^n$ as a sum of outer products:
+    $$A = c_1 u_1 u_1^\top + \dots + c_k u_k u_k^\top.$$
+Compute the rank and eigenvalues of $A$, being careful to consider any degenerate cases.  Is $A$ symmetric?  Under what conditions is $A$ positive definite?  (\emph{As usual, please explain why your answers are correct.})
+
+
+\newpage
+\prob{Problem P14.}  (\emph{This problem regards material on pages 46--47.  We are looking at the ``surprising (and delightful) result'' stated near the top of page 47.})  Assume $f:\RR^n\to \RR$ is twice continuously-differentiable, $p_k$ are from the usual quasi-Newton formula (3.34), and $x_k \to x^*$ where $\grad f(x^*)=0$. (\emph{I.e.~assume that your quasi-Newton method converged.})  Under these assumptions, show that (3.35) is equivalent to (3.36).  
+
+
+\prob{Problem P15.}  (\emph{In determining $p_k$ in Newton and quasi-Newton algorithms we solve a symmetric positive definite (SPD) linear system $B_k p_k = - \grad f(x_k)$.  The ability to identify and solve SPD linear systems, as sketched in this problem, is already built-in to \Matlab/\Octave's backslash operation.  Therefore the codes you write here are not tools you should use later!  Instead they explain in part how linear solver ``packages'' work, which is helpful knowledge.})
+
+\epart{a}  The Cholesky factorization is a modified form of the familiar Gauss elimination process (i.e.~$A=LU$), but in an efficient and stable form suitable for SPD matrices, and yielding $A=L L^\top$.  It is shown on page 608 of Nocedal \& Wright as Algorithm A.2.
+
+Implement Cholesky factorization as \texttt{cholesky.m} with form/signature
+
+\centerline{\texttt{[L,ifail] = cholesky(A)}}
+
+\noindent  Note that the algorithm computes $L_{ii} = \sqrt{A_{ii}}$ and then later it divides by this number.  Thus, if $A_{ii}\le 0$ at some stage then the algorithm should stop and report failure.  The suggested form is designed to support this behavior.  Namely, if $A$ is indeed SPD then \texttt{cholesky} should succeed and return $L$ as the first output and \texttt{ifail} $=-1$ as the second output.  Otherwise, if $A_{ii}\le 0$ at some stage, it should return the index $i\ge 1$ for which the algorithm has failed, and the incomplete $L$ computed so far.  Then one can tell if the algorithm has succeeded by testing ``\texttt{ifail < 0}''.
+
+Test your program by applying it to these two $4\times 4$ matrices:
+   $$A = \begin{bmatrix}
+        4 &       1 &      -1 &       1 \\
+        1 &       3 &      -2 &      -1 \\
+       -1 &      -2 &       3 &      -1 \\
+        1 &      -1 &      -1 &       2
+    \end{bmatrix}, \qquad
+     B = \begin{bmatrix}
+        4 &      -1 &      -1 &       1 \\
+       -1 &       3 &      -2 &       1 \\
+       -1 &      -2 &       3 &      -1 \\
+        1 &       1 &      -1 &       2
+    \end{bmatrix}$$
+Which of these matrices is SPD?  For the SPD matrix, check that the error, namely the norm of the difference between $L L^\top$ and the matrix, is indeed very small.  Does the built-in command \texttt{chol} produce exactly the same $L$, or very close?
+
+\epart{b}  Now write a code called \texttt{spdsolve.m} with form
+
+\centerline{\texttt{x = spdsolve(A,b)}}
+
+\noindent This code solves $A x = b$ if $A$ is SPD.  It calls \texttt{cholesky.m} to get $L$ so that $L L^\top = A$ and then it solves the two systems $L y = b$ and $L^\top x = y$.  The latter two systems can be solved by \Matlab/\Octave's backslash, which will automatically do the forward/back-substitution on these triangular systems.  Your code will also determine if $A$ is SPD.  Your code will do at most $\frac{1}{3} n^3 + O(n^2)$ floating point operations.
+
+Make sure that the checks you make for being SPD are from code you write, not other expensive steps.  The main point here is that \emph{running Cholesky and seeing if it fails} is the fastest known way to determine the non-obvious answer to ``is my symmetric matrix with positive diagonal actually SPD?''
+
+%\prob{Problem P12.}  CABLE
+
+\end{document}

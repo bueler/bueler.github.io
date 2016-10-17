@@ -1,0 +1,138 @@
+\documentclass[12pt]{amsart}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.6in} 
+\addtolength{\evensidemargin}{-.6in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textwidth}{1.3in}
+\addtolength{\textheight}{1.1in}
+
+\renewcommand{\baselinestretch}{1.05}
+
+%\usepackage{verbatim,fancyvrb}
+
+\usepackage{palatino}
+
+\usepackage{listings}             % Include the listings-package
+\lstset{language=Matlab}          % Set your language (you can change the language for 
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+\usepackage[final]{graphicx}
+\newcommand{\mfigure}[1]{\includegraphics[height=2.5in,
+width=3.5in]{#1.eps}}
+\newcommand{\regfigure}[2]{\includegraphics[height=#2in,
+keepaspectratio=true]{#1.eps}}
+\newcommand{\widefigure}[3]{\includegraphics[height=#2in,
+width=#3in]{#1.eps}}
+
+\usepackage{amssymb}
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=black, citecolor=red, urlcolor=red]{hyperref}
+
+% macros
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+
+%\renewcommand{\det}{\operatorname{det}}
+\newcommand{\onull}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Octave}{\textsc{Octave}\xspace}
+\newcommand{\Python}{\textsc{Python}\xspace}
+
+\newcommand{\prob}[1]{\medskip\noindent\textbf{#1}\quad }
+
+\newcommand{\chapexers}[2]{\prob{Chapter #1, pages #2, Exercises:}}
+\newcommand{\exer}[1]{\prob{Exercise #1}}
+
+\newcommand{\pts}[1]{(\emph{#1 pts}) }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\quad }
+\newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=ellipse,draw,inner sep=2pt] (char) {#1};}}
+
+
+\begin{document}
+\scriptsize \noindent Math 661 Optimization (Bueler) \hfill \today
+\normalsize
+
+\medskip
+
+\Large\centerline{\textbf{Assignment \#3}}
+\large
+\medskip
+
+\centerline{\textbf{Due Wednesday 28 September (\emph{REVISED}) at the start of class}}
+
+\normalsize
+
+\thispagestyle{empty}
+
+\medskip
+\noindent Please read Chapter 2 and section 3.1, pages 10--29 in the textbook (Nocedal \& Wright).
+
+\smallskip
+
+\exer{2.7}
+
+\exer{2.10}
+
+\exer{3.1}   \emph{Note:}  I have programmed back-tracking line search and it is posted online:  \footnotesize \href{http://bueler.github.io/M661F16/matlab/bt.m}{\texttt{bueler.github.io/M661F16/matlab/bt.m}} \normalsize \quad  You can call it from your codes.
+
+\prob{Problem P6.}  \ppart{a}  Suppose $r:\RR\to\RR$ is a continuous function.  Assume there is an initial \emph{bracket} $[a,b]$ satisfying $a<b$ and $r(a) r(b) < 0$.  First, show that there is a solution $x^*$ to $r(x)=0$ on the interval $a \le x \le b$.  Next, assuming also that there is only one such solution $x^*$, show that the \emph{bisection algorithm} below generates a sequence of brackets and that it terminates with $x$ satisfying
+   $$|x - x^*| \le \frac{1}{2^k} |b-a|.$$
+(\emph{Hint:}  A sketch is useful in your solution, but there must be rigor in the words you write.)  Last, explain in a sentence or two why ``bisection gets one bit per iteration''.
+
+\bigskip
+
+\scriptsize
+\begin{lstlisting}[frame=single,tabsize=4]
+function x = bisection(r,a,b,k)
+	for j = 1:k
+	    c = (a + b) / 2;
+	    if r(c) * r(a) < 0
+	        b = c;
+	    else
+	        a = c;
+	    end
+	end
+	x = c;
+\end{lstlisting}
+\normalsize
+
+\epart{b}  Suppose $r:\RR\to\RR$ is a twice-continuously-differentiable function.  Assume that \emph{Newton's method}, the algorithm below, converges to a solution $x^*$ of the equation $r(x)=0$ when starting from initial iterate $x_0$.  Assume also that $r'(x^*) \ne 0$.  Show that there is $M\ge 0$ and $J$ such that if $j>J$ then the iterates $x_j$ from Newton's method satisfy
+    $$|x_{j+1} - x^*| \le M |x_j - x^*|^2.$$
+(\emph{Hint}:  Use Taylor's theorem.  But also: look up this famous proof.)  Explain in a sentence or two why ``after Newton gets close, the number of correct digits in $x_j$ starts to double per iteration''.
+
+\bigskip
+
+\scriptsize
+\begin{lstlisting}[frame=single,tabsize=4,mathescape]
+function x = newton(r,dr,x0,k)
+    x = x0;
+	for j = 1:k
+	    x = x - r(x) / dr(x)   % compute $x_{j+1}$ from $x_j$
+	end
+\end{lstlisting}
+\normalsize
+\end{document}
