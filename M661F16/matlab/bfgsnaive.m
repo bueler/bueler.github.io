@@ -40,7 +40,8 @@ for k = 1:maxiters
     if norm(dfxk) < tol          % absolute tolerance on gradient f
         break
     end
-    pk = - Bk \ dfxk;            % nontrivial Newton step; \ is Gauss elim
+    pk = - Bk \ dfxk;            % solve linear system; \ is Cholesky because
+                                 %   Bk is symmetric pos. def.; O(n^3) step
     if dfxk' * pk < 0.0
          alphak = bt(xk,pk,f,dfxk);
     else
