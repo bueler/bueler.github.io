@@ -1,4 +1,4 @@
-function x = conjdir(x0,A,b,P)
+function xklist = conjdir(x0,A,b,P)
 % CONJDIR  The "conjugate directions" method described in section 5.1 of
 % Nocedal & Wright.  Computes
 %   x_{k+1} = xk + alphak pk
@@ -6,6 +6,7 @@ function x = conjdir(x0,A,b,P)
 % Note alphak = - rk' * pk / (pk' * A * pk), the result of exact minimization
 % of  f(x) = (1/2) x' * A * x - b' * x  in the direction pk; here
 % rk = A * xk - b is the residual at xk.
+%
 % WARNING: This is not a practical algorithm, but instead a step toward
 % LCG = linear conjugate gradients.
 %
@@ -14,7 +15,9 @@ function x = conjdir(x0,A,b,P)
 %   >> P = [1 1; 0 -2];       % by-hand calc constructs conjugate columns
 %   >> P(:,1)' * A * P(:,2)   % check it ... gives zero
 %   >> x0 = [3 3]';
-%   >> x = conjdir(x0,A,b,P)  % gives x* = 0
+%   >> xk = conjdir(x0,A,b,P)  % gives x2 = 0
+%
+% See also: CONJDIRVIS
 
 % do a bunch of size checking
 x0 = x0(:);  % force into column
@@ -25,11 +28,13 @@ if length(b) ~= n, error('b is not length n'), end
 if size(P,1) ~= n, error('columns of P are not length n'), end
 
 % run the conjugate directions method
-xk = x0
+xk = x0;
+xklist = xk;
 for k = 1:size(P,2)
     pk = P(:,k);
     rk = A * xk - b;
     alphak = - rk' * pk / (pk' * (A * pk));
-    xk = xk + alphak * pk
+    xk = xk + alphak * pk;
+    xklist = [xklist xk];
 end
-x = xk;
+
