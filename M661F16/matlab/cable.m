@@ -1,12 +1,15 @@
-function [f, df] = cable(u,n,C);
+function [f, df, A, b] = cable(u,n,C);
 % CABLE Objective function associated to a problem of minimum energy of
 % a hanging cable.  This example is a case in which we want the dimension
-% of the input u to be as large as possible.
+% of the input u to be as large as possible.  The objective is a quadratic
+% function of the form  f(x) = (1/2) x' A x - b' x
 %
-% Usage:      [f, df] = cable(u,n,C)
+% Usage:      [f, df, A, b] = cable(u,n,C)
 % where
 %     f  = function value (elastic plus potential energy of cable)
 %     df = gradient of f
+%     A  = OPTIONAL: Hessian of system; tridiagonal SPD n x n sparse matrix
+%     b  = OPTIONAL: right-hand-side of linear system  A x = b
 %     u  = vector of length n (= vertical displacements of cable)
 %     n  = dimension of problem (number of interior points along cable)
 %     C  = constant (weight per unit length of cable)
@@ -44,3 +47,10 @@ for j = 2:n-1
 end
 df(n) = (1.0 / h^2) * (2.0 * u(n) - u(n-1)) + C;
 df = h * df;
+
+% additional output if desired:  A = grad^2 f  and RHS  b
+if nargout > 2
+    A = (1/h) * spdiags([-ones(n,1), 2*ones(n,1), -ones(n,1)], [-1 0 1], n, n);
+    b = - h * C * ones(n,1);
+end
+
