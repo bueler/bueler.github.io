@@ -1,7 +1,8 @@
 function [x, xlist] = lcg(x0,A,b,...
                           atol,maxiter)
 % LCG  The linear conjugate gradient method.  This is Algorithm 5.2 in
-% Nocedal & Wright.
+% Nocedal & Wright.  Requires that  A  be a symmetric positive definite (SPD)
+% matrix.  Suitable for approximate solution to large SPD systems.
 %
 % Usage:
 %   [x, xlist] = lcg(x0,A,b,atol,maxiter)
@@ -11,31 +12,32 @@ function [x, xlist] = lcg(x0,A,b,...
 %   x0    = user-provided initial iterate; set to zero if unknown
 %   A     = n x n symmetric positive-definite matrix
 %   b     = length n column vector for right-hand side of system Ax=b
-%   atol  = OPTIONAL: absolute tolerance (terminates if k==n or ||r_k||<atol);
-%           defaults to 1.0e-8
+%   atol  = OPTIONAL: absolute tolerance; terminates if ||r_k|| < atol;
+%           defaults to 0 so runs maxiter steps
 %   maxiter = OPTIONAL: maximum number of iterations; defaults to n
 %
-% Fixed sizer example:
-%   >> A = randn(4,4);  A = A' * A;    % symmetric positive definite
+% Fixed size example:
+%   >> A = randn(4,4);  A = A' * A + eye(4,4);  % symmetric positive definite
 %   >> b = randn(4,1);
-%   >> xChol = A \ b;
 %   >> x0 = zeros(4,1);
-%   >> xLCG = lcg(x0,A,b,1.0e-10);
-%   >> norm(A * xLCG - b)
-%   >> norm(xLCG - xChol)
+%   >> x = lcg(x0,A,b);
+%   >> norm(A * x - b)
+%   >> x2 = A \ b;
+%   >> norm(x - x2)
 %
-% Big example:
-%   >> N = 2000; A = randn(N,N); A = A '* A + eye(N,N); b = randn(N,1);
+% Bigish example:
+%   >> N = 1000; A = randn(N,N); A = A '* A + eye(N,N); b = randn(N,1);
 %   >> x0=zeros(N,1);
-%   >> [x, xlist] =lcg(x0,A,b,1.0e-16);
+%   >> [x, xlist] =lcg(x0,A,b,1.0e-6);
 %   >> norm(A*x - b)/norm(b),  size(xlist,2)
+% (Result is o.k. ... but preconditioning needed.)
 
 % do checks
 n = size(A,1);
 if size(A,2) ~= n,  error('A must be square'),  end
 b = b(:);        % force into column
 if length(b) ~= n,  error('b must be  n x 1  if A is  n x n'),  end
-if nargin < 4,  atol = 1.0e-8;  end
+if nargin < 4,  atol = 0.0;  end
 if nargin < 5,  maxiter = n;  end
 x0 = x0(:);
 if nargout > 1,  xlist = [x0];  end
