@@ -1,14 +1,15 @@
 function [x, xlist] = lcg(x0,A,b,...
                           atol,maxiter)
 % LCG  The linear conjugate gradient method.  This is Algorithm 5.2 in
-% Nocedal & Wright.  Requires that  A  be a symmetric positive definite (SPD)
-% matrix.  Suitable for approximate solution to large SPD systems.
+% Nocedal & Wright.  Will generally only succeed if  A  is a symmetric
+% positive definite (SPD) matrix.  Suitable for approximate solution to
+% large SPD systems.
 %
 % Usage:
 %   [x, xlist] = lcg(x0,A,b,atol,maxiter)
 % where
 %   x     = final result; approximate solution to Ax=b; length n column vector
-%   xlist = OPTIONAL: list of iterates
+%   xlist = OPTIONAL: list of all iterates
 %   x0    = user-provided initial iterate; set to zero if unknown
 %   A     = n x n symmetric positive-definite matrix
 %   b     = length n column vector for right-hand side of system Ax=b
@@ -16,19 +17,17 @@ function [x, xlist] = lcg(x0,A,b,...
 %           defaults to 0 so runs maxiter steps
 %   maxiter = OPTIONAL: maximum number of iterations; defaults to n
 %
-% Fixed size example:
-%   >> A = randn(4,4);  A = A' * A + eye(4,4);  % symmetric positive definite
-%   >> b = randn(4,1);
-%   >> x0 = zeros(4,1);
+% Fixed size Example:
+%   >> A = randn(4,4);  A = A' * A + eye(4,4);               % A is SPD
+%   >> b = randn(4,1);  x0 = zeros(4,1);
 %   >> x = lcg(x0,A,b);
 %   >> norm(A * x - b)
-%   >> x2 = A \ b;
-%   >> norm(x - x2)
+%   >> x2 = A \ b;  norm(x - x2)
 %
-% Bigish example:
-%   >> N = 1000; A = randn(N,N); A = A '* A + eye(N,N); b = randn(N,1);
-%   >> x0=zeros(N,1);
-%   >> [x, xlist] =lcg(x0,A,b,1.0e-6);
+% Bigish Example:
+%   >> N = 1000;  A = randn(N,N);  A = A '* A + eye(N,N);    % A is SPD
+%   >> b = randn(N,1);  x0 = zeros(N,1);
+%   >> [x, xlist] = lcg(x0,A,b,1.0e-6);
 %   >> norm(A*x - b)/norm(b),  size(xlist,2)
 % (Result is o.k. ... but preconditioning needed.)
 
@@ -58,7 +57,7 @@ for k = 1:maxiter
         break;
     end
     beta = rsqrnew / rsqr;
-    p = - r + beta * p;
+    p = - r + beta * p;                        % next search direction
     rsqr = rsqrnew;
 end
 
