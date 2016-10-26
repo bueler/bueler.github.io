@@ -1,4 +1,5 @@
-function [xk, xklist, alphaklist] = bfgsnaive(x0,f,tol)
+function [xk, xklist, alphaklist] = bfgsnaive(x0,f,tol,...
+                                              maxiter)
 % BFGSNAIVE  Quasi-Newton optimization with naive (inefficient) use of BFGS
 % updating and back-tracking.  Uses absolute tolerance on the norm of the
 % gradient for termination.  This algorithm is sketched in section 2.2 of
@@ -30,13 +31,15 @@ function [xk, xklist, alphaklist] = bfgsnaive(x0,f,tol)
 %
 % Requires: BT
 
-maxiters = 100;   % never take more steps than this
+if nargin < 4
+    maxiters = 100;   % never take more steps than this
+end
 xk = x0(:);       % force as column
 xklist = [xk];
 alphaklist = [];
 Bk = eye(length(xk),length(xk));
 [fxk, dfxk] = f(xk);
-for k = 1:maxiters
+for k = 0:maxiters-1
     if norm(dfxk) < tol          % absolute tolerance on gradient f
         break
     end
