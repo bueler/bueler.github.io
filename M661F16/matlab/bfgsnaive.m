@@ -1,5 +1,5 @@
 function [xk, xklist, alphaklist] = bfgsnaive(x0,f,tol,...
-                                              maxiter)
+                                              maxiters)
 % BFGSNAIVE  Quasi-Newton optimization with naive (inefficient) use of BFGS
 % updating and back-tracking.  Uses absolute tolerance on the norm of the
 % gradient for termination.  This algorithm is sketched in section 2.2 of

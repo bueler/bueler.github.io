@@ -68,7 +68,11 @@ for k = 0:maxiters-1
         R = (yk' * sk) / (yk' * yk);
         Hk = R * eye(n,n);       % (6.20) 
     end
-    rhok = 1.0 / (yk' * sk);     % (6.14)
+    rhok = yk' * sk;
+    if rhok <= 0                 % stop if curvature condition (6.7) fails
+        break
+    end
+    rhok = 1.0 / rhok;           % (6.14)
     zk = rhok * sk;
     Hk = Hk - (Hk * yk) * zk';   % (6.17):  cost 4 n^2 + O(n)
     Hk = Hk - zk * (yk' * Hk);   %          cost 4 n^2 + O(n)
