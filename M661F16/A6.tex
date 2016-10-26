@@ -1,0 +1,185 @@
+\documentclass[12pt]{amsart}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.45in} 
+\addtolength{\evensidemargin}{-.45in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\textheight}{1.0in}
+
+\renewcommand{\baselinestretch}{1.1}
+
+\usepackage{verbatim,fancyvrb}
+\usepackage{xspace}
+\usepackage{palatino}
+
+\usepackage{listings}             % Include the listings-package
+\lstset{language=Matlab}          % Set your language
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+\usepackage{amssymb}
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=black, citecolor=red, urlcolor=red]{hyperref}
+
+% macros
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+
+%\renewcommand{\det}{\operatorname{det}}
+\newcommand{\onull}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\cond}{\operatorname{cond}}
+
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Octave}{\textsc{Octave}\xspace}
+\newcommand{\Python}{\textsc{Python}\xspace}
+
+\newcommand{\mfile}[2]{
+	\bigskip
+	\begin{quote}
+		\bigskip
+		\VerbatimInput[frame=single,framesep=3mm,label=\fbox{\normalsize \textsl{\,#1\,}},fontfamily=courier,fontsize=\scriptsize]{#2}
+		\bigskip
+	\end{quote}
+}
+
+\DefineVerbatimEnvironment{mVerb}{Verbatim}{numbersep=2mm,frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\small}
+
+\newcommand{\prob}[1]{\medskip\noindent\textbf{#1.}\quad }
+
+\newcommand{\chapexers}[2]{\prob{Chapter #1, pages #2, Exercises:}}
+\newcommand{\exer}[1]{\prob{Exercise #1}}
+
+\newcommand{\pts}[1]{(\emph{#1 pts}) }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\quad }
+\newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=ellipse,draw,inner sep=2pt] (char) {#1};}}
+
+
+\begin{document}
+\scriptsize \noindent Math 661 Optimization (Bueler) \hfill \today
+\normalsize
+
+\bigskip
+
+\Large\centerline{\textbf{Assignment \#6}}
+\large
+\medskip
+
+\centerline{\textbf{Due Monday 7 November at the start of class}}
+
+\normalsize
+
+\thispagestyle{empty}
+
+\bigskip\medskip
+
+\noindent Please read sections 5.1, 5.2, and 6.1 of Chapter 3 in the textbook (Nocedal \& Wright).  Do the following Exercises and Problems.
+
+\bigskip
+
+\exer{5.1}  (\emph{Hints and comments.}  \Matlab/\Octave code \texttt{lcg.m}, posted online at
+
+\medskip
+
+\centerline{\href{http://bueler.github.io/M661F16/matlab/lcg.m}{\texttt{bueler.github.io/M661F16/matlab/lcg.m}}}
+
+\medskip
+\noindent already implements Algorithm 5.2.  Please use it; there is no need to write your own.  Also, Hilbert matrices are already built-in in \Matlab/\Octave: \texttt{hilb(5)} generates the $n=5$ case.  Please also report \texttt{cond(A)} for each $n=5,8,12,20$.  Because these condition numbers are large, \emph{no} method will generate accurate inverses; confirm this by comparing the result $x$ of \texttt{lcg.m} to the result $\tilde x$ from \verb|A\b|.)
+
+\exer{5.2}
+
+\exer{6.3}  (\emph{Hint.}  The only way to do this is inductively.  \emph{Assume} $H_k = B_k^{-1}$.  Then \emph{show} $H_{k+1} B_{k+1} = I$.)
+
+\bigskip
+
+\prob{Problem P16}  As noted above, \texttt{lcg.m}, posted online, implements Algorithm 5.2.
+
+\epart{a}  Count all the floating-point operations inside the \texttt{for} loop, assuming that $A\in \RR^{n\times n}$ is a dense matrix.
+
+\epart{b}  Now assume that the \texttt{for} loop is executed $K=n$ times.  Which is faster, the Cholesky ($\frac{1}{3} n^3 + O(n^2)$ operations) or \texttt{lcg.m}?
+
+\epart{c}  Writing $K$ as a fraction of $n$ (i.e.~$K = a n$ with $0\le a \le 1$), what number of iterations $K$ are needed so that, for large $n$, the work of Cholesky and \texttt{lcg.m} are the same?  (\emph{Comment.  If $A$ is sparse then one must redo all this calculation using a reduced cost for the matrix-vector product $A p_k$.})
+
+\newpage
+\prob{Problem P17}  Reproduce something like the ``clustered eigenvalues'' result in Figure 5.4 as follows, using \texttt{lcg.m}:\renewcommand{\labelenumi}{\emph{\roman{enumi})}} \begin{enumerate}
+\item With $n=30$, generate an $n \times n$ diagonal, SPD matrix $D$ with five large eigenvalues, say $100,110,140,200,400$ for concreteness, and the remaining $n-5$ eigenvalues equally-distributed in the closed interval $[0.95,1.05]$.
+\item Generate a random orthogonal \footnote{A square matrix $Q$ is \emph{orthogonal} if its columns form an orthonormal basis.  Equivalently, if $Q^\top Q = I$.  You may confirm that the $Q$ you generate is orthogonal by computing \texttt{norm(Q'*Q-eye(n,n))} and seeing that it is small.} matrix $Q$ by the recipe
+\begin{Verbatim}
+     [Q,R] = qr(randn(n,n));
+\end{Verbatim}
+and then discarding $R$.
+\item Generate $A = Q^\top D Q$.  Confirm that the dense matrix $A$ is, to a high degree of accuracy, SPD.
+\item Let $x^* = [1,\,1,\,\dots,\,1]^\top \in \RR^n$.  Compute $b = A x^*$.  Observe that we now know that $x^*$ is the exact solution to the linear system $A x = b$.
+\item Using the \texttt{xlist} output from \texttt{lcg.m}, generate a graph like Figure 5.4, but better-looking by using \texttt{semilogy}.
+\end{enumerate}
+
+\begin{comment} SOLUTION
+n = 30;
+D = diag([100, 110, 140, 200, 400, linspace(0.95,1.05,n-5)]);
+[Q,R] = qr(randn(n));
+norm(Q'*Q-eye(n))
+A = Q'*D*Q;
+norm(A-A')
+%format long g
+%eig(A)
+xstar = ones(n,1);
+b = A * xstar;
+[x xlist]=lcg(zeros(n,1),A,b,1.0e-13,12)
+KK=size(xlist,2);  err = ones(1,KK);
+for k=1:KK
+    err(k) = (xlist(:,k)-xstar)' * A * (xlist(:,k)-xstar);
+end
+semilogy(1:KK,err,'o-')
+\end{comment}
+
+\bigskip
+
+\prob{Problem P18}  My ``good'' (not naive) implementation of BFGS is online at
+
+\medskip
+
+\centerline{\href{http://bueler.github.io/M661F16/matlab/bfgsbt.m}{\texttt{bueler.github.io/M661F16/matlab/bfgsbt.m}}}
+
+\medskip
+\noindent It implements Algorithm 6.1 and uses back-tracking.
+
+It writes (6.17) as several steps, namely
+\begin{mVerb}
+    zk = rhok * sk;
+    Hk = Hk - (Hk * yk) * zk';
+    Hk = Hk - zk * (yk' * Hk);
+    Hk = Hk + zk * sk';
+\end{mVerb}
+Explain why this form is correct.  That is, explain why this sequence of four lines generates $H_{k+1}$ from formula (6.17), assuming that $s_k$, $y_k$, $H_k$, $\rho_k$ have previously been calculated correctly.
+
+\bigskip
+
+\noindent \scriptsize (\emph{Comment.}  It is possible to get this wrong and write a wildly-inefficient $O(n^3)$ version.  In fact, the version in \texttt{scipy.optimize} is exactly that.  See function \verb|fmin_bfgs()| at
+
+\href{https://github.com/scipy/scipy/blob/master/scipy/optimize/optimize.py}{\texttt{github.com/scipy/scipy/blob/master/scipy/optimize/optimize.py}}.
+
+\noindent Fixing it the right way, and documenting/testing your code to the usual good Scipy standards, would be a contribution to humanity.)
+
+\end{document}
