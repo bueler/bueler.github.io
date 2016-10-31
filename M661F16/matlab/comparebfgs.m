@@ -29,5 +29,5 @@ hold off
 grid on,  xlabel k,  ylabel('error |x_k - x^*|')
 legend('Newton', 'BFGS (naive)', 'BFGS (scale H0)', 'BFGS (no scale)')
 set(gca,'ytick',10.^(-12:2:0))
-set(gca,'yticklabel',{'10^-12','10^-10','10^-8','10^-6','10^-4','10^-2','1'})
+set(gca,'yticklabel',{'10^{-12}','10^{-10}','10^{-8}','10^{-6}','10^{-4}','10^{-2}','1'})
 
