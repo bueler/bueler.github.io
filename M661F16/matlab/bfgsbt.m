@@ -53,10 +53,10 @@ for k = 0:maxiters-1
     end
     pk = - Hk * dfxk;            % (6.18); mat-vec; cost 2 n^2 + O(n)
     if dfxk' * pk < 0.0
-         alphak = bt(xk,pk,f,dfxk);
+        alphak = bt(xk,pk,f,dfxk);
     else
-         warning('not descent direction ... unable to do backtracking')
-         alphak = 1.0;
+        warning('not descent direction ... unable to do backtracking')
+        alphak = 1.0;
     end
     sk = alphak * pk;
     xk = xk + sk;                % update xk
@@ -64,13 +64,16 @@ for k = 0:maxiters-1
     alphaklist = [alphaklist alphak];
     [fxk, dfnew] = f(xk);
     yk = dfnew - dfxk;
-    if ((k == 0) & (scaleH0))
-        R = (yk' * sk) / (yk' * yk);
-        Hk = R * eye(n,n);       % (6.20) 
-    end
     rhok = yk' * sk;
-    if rhok <= 0                 % stop if curvature condition (6.7) fails
-        break
+    if rhok <= 0                 % curvature condition (6.7)
+        warning('curvature condition fails ... resetting to H0 ...')
+    end
+    if (k == 0) | (rhok <= 0)
+        Hk = eye(n,n);
+        if scaleH0
+            R = (yk' * sk) / (yk' * yk);
+            Hk = R * Hk;         % (6.20)
+        end
     end
     rhok = 1.0 / rhok;           % (6.14)
     zk = rhok * sk;
