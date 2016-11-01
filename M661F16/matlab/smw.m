@@ -15,7 +15,7 @@ function Z = smw(Ainv,a,b)
 
                             % FLOP counts: 
 a = Ainv * a;               % 2 n^2 - n     (mat-vec: n^2 mults, n^2-n adds)
-b = b / (1 + b' * a);       % 2 n + 1       (inner product plus two more ops)
+b = b / (1 + b' * a);       % 3 n           (inner product, + 1, scale vector)
 b = Ainv' * b;              % 2 n^2 - n     (mat-vec with transpose)
 Z = a * b';                 % n^2           (outer product: n^2 mults)
 Z = Ainv - Z;               % n^2           (n^2 adds)
