@@ -1,4 +1,4 @@
-function [xk, xklist, alphaklist] = gnbt(x0,phi,t,y,tol)
+function [xk, xklist, alphaklist] = gnbt(x0,phi,dphi,t,y,tol)
 % GNBT  Gauss-Newton solution of nonlinear least-squares using back-tracking
 % line search and an absolute tolerance on the norm of the gradient.  This
 % algorithm is from section 10.3 of Nocedal & Wright.  It minimizes
@@ -10,14 +10,17 @@ function [xk, xklist, alphaklist] = gnbt(x0,phi,t,y,tol)
 % phi and d(phi)/dx.
 %
 % Usage:
-%    [xk, xklist, alphaklist] = gnbt(x0,phi,t,y,tol)
+%    [xk, xklist, alphaklist] = gnbt(x0,phi,dphi,t,y,tol)
 % with inputs
 %    x0          n-entry column vector with initial iterate; these are initial
 %                estimates of the best-fit parameters
-%    phi         function handle which returns phi(x,t) and dphidx(x,t), i.e.
-%                    [PHI, dPHI] = phi(x,t)
-%                where x is a vector of length n, and t, PHI are all scalars,
-%                and dPHI is a vector of length n (= the derivatives dphi/dx_j)
+%    phi         function handle which returns phi(x,t) i.e.
+%                    PHI = phi(x,t)
+%                where x is a vector of length n, and t, PHI are scalars
+%    dphi        function handle which returns gradient dphidx(x,t), i.e.
+%                    dPHI = dphi(x,t)
+%                where x is a vector of length n, and t is a scalars,
+%                and dPHI is a column vector of length n (= derivatives dphi/dx_j)
 %    t           independent coordinates of data; length m vector
 %    y           dependent coordinates of data; length m vector
 %    tol         stop when norm of gradient is less than this number
@@ -26,8 +29,30 @@ function [xk, xklist, alphaklist] = gnbt(x0,phi,t,y,tol)
 %    xklist      all iterates as N+1 column matrix
 %    alphaklist  step lengths as row vector of length N
 %
-% Example:
-%   >> FIXME
+% Example of linear interpolation:
+%   >> t = [0, 1]';  y = [3, 5]';
+%   >> phi = @(x,t) x(1) + x(2)*t;
+%   >> dphi = @(x,t) [1; t];
+%   >> x0 = [1, 1]';
+%   >> [x,xlist,alphalist] = gnbt(x0,phi,dphi,t,y,1.0e-6);
+%
+% Example of linear least-squares fit:
+%   >> m = 20;  t = (1:m)';  y = (5:2:2*m+3)' + 0.5*randn(m,1);
+%   >> phi = @(x,t) x(1) + x(2)*t;
+%   >> dphi = @(x,t) [1; t];
+%   >> x0 = [1, 1]';
+%   >> [x,xlist,alphalist] = gnbt(x0,phi,dphi,t,y,1.0e-6);
+%   >> x                % x approximates [3,2]'
+%   >> plot(t,y,'ko',t,x(1)+x(2)*t,'k--')
+%
+% Example of nonlinear least-squares fit:
+%   >> t = (0:3)';  y = [3, 1, 2, 1]';
+%   >> phi = @(x,t) x(1) * exp(x(2)*t);
+%   >> dphi = @(x,t) [exp(x(2)*t); t*x(1)*exp(x(2)*t)];
+%   >> x0 = [2, 0]';
+%   >> [x,xlist,alphalist] = gnbt(x0,phi,dphi,t,y,1.0e-6);
+%   >> tfine = 0:.01:3;
+%   >> plot(t,y,'ko',tfine,x(1)*exp(x(2)*tfine),'k--')
 %
 % Compare: NEWTONBT, BFGSBT
 
@@ -54,9 +79,8 @@ for k = 1:maxiters
     rr = zeros(m,1);
     JJ = zeros(m,n);             % an alternative is (10.27) to form J'J
     for j = 1:m
-        [PHI, dPHI] = phi(xk,t(j));
-        rr(j) = PHI - y(j);
-        JJ(j,:) = dPHI';
+        rr(j) = phi(xk,t(j)) - y(j);
+        JJ(j,:) = dphi(xk,t(j))';
     end
     dfxk = JJ' * rr;
     if norm(dfxk) < tol          % absolute tolerance on gradient f
@@ -73,10 +97,10 @@ for k = 1:maxiters
     alphak = alphabar;
     fxk = 0.5 * rr' * rr;          % = f(xk)
     for q = 1:20                   % assume rho^20 is small
+        xap = xk + alphak * pk;
         fxap = 0.0;                % = f(xk + alphak * pk)
         for j = 1:m
-            [PHI, discard] = phi(xk + alphak * pk,t(j));
-            fxap = fxap + (PHI - y(j))^2;
+            fxap = fxap + (phi(xap,t(j)) - y(j))^2;
         end
         fxap = 0.5 * fxap;
         if fxap <= fxk + c * alphak * Dk
@@ -86,7 +110,7 @@ for k = 1:maxiters
     end
     if q == 20,  error('too many back-tracking steps ... stopping'),  end
     % take step
-    xk = xk + alphak * pk;
+    xk = xap;
     xklist = [xklist xk];        % append to list
     alphaklist = [alphaklist alphak];
 end
