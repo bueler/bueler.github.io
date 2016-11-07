@@ -1,0 +1,30 @@
+% signature of GNBT:
+   [x,xlist,alphalist] = gnbt(x0,phi,dphi,t,y,1.0e-6)
+
+% linear model
+phi = @(x,t) x(1) + x(2)*t;
+dphi = @(x,t) [1; t];
+
+% Example of linear interpolation:
+t = [0, 1]';  y = [3, 5]';
+x0 = [1, 1]';
+[x,xlist,alphalist] = gnbt(x0,phi,dphi,t,y,1.0e-6);
+
+% Example of linear least-squares fit:
+m = 20;  t = (1:m)';  y = (5:2:2*m+3)' + 0.5*randn(m,1);
+x0 = [1, 1]';
+[x,xlist,alphalist] = gnbt(x0,phi,dphi,t,y,1.0e-6);
+x                % x approximates [3,2]'
+plot(t,y,'ko',t,x(1)+x(2)*t,'k--')
+
+% a nonlinear model
+phi = @(x,t) x(1) * exp(x(2)*t);
+dphi = @(x,t) [exp(x(2)*t); t*x(1)*exp(x(2)*t)];
+
+% Example of nonlinear least-squares fit:
+t = (0:3)';  y = [3, 1, 2, 1]';
+x0 = [2, 0]';
+[x,xlist,alphalist] = gnbt(x0,phi,dphi,t,y,1.0e-6);
+tfine = 0:.01:3;
+plot(t,y,'ko',tfine,x(1)*exp(x(2)*tfine),'k--')
+
