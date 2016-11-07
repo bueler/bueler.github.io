@@ -1,5 +1,5 @@
 function [xk, xklist, alphaklist] = newtonbt(x0,f,tol)
-% NEWTONBTFIXED  Newton optimization with back-tracking and an absolute
+% NEWTONBT  Newton optimization with back-tracking and an absolute
 % tolerance on the norm of the gradient.  This algorithm is implied in
 % section 2.2 of Nocedal & Wright.  If xk is the current iterate then the
 % search vector is
