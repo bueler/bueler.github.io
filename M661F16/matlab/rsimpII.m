@@ -14,22 +14,22 @@ if ~isindex(BB),  error('BB must be positive integers'), end
 if any(BB > n),  error('indices in BB must be <= n'),  end
 if cond(A(:,BB)) > 1.0e10,  warning('columns of A indicated by BB may not be linearly independent'),  end
 
-x = zeros(n,1);
-NN = setdiff((1:n)',BB)
+mm = 1:m;
 for k = 1:2^n
-	x(BB) = A(:,BB) \ b
-	lam = A(:,BB)' \ c(BB)
-	sN = c(NN) - A(:,NN)' * lam
+    % Procedure 13.1
+    NN = setdiff((1:n)',BB);
+    x = zeros(n,1);
+	x(BB) = A(:,BB) \ b;
+	lambda = A(:,BB)' \ c(BB);
+	sN = c(NN) - A(:,NN)' * lambda;
     if all(sN >= 0)
         break
     end
     [discard, q] = min(sN);
-    q
-    d = A(:,BB) \ A(:,NN(q))
-    [xqplus, p] = min(x(BB) ./ d)
-    BB(p) = NN(q)
-FIXME
-	x(NN) = 0
-    if k == 3, break, end
+    d = A(:,BB) \ A(:,NN(q));
+    [xqplus, p] = min(x(BB(d>0)) ./ d(d>0));
+    pindex = BB(p);
+    BB(p) = NN(q);
 end
+fval = c' * x;
 
