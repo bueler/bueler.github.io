@@ -1,4 +1,4 @@
-function [xk, xklist, alphaklist] = newtonsolve(x0,rr,JJ,tol)
+function [xk, xklist, alphaklist] = newtonsolve(x0,rr,JJ,tol,maxiters)
 % NEWTONSOLVE  Newton's method for solving equations
 %    r(x) = 0
 % with back-tracking line search and an absolute tolerance on the norm of the
@@ -29,27 +29,30 @@ function [xk, xklist, alphaklist] = newtonsolve(x0,rr,JJ,tol)
 %
 % Requires: BT
 
-maxiters = 100;   % never take more steps than this
-xk = x0(:);       % force as column
+if nargin < 4,  tol = 1.0e-6;  end
+if nargin < 5,  maxiter = 100;  end
+
+MM = @(x) 0.5 * norm(rr(x))^2;   % sum of squares merit function
+
+xk = x0(:);                      % force as column
 xklist = [xk];
 alphaklist = [];
 for k = 1:maxiters
     rk = rr(xk);
-    if norm(rk) < tol          % absolute tolerance on gradient f
+    if norm(rk) < tol            % absolute tolerance on gradient f
         break
     end
-    pk = - JJ(xk) \ rk;          % nontrivial Newton step; \ is Gauss elim
-FIXME   M = @(x) 0.5 * r(x)' * r(x)
-    %if dfxk' * pk < 0.0
-    %     alphak = bt(xk,pk,f,dfxk);
-    %else
-    %     warning('not descent direction ... unable to do backtracking')
-    %     alphak = 1.0;
-    %end
-    %xk = xk + alphak * pk;
-    xk = xk + pk;
+    Jk = JJ(xk);
+    pk = - Jk \ rk;              % nontrivial Newton step; \ is Gauss elim
+    gradMk = Jk' * rk;           % grad M(xk)
+    if gradMk' * pk < 0
+        alphak = bt(xk,pk,MM,gradMk);
+    else
+        warning('not a Jacobian descent direction')
+        alphak = 1.0;
+    end
+    xk = xk + alphak * pk;
     xklist = [xklist xk];        % append to list
-    %alphaklist = [alphaklist alphak];
-    alphaklist = [alphaklist, 1];
+    alphaklist = [alphaklist alphak];
 end
 
