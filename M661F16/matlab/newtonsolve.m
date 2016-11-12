@@ -48,7 +48,7 @@ for k = 1:maxiters
     if gradMk' * pk < 0
         alphak = bt(xk,pk,MM,gradMk);
     else
-        warning('not a Jacobian descent direction')
+        warning('not a merit-function descent direction')
         alphak = 1.0;
     end
     xk = xk + alphak * pk;
