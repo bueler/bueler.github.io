@@ -1,4 +1,4 @@
-function [xk, xklist, alphaklist] = newtonsolve(x0,rr,JJ,tol,maxiters)
+function [xk, xklist, alphaklist] = newtonsolve(x0,rr,JJ,tol,maxiters,dols)
 % NEWTONSOLVE  Newton's method for solving equations
 %    r(x) = 0
 % with back-tracking line search and an absolute tolerance on the norm of the
@@ -9,13 +9,14 @@ function [xk, xklist, alphaklist] = newtonsolve(x0,rr,JJ,tol,maxiters)
 % to get alphak (bt.m = Algorithm 3.1).
 %
 % Usage:
-%    [xk, xklist, alphaklist] = newtonsolve(x0,rr,JJ,tol)
+%    [xk, xklist, alphaklist] = newtonsolve(x0,rr,JJ,tol,nols)
 % with inputs
 %    x0          n-entry column vector with initial iterate (location)
 %    rr          function handle for residuals:  r(x) is column vector of
 %                length n
 %    JJ          function handle for Jacobian:  J(x) is n x n matrix
 %    tol         stop when norm of residuals is less than this number
+%    dols        if true, do line search with merit function
 % and outputs
 %    xk          Nth iterate
 %    xklist      all iterates as N+1 column matrix
@@ -31,6 +32,7 @@ function [xk, xklist, alphaklist] = newtonsolve(x0,rr,JJ,tol,maxiters)
 
 if nargin < 4,  tol = 1.0e-6;  end
 if nargin < 5,  maxiter = 100;  end
+if nargin < 6,  dols = true;  end
 
 MM = @(x) 0.5 * norm(rr(x))^2;   % sum of squares merit function
 
@@ -44,15 +46,19 @@ for k = 1:maxiters
     end
     Jk = JJ(xk);
     pk = - Jk \ rk;              % nontrivial Newton step; \ is Gauss elim
-    gradMk = Jk' * rk;           % grad M(xk)
-    if gradMk' * pk < 0
-        alphak = bt(xk,pk,MM,gradMk);
+    if dols
+		gradMk = Jk' * rk;           % grad M(xk)
+		if gradMk' * pk < 0
+		    alphak = bt(xk,pk,MM,gradMk);
+		else
+		    warning('not a merit-function descent direction')
+		    alphak = 1.0;
+		end
+        xk = xk + alphak * pk;
+        alphaklist = [alphaklist alphak];
     else
-        warning('not a merit-function descent direction')
-        alphak = 1.0;
+        xk = xk + pk;
     end
-    xk = xk + alphak * pk;
     xklist = [xklist xk];        % append to list
-    alphaklist = [alphaklist alphak];
 end
 
