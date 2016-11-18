@@ -43,6 +43,7 @@ function z = idroot(x)
 end
 
 % generate x0 and test on N x N grid
+atol = 1.0e-8;
 Als = zeros(N,N);
 Ano = zeros(N,N);
 x1 = linspace(rect(1),rect(2),N)';
@@ -50,16 +51,21 @@ x2 = linspace(rect(3),rect(4),N)';
 for l = N:-1:1
     for k = 1:N
         x0 = [x1(k) x2(l)]';
-        xls = newtonsolve(x0,r,J,1.0e-6,maxiters);
-        ji = idroot(xls);
+        x = newtonsolve(x0,r,J,atol,maxiters);
+        ji = idroot(x);
         Als(l,k) = ji;
         if ji > 0
-            fprintf('%d',ji)
+            fprintf('%d',ji)  % 1,...,nrt  represent root
         else
-            fprintf(' ')
+            if (cond(J(x)) > 1.0e6) & (norm(r(x)) > 2*atol)
+                fprintf('.')  % x is where  J(x)' r(x) = grad f(x) = 0,
+                              %   but  r(x) != 0  and  J(x) singular
+            else
+                fprintf(' ')  % otherwise; unknown case
+            end
         end
-        xno = newtonsolve(x0,r,J,1.0e-6,maxiters,false);
-        Ano(l,k) = idroot(xno);
+        x = newtonsolve(x0,r,J,atol,maxiters,false);
+        Ano(l,k) = idroot(x);
     end
     fprintf('\n')
 end
@@ -73,7 +79,7 @@ for fn = 1:2
     figure(fn)
     if fn == 1
         imagesc(x1,x2,Als)
-        title('with line search')
+        title('backtracking line search')
     else
         imagesc(x1,x2,Ano)
         title('NO line search')
