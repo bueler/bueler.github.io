@@ -16,7 +16,7 @@ for k = 1:length(alf)
    y(k) = phi(alf(k));
 end
 plot(alf,y,'k','linewidth',6),  hold on
-plot(1.0,phi(1.0),'k.','markersize',24)
+plot(1.0,phi(1.0),'k.','markersize',24)   % mark full step alpha = 1
 grid on,  xlabel('alpha'),  ylabel('phi(alpha)')
 
 % add Wolfe condition lines to graph, and report
