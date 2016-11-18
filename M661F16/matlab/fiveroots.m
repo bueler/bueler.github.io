@@ -44,16 +44,17 @@ end
 
 % generate x0 and test on N x N grid
 atol = 1.0e-8;
-Als = zeros(N,N);
+Abt = zeros(N,N);
 Ano = zeros(N,N);
+Arc = zeros(N,N);
 x1 = linspace(rect(1),rect(2),N)';
 x2 = linspace(rect(3),rect(4),N)';
 for l = N:-1:1
     for k = 1:N
         x0 = [x1(k) x2(l)]';
-        x = newtonsolve(x0,r,J,atol,maxiters);
+        x = newtonsolve(x0,r,J,atol,maxiters,'bt');
         ji = idroot(x);
-        Als(l,k) = ji;
+        Abt(l,k) = ji;
         if ji > 0
             fprintf('%d',ji)  % 1,...,nrt  represent root
         else
@@ -64,7 +65,9 @@ for l = N:-1:1
                 fprintf(' ')  % otherwise; unknown case
             end
         end
-        x = newtonsolve(x0,r,J,atol,maxiters,false);
+        x = newtonsolve(x0,r,J,atol,maxiters,'rcmbt');
+        Arc(l,k) = idroot(x);
+        x = newtonsolve(x0,r,J,atol,maxiters,'none');
         Ano(l,k) = idroot(x);
     end
     fprintf('\n')
@@ -75,14 +78,20 @@ cm = colormap('jet');
 cm(1,:) = [1 1 1];
 
 % generate two figures from Als, Ano
-for fn = 1:2
+for fn = 1:3
     figure(fn)
-    if fn == 1
-        imagesc(x1,x2,Als)
-        title('backtracking line search')
-    else
-        imagesc(x1,x2,Ano)
-        title('NO line search')
+    switch fn
+        case 1
+            imagesc(x1,x2,Abt)
+            title('backtracking line search')
+        case 2
+            imagesc(x1,x2,Arc)
+            title('rcond/merit backtracking line search')
+        case 3
+            imagesc(x1,x2,Ano)
+            title('NO line search')
+        otherwise
+            error('unknown fn case')
     end
     set(gca,'ydir','normal')
     colormap(cm),  colorbar,  hold on
