@@ -1,5 +1,5 @@
 function [x f lambda k] = rsimpII(c, A, b, BB, spew)
-% RSIMPII  Phase II of reduced simplex method.  Contains Procedure 13.1
+% RSIMPII  Phase II of reduced simplex method.  Implements Procedure 13.1
 % from Nocedal & Wright.  Requires linear program in standard form, namely
 %     min c'*x   subject to   A x = b,  x >= 0
 % Requires initial "basis" BB, an index set on columns of A.
@@ -7,9 +7,8 @@ function [x f lambda k] = rsimpII(c, A, b, BB, spew)
 % Usage:
 %     [x f lambda k] = rsimpII(c, A, b, BB, spew)
 % where
-%     x      = solution; will be infinite (nonfeasible) if no solution
-%              because feasible set is unbounded
-%     f      = value c'*x at solution
+%     x      = solution;  = inf if no solution from unbounded feasible set
+%     f      = objective value c'*x at solution
 %     lambda = lagrange multipliers (dual variables) at solution
 %     k      = number of steps (moves of basic feasible point)
 %     c      = column vector of length n
@@ -18,7 +17,7 @@ function [x f lambda k] = rsimpII(c, A, b, BB, spew)
 %     BB     = initial basis indices; must be subset of {1,...,n} with
 %              with size m and so that corresponding columns of A are
 %              linearly-independent:  B = A(:,BB) is invertible
-%     spew   = if true, print various intermediate quantities [default: false]
+%     spew   = if true, print intermediate quantities [default: false]
 %
 % Example:  gives feedback; see TESTRSIMP for additional examples
 %   c = [-4 -2 0 0]';
@@ -27,7 +26,9 @@ function [x f lambda k] = rsimpII(c, A, b, BB, spew)
 %   b = [5 8]';
 %   BB = [3 4];
 %   [x, f, lambda, k] = rsimpII(c, A, b, BB, true)
-
+%   [xgl, fgl] = glpk(c, A, b)     % compare to black box *available in Octave*
+%
+% See also:  TESTRSIMP, GLPK
 
 if nargin < 5,  spew = false;  end
 
@@ -43,10 +44,10 @@ if length(BB) ~= m,  error('BB must contain m indices'),  end
 if ~isindex(BB),  error('BB must be positive integers'), end
 if any(BB > n),  error('indices in BB must be <= n'),  end
 
-% initial N indices are ordered
+% initial N indices are ordered complement of BB
 NN = setdiff((1:n)',BB)';
 
-% repeat Procedure 13.1; there exist examples where 2^n steps needed
+% iterate Procedure 13.1; there exist examples where 2^n steps needed
 for k = 0:2^n
     % new primal (x) and dual (lambda) values
     if rcond(A(:,BB)) < 1.0e-10
@@ -59,10 +60,10 @@ for k = 0:2^n
 	sN = c(NN) - A(:,NN)' * lambda;
     if spew
         fprintf('  k = %d:\n',k)
-        printreals('x''',x)
-        printints('[BB NN]',[BB NN])
-        printreals('lambda''',lambda)
-        printreals('sN''',sN)
+        printv('x''',x)
+        printv('[BB NN]',[BB NN],true)
+        printv('lambda''',lambda)
+        printv('sN''',sN)
     end
     if all(sN >= 0)
         break   % optimal point found
@@ -81,8 +82,8 @@ for k = 0:2^n
     pindex = BDPOS(p);
     if spew
         fprintf('    q = entering = %d\n',NN(q))
-        printreals('d''',d)
-        printreals('ratios with d_i>0',x(BDPOS) ./ d(d>0))
+        printv('d''',d)
+        printv('ratios with d_i>0',x(BDPOS) ./ d(d>0))
         fprintf('    p = leaving  = %d\n',pindex)
     end
     % update the indices
@@ -93,15 +94,13 @@ f = c' * x;
 end  % function
 
 
-function printints(name, v)
+function printv(name, v, integer)
+    if nargin < 3,  integer = false;  end
     fprintf('    %s = [',name)
-    for j = v,  fprintf(' %d',j), end
-    fprintf(' ]\n')
-end
-
-function printreals(name, v)
-    fprintf('    %s = [',name)
-    for j = v,  fprintf(' %.4f',j), end
+    for j = v
+        if integer,  fprintf(' %d',j)
+        else,  fprintf(' %.4f',j),  end
+    end
     fprintf(' ]\n')
 end
 
