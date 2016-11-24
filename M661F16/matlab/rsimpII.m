@@ -1,16 +1,17 @@
 function [x f lambda k] = rsimpII(c, A, b, BB, spew)
 % RSIMPII  Phase II of reduced simplex method.  Contains Procedure 13.1
-% from Nocedal & Wright.  Requires linear program in standard form
+% from Nocedal & Wright.  Requires linear program in standard form, namely
 %     min c'*x   subject to   A x = b,  x >= 0
-% and (phase II) the initial basis BB as an index set on columns of A.
+% Requires initial "basis" BB, an index set on columns of A.
 %
 % Usage:
-%     [x f lambda k] = rsimpII(c, A, b, BB)
+%     [x f lambda k] = rsimpII(c, A, b, BB, spew)
 % where
 %     x      = solution; will be infinite (nonfeasible) if no solution
 %              because feasible set is unbounded
 %     f      = value c'*x at solution
 %     lambda = lagrange multipliers (dual variables) at solution
+%     k      = number of steps (moves of basic feasible point)
 %     c      = column vector of length n
 %     A      = m by n matrix
 %     b      = column vector of length m
@@ -18,6 +19,15 @@ function [x f lambda k] = rsimpII(c, A, b, BB, spew)
 %              with size m and so that corresponding columns of A are
 %              linearly-independent:  B = A(:,BB) is invertible
 %     spew   = if true, print various intermediate quantities [default: false]
+%
+% Example:  gives feedback; see TESTRSIMP for additional examples
+%   c = [-4 -2 0 0]';
+%   A = [1   1 1 0;
+%        2 0.5 0 1];
+%   b = [5 8]';
+%   BB = [3 4];
+%   [x, f, lambda, k] = rsimpII(c, A, b, BB, true)
+
 
 if nargin < 5,  spew = false;  end
 
@@ -28,49 +38,53 @@ m = length(b);
 if any(size(A) ~= [m n]),  error('A must be m by n'),  end
 
 % input checking: indices
-BB = BB(:)';  % force row
+BB = BB(:)';  % force into row
 if length(BB) ~= m,  error('BB must contain m indices'),  end
 if ~isindex(BB),  error('BB must be positive integers'), end
 if any(BB > n),  error('indices in BB must be <= n'),  end
-if cond(A(:,BB)) > 1.0e10
-    warning('columns of A indicated by BB may not be linearly independent')
-end
-NN = setdiff((1:n)',BB)';   % initial N indices are ordered
+
+% initial N indices are ordered
+NN = setdiff((1:n)',BB)';
 
 % repeat Procedure 13.1; there exist examples where 2^n steps needed
 for k = 0:2^n
-    if spew
-        fprintf('  k = %d:\n',k)
-        printints('[BB NN]',[BB NN])
-    end
     % new primal (x) and dual (lambda) values
+    if rcond(A(:,BB)) < 1.0e-10
+        warning('columns A(:,BB) may not be linearly-independent')
+    end
     x = zeros(n,1);
 	x(BB) = A(:,BB) \ b;
-    if spew,  printints('x''',x),  end
 	lambda = A(:,BB)' \ c(BB);
-    if spew,  printints('lambda''',lambda),  end
 	% optimality test
 	sN = c(NN) - A(:,NN)' * lambda;
-    if spew,  printints('sN''',sN),  end
+    if spew
+        fprintf('  k = %d:\n',k)
+        printreals('x''',x)
+        printints('[BB NN]',[BB NN])
+        printreals('lambda''',lambda)
+        printreals('sN''',sN)
+    end
     if all(sN >= 0)
         break   % optimal point found
     end
     % entering variable;  NN(q) is entering index
     [~, q] = min(sN);
-    if spew,  fprintf('    q = entering = %d\n',NN(q)),  end
     % the step
     d = A(:,BB) \ A(:,NN(q));
-    if spew,  printints('d''',d),  end
     if all(d <= 0)
         x = inf(n,1);   % invalidate x (nonfeasible) because unbounded
         break
     end
-    % the ratio test;  pindex is leaving index
+    % ratio test;  pindex is leaving index
     BDPOS = BB(d>0);
-    if spew,  printints('ratios with d_i>0',x(BDPOS) ./ d(d>0)),  end
     [~, p] = min(x(BDPOS) ./ d(d>0));
     pindex = BDPOS(p);
-    if spew,  fprintf('    p = leaving  = %d\n',pindex),  end
+    if spew
+        fprintf('    q = entering = %d\n',NN(q))
+        printreals('d''',d)
+        printreals('ratios with d_i>0',x(BDPOS) ./ d(d>0))
+        fprintf('    p = leaving  = %d\n',pindex)
+    end
     % update the indices
     BB(BB == pindex) = NN(q);
     NN(q) = pindex;
