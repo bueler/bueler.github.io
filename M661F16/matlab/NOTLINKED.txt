@@ -1,4 +1,0 @@
-gnbt.m
-rsimpII.m
-testrsimp.m
-
