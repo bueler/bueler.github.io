@@ -72,6 +72,10 @@ for k = 0:2^n
     [~, q] = min(sN);
     % the step
     d = A(:,BB) \ A(:,NN(q));
+    if spew
+        fprintf('    q = entering = %d\n',NN(q))
+        printv('d''',d)
+    end
     if all(d <= 0)
         x = inf(n,1);   % invalidate x (nonfeasible) because unbounded
         break
@@ -81,8 +85,6 @@ for k = 0:2^n
     [~, p] = min(x(BDPOS) ./ d(d>0));
     pindex = BDPOS(p);
     if spew
-        fprintf('    q = entering = %d\n',NN(q))
-        printv('d''',d)
         printv('ratios with d_i>0',x(BDPOS) ./ d(d>0))
         fprintf('    p = leaving  = %d\n',pindex)
     end
