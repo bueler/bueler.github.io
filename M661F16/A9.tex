@@ -1,0 +1,227 @@
+\documentclass[12pt,reqno]{amsart}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.5in} 
+\addtolength{\evensidemargin}{-.5in}
+\addtolength{\topmargin}{-.3in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\textheight}{0.7in}
+
+\renewcommand{\baselinestretch}{1.1}
+
+\usepackage{verbatim,fancyvrb}
+\usepackage{xspace}
+\usepackage{palatino}
+\usepackage{graphicx}
+
+\usepackage{listings}             % Include the listings-package
+\lstset{language=Matlab}          % Set your language
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+\usepackage{amssymb}
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=black, citecolor=red, urlcolor=red]{hyperref}
+
+% macros
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+
+%\renewcommand{\det}{\operatorname{det}}
+\newcommand{\onull}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\cond}{\operatorname{cond}}
+
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Octave}{\textsc{Octave}\xspace}
+\newcommand{\Python}{\textsc{Python}\xspace}
+
+\newcommand{\mfile}[2]{
+	\bigskip
+	\begin{quote}
+		\bigskip
+		\VerbatimInput[frame=single,framesep=3mm,label=\fbox{\normalsize \textsl{\,#1\,}},fontfamily=courier,fontsize=\scriptsize]{#2}
+		\bigskip
+	\end{quote}
+}
+
+\DefineVerbatimEnvironment{mVerb}{Verbatim}{numbersep=2mm,frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\small}
+
+\newcommand{\prob}[1]{\bigskip\noindent\textbf{#1.}\quad }
+
+\newcommand{\chapexers}[2]{\prob{Chapter #1, pages #2, Exercises:}}
+\newcommand{\exer}[1]{\prob{Exercise #1}}
+
+\newcommand{\pts}[1]{(\emph{#1 pts}) }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\quad }
+\newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=ellipse,draw,inner sep=2pt] (char) {#1};}}
+
+
+\begin{document}
+\scriptsize \noindent Math 661 Optimization (Bueler) \hfill \today
+\normalsize
+
+\medskip
+
+\Large\centerline{\textbf{Assignment \#9}}
+\large
+\medskip
+
+\centerline{\textbf{\emph{REVISED} $\to$ \quad Due Wednesday, 7 December at the start of class}}
+
+\normalsize
+
+\thispagestyle{empty}
+
+\bigskip
+
+\noindent Please read Chapters 13 and 15 in Nocedal \& Wright.  Do the following Exercises and Problems.
+
+
+\exer{13.1}  (\emph{Hint}.  Pages 356--357.)
+
+
+\prob{Problem P22}  Fix $\alpha \in \RR$.  Consider the linear programming problem
+    $$\begin{matrix}
+    \min \, \alpha x_1 - 2 x_2 \qquad \text{subject to} \\
+    \phantom{\bigg|}
+    \end{matrix}   \qquad
+      \begin{matrix} -3 x_1 +   x_2 \le 1 \\
+                      6 x_1 - 2 x_2 \le 9 \\
+                      x_1 \ge 0,\, x_2 \ge 0 \end{matrix}$$
+
+\epart{a}  Sketch the feasible set with some care and note it is unbounded.  For what values of $\alpha$ does the problem have a solution?
+
+\epart{b}  Add slack variables to put the problem in standard form (13.1).  For the particular value $\alpha = 10$, solve the problem by hand using the simplex method and a template as done in class.  (\emph{Start with a basic feasible point (vector) with $x_1=x_2=0$ as in the examples done in lecture.  If needed, download and print the template from online:} \small \href{http://bueler.github.io/M661F16/linprogtemplate.pdf}{\texttt{bueler.github.io/M661F16/linprogtemplate.pdf}} \normalsize)
+
+\epart{c}  To confirm your answer from part \textbf{(b)}, run the code \texttt{rsimpII.m}, which I posted at \small
+
+  \centerline{\href{http://bueler.github.io/M661F16/matlab/rsimpII.m}{\texttt{bueler.github.io/M661F16/matlab/rsimpII.m}},} \normalsize
+  
+\noindent You probably want to start by typing \, ``\texttt{help rsimpII}''.
+
+\medskip
+
+
+\prob{Problem P23}   \emph{Recall least-squares problems from Chapter 10.  It is common to minimize a sum of squares of misfits (i.e.~residuals), but subject to additional ``exact'' requirements, giving an equality-constrained problem (e.g.~as in Chapter 12).  Such problems are often called ``inverse modeling.''  This is a visualizable and finite-dimensional example.}
+
+Consider the two sets of data
+\begin{center}
+\begin{tabular}{c|cc}
+$t$ & 1 & 4 \\ \hline
+$w$ & 2 & 1
+\end{tabular}\quad, \qquad
+\begin{tabular}{c|ccccc}
+$t$ & 0 & 2 & 3 & 5 & 6 \\ \hline
+$y$ & 1 & 1 & 2 & 2 & 3
+\end{tabular}
+\end{center}
+The first set of data with $q=2$ points is marked by stars ($\ast$) in the Figure on the next page, and the second with $m=5$ points is marked by circles ($\circ$).
+
+Consider the problem of finding a cubic polynomial which fits the second data set as closely as possible, but which is \emph{required} to \emph{exactly} fit the first data set.  That is, the polynomial must pass through the two stars.  Using the notation of Chapter 10, let
+    $$\phi(x; t) = x_1 + x_2\, t + x_3\, t^2 + x_4\, t^3$$
+be the model, with parameters $x\in \RR^n$ where $n=4$.  For $r_j(x) = \phi(x; t_j) - y_j$ let
+    $$f(x) = \frac{1}{2} \|r(x)\|^2 = \frac{1}{2} \sum_{j=1}^m r_j(x)^2.$$
+(\emph{Note that only the second data set is used in building $f(x)$.})  We require that the model exactly fits the first data set, so this is an equality constraint.  Thus the problem is in form (1.1) = (12.1), namely
+\begin{equation}
+    \min_{x\in\RR^n} f(x) \qquad \text{subject to} \quad E x = w.    \label{leastsquaresconstrained}
+\end{equation}
+
+
+\bigskip
+\begin{center}
+\includegraphics[width=0.7\textwidth]{p23data}
+\end{center}
+
+
+\epart{a}  Explain why $f(x) = \frac{1}{2} \|Jx - y\|^2$ where $y$ is from the second data set and
+    $$J = \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    1 & 2 & 4 & 8 \\
+    1 & 3 & 9 & 27 \\
+    \,\,\underline{\phantom{X}} & \underline{\phantom{X}} & \underline{\phantom{X}} & \underline{\phantom{X}}\,\, \\
+    \,\,\underline{\phantom{X}} & \underline{\phantom{X}} & \underline{\phantom{X}} & \underline{\phantom{X}}\,\,
+    \end{bmatrix} \in \RR^{m\times n};$$
+please fill in the remaining entries of the matrix.  (\emph{Your answer should start by \emph{defining} $J$, and only then computing the entries.})  Then compute, using the formula for $\phi(x;t)$ and the first set of data, a specific matrix $E \in \RR^{q\times n}$ and vector $w \in \RR^q$ for the constraints in problem \eqref{leastsquaresconstrained}.
+%    $$E = \begin{bmatrix} 1 & 1 & 1 & 1 \\ 1 & 4 & 16 & 64 \end{bmatrix} \qquad \text{and} \qquad w = \begin{bmatrix} 2 \\ 1 \end{bmatrix}.$$
+
+\epart{b}  Consider the Lagrangian for problem \eqref{leastsquaresconstrained},
+    $$\mathcal{L}_1(x,\lambda) = \frac{1}{2} \|Jx - y\|^2 - \lambda^\top \left(E x - w\right),$$
+with $\lambda \in \RR^q$.  Show that the KKT conditions (12.34) for problem \eqref{leastsquaresconstrained} can be written ``blockwise'' as
+\begin{equation}
+\begin{bmatrix}
+J^\top J & -E^\top \\
+- E & 0
+\end{bmatrix}
+\begin{bmatrix}
+x \\ \lambda
+\end{bmatrix}
+=
+\begin{bmatrix}
+J^\top y \\
+-w
+\end{bmatrix}.  \label{lscone}
+\end{equation}
+The matrix $A_1$ on the left in \eqref{lscone} has size $(n+q) \times (n+q)$.
+
+Show $A_1$ is symmetric but that it is not SPD.  (\emph{This should be answered theoretically, though it may be confirmed numerically.  Find a nonzero vector $z\in \RR^{n+q}$ for which $z^\top A_1 z = 0$.})
+
+Also, using \Matlab, compute $\cond(A_1)$.\footnote{This condition number, even on such a small problem, is large enough to cause several digits of error in solving \eqref{lscone} numerically.  In bigger problems of this least-squares-with-constraints type, the loss of accuracy coming from an ill-conditioned system matrix can be catastrophic when using formulation \eqref{lscone}.}
+
+\epart{c}  \emph{It turns out that the condition number in part} \textbf{(b)} \emph{is larger than necessary.}
+
+We reformulate \eqref{leastsquaresconstrained} as
+\begin{equation}
+    \min_{r\in\RR^m} \frac{1}{2} \|r\|^2 \qquad \text{subject to} \quad E x = w \quad \text{ and } \quad r = J x - y. \label{lscreform}
+\end{equation}
+Note $r\in \RR^m$ is now a \emph{variable}, not a function.  There is no need to confirm that \eqref{lscreform} is equivalent to \eqref{leastsquaresconstrained}; it should be obvious.  The question we address, by looking at condition numbers, is \emph{why} you would transform the problem this way.
+
+Define a new Lagrangian
+    $$\mathcal{L}_2(r,\mu,\lambda,x) = \frac{1}{2} \|r\|^2 - \lambda^\top \left(E x - w\right) - \mu^\top \left(J x - y - r\right),$$
+with $r\in \RR^m, \mu\in\RR^m, \lambda \in \RR^q, x\in \RR^n$.
+
+Show that the KKT conditions for problem \eqref{lscreform} can be written as
+\begin{equation}
+\begin{bmatrix}
+I       &   0    & -J \\
+0       &   0    &  E \\
+-J^\top & E^\top &  0
+\end{bmatrix}
+\begin{bmatrix}
+r \\ \lambda \\ x
+\end{bmatrix}
+=
+\begin{bmatrix}
+-y \\
+w \\
+0
+\end{bmatrix}.  \label{lsctwo}
+\end{equation}
+(Oddly enough, you eliminate the ``extraneous'' multipliers $\mu$ in writing this down!)  The matrix $A_2$ on the left in \eqref{lsctwo} has size $N \times N$ where $N=m+q+n$, and thus it might be much bigger than $A_1$ in \eqref{lscone}, but it is rather sparse.  Again $A_2$ is symmetric but not SPD; there is no need to prove this.
+
+Using \Matlab, compute $\cond(A_2)$.
+
+\epart{d}  Now use \Matlab to implement both \eqref{lscone} and \eqref{lsctwo} to solve the problem posed at the beginning.  Confirm that the solutions $x$ and $\lambda$ are the same.  (\emph{Don't show me a lot of numbers.  Show norms of differences of vectors that should be the same.})  Then plot the result on top of the data, so that you generate a Figure like the one above but showing both the original data and the solution.
+
+\end{document}
