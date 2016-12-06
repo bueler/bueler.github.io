@@ -31,7 +31,7 @@ function [xk, xklist, alphaklist] = newtonsolve(x0,rr,JJ,tol,maxiters,dols)
 % Requires: BT
 
 if nargin < 4,  tol = 1.0e-6;  end
-if nargin < 5,  maxiter = 100;  end
+if nargin < 5,  maxiters = 100;  end
 if nargin < 6,  dols = true;  end
 
 MM = @(x) 0.5 * norm(rr(x))^2;   % sum of squares merit function
