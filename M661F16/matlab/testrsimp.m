@@ -68,7 +68,7 @@ for E = 1:6
                 k, norm(x - xgl), norm(lambda - extra.lambda))
     else
         if status == 0
-            fprintf('ERROR: RSIMPII reports unbounded but GLPK reports success!\n',status)
+            fprintf('ERROR: RSIMPII reports unbounded but GLPK reports success!\n')
         else
             fprintf('RSIMPII reports unbounded; GLPK reports status = %d\n',status)
         end
