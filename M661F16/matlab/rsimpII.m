@@ -1,18 +1,22 @@
 function [x f lambda k] = rsimpII(c, A, b, BB, spew)
 % RSIMPII  Phase II of reduced simplex method.  Implements Procedure 13.1
 % from Nocedal & Wright.  Requires linear program in standard form, namely
-%     min c'*x   subject to   A x = b,  x >= 0
-% Requires initial "basis" BB, an index set on columns of A.
+%
+%     min c' * x   subject to   A * x = b,  x >= 0
+%
+% Requires initial "basis" BB, an index set on columns of A so that there is
+% a basic feasible vector exists that is zero except in these columns.  Finding
+% an initial basic feasible vector would be "phase I".
 %
 % Usage:
 %     [x f lambda k] = rsimpII(c, A, b, BB, spew)
 % where
 %     x      = solution;  = inf if no solution from unbounded feasible set
-%     f      = objective value c'*x at solution
+%     f      = objective value  f(x) = c' * x  at solution
 %     lambda = lagrange multipliers (dual variables) at solution
 %     k      = number of steps (moves of basic feasible point)
 %     c      = column vector of length n
-%     A      = m by n matrix
+%     A      = m by n matrix; must have full (row) rank
 %     b      = column vector of length m
 %     BB     = initial basis indices; must be subset of {1,...,n} with
 %              with size m and so that corresponding columns of A are
@@ -32,17 +36,18 @@ function [x f lambda k] = rsimpII(c, A, b, BB, spew)
 
 if nargin < 5,  spew = false;  end
 
-% input checking: vectors
+% input checking: sizes
 c = c(:);  b = b(:);  % force into columns
 n = length(c);
 m = length(b);
 if any(size(A) ~= [m n]),  error('A must be m by n'),  end
 
-% input checking: indices
+% input checking: indices and feasibility
 BB = BB(:)';  % force into row
 if length(BB) ~= m,  error('BB must contain m indices'),  end
 if ~isindex(BB),  error('BB must be positive integers'), end
 if any(BB > n),  error('indices in BB must be <= n'),  end
+if any(A(:,BB) \ b < 0),  error('BB generates x which is not basic feasible'),  end
 
 % initial N indices are ordered complement of BB
 NN = setdiff((1:n)',BB)';
@@ -78,6 +83,7 @@ for k = 0:2^n
     end
     if all(d <= 0)
         x = inf(n,1);   % invalidate x (nonfeasible) because unbounded
+        warning('unbounded feasible region detected ... invalidating return value')
         break
     end
     % ratio test;  pindex is leaving index
