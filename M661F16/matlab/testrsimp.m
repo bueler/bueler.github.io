@@ -3,6 +3,11 @@
 % Compares against the octave linear programming black box GLPK; see
 %   https://www.gnu.org/software/octave/doc/v4.0.0/Linear-Programming.html
 
+isOctave = exist('OCTAVE_VERSION', 'builtin') ~= 0;
+if ~isOctave
+    error('this test code only works in octave because it needs glpk')
+end
+
 for E = 1:6
     switch E
         case 1
