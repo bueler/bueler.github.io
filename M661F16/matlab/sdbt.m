@@ -22,14 +22,14 @@ function [xk, xklist, alphaklist] = sdbt(x0,f,tol)
 %    alphaklist  step lengths as row vector of length N
 %
 % Example, as visualized in slides http://bueler.github.io/M661F16/pits.pdf:
-%   >> x0 = [1.5 0.5]';
-%   >> x = sdbt(x0,@pits,1.0e-2)
+%   x0 = [1.5 0.5]';
+%   x = sdbt(x0,@pits,1.0e-2)
 %
 % Example for Exercise 3.1 in Nocedal & Wright:
-%   >> x0 = [1.2 1.2]';
-%   >> [x, xlist, alphalist] = sdbt(x0,@rosenbrock,1.0e-4);
-%   >> plot(alphalist,'ko'),  grid on     % plot step lengths
-%   >> xlabel k, ylabel('\alpha_k')
+%   x0 = [1.2 1.2]';
+%   [x, xlist, alphalist] = sdbt(x0,@rosenbrock,1.0e-4);
+%   plot(alphalist,'ko'),  grid on     % plot step lengths
+%   xlabel k, ylabel('\alpha_k')
 %
 % Requires: BT
 

@@ -22,18 +22,18 @@ function alphak = bt(xk,pk,f,dfxk, ...
 %    rho      defaults to 0.5
 %
 % Example 1:
-%    >> f = @(x) (x.^2 + cos(x)).^2 - 10.0 * sin(5.0 * x);
-%    >> df = @(x) 2.0 * (x.^2 + cos(x)) .* (2.0 * x - sin(x)) - 50.0 * cos(5.0 * x);
-%    >> x = 0.0;  fx = f(x);  dfx = df(x);
-%    >> p = - dfx / abs(dfx);      % steepest descent unit vector
-%    >> alpha = bt(x,p,f,dfx)
-%    >> x = x + alpha * p          % next step ... repeat steps as desired
+%    f = @(x) (x.^2 + cos(x)).^2 - 10.0 * sin(5.0 * x);
+%    df = @(x) 2.0 * (x.^2 + cos(x)) .* (2.0 * x - sin(x)) - 50.0 * cos(5.0 * x);
+%    x = 0.0;  fx = f(x);  dfx = df(x);
+%    p = - dfx / abs(dfx);      % steepest descent unit vector
+%    alpha = bt(x,p,f,dfx)
+%    x = x + alpha * p          % next step ... repeat steps as desired
 %
 % Example 2 ... see pits.m:
-%    >> x = [1.5 0.5]';
-%    >> [fx dfx Hfx] = pits(x);
-%    >> p = - dfx;  alpha = bt(x,p,@pits,dfx)         % alpha = 0.0625 for SD
-%    >> p = - Hfx \ dfx;  alpha = bt(x,p,@pits,dfx)   % alpha = 1 for Newton
+%    x = [1.5 0.5]';
+%    [fx dfx Hfx] = pits(x);
+%    p = - dfx;  alpha = bt(x,p,@pits,dfx)         % alpha = 0.0625 for SD
+%    p = - Hfx \ dfx;  alpha = bt(x,p,@pits,dfx)   % alpha = 1 for Newton
 
 Dk = dfxk' * pk;
 if Dk >= 0.0

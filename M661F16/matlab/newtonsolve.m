@@ -23,10 +23,10 @@ function [xk, xklist, alphaklist] = newtonsolve(x0,rr,JJ,tol,maxiters,dols)
 %    alphaklist  step lengths as row vector of length N
 %
 % Example:
-%   >> x0 = [2 2]';
-%   >> r = @(x) [x(1) - x(2)^2 + 3; 3*cos(x(1)) + x(2)];
-%   >> J = @(x) [1, -2*x(2);  -3*sin(x(1)), 1];
-%   >> x = newtonsolve(x0,r,J,1.0e-6)
+%   x0 = [2 2]';
+%   r = @(x) [x(1) - x(2)^2 + 3; 3*cos(x(1)) + x(2)];
+%   J = @(x) [1, -2*x(2);  -3*sin(x(1)), 1];
+%   x = newtonsolve(x0,r,J,1.0e-6)
 %
 % Requires: BT
 
