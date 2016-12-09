@@ -45,7 +45,7 @@ if any(size(A) ~= [m n]),  error('A must be m by n'),  end
 % input checking: indices and feasibility
 BB = round(BB(:)');  % force into row of integers
 if length(BB) ~= m,  error('BB must contain m indices'),  end
-if any(BB > n) or any(BB < 1),  error('indices in BB must be in {1,...,n}'),  end
+if (any(BB > n) | any(BB < 1)),  error('indices in BB must be in {1,...,n}'),  end
 if any(A(:,BB) \ b < 0),  error('BB generates x which is not basic feasible'),  end
 
 % initial N indices are ordered complement of BB
