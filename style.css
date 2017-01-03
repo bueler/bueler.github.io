@@ -5,10 +5,16 @@ CSS for M614S15, thanks to help from Thomas
 body{
   font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-size:100%;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
   text-align:center;
+}
+
+h3{
+    padding: 5px;
 }
 
 table {
@@ -25,10 +31,6 @@ th {
   font-size: 110%;
 }
 
-.pic  img {
-    width:100%;
-    height:100%;
-}
 
 ul {
     position: relative;
@@ -66,7 +68,7 @@ li:hover ul{
 
 
 .sidebar{
-    background-color:#626266;
+    background-color:white;
     color:white;
     width:300px;
     position:absolute;
@@ -74,7 +76,100 @@ li:hover ul{
     left:0;
     height:100%;
     padding: 10px;
+    display: block;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
 }
+.sidebar input
+{
+      display: block;
+      width: 40px;
+      height: 32px;
+      position: absolute;
+      top: -7px;
+      left: -5px;
+      cursor: pointer;
+      opacity: 0; /* hide this */
+      z-index: 2; /* and place it over the hamburger */
+      -webkit-touch-callout: none;
+}
+.sidebar span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+
+  background: black;
+  border-radius: 3px;
+
+  z-index: 1;
+
+  transform-origin: 4px 0px;
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+.sidebar span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+.sidebar span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+.sidebar input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: white;
+}
+.sidebar input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+.sidebar input:checked ~ span:nth-last-child(2)
+{
+  opacity: 1;
+  transform: rotate(-45deg) translate(0, -1px);
+}
+.sidebar input:checked ~ #menu
+{
+  transform: scale(1.0, 1.0);
+  opacity: 1;
+}
+
+.sidebar input:not(:checked) ~ #menu
+{
+  display:none;
+}
+
+#menu
+{
+  position: absolute;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding-left: 50px;
+  padding-top: 125px;
+  height: 100%;
+
+  background-color:#626266;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
 .main{
     position: relative;
     left: 330px;
@@ -84,7 +179,7 @@ li:hover ul{
     background-color:#d6d6d6;
     padding:5px;
     border-radius: 7px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 4px 13px 0 rgba(0, 0, 0, 0.39);
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 4px 13px 0 rgba(0, 0, 0, 0.39);*/
 }
 .header{
     position: relative;
@@ -110,4 +205,18 @@ a:hover {  /* mouse over link */
 a:active { /* selected link */
     color: blue;
     text-decoration: none;
+}
+
+.pic  img {
+    width:100%;
+    height:100%;
+    border-radius: 7px;
+}
+
+.pic {
+    padding: 0;
+}
+
+@media (max-width: 1100px) {
+
 }
