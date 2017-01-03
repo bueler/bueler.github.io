@@ -23,6 +23,9 @@ window.onload = function (evt) {
         }
         var k, obj, collom,
             wW = window.innerWidth - 360;
+            if (window.innerWidth<=1100){
+                wW = window.innerWidth;
+            }
         for(i = 1; i <post.length+1; i++) {
             id = 'p' + i;
             k = clums.indexOf(clums.min());
