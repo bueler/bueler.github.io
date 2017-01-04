@@ -52,5 +52,8 @@ window.onload = function (evt) {
     $(window).resize(function(){
         style();
     });
+    if (document.getElementById("checkBox").checked === false){
+        style();
+    }
     style();
 };

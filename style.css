@@ -76,36 +76,38 @@ li:hover ul{
     left:0;
     height:100%;
     padding: 10px;
+    padding-right: 0px;
     display: block;
     z-index: 1;
     -webkit-user-select: none;
     user-select: none;
 }
-.sidebar input
+input
 {
       display: block;
       width: 40px;
       height: 32px;
       position: absolute;
       top: -7px;
-      left: -5px;
+      left: 5px;
       cursor: pointer;
       opacity: 0; /* hide this */
-      z-index: 2; /* and place it over the hamburger */
+      z-index: 1000; /* and place it over the hamburger */
       -webkit-touch-callout: none;
 }
-.sidebar span
+span
 {
   display: block;
   width: 33px;
   height: 4px;
   margin-bottom: 5px;
   position: relative;
-
+  top:-110px;
+  left:20px;
   background: black;
   border-radius: 3px;
 
-  z-index: 1;
+  z-index: 999;
 
   transform-origin: 4px 0px;
 
@@ -114,38 +116,42 @@ li:hover ul{
               opacity 0.55s ease;
 }
 
-.sidebar span:first-child
+span:first-child
 {
   transform-origin: 0% 0%;
 }
 
-.sidebar span:nth-last-child(2)
+span:nth-last-child(2)
 {
   transform-origin: 0% 100%;
 }
-.sidebar input:checked ~ span
+input:checked ~ span
 {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
   background: white;
 }
-.sidebar input:checked ~ span:nth-last-child(3)
+input:checked ~ span:nth-last-child(3)
+{
+  opacity: 1;
+  transform: rotate(-45deg) translate(0, -3px);
+}
+input:checked ~ span.last
 {
   opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
+  transform: rotate(-0deg) translate(0, -1px);
 }
-.sidebar input:checked ~ span:nth-last-child(2)
+input:checked ~ .sidebar #menu
 {
-  opacity: 1;
-  transform: rotate(-45deg) translate(0, -1px);
-}
-.sidebar input:checked ~ #menu
-{
-  transform: scale(1.0, 1.0);
-  opacity: 1;
+    transform: scale(1.0, 1.0);
+    opacity: 1;
 }
 
-.sidebar input:not(:checked) ~ #menu
+input:not(:checked) ~ .sidebar #menu
+{
+  display:none;
+}
+input:not(:checked) ~ .sidebar
 {
   display:none;
 }
@@ -188,17 +194,21 @@ li:hover ul{
 }
 
 a:link {   /* unvisited link */
-    color: #bdbdc1;
+    color: #66686b;
     text-decoration: none;
 }
 
+.sidebar a:link, .sidebar a:visited{
+    color: #d4d8dd;
+}
+
 a:visited {
-    color: #bdbdc1;
+    color: #66686b;
     text-decoration: none;
 }
 
 a:hover {  /* mouse over link */
-    color: Blue;
+    color: black;
     text-decoration: none;
 }
 
