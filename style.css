@@ -156,7 +156,7 @@ input:not(:checked) ~ .sidebar
   display:none;
 }
 
-#menu
+#main
 {
   position: absolute;
   width: 300px;
@@ -169,10 +169,8 @@ input:not(:checked) ~ .sidebar
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
-
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
-
   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 }
 
@@ -200,6 +198,11 @@ a:link {   /* unvisited link */
 
 .sidebar a:link, .sidebar a:visited{
     color: #d4d8dd;
+}
+
+.sidebar li{
+    list-style: none;
+
 }
 
 a:visited {
