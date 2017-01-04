@@ -17,14 +17,26 @@ window.onload = function (evt) {
     };
     function style(){
         var clums = [],
-            colls = Math.floor(window.innerWidth/430);
+            colls = Math.floor(window.innerWidth/430),
+            width = window.innerWidth;
+            if (width<=1100){
+                colls = Math.floor(width/310);
+            }
         for(i = 0; i < colls; i++) {
             clums[i] = 10;
         }
+
+        //get the sidebar to close when the window is less that 1100 px wide
+        if (width<=1100){
+            document.getElementById("checkBox").checked = false;
+        } else {
+            document.getElementById("checkBox").checked = true;
+        }
+
         var k, obj, collom,
-            wW = window.innerWidth - 360;
-            if (window.innerWidth<=1100){
-                wW = window.innerWidth;
+            wW = width - 360;
+            if (width<=1100){
+                wW = width-40;
             }
         for(i = 1; i <post.length+1; i++) {
             id = 'p' + i;
@@ -33,7 +45,7 @@ window.onload = function (evt) {
             obj.position = "absolute";
             obj.top = clums[k] + 'px';
             obj.width = (wW-25*colls)/colls + 'px';
-            obj.left = (wW/colls)*k + 'px';
+            obj.left = (wW/colls)*k + 20 +'px';
             clums[k] += post[i].offsetHeight + 20;
         }
     }
