@@ -6,13 +6,13 @@
     <link href="style.css" rel="stylesheet" type="text/css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="ordering-boxes.js"></script>
-    <script src="sidebar.js"></script>
     <title>Ed Bueler's page at UAF</title>
 </head>
 <body>
-    <div class="header">
+    <div class="header" id ="m">
         <h1> Ed Bueler</h1>
         <div class="socialmedia">
+            <a href="http://www.pism-docs.org/wiki/doku.php"><img src="pism.png" width="55px;"alt="Github" /></a>
             <a href="https://github.com/bueler"><img src="GitHub-Mark-64px.png" width="48px;"alt="Github" /></a>
         </div>
         <div class= "links">
@@ -52,14 +52,14 @@
             </ul>
         </div>
     </div>
-    <input type="checkbox" id="checkBox" onclick="style();" checked/>
+    <input type="checkbox" id="checkBox" checked/>
     <span></span>
     <span class ="last"></span>
     <span></span>
     <div class="sidebar">
         <div id="menu">
             <div class="schedule">
-                <h3><a href="OffHrs.htm">Schedule and Office hours</a></h3>
+                <h3><a href="OffHrs.htm" id = "white">Schedule and Office hours</a></h3>
             </div>
             <h3>Courses</h3>
             <ul>
@@ -90,7 +90,7 @@
             </ul>
         </div>
     </div>
-    <div class="main">
+    <div class="main" id="n">
         <div class = "post" id = "p1">
             <p>Associate Professor of Mathematics (Applied)</p>
             <p><a href="http://www.uaf.edu/dms/">Dept. of Mathematics and Statistics</a></p>

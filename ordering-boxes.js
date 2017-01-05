@@ -5,7 +5,7 @@
 
 window.onload = function (evt) {
     var post = [], i, id;
-    for(i = 0; i < 1000; i++) {
+    for(i = 1; i < 1000; i++) {
         id = 'p' + i;
         if(document.getElementById(id)===false){
             break;
@@ -15,28 +15,35 @@ window.onload = function (evt) {
     Array.prototype.min = function() {
       return Math.min.apply(null, this);
     };
-    function style(){
+    function style(sidebarChange){
         var clums = [],
             colls = Math.floor(window.innerWidth/430),
             width = window.innerWidth;
-            if (width<=1100){
-                colls = Math.floor(width/310);
+            if (width<=1100 || !sidebarChange){
+                colls = Math.floor(width/305);
             }
         for(i = 0; i < colls; i++) {
             clums[i] = 10;
         }
 
         //get the sidebar to close when the window is less that 1100 px wide
-        if (width<=1100){
+        if (width<=1100 && sidebarChange){
             document.getElementById("checkBox").checked = false;
-        } else {
+        }else if(sidebarChange) {
             document.getElementById("checkBox").checked = true;
         }
 
         var k, obj, collom,
             wW = width - 360;
-            if (width<=1100){
+            if (width<=1100 || !sidebarChange){
                 wW = width-40;
+                document.getElementById("m").style.left = 20+'px'
+                document.getElementById("m").style.width = wW+'px'
+                document.getElementById("n").style.left = 10+'px'
+            } else{
+                document.getElementById("m").style.left = 330+'px'
+                document.getElementById("m").style.width = wW+'px'
+                document.getElementById("n").style.left = 320+'px'
             }
         for(i = 1; i <post.length+1; i++) {
             id = 'p' + i;
@@ -50,10 +57,12 @@ window.onload = function (evt) {
         }
     }
     $(window).resize(function(){
-        style();
+        style(true);
     });
-    if (document.getElementById("checkBox").checked === false){
-        style();
-    }
-    style();
+    $("#checkBox").change(function() {
+        if(!(this.checked)) {
+            style(false);
+        }
+    });
+    style(true);
 };
