@@ -34,16 +34,16 @@ window.onload = function (evt) {
         }
 
         var k, obj, collom,
-            wW = width - 360;
+            wW = width - 260;
             if (width<=1100 || !sidebarChange){
                 wW = width-40;
                 document.getElementById("m").style.left = 20+'px'
                 document.getElementById("m").style.width = wW+'px'
                 document.getElementById("n").style.left = 10+'px'
             } else{
-                document.getElementById("m").style.left = 330+'px'
+                document.getElementById("m").style.left = 230+'px'
                 document.getElementById("m").style.width = wW+'px'
-                document.getElementById("n").style.left = 320+'px'
+                document.getElementById("n").style.left = 220+'px'
             }
         for(i = 1; i <post.length+1; i++) {
             id = 'p' + i;
