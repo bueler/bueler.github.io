@@ -256,4 +256,7 @@ a:active { /* selected link */
         left:0;
         width:100%;
     }
+    input {
+        top:20px;
+    }
 }
