@@ -56,6 +56,7 @@ li:hover ul {
 .links li {
     display:inline;
     position: relative;
+    text-align: left;
     padding:12px;
     cursor:pointer;
     background-color:
@@ -66,7 +67,7 @@ li:hover ul {
 }
 
 .links {
-    text-align: left;
+    text-align: center;
 }
 
 .sidebar {
