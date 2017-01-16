@@ -28,5 +28,5 @@ trap  = (dx/2) * sum(y[:-1]+y[1:])
 print "trap = %.15f" % trap
 exact = (pi/2) * erf(1/sqrt(pi))
 print "exact = %.15f" % exact
-show()  # allow user to close figure
+show()
 

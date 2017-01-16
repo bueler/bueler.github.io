@@ -1,8 +1,7 @@
 function c = bis(a,b,f)
 % BIS  Apply the bisection method to solve
 %   f(x) = 0
-% with initial bracket [a,b].
-% example:
+% with initial bracket [a,b].  Example:
 %   >> f = @(x) cos(x) - x      % define fcn
 %   >> r = bis(0,1,f)           % find root
 %   >> f(r)                     % confirm
