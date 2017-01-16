@@ -63,7 +63,7 @@ window.onload = function (evt) {
         if(!(this.checked)) {
             style(false);
         }
-        if(this.checked) {
+        if(this.checked && window.innerWidth>1100) {
             style(true);
         }
     });
