@@ -63,6 +63,9 @@ window.onload = function (evt) {
         if(!(this.checked)) {
             style(false);
         }
+        if(this.checked) {
+            style(true);
+        }
     });
     style(true);
 };
