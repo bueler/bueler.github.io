@@ -6,18 +6,18 @@
 # by left-hand, right-hand, and
 # trapezoid rules
 # example:
-#   julia> Pkg.add("Winston")   # if needed
-#   julia> using Winston
 #   julia> include("expint.jl")
+
+Pkg.add("PyPlot")
+using PyPlot
 
 N = 1000
 dx = (1 - 0) / N;
 x = linspace(0,1,N+1)
 y = exp(- x.^2 / pi)
 
-p = plot(x,y)
-#axis([0 1 0 1]), grid
-file(p,"expint-julia.png")
+plot(x,y)
+savefig("expint-julia.png")
 
 lhand = dx * sum(y[1:end-1])
 @printf("lhand = %.15f\n", lhand)

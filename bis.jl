@@ -1,12 +1,22 @@
+"""
+BIS  Apply the bisection method to solve
+
+   f(x) = 0
+
+with initial bracket [a,b].  Example:
+
+julia> include("bis.jl")
+
+julia> ?bis
+
+julia> f(x) = cos(x) - x      # define fcn
+
+julia> r = bis(0,1,f)         # find root
+
+julia> f(r)                   # confirm
+
+"""
 function bis(a,b,f)
-# BIS  Apply the bisection method to solve
-#   f(x) = 0
-# with initial bracket [a,b].
-# example:
-#   julia> require("bis")
-#   julia> f(x) = cos(x) - x      # define fcn
-#   julia> r = bis(0,1,f)         # find root
-#   julia> f(r)                   # confirm
 
 if f(a) * f(b) > 0
   error("not a bracket!")
