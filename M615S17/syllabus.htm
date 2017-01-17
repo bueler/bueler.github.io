@@ -13,6 +13,8 @@
 <center>
 <h1><a href="index.html">Math 615 Numerical Analysis of Differential Equations</a></h1>
 
+<h1>DRAFT</h1>
+
 <h2>Spring 2017, UAF</h2>
 </center>
 
@@ -38,25 +40,33 @@
 
 <h2 style="text-align:left;"> Course Content and Topics: </h2>
 
-FIXME EVERYTHING FROM HERE ON IS WRONG<br>
+We cover methods for numerical approximations to partial differential equations (PDEs) and ordinary differential equations (ODEs) and related problems on computers.  PDEs are the underlying structure for fluid flow, electric/magnetic fields, thermodynamics, deformation, quantum mechanics and chemistry, and so on.  They also appear in finance and population dynamics.  As a rule, ODEs are even more universal, often as a part of a PDE problem.<br><br>
 
-Continuous optimization ("programming" in the old sense), both nonlinear and linear.  Iterative methods for unconstrained problems including linear algebra aspects.  Line search and trust region methods.  Convergence theorems for these methods.  Simplex method.  Constrained problems and Karush-Kuhn-Tucker conditions.  Practical work with the computer.  Examples from applications.
+The emphasis will be on finite difference methods for PDEs and the understanding of many ODE schemes.  We do mathematical analysis of numerical methods for these equations, with both practical and abstract approaches to this numerical analysis: How are these methods implemented, verified, and used? When are they stable? Do we know in advance that they converge?<br><br>
+
+Lectures will include <em>Matlab</em> demonstrations, and help getting started with it, whenever I can.  However, <em>you</em> must show initiative in learning actual numerical computation if you have not done it before.<br><br>
+
+Homework assignments and a student-chosen project, tentatively in the form of a short slide-show, will include actual implementations in <em>Matlab</em> or another suitable language of your choice; I will support <em>Matlab</em> but I'll be flexible on what you use for assignments and the project.<br><br>
+
+Abstract and precise thought, that is, actual mathematics, is also essential when making choices among numerical methods for solving major problems.  Thus all homework assignments will have mathematical exercises.  In these you will be asked to "show" and "prove", and, while ormal proof style is not important, you will need to give clear and sufficiently-general logical arguments.<br><br>
+
+We will not be satisfied with seeing lots of numbers or pretty pictures coming from a computer.  Instead we will be concerned with the degree to which our numbers correctly approximate the PDE problem.  Thus we will seek the underlying linear algebra structure of these problems and we will usually think in terms of vectors and matrices.  The course will include some nonlinear examples, for which one uses a sequence of approximating linear problems.<br>
 
 <h2 style="text-align:left;">Goals and Outcomes:</h2>
 
-Optimization is one of the essential mathematical technologies for scientific, engineering, economics, and finance.  The goal of this applied mathematics course is to be able to understand optimization problems as they arise in applied contexts, select algorithms, and apply optimization software based on understanding of theory and examples.<br><br>
-
-Examples in lecture, and homework, will use Matlab/Octave both as a "supercalculator" and as a programming language.  (Other languages are accepted from students but are not instructor-supported.)  Help will be given to learn Matlab/Octave; it is well-suited to the numerical computations in optimization algorithms.  The course includes a project (below); a substantial portion of the project will involve Matlab/Octave use.  In any case, increased student competence with scientific computing is a goal of the course.
+At the end this course you will not be a professional numerical analyst.  You will be able to evaluate and use many numerical tools for solving scientific and engineering problems.  You will be able to code some of the basic methods (i.e. for prototyping more serious solutions), and you will have the mathematical start needed to take the next steps to learn other approaches like the finite element method and spectral methods.<br><br>
+    
+You will be comfortable using Matlab/Octave both as a "supercalculator" and as a programming language.  Increased student competence with actual scientific computing is a goal of the course.<br>
 
 <h2 style="text-align:left;">Assigned Work:</h2>
 
 Weekly homework forms 50% of your score for the class.  The homework consists of by-hand computations, construction/comprehension of numerical algorithms, implementation of numerical algorithms in Matlab/Octave, basic computer visualization of functions and constraints, rigorously-justified examples and counter-examples, and some proofs.<br><br>
 
-Homework assignments, and their due dates, will be regularly posted at the Course Website <a href="index.html">bueler.github.io/M661F16/</a>.  The site also has a daily schedule of topics which will be updated on an ongoing basis to reflect what topics were actually covered each day.
+Homework assignments, and their due dates, will be regularly posted at the Course Website <a href="index.html">bueler.github.io/M615S17/</a>.  The site also has a daily schedule of topics which will be updated on an ongoing basis to reflect what topics were actually covered each day.
 
 <h2 style="text-align:left;">How Your Grade is Determined:</h2>
 
-There will be <span style="font-weight: bold;">one in-class Midterm Exam</span> covering basic concepts and definitions.  A <span style="font-weight: bold;">take-home Final Exam</span>.  A <span style="font-weight: bold;">project in two parts</span>, with the first part due midsemester and the second due before final exams:<br><br>
+There will be <span style="font-weight: bold;">one in-class Midterm Exam</span>, covering basic concepts and definitions, and a <span style="font-weight: bold;">take-home Final Exam</span>.  There will be a <span style="font-weight: bold;">project in two parts</span>, with the first part due midsemester and the second due before final exams:<br><br>
 
 <table cols="4" width="100%">
   <tbody>
@@ -77,7 +87,7 @@ Final Exam<br>
       </td>
       <td valign="top" width="40%"><b>Dates </b><br>
 weekly<br>
-<span style="font-style: italic;">due</span> Friday 4 November, noon<br>
+<span style="font-style: italic;">due</span> FIXME Friday 4 November, noon<br>
 <span style="font-style: italic;">due</span> Tuesday 13 December, 5pm<br>
 <span style="text-decoration: underline; font-style: italic;">in class</span>, Monday 24 October<br>
 <span style="font-style: italic;">due</span> Thursday 15 December, 5pm<br>
@@ -101,11 +111,10 @@ The Dept of Mathematics and Statistics has reasonable policies on incompletes, l
 
 <h2 style="text-align:left;"> Prerequisites:</h2>
 
-Officially: <span style="font-style: italic;">Knowledge of calculus, linear algebra and computer programming.</span><br><br>
+Officially: <em>Prerequisites: CS F201 (Computer Science I); MATH F310 (Numerical Analysis); MATH F314 (Linear Algebra); MATH F421 (Applied Analysis); MATH F422 (Intro to Complex Analysis); or permission of instructor.
+</em><br><br>
 
-In terms of UAF courses this translates to <span style="font-style: italic;">MATH 253 Calculus III, MATH 314 Linear Algebra, and either MATH 310 Numerical Analysis or CS 201 Computer Science I.</span><br><br>
-
-As a pragmatic matter, students for this course come from math, computer science, physics, geophysics, engineering, and indeed all over the technical subjects at UAF.  I am aware of this!  I will devote substantial class time to the task of collecting together the many bits of prequisite knowledge needed to do this applied/computational mathematics at the introductory graduate level.  In these aspects, this course is similar to MATH 614 Numerical Linear Algebra and MATH 615 Numerical Analysis of Differential Equations.<br><br>
+In other words, this is an applied and computational mathematics course at the introductory graduate level.  As a practical matter, students course come from math, computer science, physics, geophysics, engineering, and indeed all over the technical subjects at UAF, and I am aware of this fact!  I will devote substantial class time, especially at the beginning of the semester, to collecting together the many bits of needed prequisite knowledge.  In these aspects, this course is similar to MATH 614 Numerical Linear Algebra and MATH 661 Optimization.<br><br>
 
 
 <br>
