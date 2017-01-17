@@ -73,14 +73,14 @@ li:hover ul {
 .sidebar {
     background-color:#626266;
     color:white;
-    width:200px;
+    width:250px;  /* to change, also change: width of header and boxes in .js */
     position:absolute;
     top:0;
     left:0;
     height:100%;
     padding: 10px;
     padding-top: 50px;
-    padding-right: 0px;
+    padding-right: 10px;
     display: block;
     z-index: 1;
     -webkit-user-select: none;
@@ -186,7 +186,7 @@ input:not(:checked) ~ .sidebar {
 .header {
     position: relative;
     left: 310px;
-    width: calc(100% - 315px);
+    /*width: calc(100% - 365px);*/
 }
 
 a:link {   /* unvisited link */
@@ -200,15 +200,23 @@ a:link {   /* unvisited link */
 
 .sidebar li {
     list-style: none;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
 .sidebar ul {
     padding-left: 10px;
 }
 
+h2.hamburgerTag {
+    position:absolute;
+    font-size:1.3em;
+    top:0px;
+    left: 70px;
+    z-index:1000;
+}
+
 .sidebar h3 {
-    font-size: 1.3em;
+    font-size: 1.1em;
     margin-top: 17px;
     margin-bottom: 3px;
 }
@@ -241,6 +249,14 @@ a:active { /* selected link */
 
 #white {
     color: white;
+}
+
+input:checked ~ .hamburgerTag {
+    color:white;
+}
+
+input:not(:checked) ~ .hamburgerTag {
+    color:black;
 }
 
 @media (max-width: 1100px) {
