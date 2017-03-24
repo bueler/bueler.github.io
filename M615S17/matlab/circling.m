@@ -43,6 +43,6 @@ for n = 1:NN
     uRK4 = nuRK4;
 end
 hold off,  xlabel x,  ylabel y
-axis tight, axis square
+%axis tight, axis square
 title('blue = FE, green = RK2, red = RK4')
 
