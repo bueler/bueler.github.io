@@ -1,0 +1,79 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage[letterpaper, margin=1in]{geometry}
+
+\usepackage[final]{graphicx}
+
+
+\begin{document}
+
+\title{Your Title Here}
+
+\author{Your Name}
+
+\date{\today}
+
+\maketitle
+
+\section{Introduction}  PUT CONTENT HERE; PERHAPS CITE SOMETHING \cite{einstein}
+
+%\begin{figure}
+%\includegraphics[width=0.5\textwidth]{foo.png}  % put image "foo.png" in current directory
+%\caption{CAPTION TEXT HERE}
+%\end{figure}
+
+\section{Continuum Model [or Continuum Problem]}  PUT CONTENT HERE; PERHAPS CITE SOMETHING \cite{ockendonetal}
+
+\section{Numerical Scheme(s)}  PUT CONTENT HERE; PERHAPS CITE SOMETHING \cite{leveque}
+
+\bigskip
+\hrule
+\begin{verbatim}
+% MYCODE  This is my matlab implementation
+x = 1:10;
+y = randn(size(x));
+plot(x,y)
+z = 2+2
+\end{verbatim}
+\hrule
+\bigskip
+
+MORE CONTENT
+
+\bigskip
+\hrule
+\begin{verbatim}
+>> mycode             % here I am running the code
+z = 4
+\end{verbatim}
+\hrule
+
+\section{Analysis}  PUT CONTENT HERE
+
+\section{Results}  PUT CONTENT HERE
+
+\begin{thebibliography}{2}  % "2" because there are two references
+
+\bibitem{einstein} 
+A.~Einstein (1905). 
+\textit{Zur Elektrodynamik bewegter K{\"o}rper},
+Annalen der Physik, 322 (10), 891--921.
+
+\bibitem{leveque}
+R.~LeVeque (2007).
+\textit{Finite Difference Methods for Ordinary and Partial Differential Equations},
+SIAM Press.
+
+\bibitem{ockendonetal}
+J.~Ockendon, S.~Howison, A.~Lacey, \& A.~Movchan (2003).
+\textit{Applied Partial Differential Equations},
+Revised ed., Oxford University Press.
+
+\end{thebibliography}
+
+\appendix
+\section{Something suitable for an appendix}  PUT CONTENT HERE
+
+\end{document}
