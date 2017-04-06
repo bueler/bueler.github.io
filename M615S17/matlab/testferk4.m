@@ -13,8 +13,8 @@ loglog(kk,errFE,'ko',kk,errRK4,'k*')
 pFE = polyfit(log(kk),log(errFE),1);
 hold on,  loglog(kk,exp(pFE(1)*log(kk)+pFE(2)),'k--')
 text(kk(7),0.2*errFE(6),sprintf('O(k^{%.3f})',pFE(1)),'fontsize',20)
-loglog(kk,exp(pRK4(1)*log(kk)+pRK4(2)),'k--')
 pRK4 = polyfit(log(kk),log(errRK4),1);
+loglog(kk,exp(pRK4(1)*log(kk)+pRK4(2)),'k--')
 text(kk(6),0.2*errRK4(6),sprintf('O(k^{%.3f})',pRK4(1)),'fontsize',20)
 
 hold off,  grid on,  xlabel k,  ylabel('numerical error')

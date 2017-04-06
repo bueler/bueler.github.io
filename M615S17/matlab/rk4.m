@@ -8,7 +8,7 @@ eta = eta(:);  s = length(eta);      % force to be column vector
 zz = zeros(s,N+1);  zz(:,1) = eta;   % jth column is U at t_{j-1}
 
 for j = 1:N                          % RK4 is (5.33) in LeVeque
-    t = tt(:,j);
+    t = tt(j);
     Y1 = zz(:,j);
     Y2 = Y1 + (dt/2) * f(Y1,t);
     Y3 = Y1 + (dt/2) * f(Y2,t + dt/2);
