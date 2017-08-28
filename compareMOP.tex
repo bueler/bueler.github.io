@@ -26,7 +26,7 @@
 
 \begin{document}
 
-\title{Comparison of \textsc{Matlab}, \textsc{Octave}, and \textsc{Python} \\ (for use in the numerical analysis classroom)}
+\title{Comparison of \textsc{Matlab}, \textsc{Octave}, and \textsc{Python} \\ in the numerical analysis classroom}
 
 \author{Ed Bueler}
 
@@ -38,16 +38,16 @@
 
 \newcommand{\hrf}[2]{\href{#1}{\texttt{#2}}}
 
-On the next page are two algorithms each in \Matlab/\Octave (left column) and \Python (right column).  To download these examples, go to \hrf{http://bueler.github.io/M615S17}{bueler.github.io/M615S17} and follow links in the left-hand column of the screen.
+On the next page are two algorithms each in \Matlab/\Octave (left column) and \Python (right column).  To download these examples, go to \hrf{http://bueler.github.io/M615S17}{bueler.github.io/M310F17} and follow links in the left-hand column of the screen.
 
-A bit of background is useful.  \Matlab (\hrf{http://www.mathworks.com/}{mathworks.com}) was designed by Cleve Moler before 1980 for teaching numerical linear algebra without needing FORTRAN.  It has since become a powerful programming language and engineering tool.  More than half of UAF 600-level math/science/engineering students are already familiar with it.  It is available in most labs and graduate student offices at UAF.  It works well, looks good, and I like it.
+A bit of background is useful.  \Matlab (\hrf{http://www.mathworks.com/}{mathworks.com}) was designed by Cleve Moler before 1980 for teaching numerical linear algebra without needing FORTRAN.  It has since become a powerful programming language and engineering tool.  A large fraction of UAF upper-division and graduate students in technical subjects are already familiar with it.  It is available in most labs and graduate student offices at UAF.  It works well, looks good, and I like it.  Note the ``student (unbundled)'' version at \hrf{https://www.mathworks.com/academia/student_version.html}{www.mathworks.com/academia/student\_version.html}, for \$49, works fine.
 
-But I do prefer free, open source software.  There are effective, free alternatives to \Matlab, and at least two of these work well for this course.  First, \Octave is a \Matlab clone.  The ``\texttt{.m}'' examples on the next page work in an identical way in \Matlab and in \Octave.  I will mostly use \Octave myself for teaching, but I'll test examples in both \Octave and \Matlab.  To download \Octave, go to 
-\hrf{http://www.gnu.org/software/octave/}{www.gnu.org/software/octave}.
+But I do prefer free, open source software.  There are effective free alternatives to \Matlab, and at least two of these work well for this course.  First, \Octave is a \Matlab clone.  (Download at
+\hrf{http://www.gnu.org/software/octave/}{www.gnu.org/software/octave}.)  The ``\texttt{.m}'' examples on the next page work in an identical way in \Matlab and in \Octave.  I will mostly use \Octave myself for teaching, but I'll try to test examples in both \Octave and \Matlab.
 
-Second is the general-purpose language \Python (\hrf{http://python.org/}{python.org}).  With the \scipy (\hrf{http://www.scipy.org/}{scipy.org}) and \matplotlib (\hrf{http://matplotlib.org/}{matplotlib.org}) libraries it has all of \Matlab functionality plus quite a bit more.  Using it with the \textsc{ipython} interactive shell (\hrf{http://ipython.org/}{ipython.org}) gives the most \Matlab-like experience; this combination is called \pylab.  Students who already use \Python will like this option.
+Second is the general-purpose language \Python (\hrf{http://python.org/}{python.org}).  With the \scipy (\hrf{http://www.scipy.org/}{scipy.org}) and \matplotlib (\hrf{http://matplotlib.org/}{matplotlib.org}) libraries it has all of \Matlab functionality.  Using it with the \textsc{ipython} interactive shell (\hrf{http://ipython.org/}{ipython.org}) gives the most \Matlab-like experience.  Students who already use \Python will like this option.
 
-Here are some brief ``how-to'' comments for the \Matlab/\Octave examples: \texttt{gaussint.m} is a \emph{script}.  A script is run by starting \Matlab/\Octave, usually in the directory containing the script you want to run.  Then type the name of the script at the prompt, without the ``.m'':
+Here are some brief ``how-to'' comments for the \Matlab/\Octave examples: Program \texttt{gaussint.m} is a \emph{script}.  A script is run by starting \Matlab/\Octave, usually in the directory containing the script you want to run.  Then type the name of the script at the prompt, without the ``.m'':
 
 \verb|>> gaussint|
 
@@ -55,14 +55,14 @@ Here are some brief ``how-to'' comments for the \Matlab/\Octave examples: \textt
 
 \verb|>> help gaussint|
 
-\noindent shows the block of comments as documentation.  The second algorithm \verb|bis.m| is a \emph{function} which needs inputs.  At the prompt enter
+\noindent shows the block of comments as documentation.  The second code \verb|bis.m| is a \emph{function} which needs inputs.  At the prompt enter
 \begin{Verbatim}
 >> f = @(x) cos(x) - x
 >> bis(0,1,f)
 \end{Verbatim}
 for example.  We have given \verb|bis.m| three arguments; the last is an ``anonymous function.''
 
-For the \Python versions:  Run \Python or \ipython to get a prompt.  Type \verb|run gaussint.py|.  (You can also do \verb|python gaussint.py| directly from a shell.)  For the function \verb|bis.py|, first do: \verb|from bis import bis|.  Then, in \ipython, type \verb|bis?| to get documentation, i.e.~the ``docstring.''  At the plain \Python prompt, print the docstring directly by \verb|print bis.func_doc|.  Run the example as shown in the docstring.
+For the \Python codes:  You can do \verb|python gaussint.py| directly from a shell.  Alternatively, from the \Python or \ipython prompt, type \verb|import gaussint|.  For the function \verb|bis.py|, first do: \verb|from bis import bis|.  Run the example as shown in the docstring.  (In \ipython you can type \verb|bis?| to print the docstring.)
 
 \vfill
 
