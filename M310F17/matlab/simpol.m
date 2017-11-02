@@ -1,5 +1,5 @@
 function z = simpol(f,a,b,n)
-% SIMPOL  Implement the composite trapezoid rule as a one-liner.
+% SIMPOL  Implement the composite Simpson's rule as a one-liner.  Compare TRAPOL.
 
 if mod(n,2) ~= 0, error('n must be even'), end
 h = (b - a) / n;
