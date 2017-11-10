@@ -13,5 +13,5 @@ end
 loglog(hlist,errper,'ko',hlist,errnot,'k*')
 legend('periodic integrand', 'non-periodic integrand','location','southeast')
 ylabel('absolute error'),  xlabel h
-set(gca(),'xtick',hlist),  grid on,  axis tight
+set(gca(),'XTick',fliplr(hlist)),  grid on,  axis tight
 
