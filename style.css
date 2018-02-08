@@ -38,17 +38,17 @@ img {
 
 
 a:link {   /* unvisited link */
-    color: MediumBlue;
+    color: RoyalBlue;
     text-decoration: none;
 }
 
 a:visited {
-    color: Navy;
+    color: DarkBlue;
     text-decoration: none;
 }
 
 a:hover {  /* mouse over link */
-    color: Blue;
+    color: DeepSkyBlue;
     text-decoration: underline;
 }
 
