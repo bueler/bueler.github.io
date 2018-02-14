@@ -236,8 +236,14 @@ a:active { /* selected link */
     text-decoration: none;
 }
 
+img.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .pic img {
-    width:100%;
+    width: 80%;
     border-radius: 7px;
 }
 

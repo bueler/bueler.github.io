@@ -1,6 +1,6 @@
 
-//for boxes of the same width to be put in colloms of a length that is approriete
-//id of elements is p1, p2, p3, ect.
+//for boxes of the same width to be put in columns of a length that is appropriate
+//id of elements is p1, p2, p3, etc.
 //Its a mess of weights and numbers. just try stuff or ask me (Thomas)
 
 window.onload = function (evt) {
