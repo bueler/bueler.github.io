@@ -11,7 +11,7 @@ def bis(a,b,f):
     print([r,f(r)])                   """
 
     if f(a) * f(b) > 0.0:
-        print "not a bracket!"
+        print("not a bracket!")
         return
     for k in range(100):
         c = (a+b)/2
@@ -22,6 +22,6 @@ def bis(a,b,f):
             a = c
         else:
             b = c
-    print "no convergence"
+    print("no convergence")
     return
 
