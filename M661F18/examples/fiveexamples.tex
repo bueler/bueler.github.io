@@ -1,0 +1,221 @@
+\documentclass[11pt]{amsart}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.55in} 
+\addtolength{\evensidemargin}{-.55in}
+\addtolength{\topmargin}{-.2in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\textheight}{.4in}
+
+\renewcommand{\baselinestretch}{1.1}
+
+\usepackage{verbatim,fancyvrb}
+
+\usepackage{palatino,amssymb}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+\newtheorem*{thm}{Theorem 16.0}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\mtt}{\texttt}
+\usepackage{alltt,xspace}
+\newcommand{\mfile}[1]
+{\medskip\begin{quote}\scriptsize \begin{alltt}\input{#1.m}\end{alltt} \normalsize\end{quote}\medskip}
+
+%\usepackage[final]{graphicx}
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=blue, citecolor=red, urlcolor=blue]{hyperref}
+
+% macros
+\newcommand{\bc}{\mathbf{c}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+
+%\renewcommand{\det}{\operatorname{det}}
+\newcommand{\onull}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\prob}[1]{\bigskip\noindent\textbf{#1.}\quad }
+\newcommand{\exer}[2]{\prob{Exercise #2 in Lecture #1}}
+
+\newcommand{\pts}[1]{(\emph{#1 pts}) }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\quad }
+\newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
+
+\newcommand{\Julia}{\textsc{Julia}\xspace}
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Octave}{\textsc{Octave}\xspace}
+\newcommand{\Python}{\textsc{Python}\xspace}
+
+\DefineVerbatimEnvironment{mVerb}{Verbatim}{numbersep=2mm,
+frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
+
+\newcommand{\ema}{\emach}
+\newcommand{\emach}{\eps_{\!_{\text{m}}}}
+
+
+\begin{document}
+\scriptsize \noindent Math 661 Optimization (Bueler) \hfill 27 August, 2018
+\normalsize
+
+\medskip\bigskip
+\Large
+\centerline{Example optimization problems}
+
+\bigskip\medskip
+\normalsize
+
+\thispagestyle{empty}
+
+I have three goals in starting the course with examples:
+\renewcommand{\labelenumi}{\arabic{enumi})}
+\begin{enumerate}
+\item To suggest how optimization can come from real-world applications.
+\item To allow you to create, for yourself, some of the basic theoretical and numerical ideas for how to solve such problems.
+\item To provide examples on which to practice and learn \Matlab\footnote{You may use other languages such as \Python or \Julia.  However, I will only provide examples and solutions in \Matlab and \Octave.  Note that a \Matlab code works in \Octave and vice versa.} programming.
+\end{enumerate}
+
+The textbook\footnote{Griva, Nash, and Sofer, \emph{Linear and Nonlinear Optimization}, 2nd ed., SIAM Press 2009.  See Chapter 1.} also provides many examples, and all optimization experts have been exposed to loads of examples.  You will not be able to understand the theory and algorithms without some sense of the applications.
+
+Following Chapter 2.1 in the textbook, in each example problem I will identify a \emph{feasible set} $S$ and an \emph{objective function} $f(x)$.  In these terms each problem can be written in a standard form
+    $$\min_{x\in S} f(x).$$
+
+This document does \emph{not} address how to solve the problems.  That will be done in class, on homework, and in additional handouts; Assignment \#1 asks you to solve some.  Regarding goal 2) above, your method may be ``brute force'' or inefficient, and that is just fine for now!  The rest of the course will make more sense if you see brute force approaches before elegant algorithms.
+
+Each example has a name like ``\texttt{fit}.''  I will also use this name for my \Matlab code (e.g.~``\texttt{fit.m}'') when I hand out solutions.  Later Assignments will be largely based on textbook exercises, but I'll add my own problems, like these, as needed.
+
+\bigskip
+\renewcommand{\labelenumi}{\Roman{enumi}. \quad}
+\begin{enumerate}
+\item (\texttt{calcone})  \quad Let
+    $$f(x) = \left(x^2 + \cos x\right)^2 - 10 \sin(5 x).$$
+Compute the minimum of $f$ on the interval $S=[0,2]$:
+    $$\min_{x\in [0,2]} f(x)$$
+
+You saw such problems in Calculus I.  This one is hard to do by hand; it benefits from some programming and visualization using \Matlab.  Because $S$ is one-dimensional you may plot $f(x)$ on the given interval.  From any plot you can get close to the solution just by looking.
+
+
+\medskip
+\item (\texttt{fit})  \quad Consider the following 11 data points which are plotted below:
+
+\bigskip
+\begin{tabular}{c|ccccccccccc}
+x & 0.000 & 0.100 & 0.200 & 0.300 & 0.400 & 0.500 & 0.600 & 0.700 &  0.800 &  0.900 &  1.000 \\
+\hline
+y & 4.914 & 3.666 & 2.289 & 1.655 & 1.029 & 0.739 & 0.393 & 0.090 & -0.197 & -0.721 & -0.971
+\end{tabular}
+
+\bigskip
+\begin{center}
+\includegraphics[width=0.6\textwidth]{fitdata}
+\end{center}
+
+\medskip
+Suppose we believe that this data can be fit by a function of the form
+    $$g(x) = c_1 + c_2 x + c_3 e^{-5 x}.$$
+If the sense of ``fit'' is that the sum of the squares of the misfits should be as small as possible then we would solve
+	$$\min_{c \in \RR^3} f(c)$$
+where we define this objective function as\footnote{The overall factor of $1/2$ is a convenience for differentiating.  Which is a hint about the standard algorithms for finding the minimum \dots} 
+	$$f(c) = \frac{1}{2} \sum_{j=1}^{11} \left(g(x_j) - y_j\right)^2 = \frac{1}{2} \sum_{j=1}^{11} \left(c_1 + c_2 x_j + c_3 e^{-5 x_j} - y_j\right)^2.$$
+Note $S=\RR^3$ because there are no constraints on the coefficients $c_i$.
+
+We are \emph{not} finding $x_j$ or $y_j$ values in the minimization process!  We are finding $c_1,c_2,c_3$.  The plotted data values above merely determine the objective function.
+
+\medskip
+\item (\texttt{salmon})  \quad Ed and Thomas caught 21 salmon.  Of these, $x_1$ will be eaten fresh, which requires 2 time units per fish.  Then $x_2$ will be vacuum-packed and frozen (3 time units per fish) and another $x_3$ will be smoked and vacuum-packed (4 time units per fish).  Thus the total amount of processing time is $2 x_1 + 3 x_2 + 4 x_3$.  However, at most 2 fish can be eaten fresh before they go bad, and at most 10 fish can be smoked in the time allowed.  Find $x_1,x_2,x_3$ to minimize the total processing time.
+
+This is a constrained minimization problem wherein $x_i$ are numbers of fish, \emph{which must be positive numbers}, and the objective function is the total processing time $f(x) = 2 x_1 + 3 x_2 + 4 x_3$:
+	$$\min f(x) \qquad \text{subject to }\quad \begin{matrix} x_1 + x_2 + x_3 = 21 \\ 0 \le x_1 \le 2 \\ 0 \le x_2 \\ 0 \le x_3 \le 10 \end{matrix}$$
+
+The feasible set $S\subset \RR^3$ includes all the constraints:
+    $$S = FIXME$$
+
+\medskip
+\item (\texttt{tsp})  \quad Jill sells amazing widgets that help you learn math.  To sell these devices she plans to visit cities A, F, J, N, W, but starting and ending at city S.  Some cities have connecting flights and some do not; the one-way costs of the various flights are shown below in a \emph{graph} with costs (weights) on each connection (edge).  It is clear that she should visit each city exactly once, except for S.
+
+\begin{center}
+\vspace{-5mm}
+\begin{tikzpicture}[scale=0.9]
+\begin{scope}[every node/.style={circle,thick,draw}]
+    \node (A) at (-0.5,0) {A};
+    \node (F) at (0,3)    {F};
+    \node (J) at (2,-1)   {J};
+    \node (N) at (-3,3)   {N};
+    \node (S) at (3,-3)   {S};
+    \node (W) at (3,1)    {W} ;
+\end{scope}
+
+\begin{scope}[every node/.style={fill=white},
+              every edge/.style={draw=black,very thick}]
+    \path (A) edge node {$100$} (F);
+    \path (A) edge node {$100$} (J);
+    \path (A) edge node {$150$} (N);
+    \path (A) edge[bend right=50] node {$250$} (S);
+    \path (A) edge node {$150$} (W);
+    %\path (F) edge node {$150$} (J);
+    \draw[very thick] (F.east) .. controls (3,4) and (6,0) .. (J.east) node[midway] {$150$};
+    \path (F) edge node {$200$} (N);
+    %\path (F) edge node {$300$} (S);
+    \draw[very thick] ([yshift=3mm,xshift=-1mm] F.east) .. controls (4,5) and (7,-1) .. (S.east) node[midway] {$300$};
+    \path (F) edge node {$250$} (W);
+    \path (J) edge node {$200$} (S);
+    \path (J) edge node {$200$} (W);
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\medskip
+This is an example of the famous \emph{traveling salesperson problem}.
+
+Each possible itinerary is expressible as a seven-letter string like ``SANFWJS.''  If $x$ denotes such a feasible string then we may define the objective function $f(x)$ to be the cost of that itinerary; thus $f(x)$ is defined using the edge weights.  Finding a feasible itinerary for a big enough graph is generally nontrivial; it corresponds to finding a \emph{Hamiltonian cycle}.  One may, however, add in all remaining edges with large weights so that any itinerary $x$ is feasible and has a well-defined cost $f(x)$.
+
+FIXME The problem \emph{could} be written
+	$$\min_{x \text{ is feasible itinerary}} f(x)$$
+but this does \emph{not} mean it is in standard form (1.1) because there is no sensible way to treat the possible inputs as ``$x \in \RR^n$.''
+
+FIXME This is a \emph{discrete optimization} problem, not a continuous problem as covered in form (1.1) and the textbook generally.
+
+\medskip
+\item (\texttt{beam})  \quad A new tent design requires bending a pole to go from one corner of the tent to another while also having certain heights at particular locations.  Note that the corners of the tent, and the ends of the pole, are on the ground.  The pole is modeled as a \emph{beam} in standard engineering language.  We want to know the shape of the pole so as to determine (1) its (arc) length and (2) how fabric can be cut to reach the pole and yet be taut below it.
+
+To be specific, the length of the tent along the ground is $\pi$ length units.  We seek a function $y=h(x)$, defined on the interval $x\in[0,\pi]$, for the height of the pole above the ground.  This function must be at least twice-differentiable and satisfy $h(0)=0$ and $h(\pi)=0$.  The theory of beams says that actual bent shape will be the minimizing solution $h$ of
+    $$\min_h I[h] \qquad \text{where} \qquad I[h] = \frac{1}{2} \int_0^\pi |h''(x)|^2\,dx.$$
+Here $I$ is called the objective \emph{functional}.  The input $h$ into $I$ is itself a function from an (infinite-dimensional) vector space of functions.
+
+The following particular inequalities, shown in the figure below, give locations where the heights are constrained:
+\begin{align*}
+0.9 &\le h(1) \le 1.1 \\
+1.2 &\le h(2) \le 1.4 \\
+0.4 &\le h(3) \le 0.6
+\end{align*}
+
+The figure does not show the shape of the tent pole.  That is, it does not show the \emph{solution} of the minimization problem.  That solution, after all, has minimal concavity, i.e.~size of second derivative, subject to the constraints.  The figure does, however, show a \emph{feasible} $h(x)$ which has the required differentiability, satisfies $h(0)=h(\pi)=0$, and satisfies the inequality constraints.
+
+\bigskip
+\begin{center}
+%\includegraphics[width=0.6\textwidth]{beam-gates}
+FIXME: see F16 files
+\end{center}
+
+\end{enumerate}
+
+\end{document}
+
