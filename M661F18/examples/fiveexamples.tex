@@ -89,16 +89,16 @@ I have three goals in starting the course with examples:
 \renewcommand{\labelenumi}{\arabic{enumi})}
 \begin{enumerate}
 \item To suggest how optimization can come from real-world applications.
-\item To allow you to create, for yourself, some of the basic theoretical and numerical ideas for how to solve such problems.
-\item To provide examples on which to practice and learn \Matlab\footnote{You may use other languages such as \Python or \Julia.  However, I will only provide examples and solutions in \Matlab and \Octave.  Note that a \Matlab code works in \Octave and vice versa.} programming.
+\item To allow you to create, for yourself, some basic theoretical and numerical ideas about how to solve such problems.
+\item To provide examples on which to practice and learn \Matlab\footnote{You may use other languages such as \Python or \Julia.  However, I will only provide examples and solutions in \Matlab.  Note that a \Matlab code works in \Octave and vice versa.} programming.
 \end{enumerate}
 
-The textbook\footnote{Griva, Nash, and Sofer, \emph{Linear and Nonlinear Optimization}, 2nd ed., SIAM Press 2009.  See Chapter 1.} also provides many examples, and all optimization experts have been exposed to loads of examples.  You will not be able to understand the theory and algorithms without some sense of the applications.
+The textbook\footnote{Griva, Nash, and Sofer, \emph{Linear and Nonlinear Optimization}, 2nd ed., SIAM Press 2009.  See Chapter 1.} also provides many examples.  In any case, all optimization experts have been exposed to loads of examples.  You will not be able to understand the theory and algorithms without some understanding of applications like these.
 
-Following Chapter 2.1 in the textbook, in each example problem I will identify a \emph{feasible set} $S$ and an \emph{objective function} $f(x)$.  In these terms each problem can be written in a standard form
+Following Chapter 2.1 in the textbook, in each example problem I will identify a \emph{feasible set} $S$ and an \emph{objective function} $f(x)$.  Each problem can be written in a standard form
     $$\min_{x\in S} f(x).$$
 
-This document does \emph{not} address how to solve the problems.  That will be done in class, on homework, and in additional handouts; Assignment \#1 asks you to solve some.  Regarding goal 2) above, your method may be ``brute force'' or inefficient, and that is just fine for now!  The rest of the course will make more sense if you see brute force approaches before elegant algorithms.
+This document does \emph{not} address how to solve the problems.  That will be done in class, on homework, and in additional handouts; Assignment \#1 asks you to solve some.  Regarding goal 2) above, your method may be ``brute force'' and inefficient.  That is just fine for now!  The rest of the course will make more sense if you see brute force approaches before more elegant algorithms.
 
 Each example has a name like ``\texttt{fit}.''  I will also use this name for my \Matlab code (e.g.~``\texttt{fit.m}'') when I hand out solutions.  Later Assignments will be largely based on textbook exercises, but I'll add my own problems, like these, as needed.
 
@@ -110,7 +110,7 @@ Each example has a name like ``\texttt{fit}.''  I will also use this name for my
 Compute the minimum of $f$ on the interval $S=[0,2]$:
     $$\min_{x\in [0,2]} f(x)$$
 
-You saw such problems in Calculus I.  This one is hard to do by hand; it benefits from some programming and visualization using \Matlab.  Because $S$ is one-dimensional you may plot $f(x)$ on the given interval.  From any plot you can get close to the solution just by looking.
+You saw such problems in Calculus I, but this one is hard to do by hand.  It benefits from computer visualization, and, because $S$ is one-dimensional, you may easily plot $f(x)$ on the given interval.  From any plot you can get close to the solution just by looking.
 
 
 \medskip
@@ -137,19 +137,21 @@ where we define this objective function as\footnote{The overall factor of $1/2$ 
 	$$f(c) = \frac{1}{2} \sum_{j=1}^{11} \left(g(x_j) - y_j\right)^2 = \frac{1}{2} \sum_{j=1}^{11} \left(c_1 + c_2 x_j + c_3 e^{-5 x_j} - y_j\right)^2.$$
 Note $S=\RR^3$ because there are no constraints on the coefficients $c_i$.
 
-We are \emph{not} finding $x_j$ or $y_j$ values in the minimization process!  We are finding $c_1,c_2,c_3$.  The plotted data values above merely determine the objective function.
+We are \emph{not} finding $x_j$ or $y_j$ values in the minimization process!  We are finding $c_1,c_2,c_3$.  The data values $(x_j,y_j)$ merely determine the objective function.
 
 \medskip
 \item (\texttt{salmon})  \quad Ed and Thomas caught 21 salmon.  Of these, $x_1$ will be eaten fresh, which requires 2 time units per fish.  Then $x_2$ will be vacuum-packed and frozen (3 time units per fish) and another $x_3$ will be smoked and vacuum-packed (4 time units per fish).  Thus the total amount of processing time is $2 x_1 + 3 x_2 + 4 x_3$.  However, at most 2 fish can be eaten fresh before they go bad, and at most 10 fish can be smoked in the time allowed.  Find $x_1,x_2,x_3$ to minimize the total processing time.
 
 This is a constrained minimization problem wherein $x_i$ are numbers of fish, \emph{which must be positive numbers}, and the objective function is the total processing time $f(x) = 2 x_1 + 3 x_2 + 4 x_3$:
 	$$\min f(x) \qquad \text{subject to }\quad \begin{matrix} x_1 + x_2 + x_3 = 21 \\ 0 \le x_1 \le 2 \\ 0 \le x_2 \\ 0 \le x_3 \le 10 \end{matrix}$$
+Note that the objective function and the constraint functions (e.g.~$g_1(x)=x_1+x_2+x_3$,$g_2=x_1$,\dots) are linear functions.  This is an \emph{linear programming} problem.
 
 The feasible set $S\subset \RR^3$ includes all the constraints:
-    $$S = FIXME$$
+    $$S = \left\{x \in \RR^3\,\big|\,x_1 + x_2 + x_3 = 21, 0 \le x_1 \le 2, 0 \le x_2, \text{ and } 0 \le x_3 \le 10\right\}.$$
+Defining $S$ allows us to put the problem in standard form $\min_S f(x)$.
 
 \medskip
-\item (\texttt{tsp})  \quad Jill sells amazing widgets that help you learn math.  To sell these devices she plans to visit cities A, F, J, N, W, but starting and ending at city S.  Some cities have connecting flights and some do not; the one-way costs of the various flights are shown below in a \emph{graph} with costs (weights) on each connection (edge).  It is clear that she should visit each city exactly once, except for S.
+\item (\texttt{tsp})  \quad Jill sells amazing widgets that help you learn math.  To sell these devices she plans to visit cities A, F, J, N, W by starting and ending at city S.  Some cities have connecting flights and some do not; the one-way costs of the various flights are shown below in a \emph{graph} with costs (weights) on each connection (edge).  It is clear that she should visit each city exactly once, except for S.
 
 \begin{center}
 \vspace{-5mm}
@@ -183,18 +185,24 @@ The feasible set $S\subset \RR^3$ includes all the constraints:
 \end{center}
 
 \medskip
-This is an example of the famous \emph{traveling salesperson problem}.
+This is an example of the famous \emph{traveling salesperson problem}.  Each possible itinerary is expressible as a seven-letter string like ``SANFWJS.''  If $x$ denotes such a feasible string then we may define the objective function $f(x)$ to be the cost of that itinerary; thus $f(x)$ is defined using the edge weights.  Finding a feasible itinerary for a big enough graph is generally nontrivial; it corresponds to finding a \emph{Hamiltonian cycle}.  One may, however, add in all remaining edges with large weights so that any itinerary $x$ is feasible and has a well-defined cost $f(x)$.
 
-Each possible itinerary is expressible as a seven-letter string like ``SANFWJS.''  If $x$ denotes such a feasible string then we may define the objective function $f(x)$ to be the cost of that itinerary; thus $f(x)$ is defined using the edge weights.  Finding a feasible itinerary for a big enough graph is generally nontrivial; it corresponds to finding a \emph{Hamiltonian cycle}.  One may, however, add in all remaining edges with large weights so that any itinerary $x$ is feasible and has a well-defined cost $f(x)$.
+The problem \emph{could} be written in standard form
+	$$\min_S f(x).$$
+where $S = \{x\,|\,x \text{ is a feasible itinerary}\}$.  However, there is no easy way to describe $S$ by inequalities and equalities as as subset of some Euclidean space $\RR^n$ as above.
 
-FIXME The problem \emph{could} be written
-	$$\min_{x \text{ is feasible itinerary}} f(x)$$
-but this does \emph{not} mean it is in standard form (1.1) because there is no sensible way to treat the possible inputs as ``$x \in \RR^n$.''
-
-FIXME This is a \emph{discrete optimization} problem, not a continuous problem as covered in form (1.1) and the textbook generally.
+In any case, this is a \emph{discrete optimization} problem, not a continuous problem as expected in form (1.1) and the textbook generally.  That is, the set $S$ consists of discrete feasible itineraries.
 
 \medskip
-\item (\texttt{beam})  \quad A new tent design requires bending a pole to go from one corner of the tent to another while also having certain heights at particular locations.  Note that the corners of the tent, and the ends of the pole, are on the ground.  The pole is modeled as a \emph{beam} in standard engineering language.  We want to know the shape of the pole so as to determine (1) its (arc) length and (2) how fabric can be cut to reach the pole and yet be taut below it.
+\item (\texttt{glacier})  \quad  The shape of a glacier on flat bedrock is approximately given by the solution to a constrained optimization problem.  In one spatial dimension the unknown solution $u(x)$ is a function, and the objective function $f[u]$ takes the funciton $u(x)$ as input and produces a single real number (as usual).  That is, in contrast to all the above examples, the input to the objective function is not a finite list (vector) of numbers.  Thus this problem is infinite dimensional.
+
+The feasible set in this specific problem is simple,
+    $$S = \left\{u \,\big|\, u(x) \text{ is a differentiable function of } x\in[-100,100]\right\}.$$
+FIXME
+
+
+
+\quad A new tent design requires bending a pole to go from one corner of the tent to another while also having certain heights at particular locations.  Note that the corners of the tent, and the ends of the pole, are on the ground.  The pole is modeled as a \emph{beam} in standard engineering language.  We want to know the shape of the pole so as to determine (1) its (arc) length and (2) how fabric can be cut to reach the pole and yet be taut below it.
 
 To be specific, the length of the tent along the ground is $\pi$ length units.  We seek a function $y=h(x)$, defined on the interval $x\in[0,\pi]$, for the height of the pole above the ground.  This function must be at least twice-differentiable and satisfy $h(0)=0$ and $h(\pi)=0$.  The theory of beams says that actual bent shape will be the minimizing solution $h$ of
     $$\min_h I[h] \qquad \text{where} \qquad I[h] = \frac{1}{2} \int_0^\pi |h''(x)|^2\,dx.$$
