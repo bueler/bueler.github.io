@@ -1,12 +1,12 @@
 \documentclass[11pt]{amsart}
 %prepared in AMSLaTeX, under LaTeX2e
-\addtolength{\oddsidemargin}{-.55in} 
-\addtolength{\evensidemargin}{-.55in}
-\addtolength{\topmargin}{-.2in}
-\addtolength{\textwidth}{1.0in}
-\addtolength{\textheight}{.4in}
+\addtolength{\oddsidemargin}{-.7in} 
+\addtolength{\evensidemargin}{-.7in}
+\addtolength{\topmargin}{-.3in}
+\addtolength{\textwidth}{1.3in}
+\addtolength{\textheight}{.6in}
 
-\renewcommand{\baselinestretch}{1.1}
+\renewcommand{\baselinestretch}{1.075}
 
 \usepackage{verbatim,fancyvrb}
 
@@ -194,34 +194,31 @@ where $S = \{x\,|\,x \text{ is a feasible itinerary}\}$.  However, there is no e
 In any case, this is a \emph{discrete optimization} problem, not a continuous problem as expected in form (1.1) and the textbook generally.  That is, the set $S$ consists of discrete feasible itineraries.
 
 \medskip
-\item (\texttt{glacier})  \quad  The shape of a glacier on flat bedrock is approximately given by the solution to a constrained optimization problem.  In one spatial dimension the unknown solution $u(x)$ is a function, and the objective function $f[u]$ takes the funciton $u(x)$ as input and produces a single real number (as usual).  That is, in contrast to all the above examples, the input to the objective function is not a finite list (vector) of numbers.  Thus this problem is infinite dimensional.
+\item (\texttt{glacier})  \quad  The shape of a glacier on flat bedrock is approximately given by the solution to a constrained optimization problem.  In one spatial dimension the unknown solution $u(x)$ is a function, and the objective function $f[u]$ takes the function $u(x)$ as input and produces a single real number (as usual).  That is, in contrast to all the above examples, the input to the objective function is not a finite list (vector) of numbers.  Thus this problem is infinite-dimensional, a \emph{calculus of variations} example.
 
-The feasible set in this specific problem is simple,
-    $$S = \left\{u \,\big|\, u(x) \text{ is a differentiable function of } x\in[-100,100]\right\}.$$
-FIXME
+The feasible set in this specific problem is a set of functions defined on an interval $I$:
+    $$S = \left\{u \,\big|\, u(x) \ge 0 \text{ is a differentiable function of } x\in I = [-100,100]\right\}.$$
+The nontrivial constraint is that $u(x)$ is nonnegative, because it is a form of the ice thickness (below).  Note $x$ is in kilometers.
 
-
-
-\quad A new tent design requires bending a pole to go from one corner of the tent to another while also having certain heights at particular locations.  Note that the corners of the tent, and the ends of the pole, are on the ground.  The pole is modeled as a \emph{beam} in standard engineering language.  We want to know the shape of the pole so as to determine (1) its (arc) length and (2) how fabric can be cut to reach the pole and yet be taut below it.
-
-To be specific, the length of the tent along the ground is $\pi$ length units.  We seek a function $y=h(x)$, defined on the interval $x\in[0,\pi]$, for the height of the pole above the ground.  This function must be at least twice-differentiable and satisfy $h(0)=0$ and $h(\pi)=0$.  The theory of beams says that actual bent shape will be the minimizing solution $h$ of
-    $$\min_h I[h] \qquad \text{where} \qquad I[h] = \frac{1}{2} \int_0^\pi |h''(x)|^2\,dx.$$
-Here $I$ is called the objective \emph{functional}.  The input $h$ into $I$ is itself a function from an (infinite-dimensional) vector space of functions.
-
-The following particular inequalities, shown in the figure below, give locations where the heights are constrained:
-\begin{align*}
-0.9 &\le h(1) \le 1.1 \\
-1.2 &\le h(2) \le 1.4 \\
-0.4 &\le h(3) \le 0.6
-\end{align*}
-
-The figure does not show the shape of the tent pole.  That is, it does not show the \emph{solution} of the minimization problem.  That solution, after all, has minimal concavity, i.e.~size of second derivative, subject to the constraints.  The figure does, however, show a \emph{feasible} $h(x)$ which has the required differentiability, satisfies $h(0)=h(\pi)=0$, and satisfies the inequality constraints.
+In this specific problem we have a rather artifical function which defines the rate of total snowfall or melt in a year:
+    $$m(x) = \begin{cases} -3 + \frac{6}{90} (x+70), & -70 \le x \le 20, \\
+                            3 - \frac{6}{50} (x-20), & 20 \le x \le 70.
+             \end{cases}$$
+The units of $m(x)$ are meters per year.  This function is graphed below.  Note that it is only snowing where $m(x)$ is positive; everywhere else it is melting.
 
 \bigskip
 \begin{center}
-%\includegraphics[width=0.6\textwidth]{beam-gates}
-FIXME: see F16 files
+\includegraphics[width=0.5\textwidth]{massbalance}
 \end{center}
+
+The objective function is an integral:
+    $$f[u] = \int_I \frac{\mu}{4} \left(u'(x)\right)^4 - m(x) u(x)\,dx$$
+
+FIXME give value for $\mu$
+
+FIXME $h=u^{n/(2n+2)} = u^{3/8}$ is actual thickness
+
+FIXME acknowledge that discretization in $x$ is needed to make this finite-dimensional
 
 \end{enumerate}
 
