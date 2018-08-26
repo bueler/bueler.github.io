@@ -211,10 +211,17 @@ The units of $m(x)$ are meters per year.  This function is graphed below.  Note 
 \includegraphics[width=0.5\textwidth]{massbalance}
 \end{center}
 
+%>> rho = 910; g = 9.81; p = 4;
+%>> A = 1e-16/31556926
+%A =    3.1689e-24
+%>> Lam = 2 * (rho*g)^3 *A / 5
+%Lam =    9.0177e-13
+%>> mu = 2 * (rho * g * (p-1) / (2*p))^(p-1) * A / (p+1)
+%mu =    4.7554e-14
+
 The objective function is an integral:
     $$f[u] = \int_I \frac{\mu}{4} \left(u'(x)\right)^4 - m(x) u(x)\,dx$$
-
-FIXME give value for $\mu$
+Based on other physical constants (not shown) we take $\mu = 5 \times 10^{-14}$.
 
 FIXME $h=u^{n/(2n+2)} = u^{3/8}$ is actual thickness
 
