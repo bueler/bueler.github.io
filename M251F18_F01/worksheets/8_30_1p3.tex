@@ -1,0 +1,100 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx,color,enumerate,multicol}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+
+%% Use Minion fonts if available.  Otherwise Times.
+\IfFileExists{MinionPro.sty}{\usepackage[lf]{MinionPro}}{}
+\usepackage{amsmath,amsthm,amsbsy}
+\IfFileExists{MinionPro.sty}{}{\usepackage{times,txfonts}}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+\doclabel{Math F251: Sections 1.3--1.4 Worksheet}
+\docdate{30 August 2018}
+
+\begin{document}
+%\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+\aproblem Graph $y=x^3$ and $y=x^{\frac 1 3}$ on adjacent graphs (i.e.~distinct graphs, side-by-side).
+\vfill
+
+\aproblem Graph $y=\sqrt{x}$, $y=\sqrt{x-1}$, and $y=\sqrt{-x}$ on adjacent graphs.
+\vfill
+
+\aproblem Graph $y=\sin(x)$ and $y=\cos(x)$ on the same graph over the interval $[-\pi,\pi]$. Label the points $-\pi$, $-\pi/2$, $0$, $\pi/2$, $\pi$ on the $x$-axis.
+\vfill
+
+\aproblem Graph $y=\cos(2x)$ and $y=2\cos(x)$ over the interval $[0,2\pi]$
+on the same graph. 
+Label the points $0$, $\pi/2$, $\pi$, $3\pi/2$ and $2\pi$ on the $x$-axis.
+\vfill
+
+\newpage
+\aproblem Graph $y=\sin(|x|)$ and $y=|\sin(x)|$ over the interval $[-2\pi,2\pi]$
+on adjacent graphs.
+\vfill
+
+\aproblem Graph $y=(0.1)^x$, $y=e^x$, $y=2 e^x$ on the same graph.
+\vfill
+
+\aproblem Graph $y=e^{-|x|}$.
+\vfill
+
+\aproblem Graph $y=\sin(x^2)$ and $y=\sin(1/x)$ on adjacent graphs. \hfill \emph{(challenging)} 
+\vfill
+\end{aproblems}
+
+\end{document}
