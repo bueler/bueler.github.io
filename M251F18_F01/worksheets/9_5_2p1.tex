@@ -1,0 +1,140 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx,color,enumerate,multicol}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+
+%% Use Minion fonts if available.  Otherwise Times.
+\IfFileExists{MinionPro.sty}{\usepackage[lf]{MinionPro}}{}
+\usepackage{amsmath,amsthm,amsbsy}
+\IfFileExists{MinionPro.sty}{}{\usepackage{times,txfonts}}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+\doclabel{Math F251: Section 2.1 Activity (Worksheet)}
+\docdate{5 September 2018}
+
+\begin{document}
+%\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+\aproblem Here is a table of the temperature anomaly data, for recent years, from NASA.  I showed the whole 1880--2017 data set in class.  The first column is the year.  The second column is the difference of the globally-averaged temperature for that year minus the average of the 1951--1980 period, in Celsius.  The plot below shows this data.
+
+\bigskip
+\hspace{-15mm}\begin{minipage}[b]{0.4\textwidth}
+\footnotesize
+\begin{verbatim}
+        1990        0.44
+        1991        0.41
+        1992        0.22
+        1993        0.24
+        1994        0.31
+        1995        0.44
+        1996        0.33
+        1997        0.47
+        1998        0.62
+        1999         0.4
+        2000         0.4
+        2001        0.54
+        2002        0.62
+        2003        0.61
+        2004        0.53
+        2005        0.67
+        2006        0.62
+        2007        0.64
+        2008        0.52
+        2009        0.63
+        2010         0.7
+        2011        0.57
+        2012        0.61
+        2013        0.64
+        2014        0.73
+        2015        0.86
+        2016        0.99
+        2017         0.9
+\end{verbatim}
+\end{minipage}
+\begin{minipage}[b]{0.6\textwidth}
+\qquad \includegraphics[width=0.95\textwidth]{recentyeartemp}
+\end{minipage}
+
+\normalsize
+Compute from the data:
+
+\vspace{-5mm}
+\begin{enumerate}
+\item the average rate of change of temperature (i.e.~slope of the secant line) in the period 1990--2017
+
+\bigskip
+\item the highest average rate of change you can compute for a ten-year period
+
+\bigskip
+\item the lowest rate of change you can compute for a ten-year period
+
+\bigskip
+\item your estimate of the rate of change in the year 2010
+\end{enumerate}
+
+\vfill
+\footnotesize
+\emph{This example shows that slopes can always be computed, \emph{but} that noisy data does not really have a slope when you look at a small period.  See the next page for better-behaved functions.  Math 251 Calculus I will be \emph{entirely} about well-behaved functions.  You see, Calc I is not real life.}
+\vfill
+
+\clearpage \newpage
+\aproblem 
+\vfill
+
+
+\end{aproblems}
+
+\end{document}
