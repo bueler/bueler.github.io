@@ -12,8 +12,8 @@
 
 \usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=black, citecolor=red, urlcolor=red]{hyperref}
 
-\usepackage[final]{graphicx}
-\newcommand{\regfigure}[3]{\includegraphics[height=#2in,width=#3in]{#1.eps}}
+%\usepackage[final]{graphicx}
+\usepackage{graphbox}  % loads graphicx
 
 \newtheorem*{thm}{Theorem}
 \newtheorem*{lem}{Lemma}
@@ -73,16 +73,16 @@
 \begin{document}
 \noindent \scriptsize Math 251 Calculus I (F01; Bueler) \hfill \today
 
-\bigskip
+\medskip
 \Large\centerline{\textbf{Solutions to  Section 2.1 Activity (Worksheet)}}
 
 \normalsize
 \thispagestyle{empty}
 
-\bigskip
+\medskip
 \renewcommand{\labelenumi}{\textbf{\arabic{enumi}.}}
 \begin{enumerate}
-\item \emph{The first part has a clear answer.  The second and third parts have best answers, but I am not completely sure I found them!  A thorough search might be required.  The fourth part has a wild guess answer.} 
+\item \emph{The first part has a clear answer.  The second and third parts have best answers.  (I am not certain I found them!  A thorough search might be required.)  The fourth part has a wild guess.} 
 
 \medskip
     \renewcommand{\labelenumii}{\arabic{enumii}.}
@@ -94,40 +94,51 @@
     \end{enumerate}
 
 \medskip
-\noindent \emph{This question shows that even a function (i.e.~data) which is really bumpy or rough \emph{does} have secant lines.  It is always easy and cheap to compute the slopes of secant lines.  But for rough data like this they don't mean much!  And we will not care much either.  Calculus is about better-behaved functions like in problems} \textbf{2} \emph{and} \textbf{3}.
+\noindent \emph{Every function, even data which is really bumpy or rough, \emph{does} have secant lines.  It is always cheap to compute the slopes of secant lines, but for rough data such slopes don't mean much!  Fortunately we will not care; calculus is about better-behaved functions like in problems} \textbf{2} \emph{and} \textbf{3}.
 
 \item 
 \medskip
     \renewcommand{\labelenumii}{\alph{enumii})}
     \begin{enumerate}
-    \item
+    \item \includegraphics[align=t,width=0.45\textwidth]{secantgraph}
 
-        FIXME
+\bigskip
     \item \emph{In this part $P$ is the fixed point $(2,-1)$ while $Q$ is the point given by the following $x$-values.}
     
     Let $f(x) = 1/(1-x)$.  Then:
         \renewcommand{\labelenumiii}{(\roman{enumiii})}
         \begin{enumerate}
-        \item $m = (f(1.5) - f(2)) / (1.5 - 2) = $
-        \item $m = (f(1.9) - f(2)) / (1.9 - 2) = $
-        \item $m = (f(1.99) - f(2)) / (1.99 - 2) = $
-        \item $m = (f(1.999) - f(2)) / (1.999 - 2) = $
-        \item $m = (f(2.5) - f(2)) / (2.5 - 2) = $
-        \item $m = (f(2.1) - f(2)) / (2.1 - 2) = $
-        \item $m = (f(2.01) - f(2)) / (2.01 - 2) = $
-        \item $m = (f(2.001) - f(2)) / (2.001 - 2) = $
+        \item $m = (f(1.5) - f(2)) / (1.5 - 2) = 2.0$
+        \item $m = (f(1.9) - f(2)) / (1.9 - 2) = 1.11$
+        \item $m = (f(1.99) - f(2)) / (1.99 - 2) = 1.01$
+        \item $m = (f(1.999) - f(2)) / (1.999 - 2) = 1.001$
+        \item $m = (f(2.5) - f(2)) / (2.5 - 2) = 0.6667$
+        \item $m = (f(2.1) - f(2)) / (2.1 - 2) = 0.9091$
+        \item $m = (f(2.01) - f(2)) / (2.01 - 2) = 0.9901$
+        \item $m = (f(2.001) - f(2)) / (2.001 - 2) = 0.9990$
         \end{enumerate}
 % >> f = @(x) 1./(1-x);
 % >> q = [1.5 1.9 1.99 1.999 2.5 2.1 2.01 2.001];
 % >> m = (f(q) - f(2)) ./ (q - 2)
 % m =
 %   2.00000  1.11111  1.01010  1.00100  0.66667  0.90909  0.99010  0.99900
-
-    \item 
-    \item 
+    \item Based on the above I would guess that the tangent line slope at $P(2,-1)$ is $m=1$.
+    \item We have a point and a slope so the equation of line is immediate:
+        $$y - (-1) = 1 (x - 2) \qquad \text{ or } \qquad y = x -3$$
     \end{enumerate}
 
-\item 
+\item  If you plot the data with a computer you see it is all close to one line.  Here we first compute the four secant line slopes:
+
+    \renewcommand{\labelenumii}{\alph{enumii})}
+    \begin{enumerate}
+    \item $m=69.7$ beats/min
+    \item $m=71.8$ beats/min
+    \item $m=71.0$ beats/min
+    \item $m=66.0$ beats/min
+    \end{enumerate}
+
+We can say with some confidence that the heart monitor should report a number between $66$ and $71$.  My best estimate is the secant slope that uses $t=40$ and $t=44$:
+    $$m = \frac{3080-2806}{44-40} = 68.5 \,\,\text{beats/min}$$
 \end{enumerate}
 
 
