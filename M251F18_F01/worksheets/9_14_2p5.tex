@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx,color,enumerate,multicol}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+
+%% Use Minion fonts if available.  Otherwise Times.
+%\IfFileExists{MinionPro.sty}{\usepackage[lf]{MinionPro}}{}
+\usepackage{amsmath,amsthm,amsbsy}
+%\IfFileExists{MinionPro.sty}{}{\usepackage{times,txfonts}}
+\usepackage{palatino}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Sections 2.5 and 2.6 Worksheet}
+\docdate{14 September 2018}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+% 2.5 #40, 58, 73 and 2.6 #8, 49
+
+\begin{aproblems}
+\aproblem  Show that $f$ is continuous on $(-\infty,\infty)$:
+\begin{flalign*}
+    f(x) &= \begin{cases} \sin x & \text{ if } x < \pi/4 \\
+                          \cos x & \text{ if } x \ge \pi/4 \end{cases} &
+\end{flalign*}
+
+\vfill
+
+\aproblem  Prove that the equation has at least one real root:
+\begin{flalign*}
+    \ln x &= 3 - 2x &
+\end{flalign*}
+
+\vfill
+
+\noindent (\emph{You can use a calculator to find an approximation to the accuracy you desire.})
+
+\medskip
+
+\aproblem  A Tibetan monk leaves the monastery at 7:00 \textsc{am} and takes his usual parth to the top of the mountain, arriving at 7:00 \textsc{pm} and sleeping on top.  The next morning he starts at 7:00 \textsc{am} at the top and takes the same path back, arriving at the monastery at 7:00 \textsc{am}.  Show that there is a point on the path that the monk will cross at exactly the same time of day on both days.
+
+\medskip
+\noindent (\emph{Hint: This follows from the Intermediate Value Theorem.  Start by sketching elevation versus time for each day, one on top of the other.})
+
+\vfill
+
+\clearpage \newpage
+
+\aproblem  Sketch the graph of a function that satisfies all of the given conditions:
+\begin{itemize}
+\item $\lim_{x\to\infty} f(x) = 3$
+\item $\lim_{x\to 2^-} f(x) = \infty$
+\item $\lim_{x\to 2^+} f(x) = -\infty$
+\item $f$ is odd
+\end{itemize}
+
+\vfill
+
+\aproblem  Find all the vertical and horizontal asymptotes of the graph
+    $$y = \frac{2x^2 + x - 1}{x^2 + x - 2},$$
+and clearly state limits which justify these asymptotes.
+
+\medskip
+\noindent (\emph{Along the way you make very rough sketch of the graph.  You may be able to confirm your work by graphing calculator.})
+\vfill
+
+\end{aproblems}
+
+\end{document}
