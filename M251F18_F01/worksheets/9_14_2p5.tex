@@ -1,12 +1,8 @@
 \documentclass[12pt]{article}
-
-\usepackage{graphicx,color,enumerate,multicol}
 \usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
 
-%% Use Minion fonts if available.  Otherwise Times.
-%\IfFileExists{MinionPro.sty}{\usepackage[lf]{MinionPro}}{}
+\usepackage{graphicx,color,enumerate,multicol}
 \usepackage{amsmath,amsthm,amsbsy}
-%\IfFileExists{MinionPro.sty}{}{\usepackage{times,txfonts}}
 \usepackage{palatino}
 
 %% Setup aproblem environment, 
@@ -71,35 +67,9 @@
 \renewcommand{\d}{\displaystyle}
 
 % 2.5 #40, 58, 73 and 2.6 #8, 49
+% 2.6 first
 
 \begin{aproblems}
-\aproblem  Show that $f$ is continuous on $(-\infty,\infty)$:
-\begin{flalign*}
-    f(x) &= \begin{cases} \sin x & \text{ if } x < \pi/4 \\
-                          \cos x & \text{ if } x \ge \pi/4 \end{cases} &
-\end{flalign*}
-
-\vfill
-
-\aproblem  Prove that the equation has at least one real root:
-\begin{flalign*}
-    \ln x &= 3 - 2x &
-\end{flalign*}
-
-\vfill
-
-\noindent (\emph{You can use a calculator to find an approximation to the accuracy you desire.})
-
-\medskip
-
-\aproblem  A Tibetan monk leaves the monastery at 7:00 \textsc{am} and takes his usual parth to the top of the mountain, arriving at 7:00 \textsc{pm} and sleeping on top.  The next morning he starts at 7:00 \textsc{am} at the top and takes the same path back, arriving at the monastery at 7:00 \textsc{am}.  Show that there is a point on the path that the monk will cross at exactly the same time of day on both days.
-
-\medskip
-\noindent (\emph{Hint: This follows from the Intermediate Value Theorem.  Start by sketching elevation versus time for each day, one on top of the other.})
-
-\vfill
-
-\clearpage \newpage
 
 \aproblem  Sketch the graph of a function that satisfies all of the given conditions:
 \begin{itemize}
@@ -118,6 +88,31 @@ and clearly state limits which justify these asymptotes.
 \medskip
 \noindent (\emph{Along the way you make very rough sketch of the graph.  You may be able to confirm your work by graphing calculator.})
 \vfill
+
+\clearpage \newpage
+\aproblem  Show that $f$ is continuous on $(-\infty,\infty)$:
+\begin{flalign*}
+    f(x) &= \begin{cases} \sin x & \text{ if } x < \pi/4 \\
+                          \cos x & \text{ if } x \ge \pi/4 \end{cases} &
+\end{flalign*}
+
+\vfill
+
+\aproblem  Prove that the equation has at least one real root:
+    $$\ln x = 3 - 2x$$
+\noindent (\emph{You may use a calculator to find an accurate approximation, but this is not required.})
+
+\vfill
+
+
+\medskip
+
+\aproblem \emph{A challenge problem, but actually easy.  It follows from the Intermediate Value Theorem.  Start by sketching elevation versus time for each day, one on top of the other.}
+
+A Tibetan monk leaves the monastery at 7:00 \textsc{am} and takes his usual parth to the top of the mountain, arriving at 7:00 \textsc{pm} and sleeping on top.  The next morning he starts at 7:00 \textsc{am} at the top and takes the same path back, arriving at the monastery at 7:00 \textsc{am}.  Show that there is a point on the path that the monk will cross at exactly the same time of day on both days.
+
+\medskip
+\noindent 
 
 \end{aproblems}
 
