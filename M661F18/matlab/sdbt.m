@@ -29,11 +29,12 @@ end % function
 
     function alpha = bt(xk,pk,dfxk,f)
     Dk = dfxk' * pk;
+    fxk = f(xk);
     if Dk >= 0.0,  error('pk is not a descent direction ... stopping'),  end
     c = 1.0e-4;  % modest sufficient decrease
     rho = 0.5;   % backtracking by halving
     alpha = 1.0;
-    while f(xk + alpha * pk) > f(xk) + c * alpha * Dk
+    while f(xk + alpha * pk) > fxk + c * alpha * Dk
         alpha = rho * alpha;
     end
     end % function
