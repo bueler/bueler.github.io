@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
 
-\usepackage{graphicx,color,enumerate,multicol}
+\usepackage{graphicx,color,enumitem}
 \usepackage{amsmath,amsthm,amsbsy}
 \usepackage{palatino}
 
@@ -67,8 +67,53 @@
 \renewcommand{\d}{\displaystyle}
 
 \begin{aproblems}
+% 3.2 #4, 14, 26
+\aproblem  Differentiate.
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item $g(x) = (x + 5\sqrt{x}) e^x$
 
-\aproblem  
+\vspace{0.75in}
+\item
+    $$y = \frac{\sqrt{x}}{2+x} \hspace{4.5in}$$
+
+\vfill
+\item
+    $$f(x) = \frac{ax + b}{cx + d} \hspace{4.5in}$$
+\end{enumerate}
+
+\vfill
+% like 3.2 #1
+\aproblem  Find the derivative in two ways: (i) product rule and (ii) first multiply-out.
+    $$f(x) = (x + x^2) (x^{-1} + 3) \hspace{4.0in}$$
+\vfill
+
+\clearpage
+\newpage
+% 3.2 #57
+\aproblem  A quantity $p$ of fabric, measured in yards, is sold at a price $f(p)$ (dollars) which depends on the quantity.  The total revenue from a sale of $p$ yards of fabric is $R(p) = p f(p)$.
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item What does it mean to say that $f(20) = 100$ and that $f'(20) = -0.5$?
+
+\vfill
+\item Assuming the values in part (a), find $R'(20)$ and interpret your answer.
+\end{enumerate}
+\vfill
+
+% 3.3 #17
+\aproblem  Consider these facts:
+\begin{itemize}[itemsep=-1mm]
+\item $\csc x = 1/\sin x$
+\item $\cot x = \cos x/\sin x$
+\item $(\sin x)' = \cos x$
+\end{itemize}
+Use the quotient rule and the above facts to show that
+    $$\frac{d}{dx} \left(\csc x\right) = - \csc x \cot x$$
+\vfill
+
+% 3.3 #15
+\aproblem  Differentiate $f(\theta) = \theta \cos \theta \sin \theta$.
 \vfill
 \end{aproblems}
 
