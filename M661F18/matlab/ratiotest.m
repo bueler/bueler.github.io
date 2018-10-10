@@ -11,25 +11,25 @@ function alphabar = ratiotest(A,b,x,p)
 % ans =  0.16667
 
 [m n] = size(A);
-b = b(:);  x = x(:);  p = p(:);       % force column
+b = b(:);  x = x(:);  p = p(:);           % force columns
 if (length(b) ~= m), error('incompatible sizes for A,b'), end
 if (length(x) ~= n), error('incompatible sizes for A,x'), end
 if (length(p) ~= n), error('incompatible sizes for x,p'), end
 
-c = A * x - b;                        % c_i = a_i^T x - b_i
+c = A * x - b;                            % c_i = a_i^T x - b_i
 if any(c < 0), error('x is not feasible'), end
 
-d = A * p;                            % d_i = a_i^T p
-if all(c == 0)                        % no step size restriction if all
-    alphabar = Inf;                   % constraints are active
-end
-d = d(c > 0);
-c = c(c > 0);
-
-if all(d >= 0)
-    alphabar = Inf;                   % no step size restriction
+if all(c == 0)                            % no step size restriction if
+    alphabar = Inf;                       %   all constraints are active
 else
-    alpha = c(d < 0) ./ (-d(d < 0));  % alpha_i = c_i / (-d_i)  if  d_i < 0
-    alphabar = min(alpha);
+    d = A * p;                            % d_i = a_i^T p
+    d = d(c > 0);
+    c = c(c > 0);
+    if all(d >= 0)                        % no step size restriction if
+        alphabar = Inf;                   %   heading in unbounded direction
+    else
+        alpha = c(d < 0) ./ (-d(d < 0));  % alpha_i = c_i / (-d_i)  for  d_i < 0
+        alphabar = min(alpha);
+    end
 end
 
