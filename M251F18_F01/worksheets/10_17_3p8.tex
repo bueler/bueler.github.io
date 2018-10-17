@@ -1,0 +1,115 @@
+\documentclass[12pt]{article}
+\usepackage[top=0.9in, bottom=0.9in, left=0.9in, right=1.1in]{geometry}
+
+\usepackage{graphicx,color,enumitem}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Sections 3.8 and 3.9 Worksheet}
+\docdate{Wednesday 17 October 2018}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+% 3.8 #19
+\aproblem  The rate of change of atmospheric pressure $P$ with respect to altitude $h$ is proportional to $P$.  (This assumes the temperature is constant; let us assume that.)
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item  Write a differential equation corresponding to the first sentence above; use $k$ for the constant of proportionality.  Then write a formula for $P(h)$ in terms of $P(0)$, $k$, and $h$.
+
+\vfill
+\item  At a temperature of $15\,^\circ C$, the pressure is $101.3$ kPa at sea level and the pressure is $87.14$ kPa at $h=1000$ m.  From these facts, determine $P(0)$ and $k$.
+
+\vfill
+\item  What is the pressure at the top of Denali, at an altitude of $6187$ m?  (\emph{The problem in the book, \#19 in \S 3.8, has an error.  It calls it ``Mount McKinley.''})
+
+\vfill
+\item  At what altitude is the pressure $1/3$ of what it is at sea level?
+
+\vfill
+\end{enumerate}
+
+\clearpage
+\newpage
+\thispagestyle{plain}
+
+% 3.9 but I made it up
+\aproblem  Gravel can be made by crushing rock and then running it through a screen for sorting.  Typically the sorted gravel is piled into a cone by a conveyor belt.  Because the gravel slides down the sides as the pile steepens, the sides alway have about the same angle (the \emph{angle of repose}) and the pile keeps its shape as it grows.
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item  Draw a conveyor belt feeding a conical pile of gravel.  Label the radius of the base of the cone as $r$ and its height as $h$.
+
+\vfill
+\item  The volume of a cone is
+    $$V = \frac{1}{3} \pi r^2 h.$$
+As the pile grows, which of the variables in this equation depend on time?
+
+\vfill
+\item  Compute $dV/dt$ by differentiating the above equation, keeping in mind that the other variables are also functions of time.
+
+\vfill
+\item  If the conveyor belt is adding $5 \,\text{m}^3/\text{min}$ of gravel to the pile, and the angle of the sides of the pile is $40^\circ$, at what rate is the height increasing when the base has radius $20$ m?
+\vspace{2.5in}
+\end{enumerate}
+
+\end{aproblems}
+
+\end{document}
