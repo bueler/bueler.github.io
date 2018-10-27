@@ -54,6 +54,8 @@
 \newcommand{\pts}[1]{\scriptsize [#1 points] \normalsize}
 
 \newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Python}{\textsc{Python}\xspace}
+\newcommand{\Julia}{\textsc{Julia}\xspace}
 
 
 \begin{document}
@@ -69,21 +71,23 @@
 \thispagestyle{empty}
 \normalspacing
 
-\subsection*{Goals and expectations} The goal of this project is for you to become familiar either with a kind of optimization problems or of optimization algorithms.  Both some numerical computation and some mathematical analysis are \emph{required} on your project.
+\subsection*{Goal}  The goal of the Math 661 project is for you to become familiar with either a modest class of optimization problems or a modest class of optimization algorithms.
 
-Your project may be application-driven (\emph{choose the problems first}) or algorithm-driven (\emph{choose the algorithm first}).  In either case you will implement at least one algorithm in \Matlab, or other language, and apply your code to at least one example problem.  Then you will analyze the algorithms and results using theory from the textbook or other references.  Part of this is to provide some empirical evidence regarding the error and/or performance of your algorithm.  Such analysis is important; you can show that you have absorbed ideas from the course.
+\subsection*{Expectations}  Your project may be application-driven (\emph{choose the problem(s) first}) or algorithm-driven (\emph{choose the algorithm(s) first})---see page 3---but all projects must include a specific optimization problem and a specific optimization algorithm.  That is, you will implement at least one algorithm, i.e.~in \Matlab/\Python/ \Julia/etc., and apply your code to at least one example problem.
 
-Both the problem(s) and the algorithm(s) are important, and one of my jobs will be to help you choose them.  A significant way I can help is to advise you \emph{not} to bite off too much!  It is very easy to get lost in the application itself, the algorithmic details, or in difficulties with codes or analysis.
+Both numerical computation and mathematical analysis are required.  For the latter you will analyze the problem(s) and algorithm(s) using theory from the textbook\footnote{Griva, Nash, and Sofer, \emph{Linear and Nonlinear Optimization}, 2nd ed., SIAM Press 2009.} and/or from other references.  Once your code is running you should provide some empirical (numerical experimentation) evidence regarding the error and/or performance of your algorithm(s).  Analysis is important, for reasons which include that it shows you have absorbed ideas from the course, and numerical evidence is important because it confirms that you understood the algorithm well enough to implement it correctly.
 
-In any case your problem(s) must be in the following form, or your algorithm must work on problems in the following form:
-    $$\min_{x\in \RR^n} f(x) \quad \text{subject to} \quad \begin{matrix}
+Your problem(s) must be in the following form:
+\begin{equation}
+\min_{x\in \RR^n} f(x) \quad \text{subject to} \quad \begin{matrix}
                                                       g_i(x) = 0, & i \in \mathcal{E}, \\
-                                                      g_i(x) \ge 0, & i \in \mathcal{I}
-                                                      \end{matrix}$$
-(Of course you may replace ``$\min$'' with ``$\max$''.)  That is, your problem must be finite-dimensional ($\RR^n$), you must be able to identify the objective function $f(x)$ and the feasible set $S$, with the latter defined by finitely-many constraints $g_i(x)$ of identified type.  There may be no constraints.  Then you will find an algorithm (or algorithms) to solve the problems numerically, and then demonstrate and analyze the results.
+                                                      g_i(x) \ge 0, & i \in \mathcal{I},
+                                                      \end{matrix}  \label{genform}
+\end{equation}
+though of course you may replace $\min$ with $\max$.  If your project is algorithm-driven then you will need to identify which such problems are solved by your algorithms(s).  Note your problems must be finite-dimensional ($\RR^n$), you must be able to identify the objective function $f(x)$ and a feasible set $S$ defined by finitely-many constraints $g_i(x)$.  There may be no constraints.  Note that form \eqref{genform} describes a very large class of problems.
 
 
-\subsection*{Due dates} There are two due dates for the project:
+\subsection*{Due dates}  FIXME There are two due dates for the project:
 
 \medskip
 \begin{itemize}
@@ -102,47 +106,23 @@ The total length must be 20 pages or less; I will not accept it if it is more th
 \end{itemize}
 
 
-\newpage
-\subsection*{Choosing a topic}  Here are three approaches:
+\subsection*{Choosing a topic}  One of my jobs will be to help you choose problem(s) and algorithm(s) so that your project has reasonable difficulty.  I will likely advise you not to bite off too much!  It is very easy to get lost in the application, the algorithmic details, or in difficulties with codes or analysis.
 
-\subsubsection*{Approach 1: Talk to an advisor and/or do something related to your thesis}  You can talk to me, but it will take a while for me to know what you are interested in.  It would be better for you to talk to your thesis advisor if you already have one.  It is reasonable to ask ``are there optimization problems related to my expected thesis''?  Broadly-speaking these might relate to optimal design or parameter fitting, or to algorithms which already arise in your field of interest.  There may be a paper to read about optimization in your fieldt.
+You may not choose a topic which has been, or will be, adequately covered in the course.  For example, though the basic simplex method is not a good topic, implementations of the simplex method which respect sparsity are (Chapter 7).  Similarly, the classical Newton method is not a good subject but investigating quasi-Newton methods, line search methods, or trust region methods may be quite good choices (Chapters 11,12).  Your proposal allows me to give good feedback on this, perhaps a gentle nudge in the direction of a nice variation to study.
 
-\subsubsection*{Approach 2: Inspiration from Wikipedia page on mathematical optimization}  If the above does not apply to you, I stongly-suggest you start with this next approach, unless you have a clear desire and plan already.  Namely, see the ``Applications'' section of
+Here are three approaches to choosing a topic if you don't already have one:
+
+\subsubsection*{Approach 1: Inspiration from Wikipedia page on mathematical optimization}  See the ``Applications,'' ``Major subfields,'' and ``Computational \dots techniques'' sections of
 
    \centerline{\href{https://en.wikipedia.org/wiki/Mathematical_optimization}{\texttt{en.wikipedia.org/wiki/Mathematical\_optimization}}}
 
-\noindent This page is that it has good links to both example applications and to sub-fields of the rather broad and diffuse area called ``optimization.''
+\subsubsection*{Approach 2: Investigate skipped material from the textbook}  Consider choosing a section(s) that you find interesting and which we did not cover.  I am not really recommending just choosing a section at random; the Wikipedia page above is a better if you are starting from scratch.
 
-\subsubsection*{Approach 3: Investigate skipped material from Nocedal \& Wright}  It is practically true that there are an infinite number of topics you could choose from the textbook.  (It is more of an encyclopedia, not really a textbook that fits in a semester.)  Please \emph{do} choose a section if you roughly understand the basic idea \emph{and} you find it interesting.  Otherwise, however, please \emph{do not} just choose a section at random as a starting point for a project.  The Wikipedia page on \emph{mathematical optimization} is a much better starting point if you do not already have an idea.
+\subsubsection*{Approach 3: Talk to your advisor and/or do something related to your thesis}  You can talk to me, but it will take a while for me to know what you are interested in.  It would be better to talk to your thesis advisor (if you have one).  It is reasonable to ask ``are there optimization problems related to my expected thesis''?  Broadly-speaking these might relate to optimal design or parameter fitting, or to algorithms which arise in your field of interest.  There may be a paper to read about optimization in your field.
 
-The following bulleted list gives sections of Nocedal \& Wright that:
-\renewcommand{\labelenumi}{\roman{enumi})}
-\begin{enumerate}
-\item I plan to either skip entirely in lecture and homework, or address partially/lightly,
-\item \emph{and} which contain algorithmic ideas that might make good starting points.
-\end{enumerate}
-Here's the bulleted list:
-\begin{itemize}
-\item 3.4, 3.5
-\item 4.1, 4.2, 4.3, 4.4, 4.5
-\item 6.2, 6.3, 6.4
-\item 7.1, 7.2, 7.3, 7.4
-\item 8.2
-\item 9.2, 9.3, 9.4, 9.6
-\item 10.3, 10.4
-\item 11.2, 11.3
-\item 12.5, 12.6, 12.9
-\item 13.3, 13.4, 13.5, 13.6, 13.7
-\item 14.1, 14.2, 14.3
-\item 15.4, 15.5
-\item 16.1, 16.2, 16.3, 16.5, 16.6, 16.7
-\item 17.1, 17.2, 17.3, 17.4
-\item 18.1, 18.2, 18.3, 18.4, 18.5, 18.6
-\item 19.2, 19.3, 19.4, 19.5, 19.6
-\end{itemize}
 
 \newpage
-\subsection*{Structure of the project}  Here is a rough flow-chart.  (Use the material on the next page for the correct section headings.)
+\subsection*{Structure of the project}  Here is a rough flow-chart.
 
 \bigskip
 
@@ -165,19 +145,19 @@ Here's the bulleted list:
     \path [line] (decide.west) -- node [near start, left] {algorithm} (introalg.north);
     \node [block, below of=introalg] (algpseudo) {give pseudocode(s)};
     \path [line] (introalg) -- (algpseudo);
-    \node [block, below of=algpseudo] (algexamples) {propose two or more examples for testing};
+    \node [block, below of=algpseudo] (algexamples) {propose at least one example problem for testing};
     \path [line] (algpseudo) -- (algexamples);
 
     % application sequence
-    \node [block, below right of=decide, node distance=4cm] (introapp) {introduce application};
+    \node [block, below right of=decide, node distance=4cm] (introapp) {introduce application(s)};
     \path [line] (decide.east) -- node [near start] {application} (introapp.north);
-    \node [block, below of=introapp] (appexamples) {describe typical examples};
+    \node [block, below of=introapp] (appexamples) {describe at least one example problem};
     \path [line] (introapp) -- (appexamples);
-    \node [block, below of=appexamples] (appcompare) {describe two or more algorithms; give pseudocodes};
+    \node [block, below of=appexamples] (appcompare) {describe at least one algorithm; give pseudocodes};
     \path [line] (appexamples) -- (appcompare);
 
     % merge and continue
-    \node [block, below of=decide, node distance=10.5cm] (implement) {implement algorithms in \Matlab etc.};
+    \node [block, below of=decide, node distance=10.5cm] (implement) {implement algorithms in \Matlab/\dots};
     \path [line] (algexamples) -- (implement);
     \path [line] (appcompare) -- (implement);
     \node [block, below of=implement] (results) {demonstrate runs on example(s); show results};
