@@ -60,7 +60,7 @@
 
 \begin{document}
 \scriptsize \phantom{bob} \vspace{-0.3in}
-\noindent Math 661 Optimization \, (Bueler) \hfill  \today
+\noindent Math 661 Optimization \, (Bueler) \hfill  October 29, 2018
 \normalsize\bigskip
 \normalspacing
 
@@ -71,11 +71,11 @@
 \thispagestyle{empty}
 \normalspacing
 
-\subsection*{Goal}  The goal of the Math 661 project is for you to become familiar with either a modest class of optimization problems or a modest class of optimization algorithms.
+\subsection*{Goal}  The goal of the Math 661 project is for you to become more familiar with certain optimization problems and algorithms than is possible with the brief coverage that is typical of the rest of the course.
 
 \subsection*{Expectations}  Your project may be application-driven (\emph{choose the problem(s) first}) or algorithm-driven (\emph{choose the algorithm(s) first})---see page 3---but all projects must include a specific optimization problem and a specific optimization algorithm.  That is, you will implement at least one algorithm, i.e.~in \Matlab/\Python/ \Julia/etc., and apply your code to at least one example problem.
 
-Both numerical computation and mathematical analysis are required.  For the latter you will analyze the problem(s) and algorithm(s) using theory from the textbook\footnote{Griva, Nash, and Sofer, \emph{Linear and Nonlinear Optimization}, 2nd ed., SIAM Press 2009.} and/or from other references.  Once your code is running you should provide some empirical (numerical experimentation) evidence regarding the error and/or performance of your algorithm(s).  Analysis is important, for reasons which include that it shows you have absorbed ideas from the course, and numerical evidence is important because it confirms that you understood the algorithm well enough to implement it correctly.
+Both numerical computation and mathematical analysis are required.  For the latter you will analyze the problem(s) and algorithm(s) using theory from the textbook\footnote{Griva, Nash, and Sofer, \emph{Linear and Nonlinear Optimization}, 2nd ed., SIAM Press 2009.} and/or from other references.  Once your code is running you should provide some empirical (numerical experimentation) evidence regarding the error and/or performance of your algorithm(s).  Analysis is important because it shows you have absorbed ideas from the course, and because it distinquishes between algorithms.  Numerical evidence is important because it confirms that you understood the algorithm well enough to implement it correctly.
 
 Your problem(s) must be in the following form:
 \begin{equation}
@@ -84,25 +84,31 @@ Your problem(s) must be in the following form:
                                                       g_i(x) \ge 0, & i \in \mathcal{I},
                                                       \end{matrix}  \label{genform}
 \end{equation}
-though of course you may replace $\min$ with $\max$.  If your project is algorithm-driven then you will need to identify which such problems are solved by your algorithms(s).  Note your problems must be finite-dimensional ($\RR^n$), you must be able to identify the objective function $f(x)$ and a feasible set $S$ defined by finitely-many constraints $g_i(x)$.  There may be no constraints.  Note that form \eqref{genform} describes a very large class of problems.
+though of course you may replace $\min$ with $\max$.  If your project is algorithm-driven then you must identify which such problems are solved by your algorithms(s).
+
+Form \eqref{genform} describes a very large class of problems, but note your problem(s) must be finite-dimensional ($\RR^n$), though they may arise from an infinite-dimensional source.  The problem(s) must be well-enough understood to allow you to both precisely identify the objective function $f(x)$ and precisely identify a feasible set $S$ defined by finitely-many constraints $g_i(x)$.  It is o.k.~if there are no constraints.  
 
 
-\subsection*{Due dates}  FIXME There are two due dates for the project:
+\subsection*{Due dates}  There are two due dates for the project:
 
 \medskip
 \begin{itemize}
-\item[\underline{I = Proposal:}]  Project part I is due Friday 9 November at the start of class.  (\emph{This is a change from the date on the syllabus.})  There are no format requirements for Project part I other than that it cannot be longer than two pages.
+\item[\underline{I = Proposal:}]  \textbf{Part I is due Friday 9 November at the start of class.}\footnote{This is a change from the date on the syllabus.}  There are no format requirements for this part except that it \textbf{can be at most two pages}.
 
-The content of the proposal should be to say precisely what problem(s) or algorithm(s) you want to look at.  Several quality references are \emph{expected}; online references are o.k.~but I find that many of informal online documents are of low quality.  Thus you should prioritize 
+The content of the proposal should be to say precisely what problem(s) or algorithm(s) you want to look at.  Several quality references are \emph{expected}; online references are o.k.\footnote{However, I find that many informal online documents are of low quality.}  Make specific references to our textbook when that is appropriate.
 
-You spend less than (say) 6 hours on this.  But spending more time at this stage can be very effective, because you can talk about and play with ideas to get a clearer idea of what to write on your proposal.
+You should spend at most (say) 6 hours on this.  However, spending at least a few hours on thinking and research at this stage can be very effective.  Ideally you will talk about and play with ideas as you get a clearer idea of what to write in your proposal.
 
-This would be a good time to use a version control system, if you know how, so that your efforts grow in an organized manner and you don't lose stuff.
+It would be good to use a version control system if you know how.  In any case, your efforts should grow in an organized manner and not get lost.
 
 \medskip
-\item[\underline{II = Complete project:}]  On Monday 12 December at 5pm you will submit the complete project as version II.  It will have the form suggested below, already drafted as version I, but all parts will be completed.
+\item[\underline{II = Project:}]  \textbf{On Tuesday 11 December at 5pm you will submit the complete project.}
 
-The total length must be 20 pages or less; I will not accept it if it is more than 20 pages.  The total time spent on version II of the project should be at most 20 hours.
+It should have the format and section headings as shown on page 4 below.  This format corresponds to a \LaTeX\xspace document template already posted online, but of course you do not have to use \LaTeX:
+
+\centerline{\href{http://bueler.github.io/M661F18/index.html}{\texttt{bueler.github.io/M661F18/blankproject.tex}}}
+
+The total length \textbf{must be 20 pages or less}; I will not accept longer projects.  The total time spent on the whole project should be at most 25 hours.
 \end{itemize}
 
 
