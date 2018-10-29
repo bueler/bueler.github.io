@@ -86,7 +86,7 @@ Your problem(s) must be in the following form:
 \end{equation}
 though of course you may replace $\min$ with $\max$.  If your project is algorithm-driven then you must identify which such problems are solved by your algorithms(s).
 
-Form \eqref{genform} describes a very large class of problems, but note your problem(s) must be finite-dimensional ($\RR^n$), though they may arise from an infinite-dimensional source.  The problem(s) must be well-enough understood to allow you to both precisely identify the objective function $f(x)$ and precisely identify a feasible set $S$ defined by finitely-many constraints $g_i(x)$.  It is o.k.~if there are no constraints.  
+Form \eqref{genform} describes a very large class of problems, but note your problem(s) must be finite-dimensional ($\RR^n$), though it may arise from an infinite-dimensional source.  The problem(s) must be well-enough understood to allow you to both precisely identify the objective function $f(x)$ and precisely identify a feasible set $S$ defined by finitely-many constraints $g_i(x)$.  It is o.k.~if there are no constraints.  
 
 
 \subsection*{Due dates}  There are two due dates for the project:
@@ -95,40 +95,42 @@ Form \eqref{genform} describes a very large class of problems, but note your pro
 \begin{itemize}
 \item[\underline{I = Proposal:}]  \textbf{Part I is due Friday 9 November at the start of class.}\footnote{This is a change from the date on the syllabus.}  There are no format requirements for this part except that it \textbf{can be at most two pages}.
 
-The content of the proposal should be to say precisely what problem(s) or algorithm(s) you want to look at.  Several quality references are \emph{expected}; online references are o.k.\footnote{However, I find that many informal online documents are of low quality.}  Make specific references to our textbook when that is appropriate.
+The proposal should precisely say what problem(s) or algorithm(s) you want to look at.  If application-driven it should explain \emph{briefly} where the optimization problem(s) came from, and in any case it should briefly motivate your proposed choice(s) of algorithm(s).  Then the proposal should talk though what the complete project will contain, to the degree possible.
 
-You should spend at most (say) 6 hours on this.  However, spending at least a few hours on thinking and research at this stage can be very effective.  Ideally you will talk about and play with ideas as you get a clearer idea of what to write in your proposal.
+Several quality references are \emph{expected}; online references are o.k.\footnote{However, I find that many informal online documents are of low quality.}  Make specific references to our textbook when that is appropriate.
 
-It would be good to use a version control system if you know how.  In any case, your efforts should grow in an organized manner and not get lost.
+Spending at least a few hours on thinking and research at this stage can be very effective, but you should spend at most (say) 6 hours on this part.  It would be good to use a version control system already at this stage, if you know how.
 
 \medskip
 \item[\underline{II = Project:}]  \textbf{On Tuesday 11 December at 5pm you will submit the complete project.}
 
-It should have the format and section headings as shown on page 4 below.  This format corresponds to a \LaTeX\xspace document template already posted online, but of course you do not have to use \LaTeX:
+It should have the format and section headings as shown on page 4 below.  This format corresponds to a \LaTeX\xspace document template already posted online:
 
 \centerline{\href{http://bueler.github.io/M661F18/index.html}{\texttt{bueler.github.io/M661F18/blankproject.tex}}}
+
+\noindent Of course you do not have to use \LaTeX, but please do use the indicated section headings.
 
 The total length \textbf{must be 20 pages or less}; I will not accept longer projects.  The total time spent on the whole project should be at most 25 hours.
 \end{itemize}
 
 
-\subsection*{Choosing a topic}  One of my jobs will be to help you choose problem(s) and algorithm(s) so that your project has reasonable difficulty.  I will likely advise you not to bite off too much!  It is very easy to get lost in the application, the algorithmic details, or in difficulties with codes or analysis.
+\subsection*{Choosing a topic}  One of my jobs will be to help you choose problem(s) and algorithm(s) so that your project has reasonable difficulty.  I will likely advise you not to bite off too much!  The bigger the scope the easier it is to get lost in the application, the algorithmic details, or in difficulties with codes or analysis.  And your proposal allows me to give good feedback on the topic, perhaps a gentle nudge in the direction of a nice variation in topic, or a different analysis to consider, etc.
 
-You may not choose a topic which has been, or will be, adequately covered in the course.  For example, though the basic simplex method is not a good topic, implementations of the simplex method which respect sparsity are (Chapter 7).  Similarly, the classical Newton method is not a good subject but investigating quasi-Newton methods, line search methods, or trust region methods may be quite good choices (Chapters 11,12).  Your proposal allows me to give good feedback on this, perhaps a gentle nudge in the direction of a nice variation to study.
+You may \textbf{not} choose a topic which has been, or will be, adequately covered in the course.  For example, though the basic simplex method is not a good topic.  However, implementations of the simplex method which respect sparsity, a topic we do not cover, would be a great choice (Chapter 7).  Similarly, the classical Newton method is not a good subject but investigating quasi-Newton methods beyond BFGS, or line search methods beyond backtracking, or trust region methods, would all be good choices (Chapters 11,12).
 
 Here are three approaches to choosing a topic if you don't already have one:
 
-\subsubsection*{Approach 1: Inspiration from Wikipedia page on mathematical optimization}  See the ``Applications,'' ``Major subfields,'' and ``Computational \dots techniques'' sections of
+\subsubsection*{Approach 1: Inspiration from the Wikipedia page on mathematical optimization}  See the ``Applications,'' ``Major subfields,'' and ``Computational \dots techniques'' sections of
 
    \centerline{\href{https://en.wikipedia.org/wiki/Mathematical_optimization}{\texttt{en.wikipedia.org/wiki/Mathematical\_optimization}}}
 
-\subsubsection*{Approach 2: Investigate skipped material from the textbook}  Consider choosing a section(s) that you find interesting and which we did not cover.  I am not really recommending just choosing a section at random; the Wikipedia page above is a better if you are starting from scratch.
+\subsubsection*{Approach 2: Investigate skipped material from the textbook}  Consider section(s) that you find interesting and which we did not cover.  However, don't just choose a section at random; the above Wikipedia page is better for starting from scratch.
 
-\subsubsection*{Approach 3: Talk to your advisor and/or do something related to your thesis}  You can talk to me, but it will take a while for me to know what you are interested in.  It would be better to talk to your thesis advisor (if you have one).  It is reasonable to ask ``are there optimization problems related to my expected thesis''?  Broadly-speaking these might relate to optimal design or parameter fitting, or to algorithms which arise in your field of interest.  There may be a paper to read about optimization in your field.
+\subsubsection*{Approach 3: A topic related to your thesis (if you have one)}  You can talk to me, but it will take a while for me to understand the context of your problem.  It would be better to talk to your thesis advisor.  It is reasonable to ask ``are there optimization problems related to my expected thesis''?  Broadly-speaking these might relate to optimal design or parameter fitting, or to algorithms which arise in your field of interest.  There may be a paper to read about optimization in your field.  \textbf{Don't} cover territory comparable to your whole thesis; extract a little part and do it carefully.
 
 
 \newpage
-\subsection*{Structure of the project}  Here is a rough flow-chart.
+\subsection*{Structure of the project}  Here is a rough flow-chart.  It aligns well with the section headings on the next page.
 
 \bigskip
 
