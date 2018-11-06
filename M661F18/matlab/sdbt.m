@@ -2,7 +2,7 @@ function [xk, xklist] = sdbt(x0,f,tol)
 % SDBT  Steepest-descent optimization with back-tracking line search.  Stopping
 % criterion is tolerance on the norm of the gradient.
 % Usage:
-%    [xk, xklist] = sdbt(x0,f,tol,alpha)
+%    [xk, xklist] = sdbt(x0,f,tol)
 % where
 %    x0          vector with initial iterate
 %    f           function handle (e.g. "f" if f is anonymous or "@f" if f is
@@ -40,3 +40,4 @@ end % function
         alpha = rho * alpha;
     end
     end % function
+
