@@ -5,6 +5,8 @@
 \usepackage{amsmath,amsthm,amsbsy}
 \usepackage{palatino}
 
+\usepackage{tikz}
+
 %% Setup aproblem environment, 
 %% aproblem items
 %% subproblems environment
@@ -69,18 +71,25 @@
 \begin{aproblems}
 
 % 4.7 # 21
-\aproblem  FIXME
-\vfill
+\aproblem  Find the point on the line $y=2x+3$ which is closest to the origin.
+\vspace{3.0in}
 
-% 4.7 # 33
-\aproblem  FIXME
+% 4.7 # 35
+\aproblem  The top and bottom margins of a poster are each 6 cm and the side margins are 4 cm.  If the area of the printed material on the poster is fixed at 384 $\text{cm}^2$, find the dimensions of the poster with the smallest total area.
 \vfill
 
 \newpage
 \thispagestyle{plain}
 
-% 4.7 # 35
-\aproblem  FIXME
+% 4.7 # 41
+\aproblem  A cone-shaped drinking cup is made from a circular piece of waxed paper of radius $R$ by cutting out a sector, as shown, and joining the edges $CA$ and $CB$.  Find the maximum capacity of the cup.
+
+\begin{tikzpicture}[scale=1.0]
+  \draw (0,0) node[yshift=3mm] {$A$} arc (120:420:2.0) node[yshift=3mm] {$B$} -- node[midway,xshift=-2mm,yshift=2mm] {$R$} (1.0,-1.7321) node[yshift=-3mm] {$C$} -- (0.0,0.0);
+\end{tikzpicture}
+\vfill
+
+
 \vfill
 \end{aproblems}
 
