@@ -1,0 +1,115 @@
+\documentclass[11pt]{article}
+\usepackage[top=0.8in, bottom=0.7in, left=0.7in, right=0.9in]{geometry}
+
+\usepackage{graphicx,color,enumitem}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+\usepackage{tikz}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  %\hskip -\labelwidth\hskip -\labelsep 
+  \hskip 0pt%-\labelsep 
+  \hbox to\labelwidth{\hss\textbf{Example \arabic{probcount}.} \,}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 0pt
+
+
+\doclabel{Math F251: Section 4.8 Handout}
+\docdate{Thursday 8 November 2018}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+
+\phantom{foo}
+
+\vspace{-10mm}
+Newton's method solves a problem
+    $$f(x)=0$$
+by starting with an initial estimate $x_0$.  It gets a new estimate from the old estimate by finding where the linearization $L(x) \approx f(x)$ crosses the $x$-axis.  (\emph{To understand this, write down the linearization at $a=x_0$.  Solve for $x$.})  So it uses this formula:
+    $$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}.$$
+
+\aproblem  Suppose you want to solve the equation
+    $$3x^4-x^3+6x^2+4x-2 = 0.$$
+I do not see how to factor this by hand.  (\emph{Do you?})  If we name the left side of the equation ``$f(x)$'' and if we go looking for a root of $f(x)$ then we might notice $f(0)=-2$ and $f(1)=10$.  Because $f$ is continuous, by the intermediate value theorem there is a root on $(0,1)$.  Also, the derivative is an easy calculation: $f'(x) = 12 x^3 - 3 x^2 + 12 + 4.$
+
+Newton's method with initial estimate $x_0=1/2$ gives the next value by
+    $$x_1 = x_0 - \frac{f(x_0)}{f'(x_0)} = 0.354651162790698$$
+(\emph{It is nice to immediately use a \emph{serious} calculator, namely one with a big screen and the ability to run a loop.  Thus I used \textsc{Matlab} on my laptop.})  The next four iterations gave consistent numbers which strongly suggest $x=1/3$ is an exact root:
+\begin{align*}
+x_0 &= 0.500000000000000 \\
+x_1 &= \underline{0.3}54651162790698 \\
+x_2 &= \underline{0.333}718551391767 \\
+x_3 &= \underline{0.333333}461355651 \\
+x_4 &= \underline{0.3333333333333}47 \\
+x_5 &= \underline{0.333333333333333}
+\end{align*}
+Notice how the number of correct digits doubles from $x_1$ to $x_4$.  It stops doubling only because the computer only stores about 16 decimal digits.  In fact we have discovered how to factor the function: $f(x)=(x-\frac{1}{3}) (3x^3+6x+6)$.
+
+\medskip
+\aproblem  Suppose we want to find the maximum of $g(x) = x^2 - 2 \sin x$ on the interval $[0,1]$.  We take the derivative and set it to zero to find the critical numbers:
+    $$2x - 2 \cos x=0$$
+You can factor and remove the ``$2$,'' but otherwise this is an equation I do not know how to solve by hand.  So I try Newton's method.  Let $f(x)=x-\cos x$ so $f'(x)=1+\sin(x)$.  Newton's method starting with $x_0=0.5$ gives these five iterates, and the last two agree to all digits:
+\begin{align*}
+x_0 &= 0.500000000000000 \\
+x_1 &= \underline{0.7}55222417105636 \\
+x_2 &= \underline{0.739}141666149879 \\
+x_3 &= \underline{0.739085133}920807 \\
+x_4 &= \underline{0.739085133215161} \\
+x_5 &= \underline{0.739085133215161}
+\end{align*}
+In fact $f(x_4)=0$ to the accuracy of the computer.  Again notice the approximate doubling of the number of correct digits at each Newton step.
+
+\end{aproblems}
+
+\end{document}
