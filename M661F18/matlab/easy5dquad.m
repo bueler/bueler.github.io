@@ -1,4 +1,4 @@
-function [f, df] = easy5dquad(x)
+function [f, df, Hf] = easy5dquad(x)
 % EASY5DQUAD  Easy to minimize quadratic function in 5D with unique minimum 0.
 
 if length(x) ~= 5,  error('x must be length 5 vector'),  end
@@ -8,4 +8,11 @@ df = [20 * x(1);
       2 * x(3);
       x(4);
       0.2 * x(5)];
+if nargout > 2
+   Hf = [20,  0,   0,   0,   0;
+         0,  10,   0,   0,   0;
+         0,   0,   2,   0,   0;
+         0,   0,   0,   1,   0;
+         0,   0,   0,   0, 0.2];
+end
 
