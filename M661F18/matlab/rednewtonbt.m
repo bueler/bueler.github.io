@@ -3,7 +3,8 @@ function [xk, xklist] = rednewtonbt(x0,f,A,b,tol,maxiter,ctol)
 % equality-constrained optimization problem
 %    min  f(x)
 %    s.t. A*x = b
-% where f : R^n -> R is twice-differentiable and A has full row rank.
+% where f : R^n -> R is twice-differentiable and A has full row rank.  Stopping
+% criterion is tolerance on the norm of the gradient.
 %
 % Usage:   [xk, xklist] = rednewtonbt(x0,f,A,b,tol)
 % where
@@ -18,6 +19,7 @@ function [xk, xklist] = rednewtonbt(x0,f,A,b,tol,maxiter,ctol)
 %    tol         stop when norm of gradient is less than this number
 % and (outputs)
 %    xk          final iterate
+%    xklist      list of all iterates [optional]
 %
 % Warning:  This implementation is inefficient.  It uses explicit matrix
 %           multiplication to build the reduced gradient and Hessian.  It also
@@ -57,7 +59,9 @@ else
 end
 
 % reduced Newton iteration
-xklist = [xk];
+if nargout > 1
+    xklist = [xk];
+end
 for k=1:maxiter
     [fk, dfk, Hfk] = f(xk);
     r_dfk = Z' * dfk;            % reduced gradient
@@ -76,7 +80,9 @@ for k=1:maxiter
     if m > 0
         if norm(A*xk-b) >= ctol, warning('iterate %k may not be feasible!',k), end
     end
-    xklist = [xklist xk];        % append latest point to list
+    if nargout > 1
+        xklist = [xklist xk];    % append latest point to list
+    end
 end
 
     function alpha = bt(xk,pk,dfxk,f)
@@ -91,4 +97,5 @@ end
     end
     end % function bt
 
-end % function 
+end % function
+
