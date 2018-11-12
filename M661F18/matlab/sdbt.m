@@ -1,4 +1,4 @@
-function [xk, xklist] = sdbt(x0,f,tol)
+function [xk, xklist] = sdbt(x0,f,tol,maxiters)
 % SDBT  Steepest-descent optimization with back-tracking line search.  Stopping
 % criterion is tolerance on the norm of the gradient.
 % Usage:
@@ -13,9 +13,13 @@ function [xk, xklist] = sdbt(x0,f,tol)
 %    xk          Nth iterate
 %    xklist      all iterates as N+1 column matrix
 
-maxiters = 20000;                % never take more steps than this
+if nargin < 4
+    maxiters = 20000;            % never take more steps than this
+end
 xk = x0(:);                      % force into column shape
-xklist = [xk];
+if nargout > 1
+    xklist = [xk];
+end
 for k = 1:maxiters
     [fxk, dfxk] = f(xk);
     if norm(dfxk) < tol          % absolute tolerance on gradient f
@@ -24,7 +28,9 @@ for k = 1:maxiters
     pk = - dfxk;                 % steepest descent
     alpha = bt(xk,pk,dfxk,f);    % back-tracking line search
     xk = xk + alpha * pk;
-    xklist = [xklist xk];        % append latest point to list
+    if nargout > 1
+        xklist = [xklist xk];    % append latest point to list
+    end
 end
 end % function
 
