@@ -78,7 +78,7 @@ for k=1:maxiter
     alpha = bt(zeros(n-m,1),v,r_dfk,fred);
     xk = xk + Z * (alpha * v);
     if m > 0
-        if norm(A*xk-b) >= ctol, warning('iterate %k may not be feasible!',k), end
+        if norm(A*xk-b) >= ctol, warning('iterate %d may not be feasible!',k), end
     end
     if nargout > 1
         xklist = [xklist xk];    % append latest point to list
