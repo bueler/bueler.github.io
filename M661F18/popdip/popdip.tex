@@ -23,8 +23,6 @@
 
 \newcommand{\mtt}{\texttt}
 \usepackage{alltt,xspace}
-\newcommand{\mfile}[1]
-{\medskip\begin{quote}\scriptsize \begin{alltt}\input{#1.m}\end{alltt} \normalsize\end{quote}\medskip}
 
 %\usepackage[final]{graphicx}
 
@@ -88,6 +86,8 @@ These short notes are not research!  This algorithm is simply a special case of 
 \thispagestyle{empty}
 
 \bigskip
+\subsection*{Introduction and algorithm design}
+
 Consider a nonlinear optimization problem with positivity constraints on the variables:
 \begin{equation}
 \begin{matrix}
@@ -114,7 +114,7 @@ where $\lambda\in\RR^n$.  Note that $\lambda>0$ if and only if $x>0$ because $\l
 \begin{align}
 x &\ge 0 \label{firstordersystem} \\
 \lambda &\ge 0 \notag \\
-\grad f(x) - \sum_{i=1}^n \lambda_i e_i &= 0 \notag \\
+\grad f(x) - \lambda &= 0 \notag \\
 \lambda_i x_i &= \mu, \qquad i=1,\dots,n \notag
 \end{align}
 
@@ -124,17 +124,17 @@ The third condition in \eqref{firstordersystem} is related to a Lagrangian funct
     $$\mathcal{L}(x,\lambda) = f(x) - \sum_{i=1}^n \lambda_i x_i.$$
 The third condition is the statement that $\grad_x \mathcal{L}(x,\lambda)=0$.  However, the whole system \eqref{firstordersystem} describes a solution which is generally different from an unconstrained stationary point of the Lagrangian.  There is an additional connection between the variables ($\lambda_i x_i = \mu$) and there are additional nonnegativity constraints ($x\ge 0$ and $\lambda\ge 0$) so generally ``$\grad_x\mathcal{L}(x,\lambda)=0$ and $\grad_\lambda\mathcal{L}(x,\lambda)=0$'' does not hold at the solution.
 
-Algorithm 16.1 in \cite{GrivaNashSofer2009} applies to \eqref{minproblem}, and the POPDIP algorithm proposed below is the simplification which uses the fact that $g_i(x)=x_i$.  These algorithms compute approximate solutions to \eqref{firstordersystem} for a sequence $\mu=\mu^{(k)} \to 0$.  In that limit the exact solution solves \eqref{firstordersystem} with $\mu$ replaced by zero.  These are the KKT conditions for \eqref{minproblem}---see Lemma 14.8 and Theorem 14.18 in \cite{GrivaNashSofer2009}---including the complementarity statement $\lambda_i x_i=0$.
+Algorithm 16.1 in \cite{GrivaNashSofer2009} applies to \eqref{minproblem}, and the POPDIP algorithm proposed below is the simplification which uses the fact that $g_i(x)=x_i$.  These algorithms compute approximate solutions to \eqref{firstordersystem} for a sequence $\mu_k \to 0$.  In that limit the exact solution solves \eqref{firstordersystem} with $\mu$ replaced by zero.  These are the KKT conditions for \eqref{minproblem}---see Lemma 14.8 and Theorem 14.18 in \cite{GrivaNashSofer2009}---including the complementarity statement $\lambda_i x_i=0$.
 
 Each step of the algorithm is a Newton step for the nonlinear system of equalities from \eqref{firstordersystem},
 \begin{align}
-\grad f(x) - \sum_{i=1}^n \lambda_i e_i &= 0 \label{equalitysystem} \\
-\lambda_i x_i &= \mu, \qquad i=1,\dots,n. \notag
+\grad f(x) - \lambda &= 0 \label{equalitysystem} \\
+\lambda_i x_i &= \mu_k, \qquad i=1,\dots,n. \notag
 \end{align}
-The Newton method updates both $x$ and $\lambda$ using the linearization of these equations.  To describe the Newton step let $x=x^{(k)}+\Delta x$, $\lambda=\lambda^{(k)}+\Delta\lambda$, and $\mu=\mu^{(k)}$.  Note that the current iterate, namely $(x^{(k)},\lambda^{(k)})$, generally does not solve \eqref{equalitysystem}.  The unknowns in the Newton step are the search direction $p=(\Delta x,\Delta \lambda)$.  Substituting into \eqref{equalitysystem} and expanding to first order gives
+The Newton method updates both $x$ and $\lambda$ using the linearization of these equations.  To describe the Newton step let $x=x^{(k)}+\Delta x$ and $\lambda=\lambda^{(k)}+\Delta\lambda$.  Note that the current iterate, namely $(x^{(k)},\lambda^{(k)})$, generally does not solve \eqref{equalitysystem}.  The unknowns in the Newton step are the search direction $p=(\Delta x,\Delta \lambda)$.  Substituting into \eqref{equalitysystem} and expanding to first order gives
 \begin{align}
-\grad f(x^{(k)}) - \sum_{i=1}^n \lambda_i^{(k)} e_i + \grad^2 f(x^{(k)}) \Delta x - \sum_{i=1}^n (\Delta \lambda)_i e_i &= 0 \label{prenewtonstep} \\
-\lambda_i^{(k)} x_i^{(k)} + x_i^{(k)} (\Delta\lambda)_i + \lambda_i^{(k)} (\Delta x)_i &= \mu^{(k)}, \qquad i=1,\dots,n \notag
+\grad f(x^{(k)}) - \lambda^{(k)} + \grad^2 f(x^{(k)}) \Delta x - \Delta \lambda &= 0 \label{prenewtonstep} \\
+\lambda_i^{(k)} x_i^{(k)} + x_i^{(k)} (\Delta\lambda)_i + \lambda_i^{(k)} (\Delta x)_i &= \mu_k, \qquad i=1,\dots,n \notag
 \end{align}
 Rearranging as a linear block system for the search direction, and suppressing the superscript on the current iterate gives the Newton step equations
 \begin{equation}
@@ -148,15 +148,86 @@ Rearranging as a linear block system for the search direction, and suppressing t
 \end{bmatrix}
 =
 \begin{bmatrix}
--\grad f(x) + \sum_{i=1}^n \lambda_i e_i \\
--\Lambda x + \mu^{(k)} e
+-\grad f(x) + \lambda \\
+-\Lambda x + \mu_k e
 \end{bmatrix}
  \label{newtonstep}
 \end{equation}
 where $I$ is the $n\times n$ identity matrix and the other notation is as follows:
     $$\Lambda = \begin{bmatrix} \lambda_1 & & \\ & \ddots & \\ & & \lambda_n \end{bmatrix}, \qquad X = \begin{bmatrix} x_1 & & \\ & \ddots & \\ & & x_n \end{bmatrix}, \qquad e = \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix}.$$
 
-Equation \eqref{newtonstep} can be symmetrized by multiplying the second half of the equations by $-\Lambda^{-1}$:
+Given a solution of \eqref{newtonstep} the update formulas are
+\begin{align*}
+x_{k+1} &= x_k + \alpha_P \Delta x \\
+\lambda_{k+1} &= \lambda_k + \alpha_D \Delta \lambda
+\end{align*}
+The maximum step sizes $\alpha_P,\alpha_D$ for the primal and dual variables are determined by separate ratio tests to achieve (strict) positivity of $x_{k+1}$ and $\lambda_{k+1}$, respectively.  Because this is a Newton search one uses $\alpha_P=\alpha_D=1$ for the largest allowed step.  Note we are not truly using $p=(\Delta x,\Delta \lambda) \in \RR^{2n}$ as a search direction; instead separate searches update the primal and dual variables.
+
+The optimality test in our algorithm follows Algorithm 16.1 by using the merit function
+    $$\nu(x,\lambda) = \max\{\|\grad f(x)-\lambda\|,\|\Lambda x\|\}$$
+where $\|\cdot\|$ denotes the usual $L^2$ norm on $\RR^n$.  Note that once $\mu_k\to 0$ we have $\nu(x_*,\lambda_*) = 0$ for the exact optimum, but when $\mu_k \ne 0$ then the exact solution of \eqref{equalitysystem} does not make $\nu(x,\lambda)$ have value zero.  In fact $\nu(x_*,\lambda_*) = \sqrt{n}\, \mu_k$ for the exact solution of \eqref{equalitysystem}; if the merit function values $\nu(x_k,\lambda_k)$ are close to these values then we should decrease $\mu_k$ more rapidly.
+
+
+\subsection*{Algorithm}
+
+We can now present a pseudocode for our algorithm.
+
+\bigskip
+\noindent \textsc{Algorithm POPDIP.}
+\begin{quote}
+\begin{itemize}
+\item[\emph{inputs}]  primal initial values $x_0$ such that $x_0 > 0$
+\item[]  smooth function $f$ returning $f(x)$, $\grad f(x)$, and $\grad^2 f(x)$
+\item[\emph{parameters}]  $\text{\texttt{tol}}>0$ [default $\text{\texttt{tol}}=10^{-4}$]
+\item[]  $\mu_0>0$ [default $\mu_0=1$]
+\item[]  $\theta>0$ [default $\theta=0.2$]
+\item[]  $\kappa>0$ [default $\kappa=0.9$]
+\item[\emph{output}]  an estimate $(x_k,\lambda_k)$ of the solution
+\item  determine initial dual variables: $(\lambda_0)_i = \mu_0 / (x_0)_i$
+\item  for $k=0,1,2,\dots$
+    \renewcommand{\labelenumi}{(\roman{enumi})}
+    \begin{enumerate}
+    \item optimality test: if $\nu(x_k,\lambda_k)<\text{\texttt{tol}}$ then stop
+    \item compute Newton step by solving this system for $(\Delta x,\Delta \lambda)$:
+    $$\begin{bmatrix}
+\grad^2 f(x_k) & - I \\
+\Lambda_k & X_k
+\end{bmatrix}
+\begin{bmatrix}
+\Delta x \\
+\Delta \lambda
+\end{bmatrix}
+=
+\begin{bmatrix}
+-\grad f(x_k) + \lambda_k \\
+-\Lambda_k x_k + \mu_k e
+\end{bmatrix}$$
+    \item ratio test for step sizes to keep $x_{k+1},\lambda_{k+1}$ positive:
+\begin{align*}
+\alpha_P &= \min_{1\le i\le n} \left\{1, \,-\kappa \frac{(x_k)_i}{(\Delta x)_i} \,:\, (\Delta x)_i < 0\right\} \\
+\alpha_D &= \min_{1\le i\le n} \left\{1, \,-\kappa \frac{(\lambda_k)_i}{(\Delta \lambda)_i} \,:\, (\Delta \lambda)_i < 0\right\}
+\end{align*}
+    \item the update:
+\begin{align*}
+x_{k+1} &= x_k + \alpha_P \Delta x \\
+\lambda_{k+1} &= \lambda_k + \alpha_D \Delta \lambda
+\end{align*}
+    \item the barrier parameter update:
+        $$\mu_{k+1} = \theta \mu_k$$
+    \end{enumerate}
+\end{itemize}
+\end{quote}
+
+This algorithm is implemented by a \Matlab code with signature
+\begin{center}
+\texttt{function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,mu0,theta,kappa)}
+\end{center}
+Only inputs \texttt{x0,lam0,f} are required.  If outputs \texttt{xklist,lamklist} are not requested then they are not computed.  The parameters have the default values listed above.  Download at
+\begin{center}
+    \href{http://bueler.github.io/M661F18/matlab/popdip.m}{\texttt{bueler.github.io/M661F18/matlab/popdip.m}}
+\end{center}
+
+We may consider three possible areas for improvements of Algorithm 16.1.  First, in Algorithm 16.1 the computation of the Newton search direction is followed by separate line searches in $x$ and in $\lambda$.  These line searches only to maintain the nonnegativity requirements (generally: $g_i(x)\ge 0$ and $\lambda_i\ge 0$), and they do not seek sufficient decrease of $f(x)$ in particular, so they are just ratio tests.  Also, the same parameter $\kappa$ is used in both instances of the ratio test, and this could change.  Finally, equation \eqref{newtonstep} can be symmetrized by multiplying the second half of the equations by $-\Lambda^{-1}$:
 \begin{equation}
 \begin{bmatrix}
 \grad^2 f(x) & - I \\
@@ -168,40 +239,37 @@ Equation \eqref{newtonstep} can be symmetrized by multiplying the second half of
 \end{bmatrix}
 =
 \begin{bmatrix}
--\grad f(x) + \sum_{i=1}^n \lambda_i e_i \\
+-\grad f(x) + \lambda \\
 x - \mu^{(k)} \Lambda^{-1} e
 \end{bmatrix}
  \label{symmnewtonstep}
 \end{equation}
-However, it is not clear to me whether solving \eqref{newtonstep} or \eqref{symmnewtonstep} leads to a better algorithm.
 
-In Algorithm 16.1 the computation of the Newton search direction is followed by separate line searches in $x$ and in $\lambda$.  The goals of these line searches is only to maintain the nonnegativity requirements ($g_i(x)\ge 0$ and $\lambda_i\ge 0$, in general) and not to get sufficient decrease of $f(x)$.  Even for the general case the line search on $\lambda$ is merely the application of the ratio test.  These facts suggests two possible areas for improvement of the algorithm:
+These facts suggests four possible changes of Algorithm 16.1:
 \begin{enumerate}
-\item Because of the linearity of the constraint functions in problem \eqref{minproblem}, namely $g_i(x)=x_i$, a ratio test on $x$ also suffices to keep $x$ feasible.
-\item Back-tracking line search is appropriate as a globalization even for unconstrained optimization.  Thus there are cases where it is appropriate for problem \eqref{minproblem} as well.
+\item Back-tracking is not needed to maintain feasibility of the primal variables because of the linearity of the constraint functions in problem \eqref{minproblem}, namely $g_i(x)=x_i$.  A ratio test on $x$ suffices to keep $x$ feasible.
+\item Back-tracking line search is appropriate as a globalization even for unconstrained optimization.  Thus there must be cases where it is appropriate for problem \eqref{minproblem} as well.  Compare the modified back-tracking line searches in \cite{BensonMunson2006}.
+\item One could use separate parameters $\kappa_P,\kappa_D$ in the ratio tests.
+\item One can replace linear system \eqref{newtonstep} with a symmetrized version, system \eqref{symmnewtonstep}.
 \end{enumerate}
-For now we will implement improvement 1 but keep 2 in reserve as a possible further improvement.
+In POPDIP we have already implemented change 1.  Changes 2, 3, and 4 may generate further improvements, but that would require testing which we have not done.
 
-The optimality test in Algorithm 16.1 uses the merit function
-    $$\nu(x,\lambda) = $$
 
-\bigskip
-\noindent \textsc{Algorithm. the POsitive-variables Primal-Dual Interior Point method.}
-\begin{quote}
-\begin{itemize}
-\item[\emph{input}]  FIXME
-\item[\emph{output}]  FIXME
-\end{itemize}
-\renewcommand{\labelenumi}{\arabic{enumi}.}
-\begin{enumerate}
-\item FIXME
-\item For $k=0,1,2,\dots$
-    \renewcommand{\labelenumii}{(\alph{enumii})}
-    \begin{enumerate}
-    \item FIXME
-    \end{enumerate}
-\end{enumerate}
-\end{quote}
+\subsection*{Testing}
+
+FIXME we start with a 2D easy test
+\begin{equation}
+\begin{matrix}
+\text{minimize} \qquad & f(x) = \frac{1}{2} (x_1-1)^2 + \frac{1}{2} (x_2+1)^2 \\
+\text{subject to} \qquad & x \ge 0
+\end{matrix} \label{testoneproblem}
+\end{equation}
+For this problem the unconstrained minimum is the infeasible point $\hat x =(1,-1)^\top$.  A sketch shows the exact solution is $x_*=(1,0)^\top$.  We propose to use the default parameters and start with the feasible point $x_0=(2,2)^\top$.  Note the initial dual variables are then determined using $\mu_0=1$: $\lambda_0=(1/2,1/2)^\top$.
+
+
+\subsection*{Application to example problem (\texttt{glacier}).}
+
+FIXME a primal-dual interior point method for a glacier problem appears in \cite{Calvoetal2003}
 
 
 \bibliography{popdip}
