@@ -1,4 +1,12 @@
-all:
+all: popdip.pdf
+
+popdip.pdf: popdip.aux
+	pdflatex popdip
+
+popdip.aux: popdip.tex popdip.bib
+	pdflatex popdip
+	bibtex popdip
+	pdflatex popdip
 
 .PHONY: clean
 
