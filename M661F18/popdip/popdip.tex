@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.75in} 
+\addtolength{\evensidemargin}{-.75in}
+\addtolength{\topmargin}{-.4in}
+\addtolength{\textwidth}{1.4in}
+\addtolength{\textheight}{1.0in}
+
+\renewcommand{\baselinestretch}{1.075}
+
+\usepackage{verbatim,fancyvrb}
+
+\usepackage{palatino,amsmath,amssymb,amsthm}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\mtt}{\texttt}
+\usepackage{alltt,xspace}
+\newcommand{\mfile}[1]
+{\medskip\begin{quote}\scriptsize \begin{alltt}\input{#1.m}\end{alltt} \normalsize\end{quote}\medskip}
+
+%\usepackage[final]{graphicx}
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=blue, citecolor=red, urlcolor=blue]{hyperref}
+
+% macros
+\newcommand{\bc}{\mathbf{c}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+
+%\renewcommand{\det}{\operatorname{det}}
+\newcommand{\onull}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\prob}[1]{\bigskip\noindent\textbf{#1.}\quad }
+\newcommand{\exer}[2]{\prob{Exercise #2 in Lecture #1}}
+
+\newcommand{\pts}[1]{(\emph{#1 pts}) }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\quad }
+\newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
+
+\newcommand{\Julia}{\textsc{Julia}\xspace}
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Octave}{\textsc{Octave}\xspace}
+\newcommand{\Python}{\textsc{Python}\xspace}
+
+\DefineVerbatimEnvironment{mVerb}{Verbatim}{numbersep=2mm,
+frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
+
+\newcommand{\ema}{\emach}
+\newcommand{\emach}{\eps_{\!_{\text{m}}}}
+
+\title{POPDIP: \\ the POsitive-variables Primal-Dual Interior Point method}
+\author{Ed Bueler}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+%\abstract{This is not research, but it is a new algorithm for me.  It is a version of the primal dual interior point algorithm in \cite{GrivaNashSofer2009}.}
+\begin{abstract}
+POPDIP is a version of the primal dual interior point algorithm in \cite{GrivaNashSofer2009}; see section 16.7 and Algorithm 16.1.  (``POPDIP'' is just a name I made up; it is not in common use.)  It minimizes a smooth nonlinear function subject to the constraints that all the variables are nonnegative.
+
+These short notes are not research!  Indeed this algorithm is simply a special case of a well-known algorithm.  However, it is new to me so I am documenting it fully.
+\end{abstract}
+
+\thispagestyle{empty}
+
+\bigskip
+Consider the nonlinear optimization problem with positivity constraints on the variables:
+\begin{equation}
+\begin{matrix}
+\text{minimize} \qquad & f(x) \\
+\text{subject to} \qquad & x \ge 0
+\end{matrix} \label{minproblem}
+\end{equation}
+Here $f:\RR^n\to\RR^n$ is a smooth function and ``$x\ge 0$'' means that each entry of $x\in\RR^n$ is nonnegative.  Clearly the feasible set of \eqref{minproblem} is $S = \{x\in \RR^n\,:\,x\ge 0\}$.
+
+Let $\mu>0$.  If $x$ is in the interior of $S$ then the following ``barrier function'' is finite:
+\begin{equation}
+\beta_\mu = f(x) - \mu \sum_{i=1}^n \ln x_i \label{barrierfunction}
+\end{equation}
+The first-order necessary conditions for the unconstrained problem of minimizing $\beta_\mu$, namely $\grad \beta_\mu(x)=0$ for $x$ in the interior of $S$, are
+\begin{align}
+x &> 0 \label{firstorderbarrier} \\
+\grad f(x) - \mu \sum_{i=1}^n x_i^{-1} e_i &= 0 \notag
+\end{align}
+Here $\{e_1,\dots,e_n\}$ is the standard basis of $\RR^n$.
+
+Conditions \eqref{firstorderbarrier} can be reformulated by defining additional variables $\lambda_i = \mu / x_i$ where $\lambda\in\RR^n$.  Note that $\lambda>0$ if and only if $x>0$ because $\lambda_i x_i = \mu > 0$.  Now \eqref{firstorderbarrier} is precisely equivalent to the following nonlinear system of equations and inequalities:
+\begin{align}
+x &\ge 0 \label{firstordersystem} \\
+\lambda &\ge 0 \notag \\
+\grad f(x) - \sum_{i=1}^n \lambda_i e_i &= 0 \notag \\
+\lambda_i x_i &= \mu, \qquad i=1,\dots,n \notag
+\end{align}
+
+Conditions \eqref{firstordersystem} are related to an obvious definition of a Lagrangian function for \eqref{minproblem}, namely
+    $$\mathcal{L}(x,\lambda) = f(x) - \sum_{i=1}^n \lambda_i x_i,$$
+so that the third line of \eqref{firstordersystem} is the statement that $\grad_x \mathcal{L}(x,\lambda)=0$.  However, the whole system \eqref{firstordersystem} says more than the statement of that the unconstrained Lagrangian has a stationary point.  Namely, there is an additional connection between the variables ($\lambda_i x_i = \mu$) and there are additional nonnegativity constraints ($x\ge 0$ and $\lambda\ge 0$).
+
+A primal-dual interior point algorithm for \eqref{minproblem} will compute approximate solutions to \eqref{firstordersystem} for a sequence $\mu=\mu_k \to 0$.  In the limit the exact solution solves \eqref{firstordersystem} with $\mu$ replaced by zero.  These are the Karush-Kuhn-Tucker conditions for \eqref{minproblem}; see Lemma 14.8 and Theorem 14.18 in \cite{GrivaNashSofer2009}.
+
+
+
+\bigskip
+\noindent \textsc{Algorithm. the POsitive-variables Primal-Dual Interior Point method.}
+\begin{quote}
+\begin{itemize}
+\item[\emph{input}]  FIXME
+\item[\emph{output}]  FIXME
+\end{itemize}
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\begin{enumerate}
+\item FIXME
+\item For $k=0,1,2,\dots$
+    \renewcommand{\labelenumii}{(\alph{enumii})}
+    \begin{enumerate}
+    \item FIXME
+    \end{enumerate}
+\end{enumerate}
+\end{quote}
+
+
+\bibliography{popdip}
+\bibliographystyle{siam}
+
+\end{document}
+
