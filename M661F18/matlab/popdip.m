@@ -1,6 +1,9 @@
 function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,maxiters,mu0,theta,kappa)
 % POPDIP  POsitive-variables Primal-Dual Interior Point method
 % documented by: http://bueler.github.io/M661F18/popdip/popdip.pdf
+% Example:
+%   >> format long g
+%   >> [xk,lamk,xklist]=popdip([2;2],@quickquad,1.0e-8); xk,lamk,xklist'
 
 if nargin < 3,  tol = 1.0e-4;    end
 if nargin < 5,  maxiters = 200;  end
@@ -38,6 +41,7 @@ for k = 1:maxiters
         xklist = [xklist xk];
         lamklist = [lamklist lamk];
     end
+    mu = theta * mu;
 end
 end % function
 
