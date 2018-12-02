@@ -42,7 +42,8 @@ end
 end % function
 
     function z = merit(x,lam,dfx)
-    return max(norm(dfx-lam),norm(lam.*x));
+    z = max(norm(dfx-lam),norm(lam.*x));
+    end % function
 
     function alpha = ratiotest(x,dx,kappa)
     alpha = 1.0;
@@ -51,5 +52,5 @@ end % function
             alpha = min(alpha, - kappa * x(j) / dx(j));
         end
     end
-    return alpha;
+    end % function
 
