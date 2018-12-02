@@ -115,13 +115,63 @@ x &\ge 0 \label{firstordersystem} \\
 \grad f(x) - \sum_{i=1}^n \lambda_i e_i &= 0 \notag \\
 \lambda_i x_i &= \mu, \qquad i=1,\dots,n \notag
 \end{align}
+Note that, because of the last condition, both $x$ and $\lambda$ are positive and thus in the interiors of their respective feasible sets.
 
 Conditions \eqref{firstordersystem} are related to an obvious definition of a Lagrangian function for \eqref{minproblem}, namely
     $$\mathcal{L}(x,\lambda) = f(x) - \sum_{i=1}^n \lambda_i x_i,$$
 so that the third line of \eqref{firstordersystem} is the statement that $\grad_x \mathcal{L}(x,\lambda)=0$.  However, the whole system \eqref{firstordersystem} says more than the statement of that the unconstrained Lagrangian has a stationary point.  Namely, there is an additional connection between the variables ($\lambda_i x_i = \mu$) and there are additional nonnegativity constraints ($x\ge 0$ and $\lambda\ge 0$).
 
-A primal-dual interior point algorithm for \eqref{minproblem} will compute approximate solutions to \eqref{firstordersystem} for a sequence $\mu=\mu_k \to 0$.  In the limit the exact solution solves \eqref{firstordersystem} with $\mu$ replaced by zero.  These are the Karush-Kuhn-Tucker conditions for \eqref{minproblem}; see Lemma 14.8 and Theorem 14.18 in \cite{GrivaNashSofer2009}.
+Algorithm 16.1 in section 16.7 of \cite{GrivaNashSofer2009}, a primal-dual interior point algorithm, applies to \eqref{minproblem}.  POPDIP is the resulting simplified algorithm which uses the fact that $g_i(x)=x_i$.  It computes approximate solutions to \eqref{firstordersystem} for a sequence $\mu=\mu^{(k)} \to 0$.  In that limit the exact solution solves \eqref{firstordersystem} with $\mu$ replaced by zero, and these conditions are the Karush-Kuhn-Tucker conditions for \eqref{minproblem}; see Lemma 14.8 and Theorem 14.18 in \cite{GrivaNashSofer2009}.
 
+Each step of the algorithm is a Newton step for the nonlinear system
+\begin{align}
+\grad f(x) - \sum_{i=1}^n \lambda_i e_i &= 0 \label{equalitysystem} \\
+\lambda_i x_i &= \mu, \qquad i=1,\dots,n \notag
+\end{align}
+in the variables $x$ and $\lambda$.  To describe the Newton step let $x=x^{(k)}+\Delta x$, $\lambda=\lambda^{(k)}+\Delta\lambda$, and $\mu=\mu^{(k)}$.  (The current iterate is $(x^{(k)},\lambda^{(k)})$ generally does not solve \eqref{equalitysystem}.  The unknowns in the Newton step are the search direction $p=(\Delta x,\Delta \lambda)$.)  Substituting these into \eqref{equalitysystem} and expanding to first order gives
+\begin{align}
+\grad f(x^{(k)}) - \sum_{i=1}^n \lambda_i^{(k)} e_i + \grad^2 f(x^{(k)}) \Delta x - \sum_{i=1}^n (\Delta \lambda)_i e_i &= 0 \label{prenewtonstep} \\
+\lambda_i^{(k)} x_i^{(k)} + x_i^{(k)} (\Delta\lambda)_i + \lambda_i^{(k)} (\Delta x)_i &= \mu^{(k)}, \qquad i=1,\dots,n \notag
+\end{align}
+Rearranging as a linear block system for the search direction, and suppressing the ``$(k)$'' superscript on the current iterate gives the Newton step equations
+\begin{equation}
+\begin{bmatrix}
+\grad^2 f(x) & - I \\
+\Lambda & X
+\end{bmatrix}
+\begin{bmatrix}
+\Delta x \\
+\Delta \lambda
+\end{bmatrix}
+=
+\begin{bmatrix}
+-\grad f(x) + \sum_{i=1}^n \lambda_i e_i \\
+-\Lambda x + \mu^{(k)} e
+\end{bmatrix}
+ \label{newtonstep}
+\end{equation}
+where $I$ is the $n\times n$ identity matrix, $X$ is an $n\times n$ diagonal matrix with the entries of the vector $x$ on the diagonal, and similarly $\Lambda$ is an $n\times n$ diagonal matrix with the entries of the vector $\lambda$ on the diagonal.
+
+Equation \eqref{newtonstep} can be symmetrized by multiplying the second half of the equations by $-\Lambda^{-1}$:
+\begin{equation}
+\begin{bmatrix}
+\grad^2 f(x) & - I \\
+-I & - \Lambda^{-1} X
+\end{bmatrix}
+\begin{bmatrix}
+\Delta x \\
+\Delta \lambda
+\end{bmatrix}
+=
+\begin{bmatrix}
+-\grad f(x) + \sum_{i=1}^n \lambda_i e_i \\
+x - \mu^{(k)} \Lambda^{-1} e
+\end{bmatrix}
+ \label{symmnewtonstep}
+\end{equation}
+(Note that It is not clear to me at this time whether solving \eqref{newtonstep} or \eqref{symmnewtonstep} makes a better algorithm.
+
+In Algorithm 16.1 the computation of the Newton search direction is followed by separate line searches in $x$ and in $\lambda$.  The goals of these line searches is only to maintain the nonnegativity requirements ($g_i(x)\ge 0$ and $\lambda_i\ge 0$, in general) and not to get sufficient decrease of $f(x)$.  However, in our case, because of the linearity of the constraint functions, namely of the functions $g_i(x)=x_i$, ratio tests can be applied in each line search to bound the step sizes $\alpha$.  Thus no back-tracking line search is required.\footnote{This algorithm design suggests possible improvements.  Back-tracking line search is, of course, appropriate as a globalization for unconstrained optimization.}
 
 
 \bigskip
