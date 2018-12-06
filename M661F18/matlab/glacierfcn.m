@@ -1,25 +1,41 @@
 function [f,df,Hf] = glacierfcn(u)
 % GLACIERFCN  Evaluate objective function, gradient, and Hessian for glacier
-% viscous/climate energy function.
+% viscous/climate energy function.  The continuum objective is a functional
+%          /L
+%   f[u] = |   (mu/4) (u'(x))^4 - m(x) u(x) dx
+%          /-L
+% Uses midpoint rule.
 
-N = 21;         % hard-wired for now
-mu = 1.0e-14;
+u = u(:);
+n = length(u);
+u = [0; u; 0];  % length n+2
+
 L = 100.0e3;    % 100 km
+x = linspace(-L,L,n+2);
 
-x = linspace(-L,L,N);
-
-%y = zeros(size(x));
-%for j = 1:length(y)
-%    y(j) = mclimate(x(j));
-%end
-%plot(x/1000.0,31556926.0*y)
-
-dx = 2 * L / (N-1);
-
-FIXME
-
+% objective f(u)
+mu = 1.0e-14;
+dx = 2 * L / (n+1);
 f = 0;
-df = 0;
+for j = 1:n+1
+    xmid = 0.5 * (x(j) + x(j+1));
+    dudx = (u(j+1) - u(j))/dx;
+    uav = 0.5 * (u(j) + u(j+1));
+    f = f + (mu / 4) * dudx^4 - m(xmid) * uav;
+end
+f = f * dx;
+
+% gradient grad f(u)
+df = zeros(n,1);
+for k = 1:n
+    j = k+1;
+    dudxl = (u(j) - u(j-1))/dx;
+    dudxr = (u(j+1) - u(j))/dx;
+    xmidl = 0.5 * (x(j-1) + x(j));
+    xmidr = 0.5 * (x(j) + x(j+1));
+    df(k) = - mu * (dudxr^3 - dudxl^3) - 0.5 * (m(xmidl) + m(xmidr));
+end
+
 Hf = 0;
 end % function glacierfcn
 
