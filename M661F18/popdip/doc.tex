@@ -76,9 +76,8 @@ frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
 \begin{document}
 \maketitle
 
-%\abstract{This is not research, but it is a new algorithm for me.  It is a version of the primal dual interior point algorithm in \cite{GrivaNashSofer2009}.}
 \begin{abstract}
-The algorithm documented here is a version of the primal-dual interior point algorithm in \cite{GrivaNashSofer2009}; see section 16.7 and Algorithm 16.1.  The version here minimizes a smooth nonlinear function subject to the constraints that all the variables are nonnegative.  That is, it is a specialized algorithm for nonnegativity constraints; it is not suitable for general inequality constraints.
+The algorithm documented here is a version of a Newton-type primal-dual interior point algorithm in \cite{GrivaNashSofer2009}, namely Algorithm 16.1 in section 16.7.  The version here minimizes a smooth nonlinear function subject to the simple constraints that all the variables are nonnegative.  That is, it is a specialized algorithm for nonnegativity constraints; it is not suitable for general inequality constraints.
 
 These short notes are not research!  This algorithm is simply a special case of a well-known algorithm.  Furthermore ``POPDIP'' is just a name I made up; it is not in common use!  However, this class of algorithms is new to me so I am documenting it fully.
 \end{abstract}
@@ -171,11 +170,24 @@ Given a solution of \eqref{newtonstep} the update formulas are
 x_{k+1} &= x_k + \alpha_P \Delta x \\
 \lambda_{k+1} &= \lambda_k + \alpha_D \Delta \lambda
 \end{align*}
-The maximum step sizes $\alpha_P,\alpha_D$ for the primal and dual variables are determined by separate ratio tests to achieve (strict) positivity of $x_{k+1}$ and $\lambda_{k+1}$, respectively.  Because this is a Newton search one uses $\alpha_P=\alpha_D=1$ for the largest allowed step.  Note we are not truly using $p=(\Delta x,\Delta \lambda) \in \RR^{2n}$ as a search direction because of the separate searches for the primal and dual variables.
+The maximum step sizes $\alpha_P,\alpha_D$ for the primal and dual variables are determined by separate ratio tests to achieve (strict) positivity of $x_{k+1}$ and $\lambda_{k+1}$, respectively.  Because this is a Newton search one uses $\alpha_P=\alpha_D=1$ for the largest allowed step.  Note we are not truly using $p=(\Delta x,\Delta \lambda) \in \RR^{2n}$ as a search direction because of the separate searches for the primal and dual variables.  In fact back-tracking is not needed to maintain feasibility of the primal variables because of the linearity of the constraint functions in \eqref{minproblem}, namely $g_i(x)=x_i$.  As on page 645 for the slack variables, a ratio test on $x$ suffices to keep $x$ feasible.
 
 The optimality test is the same as in Algorithm 16.1 \cite{GrivaNashSofer2009}.  It uses the merit function
-    $$\nu(x,\lambda) = \max\{\|\grad f(x)-\lambda\|,\|\Lambda x\|\}$$
+\begin{equation}
+    \nu(x,\lambda) = \max\{\|\grad f(x)-\lambda\|,\|\Lambda x\|\}  \label{merit}
+\end{equation}
 where $\|\cdot\|$ denotes the usual $L^2$ norm on $\RR^n$.  Note that once $\mu_k\to 0$ we have $\nu(x_*,\lambda_*) = 0$ for the exact optimum, but when $\mu_k \ne 0$ then the exact solution of \eqref{equalitysystem} does not make $\nu(x,\lambda)$ zero.  In fact $\nu(x_*,\lambda_*) = \sqrt{n}\, \mu_k$ for the exact solution of \eqref{equalitysystem}; if the merit function value $\nu(x_k,\lambda_k)$ is close to $\sqrt{n}\, \mu_k$ then we should decrease $\mu_k$ more rapidly.
+
+Subsection 16.7.2 of \cite{GrivaNashSofer2009} describes how Algorithm 16.1 should be modified so that, by Theorem 16.17, the algorithm will exhibit the local quadratic convergence one would want from a Newton-type algorithm.  Note that quadratic convergence is much harder to achieve in a constrained problem.  This is why I am interested in this algorithm.
+
+First of all the general inequality constraints should be augmented by slack (excess) variables which have simple nonnegativity constraints.  But in our case the constraints are already of that type!  Indeed the general replacement ``$g_i(x)\ge 0$'' by ``$g_i(x) - s_i =0$, $s_i\ge 0$'' is, in our case, the replacement ``$x_i\ge 0$'' by ``$x_i-s_i=0$, $s_i\ge 0$''.  This would be a meaningles renaming of the existing variables, so we need not introduce ``$s_i$'' in our case.
+
+Secondly, Theorem 16.17 uses a specific barrier parameter update for $\mu_k$ and a specific parameter choice for $\kappa$ in the ratio test.  In our case these are equations
+\begin{align*}
+\mu_k &= \min\{\theta \nu(x_k,\lambda_k),\nu(x_k,\lambda_k)^2\}, \\
+\kappa &= \max\{\bar\kappa,1-\nu(x_k,\lambda_k)\},
+\end{align*}
+for the merit function $\nu(x,\lambda)$ in \eqref{merit} and for parameters $0<\theta<1$ and $0<\bar\kappa<1$.  We choose these parameters based on the minimal hints in Example 16.16 on pages 643--644.
 
 
 \subsection*{Algorithm}
@@ -188,16 +200,17 @@ We can now present a pseudocode for our algorithm.
 \begin{itemize}
 \item[\emph{inputs}]  primal initial values $x_0$ such that $x_0 > 0$
 \item[]  smooth function $f$ returning $f(x)$, $\grad f(x)$, and $\grad^2 f(x)$
-\item[\emph{parameters}]  $\text{\texttt{tol}}>0$ [default $\text{\texttt{tol}}=10^{-4}$]
-\item[]  $\mu_0>0$ [default $\mu_0=1$]
-\item[]  $\theta>0$ [default $\theta=0.2$]
-\item[]  $\kappa>0$ [default $\kappa=0.9$]
+\item[\emph{parameters}]  $0<\text{\texttt{tol}}$ [default $\text{\texttt{tol}}=10^{-4}$]
+\item[]  $0<\mu_0$ [default $\mu_0=1$]
+\item[]  $0<\theta<1$ [default $\theta=0.1$]
+\item[]  $0<\bar\kappa<1$ [default $\bar\kappa=0.9$]
 \item[\emph{output}]  an estimate $(x_k,\lambda_k)$ of the solution
 \item  determine initial dual variables: $(\lambda_0)_i = \mu_0 / (x_0)_i$
 \item  for $k=0,1,2,\dots$
     \renewcommand{\labelenumi}{(\roman{enumi})}
     \begin{enumerate}
     \item optimality test: if $\nu(x_k,\lambda_k)<\text{\texttt{tol}}$ then stop
+    \item barrier parameter: $\mu_k = \min\{\theta \nu(x_k,\lambda_k),\nu(x_k,\lambda_k)^2\}$
     \item compute Newton step by solving this system for $(\Delta x,\Delta \lambda)$:
     $$\begin{bmatrix}
 \grad^2 f(x_k) & - I \\
@@ -214,6 +227,7 @@ We can now present a pseudocode for our algorithm.
 \end{bmatrix}$$
     \item ratio test for step sizes to keep $x_{k+1},\lambda_{k+1}$ positive:
 \begin{align*}
+\kappa &= \max\{\bar\kappa,1-\nu(x_k,\lambda_k)\} \\
 \alpha_P &= \min_{1\le i\le n} \left\{1, \,-\kappa \frac{(x_k)_i}{(\Delta x)_i} \,:\, (\Delta x)_i < 0\right\} \\
 \alpha_D &= \min_{1\le i\le n} \left\{1, \,-\kappa \frac{(\lambda_k)_i}{(\Delta \lambda)_i} \,:\, (\Delta \lambda)_i < 0\right\}
 \end{align*}
@@ -222,22 +236,23 @@ We can now present a pseudocode for our algorithm.
 x_{k+1} &= x_k + \alpha_P \Delta x \\
 \lambda_{k+1} &= \lambda_k + \alpha_D \Delta \lambda
 \end{align*}
-    \item the barrier parameter update:
-        $$\mu_{k+1} = \theta \mu_k$$
     \end{enumerate}
 \end{itemize}
 \end{quote}
 
 This algorithm is implemented by a \Matlab code with signature
 \begin{center}
-\texttt{function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,mu0,theta,kappa)}
+\texttt{function [xk,lamk,...] = popdip(x0,f,tol,mu0,theta,kappabar)}
 \end{center}
-Only inputs \texttt{x0,lam0,f} are required.  If outputs \texttt{xklist,lamklist} are not requested then they are not computed.  The parameters have the default values listed above.  Download at
+Only inputs \texttt{x0,f} are required.  Suppressed outputs are \texttt{xklist,lamklist}, lists of the iterates; if they are not requested then they are not saved.  The parameters have the default values listed above.
+
+Download the code and a test program at
 \begin{center}
     \href{http://bueler.github.io/M661F18/matlab/popdip.m}{\texttt{bueler.github.io/M661F18/matlab/popdip.m}}
+    \href{http://bueler.github.io/M661F18/matlab/testpopdip.m}{\texttt{bueler.github.io/M661F18/matlab/testpopdip.m}}
 \end{center}
 
-We may consider three possible areas for improvements of Algorithm 16.1.  First, in Algorithm 16.1 the computation of the Newton search direction is followed by separate line searches in $x$ and in $\lambda$.  These line searches only to maintain the nonnegativity requirements (generally: $g_i(x)\ge 0$ and $\lambda_i\ge 0$), and they do not seek sufficient decrease of $f(x)$ in particular, so they are just ratio tests.  Also, the same parameter $\kappa$ is used in both instances of the ratio test, and this could change.  Finally, equation \eqref{newtonstep} can be symmetrized by multiplying the second half of the equations by $-\Lambda^{-1}$:
+We may consider possible improvements of our algorithm.  First, in Algorithm 16.1 the computation of the Newton search direction is followed by separate line searches in $x$ and in $\lambda$.  These line searches only maintain nonnegativity and they do not seek sufficient decrease of $f(x)$; they only use ratio tests.  Secondly, equation \eqref{newtonstep} can be symmetrized by multiplying the second half of the equations by $-\Lambda^{-1}$:
 \begin{equation}
 \begin{bmatrix}
 \grad^2 f(x) & - I \\
@@ -250,37 +265,52 @@ We may consider three possible areas for improvements of Algorithm 16.1.  First,
 =
 \begin{bmatrix}
 -\grad f(x) + \lambda \\
-x - \mu^{(k)} \Lambda^{-1} e
+x - \mu_k \Lambda^{-1} e
 \end{bmatrix}
  \label{symmnewtonstep}
 \end{equation}
-
-These facts suggests four possible changes of Algorithm 16.1:
+These facts suggests two possible changes of our algorithm:
 \begin{enumerate}
-\item Back-tracking is not needed to maintain feasibility of the primal variables because of the linearity of the constraint functions in problem \eqref{minproblem}, namely $g_i(x)=x_i$.  A ratio test on $x$ suffices to keep $x$ feasible.
-\item Back-tracking line search is appropriate as a globalization even for unconstrained optimization.  Thus there must be cases where it is appropriate for problem \eqref{minproblem} as well.  Compare the modified back-tracking line searches in \cite{BensonMunson2006}.
-\item One could use separate parameters $\kappa_P,\kappa_D$ in the ratio tests.
-\item One can replace linear system \eqref{newtonstep} with a symmetrized version, system \eqref{symmnewtonstep}.
+\item Back-tracking line search is appropriate as a globalization even for unconstrained optimization.  Thus there must be cases where it is appropriate for problem \eqref{minproblem} as well.  Once the ratio tests are applied, further back-tracking could be used based on sufficient decrease.  Compare the modified back-tracking line searches in \cite{BensonMunson2006}.
+\item One can replace linear system \eqref{newtonstep} with symmetrized system \eqref{symmnewtonstep}.
 \end{enumerate}
-In POPDIP we have already implemented change 1.  Changes 2, 3, and 4 may generate further improvements, but that would require testing which we have not done.
+Determining if these are actual improvements would require testing which we have not done.
 
 
 \subsection*{Testing}
 
-FIXME we start with a 2D easy test
+We only try an easy 2D test problem in code \href{http://bueler.github.io/M661F18/matlab/testpopdip.m}{\texttt{testpopdip.m}}:
 \begin{equation}
 \begin{matrix}
 \text{minimize} \qquad & f(x) = \frac{1}{2} (x_1-1)^2 + \frac{1}{2} (x_2+1)^2 \\
 \text{subject to} \qquad & x \ge 0
 \end{matrix} \label{testoneproblem}
 \end{equation}
-For this problem the unconstrained minimum is the infeasible point $\hat x =(1,-1)^\top$.  A sketch shows the exact solution is $x_*=(1,0)^\top$.  We propose to use the default parameters and start with the feasible point $x_0=(2,2)^\top$.  Note the initial dual variables are then determined using $\mu_0=1$: $\lambda_0=(1/2,1/2)^\top$.
+For this objective function $f$ the unconstrained minimum is the infeasible point $\hat x =(1,-1)^\top$.  A sketch shows the exact solution of the constrained problem is $x_*=(1,0)^\top$.  We propose to start with the feasible point $x_0=(2,2)^\top$.  Note the initial dual variables are then determined using $\mu_0=1$---thus $\lambda_0=(1/2,1/2)^\top$---but from then on the relationship $x_i\lambda_i=\mu_k$ only holds approximately as both $x_k$ and $\lambda_k$ are updated separately.
 
+Running the code with the given $x_0$, \texttt{tol} $=10^{-14}$, and otherwise using the default parameters in POPDIP, gives
+\begin{Verbatim}[fontsize=\small]
+>> testpopdip([2 2]',1.0e-14)
+  1:    2.000000000000000    2.000000000000000
+  2:    1.453253013076204    0.200000000000000
+  3:    1.214566731865968    0.020000000000000
+  4:    1.035839709499516    0.017240583591047
+  5:    1.006566228657711    0.004849254151787
+  6:    1.000109109789261    0.000090069040616
+  7:    1.000000031919418    0.000000028128803
+  8:    1.000000000000003    0.000000000000003
+\end{Verbatim}
+The printed columns are $(x_k)_1$ and $(x_k)_2$.  Note the apparent quadratic, or at least strongly superlinear, convergence.  The iterates $x_k$ are graphed in the following figure.
 
-\subsection*{Application to example problem (\texttt{glacier}).}
+\bigskip
+\begin{center}
+\includegraphics[width=0.7\textwidth]{testpopdip}
+\end{center}
 
-FIXME a primal-dual interior point method for a glacier problem appears in \cite{Calvoetal2003}
+%\subsection*{Application to example problem (\texttt{glacier}).}
+%FIXME a primal-dual interior point method for a glacier problem appears in \cite{Calvoetal2003}
 
+\medskip
 
 \bibliography{doc}
 \bibliographystyle{siam}
