@@ -2,9 +2,9 @@
 %prepared in AMSLaTeX, under LaTeX2e
 \addtolength{\oddsidemargin}{-.75in} 
 \addtolength{\evensidemargin}{-.75in}
-\addtolength{\topmargin}{-.4in}
+\addtolength{\topmargin}{-.6in}
 \addtolength{\textwidth}{1.4in}
-\addtolength{\textheight}{1.0in}
+\addtolength{\textheight}{1.3in}
 
 \renewcommand{\baselinestretch}{1.075}
 
@@ -78,9 +78,9 @@ frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
 
 %\abstract{This is not research, but it is a new algorithm for me.  It is a version of the primal dual interior point algorithm in \cite{GrivaNashSofer2009}.}
 \begin{abstract}
-The algorithm documented here is a version of the primal dual interior point algorithm in \cite{GrivaNashSofer2009}; see section 16.7 and Algorithm 16.1.  The version here minimizes a smooth nonlinear function subject to the specialized constraints that all the variables are nonnegative.
+The algorithm documented here is a version of the primal-dual interior point algorithm in \cite{GrivaNashSofer2009}; see section 16.7 and Algorithm 16.1.  The version here minimizes a smooth nonlinear function subject to the constraints that all the variables are nonnegative.  That is, it is a specialized algorithm for nonnegativity constraints; it is not suitable for general inequality constraints.
 
-These short notes are not research!  This algorithm is simply a special case of a well-known algorithm, and furthermore ``POPDIP'' is just a name I made up; it is not in common use!  However, it is new to me so I am documenting it fully.
+These short notes are not research!  This algorithm is simply a special case of a well-known algorithm.  Furthermore ``POPDIP'' is just a name I made up; it is not in common use!  However, this class of algorithms is new to me so I am documenting it fully.
 \end{abstract}
 
 \thispagestyle{empty}
@@ -88,29 +88,29 @@ These short notes are not research!  This algorithm is simply a special case of 
 \bigskip
 \subsection*{Introduction and algorithm design}
 
-Consider a nonlinear optimization problem with positivity constraints on the variables:
+Consider a nonlinear optimization problem with nonnegativity (informally: positivity) constraints on the variables:
 \begin{equation}
 \begin{matrix}
 \text{minimize} \qquad & f(x) \\
 \text{subject to} \qquad & x \ge 0
 \end{matrix} \label{minproblem}
 \end{equation}
-Here $f:\RR^n\to\RR^n$ is a smooth function and ``$x\ge 0$'' means that each entry of $x\in\RR^n$ is nonnegative.  The feasible set for \eqref{minproblem} is the convex and closed set $S = \{x\in \RR^n\,:\,x\ge 0\}$ with interior $S^\circ = \{x\in \RR^n\,:\,x > 0\}$.
+As usual, ``$x\ge 0$'' means that each entry of $x\in\RR^n$ is nonnegative.  The feasible set for \eqref{minproblem} is the convex and closed set $S = \{x\in \RR^n\,:\,x\ge 0\}$ with interior $S^\circ = \{x\in \RR^n\,:\,x > 0\}$.
+
+Here $f:\RR^n \to\RR^n$ is a continuous and smooth function.  In fact this algorithm only assumes $f$ is defined and smooth on $S^\circ$, but in practice, so as to have a chance of good performance, $f$ should be well-behaved near the boundary of $S$.
 
 One can start the derivation by considering a logarithmic barrier function.  Let $\mu>0$.  If $x\in S^\circ$ then the following function is well-defined and finite:
 \begin{equation}
-\beta_\mu = f(x) - \mu \sum_{i=1}^n \ln x_i \label{barrierfunction}
+\beta_\mu(x) = f(x) - \mu \sum_{i=1}^n \ln x_i \label{barrierfunction}
 \end{equation}
-The first-order necessary conditions for the unconstrained problem of minimizing $\beta_\mu$, namely $\grad \beta_\mu(x)=0$ for $x \in S^\circ$, are
-\begin{align}
-x &> 0 \label{firstorderbarrier} \\
-\grad f(x) - \mu \sum_{i=1}^n \frac{1}{x_i} e_i &= 0 \notag
-\end{align}
-Here $\{e_1,\dots,e_n\}$ is the standard basis of $\RR^n$.
+Let $\{e_1,\dots,e_n\}$ be the standard basis of $\RR^n$.  The first-order necessary condition for the unconstrained problem of minimizing $\beta_\mu$, namely $\grad \beta_\mu(x)=0$ for $x \in S^\circ$, is
+\begin{equation}
+\grad f(x) - \mu \sum_{i=1}^n \frac{1}{x_i} e_i = 0 \label{firstorderbarrier}
+\end{equation}
 
 Conditions \eqref{firstorderbarrier} can be reformulated by defining additional variables
     $$\lambda_i = \frac{\mu}{x_i}$$
-where $\lambda\in\RR^n$.  Note that $\lambda>0$ if and only if $x>0$ because $\lambda_i x_i = \mu > 0$.  Then \eqref{firstorderbarrier} is precisely equivalent to the following nonlinear system of equations and inequalities:
+so that $\lambda\in\RR^n$.  Note that $\lambda>0$ if and only if $x>0$ because $\lambda_i x_i = \mu > 0$.  Then \eqref{firstorderbarrier}, plus feasibility for $x$, is precisely equivalent to the following nonlinear system of equations and inequalities:
 \begin{align}
 x &\ge 0 \label{firstordersystem} \\
 \lambda &\ge 0 \notag \\
@@ -118,25 +118,35 @@ x &\ge 0 \label{firstordersystem} \\
 \lambda_i x_i &= \mu, \qquad i=1,\dots,n \notag
 \end{align}
 
-Because of the last condition in \eqref{firstordersystem}, both $x$ and $\lambda$ are positive and thus in the interiors of their respective feasible sets.  For the general primal-dual interior point algorithm, specifically Algorithm 16.1 in section 16.7 of \cite{GrivaNashSofer2009}, the feasible set for the primal variable $x$ is different from the feasible set for the dual variable $\lambda$.  For example, generally the dimension is different.  However, in our case the feasible set is $S$ for each variable separately.
+The feasible set for $x$ and for $\lambda$ is the same, namely $S \subset \RR^n$.  Because of the last condition in \eqref{firstordersystem}, both $x$ and $\lambda$ are positive and thus in the interior $S^\circ$.  By contrast, for the general primal-dual interior point Algorithm 16.1 \cite[section 16.7]{GrivaNashSofer2009}, the feasible set for the primal variable $x$ is different from the dual feasible set for $\lambda$.  For example, generally the dimension is different.
 
-The third condition in \eqref{firstordersystem} is related to a Lagrangian function for \eqref{minproblem}, namely
-    $$\mathcal{L}(x,\lambda) = f(x) - \sum_{i=1}^n \lambda_i x_i.$$
-The third condition is the statement that $\grad_x \mathcal{L}(x,\lambda)=0$.  However, the whole system \eqref{firstordersystem} describes a solution which is generally different from an unconstrained stationary point of the Lagrangian.  There is an additional connection between the variables ($\lambda_i x_i = \mu$) and there are additional nonnegativity constraints ($x\ge 0$ and $\lambda\ge 0$) so generally ``$\grad_x\mathcal{L}(x,\lambda)=0$ and $\grad_\lambda\mathcal{L}(x,\lambda)=0$'' does not hold at the solution.
+The third condition in \eqref{firstordersystem} can be written using a Lagrangian function for \eqref{minproblem}, namely
+\begin{equation}
+\mathcal{L}(x,\lambda) = f(x) - \sum_{i=1}^n \lambda_i x_i,  \label{Lagrangian}
+\end{equation}
+in which case it states that $\grad_x \mathcal{L}(x,\lambda)=0$.  However, system \eqref{firstordersystem} describes a solution which is different from the KKT conditions for \eqref{minproblem}.  (See Lemma 14.8 and Theorem 14.18 in \cite{GrivaNashSofer2009}.)  Those KKT conditions are the same as system \eqref{firstordersystem} but with the last equation replaced by
+\begin{equation}
+\lambda_i x_i = 0, \qquad i=1,\dots,n  \label{complementaryslackness}
+\end{equation}
+That is, complementary slackness applies in the KKT conditions.  System \eqref{firstordersystem} modifies the KKT conditions by connecting the variables through equality with a positive constant ($\lambda_i x_i = \mu$).
 
-Algorithm 16.1 in \cite{GrivaNashSofer2009} applies to \eqref{minproblem}, and the POPDIP algorithm proposed below is the simplification which uses the fact that $g_i(x)=x_i$.  These algorithms compute approximate solutions to \eqref{firstordersystem} for a sequence $\mu_k \to 0$.  In that limit the exact solution solves \eqref{firstordersystem} with $\mu$ replaced by zero.  These are the KKT conditions for \eqref{minproblem}---see Lemma 14.8 and Theorem 14.18 in \cite{GrivaNashSofer2009}---including the complementarity statement $\lambda_i x_i=0$.
+Also, the stationary-point conditions for Lagrangian \eqref{Lagrangian}, namely $\grad_x\mathcal{L}(x,\lambda)=0$ and $\grad_\lambda\mathcal{L}(x,\lambda)=0$, do not generally apply because we have nonnegativity constraints on $x$ and \emph{not} equality constraints (which would make the problem trivial).  Of course $x_i=0$ holds when the $i$th constraint is active, but the algorithm here will not keep track of the active set.
 
-Each step of the algorithm is a Newton step for the nonlinear system of equalities from \eqref{firstordersystem},
+Algorithm 16.1 \cite{GrivaNashSofer2009} applies to \eqref{minproblem}, and the POPDIP algorithm proposed below is the simplification which uses the fact that $g_i(x)=x_i$.  All such primal-dual interior point algorithms compute approximate solutions to systems like \eqref{firstordersystem} for a sequence $\{\mu_k\}$ going to zero.  In the limit where $\mu=0$, which is never achieved because the algorithm is terminated after a finite number of steps, the solution will solve \eqref{complementaryslackness}.
+
+Each step of the algorithm is a Newton step for the equalities in \eqref{firstordersystem}, namely
 \begin{align}
 \grad f(x) - \lambda &= 0 \label{equalitysystem} \\
 \lambda_i x_i &= \mu_k, \qquad i=1,\dots,n. \notag
 \end{align}
-The Newton method updates both $x$ and $\lambda$ using the linearization of these equations.  To describe the Newton step let $x=x^{(k)}+\Delta x$ and $\lambda=\lambda^{(k)}+\Delta\lambda$.  Note that the current iterate, namely $(x^{(k)},\lambda^{(k)})$, generally does not solve \eqref{equalitysystem}.  The unknowns in the Newton step are the search direction $p=(\Delta x,\Delta \lambda)$.  Substituting into \eqref{equalitysystem} and expanding to first order gives
+The Newton method updates both $x$ and $\lambda$ using the linearization of these equations.  Because of the second equation, these equations are always nonlinear.  Note that if $f$ is quadratic then the first equation is linear.
+
+To describe the Newton step let $x=x_k+\Delta x$ and $\lambda=\lambda_k+\Delta\lambda$.  We assume that the current iterate $(x_k,\lambda_k)$ does not solve \eqref{equalitysystem}.  The unknowns in the Newton step for the search direction $p=(\Delta x,\Delta \lambda)$.  Substituting into \eqref{equalitysystem} and expanding to first order gives
 \begin{align}
-\grad f(x^{(k)}) - \lambda^{(k)} + \grad^2 f(x^{(k)}) \Delta x - \Delta \lambda &= 0 \label{prenewtonstep} \\
-\lambda_i^{(k)} x_i^{(k)} + x_i^{(k)} (\Delta\lambda)_i + \lambda_i^{(k)} (\Delta x)_i &= \mu_k, \qquad i=1,\dots,n \notag
+\grad f(x_k) + \grad^2 f(x_k) \Delta x - \lambda_k - \Delta \lambda &= 0 \label{prenewtonstep} \\
+(\lambda_k)_i (x_k)_i + (x_k)_i (\Delta\lambda)_i + (\lambda_k)_i (\Delta x)_i &= \mu_k, \qquad i=1,\dots,n \notag
 \end{align}
-Rearranging as a linear block system for the search direction, and suppressing the superscript on the current iterate gives the Newton step equations
+Rearranging as a linear block system for the search direction, and suppressing the current-iterate subscript, we get the Newton step equations
 \begin{equation}
 \begin{bmatrix}
 \grad^2 f(x) & - I \\
@@ -153,7 +163,7 @@ Rearranging as a linear block system for the search direction, and suppressing t
 \end{bmatrix}
  \label{newtonstep}
 \end{equation}
-where $I$ is the $n\times n$ identity matrix and the other notation is as follows:
+Here $I$ is the $n\times n$ identity matrix and the other notation is as follows:
     $$\Lambda = \begin{bmatrix} \lambda_1 & & \\ & \ddots & \\ & & \lambda_n \end{bmatrix}, \qquad X = \begin{bmatrix} x_1 & & \\ & \ddots & \\ & & x_n \end{bmatrix}, \qquad e = \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix}.$$
 
 Given a solution of \eqref{newtonstep} the update formulas are
@@ -161,11 +171,11 @@ Given a solution of \eqref{newtonstep} the update formulas are
 x_{k+1} &= x_k + \alpha_P \Delta x \\
 \lambda_{k+1} &= \lambda_k + \alpha_D \Delta \lambda
 \end{align*}
-The maximum step sizes $\alpha_P,\alpha_D$ for the primal and dual variables are determined by separate ratio tests to achieve (strict) positivity of $x_{k+1}$ and $\lambda_{k+1}$, respectively.  Because this is a Newton search one uses $\alpha_P=\alpha_D=1$ for the largest allowed step.  Note we are not truly using $p=(\Delta x,\Delta \lambda) \in \RR^{2n}$ as a search direction; instead separate searches update the primal and dual variables.
+The maximum step sizes $\alpha_P,\alpha_D$ for the primal and dual variables are determined by separate ratio tests to achieve (strict) positivity of $x_{k+1}$ and $\lambda_{k+1}$, respectively.  Because this is a Newton search one uses $\alpha_P=\alpha_D=1$ for the largest allowed step.  Note we are not truly using $p=(\Delta x,\Delta \lambda) \in \RR^{2n}$ as a search direction because of the separate searches for the primal and dual variables.
 
-The optimality test in our algorithm follows Algorithm 16.1 by using the merit function
+The optimality test is the same as in Algorithm 16.1 \cite{GrivaNashSofer2009}.  It uses the merit function
     $$\nu(x,\lambda) = \max\{\|\grad f(x)-\lambda\|,\|\Lambda x\|\}$$
-where $\|\cdot\|$ denotes the usual $L^2$ norm on $\RR^n$.  Note that once $\mu_k\to 0$ we have $\nu(x_*,\lambda_*) = 0$ for the exact optimum, but when $\mu_k \ne 0$ then the exact solution of \eqref{equalitysystem} does not make $\nu(x,\lambda)$ have value zero.  In fact $\nu(x_*,\lambda_*) = \sqrt{n}\, \mu_k$ for the exact solution of \eqref{equalitysystem}; if the merit function values $\nu(x_k,\lambda_k)$ are close to these values then we should decrease $\mu_k$ more rapidly.
+where $\|\cdot\|$ denotes the usual $L^2$ norm on $\RR^n$.  Note that once $\mu_k\to 0$ we have $\nu(x_*,\lambda_*) = 0$ for the exact optimum, but when $\mu_k \ne 0$ then the exact solution of \eqref{equalitysystem} does not make $\nu(x,\lambda)$ zero.  In fact $\nu(x_*,\lambda_*) = \sqrt{n}\, \mu_k$ for the exact solution of \eqref{equalitysystem}; if the merit function value $\nu(x_k,\lambda_k)$ is close to $\sqrt{n}\, \mu_k$ then we should decrease $\mu_k$ more rapidly.
 
 
 \subsection*{Algorithm}
@@ -272,7 +282,7 @@ For this problem the unconstrained minimum is the infeasible point $\hat x =(1,-
 FIXME a primal-dual interior point method for a glacier problem appears in \cite{Calvoetal2003}
 
 
-\bibliography{popdip}
+\bibliography{doc}
 \bibliographystyle{siam}
 
 \end{document}
