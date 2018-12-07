@@ -20,8 +20,7 @@ if nargin < 7,  kappabar = 0.9;  end
 
 if any(x0 <= 0.0),  error('initial iterate must be strictly feasible'),  end
 xk = x0(:);                      % force into column shape
-mu = mu0;
-lamk = mu ./ xk;
+lamk = mu0 ./ xk;                % this is the only place mu0 is used; needed
 n = length(xk);
 if nargout > 2
     xklist = [xk];
@@ -34,6 +33,7 @@ for k = 1:maxiters
     if meritk < tol
         break
     end
+    mu = min(theta*meritk,meritk^2);    % formula page 646
     M = [Hfxk,       -eye(n,n);
          diag(lamk), diag(xk)];
     c = [-dfxk + lamk;
@@ -50,7 +50,6 @@ for k = 1:maxiters
         xklist = [xklist xk];
         lamklist = [lamklist lamk];
     end
-    mu = min(theta*meritk,meritk^2);    % formula page 646
 end
 end % function
 
