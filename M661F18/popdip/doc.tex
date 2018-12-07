@@ -85,7 +85,7 @@ These short notes are not research!  This algorithm is simply a special case of 
 \thispagestyle{empty}
 
 \bigskip
-\subsection*{Introduction and algorithm design}
+\subsection*{Introduction}
 
 Consider a nonlinear optimization problem with nonnegativity (informally: positivity) constraints on the variables:
 \begin{equation}
@@ -130,6 +130,9 @@ in which case it states that $\grad_x \mathcal{L}(x,\lambda)=0$.  However, syste
 That is, complementary slackness applies in the KKT conditions.  System \eqref{firstordersystem} modifies the KKT conditions by connecting the variables through equality with a positive constant ($\lambda_i x_i = \mu$).
 
 Also, the stationary-point conditions for Lagrangian \eqref{Lagrangian}, namely $\grad_x\mathcal{L}(x,\lambda)=0$ and $\grad_\lambda\mathcal{L}(x,\lambda)=0$, do not generally apply because we have nonnegativity constraints on $x$ and \emph{not} equality constraints (which would make the problem trivial).  Of course $x_i=0$ holds when the $i$th constraint is active, but the algorithm here will not keep track of the active set.
+
+
+\subsection*{Algorithm design}
 
 Algorithm 16.1 \cite{GrivaNashSofer2009} applies to \eqref{minproblem}, and the POPDIP algorithm proposed below is the simplification which uses the fact that $g_i(x)=x_i$.  All such primal-dual interior point algorithms compute approximate solutions to systems like \eqref{firstordersystem} for a sequence $\{\mu_k\}$ going to zero.  In the limit where $\mu=0$, which is never achieved because the algorithm is terminated after a finite number of steps, the solution will solve \eqref{complementaryslackness}.
 
@@ -244,13 +247,44 @@ This algorithm is implemented by a \Matlab code with signature
 \begin{center}
 \texttt{function [xk,lamk,...] = popdip(x0,f,tol,mu0,theta,kappabar)}
 \end{center}
-Only inputs \texttt{x0,f} are required.  Suppressed outputs are \texttt{xklist,lamklist}, lists of the iterates; if they are not requested then they are not saved.  The parameters have the default values listed above.
-
-Download the code and a test program at
+Only inputs \texttt{x0,f} are required.  The parameters have the default values listed above.  The suppressed outputs here are \texttt{xklist} and \texttt{lamklist}, namely lists of the iterates; if they are not requested then they are not saved.  Download the code at
 \begin{center}
     \href{http://bueler.github.io/M661F18/matlab/popdip.m}{\texttt{bueler.github.io/M661F18/matlab/popdip.m}}
-    \href{http://bueler.github.io/M661F18/matlab/testpopdip.m}{\texttt{bueler.github.io/M661F18/matlab/testpopdip.m}}
 \end{center}
+
+
+\subsection*{Testing}
+
+We only try an easy 2D test problem in code \href{http://bueler.github.io/M661F18/matlab/testpopdip.m}{\texttt{testpopdip.m}}:
+\begin{equation}
+\begin{matrix}
+\text{minimize} \qquad & f(x) = \frac{1}{2} (x_1-1)^2 + \frac{1}{2} (x_2+1)^2 \\
+\text{subject to} \qquad & x \ge 0
+\end{matrix} \label{testoneproblem}
+\end{equation}
+For this objective function $f$ the unconstrained minimum is the infeasible point $\hat x =(1,-1)^\top$.  A sketch shows the exact solution of the constrained problem is $x_*=(1,0)^\top$.  We propose to start with the feasible point $x_0=(2,2)^\top$.  Note the initial dual variables are then determined using $\mu_0=1$---thus $\lambda_0=(1/2,1/2)^\top$---but from then on the relationship $x_i\lambda_i=\mu_k$ only holds approximately as $x_k$ and $\lambda_k$ are each updated separately.
+
+Running the code with the given initial iterate $x_0$ and \texttt{tol} $=10^{-14}$, and otherwise using the default parameters in POPDIP, gives
+\begin{Verbatim}[fontsize=\small]
+>> testpopdip([2 2]',1.0e-14)
+  1:    2.000000000000000    2.000000000000000
+  2:    1.453253013076204    0.200000000000000
+  3:    1.214566731865968    0.020000000000000
+  4:    1.035839709499516    0.017240583591047
+  5:    1.006566228657711    0.004849254151787
+  6:    1.000109109789261    0.000090069040616
+  7:    1.000000031919418    0.000000028128803
+  8:    1.000000000000003    0.000000000000003
+\end{Verbatim}
+The printed columns are $(x_k)_1$ and $(x_k)_2$.  Note the apparent quadratic, or at least strongly superlinear, convergence.  The iterates $x_k$ are graphed in the following figure.
+
+\bigskip
+\begin{center}
+\includegraphics[width=0.6\textwidth]{testpopdip}
+\end{center}
+
+
+\subsection*{Possible improvements}
 
 We may consider possible improvements of our algorithm.  First, in Algorithm 16.1 the computation of the Newton search direction is followed by separate line searches in $x$ and in $\lambda$.  These line searches only maintain nonnegativity and they do not seek sufficient decrease of $f(x)$; they only use ratio tests.  Secondly, equation \eqref{newtonstep} can be symmetrized by multiplying the second half of the equations by $-\Lambda^{-1}$:
 \begin{equation}
@@ -269,43 +303,13 @@ x - \mu_k \Lambda^{-1} e
 \end{bmatrix}
  \label{symmnewtonstep}
 \end{equation}
-These facts suggests two possible changes of our algorithm:
+These facts suggests two possible changes:
 \begin{enumerate}
 \item Back-tracking line search is appropriate as a globalization even for unconstrained optimization.  Thus there must be cases where it is appropriate for problem \eqref{minproblem} as well.  Once the ratio tests are applied, further back-tracking could be used based on sufficient decrease.  Compare the modified back-tracking line searches in \cite{BensonMunson2006}.
 \item One can replace linear system \eqref{newtonstep} with symmetrized system \eqref{symmnewtonstep}.
 \end{enumerate}
 Determining if these are actual improvements would require testing which we have not done.
 
-
-\subsection*{Testing}
-
-We only try an easy 2D test problem in code \href{http://bueler.github.io/M661F18/matlab/testpopdip.m}{\texttt{testpopdip.m}}:
-\begin{equation}
-\begin{matrix}
-\text{minimize} \qquad & f(x) = \frac{1}{2} (x_1-1)^2 + \frac{1}{2} (x_2+1)^2 \\
-\text{subject to} \qquad & x \ge 0
-\end{matrix} \label{testoneproblem}
-\end{equation}
-For this objective function $f$ the unconstrained minimum is the infeasible point $\hat x =(1,-1)^\top$.  A sketch shows the exact solution of the constrained problem is $x_*=(1,0)^\top$.  We propose to start with the feasible point $x_0=(2,2)^\top$.  Note the initial dual variables are then determined using $\mu_0=1$---thus $\lambda_0=(1/2,1/2)^\top$---but from then on the relationship $x_i\lambda_i=\mu_k$ only holds approximately as both $x_k$ and $\lambda_k$ are updated separately.
-
-Running the code with the given $x_0$, \texttt{tol} $=10^{-14}$, and otherwise using the default parameters in POPDIP, gives
-\begin{Verbatim}[fontsize=\small]
->> testpopdip([2 2]',1.0e-14)
-  1:    2.000000000000000    2.000000000000000
-  2:    1.453253013076204    0.200000000000000
-  3:    1.214566731865968    0.020000000000000
-  4:    1.035839709499516    0.017240583591047
-  5:    1.006566228657711    0.004849254151787
-  6:    1.000109109789261    0.000090069040616
-  7:    1.000000031919418    0.000000028128803
-  8:    1.000000000000003    0.000000000000003
-\end{Verbatim}
-The printed columns are $(x_k)_1$ and $(x_k)_2$.  Note the apparent quadratic, or at least strongly superlinear, convergence.  The iterates $x_k$ are graphed in the following figure.
-
-\bigskip
-\begin{center}
-\includegraphics[width=0.7\textwidth]{testpopdip}
-\end{center}
 
 %\subsection*{Application to example problem (\texttt{glacier}).}
 %FIXME a primal-dual interior point method for a glacier problem appears in \cite{Calvoetal2003}
