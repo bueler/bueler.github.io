@@ -6,7 +6,7 @@ function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,maxiters,mu0,theta,kappa)
 %   >> [xk,lamk,xklist]=popdip([2;2],@quickquad,1.0e-8); xk,lamk,xklist'
 
 if nargin < 3,  tol = 1.0e-4;    end
-if nargin < 5,  maxiters = 200;  end
+if nargin < 4,  maxiters = 200;  end
 if nargin < 5,  mu0 = 1.0;       end
 if nargin < 6,  theta = 0.2;     end
 if nargin < 7,  kappa = 0.9;     end
