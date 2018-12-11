@@ -4,12 +4,12 @@ function [f,df,Hf] = obstaclefcn(u)
 %          /L
 %   f[u] = |  (1/2) (u'(x))^2 - q(x) u(x) dx
 %          /0
-% Here L=1 and q(x) = -cos(2*pi*x) - 0.7.  (Note q(x) is only positive in a
-% small interval near x=L/2.)  Uses midpoint rule to do the integral
-% numerically.  Extracts the number of points from the length of the input u.
+% Here L=1 and q(x) = - 100 * (cos(2*pi*x) + 0.7).  (Note q(x) is only
+% positive in a small interval near x=L/2.)  Uses midpoint rule.  Extracts
+% the number of points from the length of the input u.
 
 L = 1.0;
-q = @(x) - cos(2*pi*x) - 0.7;
+q = @(x) - 100 * (cos(2*pi*x) + 0.7);
 
 u = u(:);
 n = length(u);

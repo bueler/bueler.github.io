@@ -53,6 +53,7 @@ for k = 1:maxiters
     mu = min(theta*meritk,meritk^2);    % formula page 646
     M = [Hfxk,       -eye(n,n);
          diag(lamk), diag(xk)];
+    %cond(M)  <-- suddenly goes bad around n=22 for obstacle ... so precond M
     c = [-dfxk + lamk;
          - lamk .* xk + mu];
     p = M \ c;                  % presumably Gaussian elimination: O(n^3)
