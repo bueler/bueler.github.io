@@ -280,15 +280,15 @@ We first try an easy 2D test problem in \href{http://bueler.github.io/M661F18/ma
 \end{equation}
 For this objective function $f$ the unconstrained minimum is the infeasible point $\hat x =(1,-1)^\top$.  A sketch shows the exact solution of the constrained problem is $x_*=(1,0)^\top$.  Running the code with the given initial iterate $x_0=(2,2)^\top$ and \texttt{tol} $=10^{-14}$, and otherwise using the default parameters in POPDIP, gives
 \begin{Verbatim}[fontsize=\small]
->> testpopdip([2 2]',1.0e-12)
+>> testpopdip([2 2]',1.0e-14)
   1:    2.000000000000000    2.000000000000000
-  2:    1.544151844011225    0.926491106406735
-  3:    1.236257762187731    0.370020707549202
-  4:    1.077638214646503    0.112308286732346
-  5:    1.018231799235416    0.022577047718139
-  6:    1.001167457235242    0.001327413357958
-  7:    1.000004485331373    0.000004881913431
-  8:    1.000000000064069    0.000000000067784
+  2:    1.641421356237309    0.641421356237310
+  3:    1.245446520462486    0.245446520462486
+  4:    1.069404818969903    0.069404818969903
+  5:    1.013447008853577    0.013447008853577
+  6:    1.000537794151783    0.000537794151783
+  7:    1.000000867357066    0.000000867357066
+  8:    1.000000000002257    0.000000000002257
   9:    1.000000000000000    0.000000000000000
 \end{Verbatim}
 The printed columns are $(x_k)_1$ and $(x_k)_2$.  Note the apparent quadratic, or at least strongly superlinear, convergence.  The iterates $x_k$ are graphed in the following figure.

@@ -7,7 +7,7 @@ function testpopdip(x0,tol)
 % namely in Theorem 16.17.
 
 if nargin < 1,  x0 = [2;2];  end
-if nargin < 2,  tol = 1.0e-12;  end
+if nargin < 2,  tol = 1.0e-14;  end
 
 [xk,lamk,xklist,lamklist] = popdip(x0,@quickquad,tol);
 
