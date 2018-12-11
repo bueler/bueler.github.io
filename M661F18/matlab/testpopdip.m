@@ -21,8 +21,8 @@ maxx = max(xklist(1,:));
 maxy = max(xklist(2,:));
 axis([0 1.1*maxx 0 1.1*maxy])
 grid on
-xlabel('x','fontsize',20)
-ylabel('y','fontsize',20)
+xlabel('x_1','fontsize',20)
+ylabel('x_2','fontsize',20)
 end % function testpopdip
 
     function [f,df,Hf] = quickquad(x)
