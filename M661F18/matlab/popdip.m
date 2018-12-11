@@ -32,7 +32,7 @@ if all(lamk <= 0)
 else
     mu0 = sum(lamk(lamk > 0) .* xk(lamk > 0)) / n;  % on average:  lam * x = mu0
 end
-lamk(lamk <= 0) = mu0 ./ xk(lamk <= 0);
+lamk = mu0 ./ xk;
 
 % initialize output lists if requested
 if nargout > 2
