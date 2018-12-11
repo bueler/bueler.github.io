@@ -3,7 +3,7 @@ function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,maxiters,theta,kappabar)
 % version of Algorithm 16.1 in section 16.7 of Griva, Nash, Sofer (2009).
 % Uses mu_k and kappa formulas in section 16.7.2.  It appears the convergence
 % of this algorithm it quadratic; it should be governed by Theorem 16.17.
-%     This implementation does not use back-tracking; only the ratio test
+% This implementation does not use back-tracking; only the ratio test
 % for positivity, both primal and dual, adjusts the step size.  This
 % implemenation does not exploit any sparsity; the indefinite Newton step
 % equations are solved by O(n^3) Gauss elimination.
@@ -43,8 +43,12 @@ end
 for k = 1:maxiters
     [fxk, dfxk, Hfxk] = f(xk);
     meritk = merit(xk,lamk,dfxk);
-    if meritk < tol
-        break
+    if k == 1
+        merit0 = meritk;
+    else
+        if meritk/merit0 < tol
+            break
+        end
     end
     mu = min(theta*meritk,meritk^2);    % formula page 646
     M = [Hfxk,       -eye(n,n);
