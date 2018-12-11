@@ -1,4 +1,4 @@
-function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,maxiters,mu0,theta,kappabar)
+function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,maxiters,theta,kappabar)
 % POPDIP  POsitive-variables Primal-Dual Interior Point method.  This is a
 % version of Algorithm 16.1 in section 16.7 of Griva, Nash, Sofer (2009).
 % Uses mu_k and kappa formulas in section 16.7.2.  It appears the convergence
@@ -14,14 +14,27 @@ function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,maxiters,mu0,theta,kappabar
 
 if nargin < 3,  tol = 1.0e-4;    end
 if nargin < 4,  maxiters = 200;  end
-if nargin < 5,  mu0 = 1.0;       end
-if nargin < 6,  theta = 0.1;     end
-if nargin < 7,  kappabar = 0.9;  end
+if nargin < 5,  theta = 0.1;     end
+if nargin < 6,  kappabar = 0.9;  end
 
 if any(x0 <= 0.0),  error('initial iterate must be strictly feasible'),  end
+
 xk = x0(:);                      % force into column shape
-lamk = mu0 ./ xk;                % this is the only place mu0 is used; needed
 n = length(xk);
+
+% initialize dual variables:  if  (grad f(x0))_i > 0  then use for lam0_i
+%                             otherwise guess a mu value
+[tmp, lamk] = f(xk);
+lamk = lamk(:);                  % force into column shape
+if length(lamk) ~= n,  error('gradient f(x) must be same size as x'),  end
+if all(lamk <= 0)
+    mu0 = 1.0;
+else
+    mu0 = sum(lamk(lamk > 0) .* xk(lamk > 0)) / n;  % on average:  lam * x = mu0
+end
+lamk(lamk <= 0) = mu0 ./ xk(lamk <= 0);
+
+% initialize output lists if requested
 if nargout > 2
     xklist = [xk];
     lamklist = [lamk];
