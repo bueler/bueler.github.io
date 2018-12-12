@@ -8,26 +8,29 @@ if nargin < 1,  n = 20;         end
 if nargin < 2,  tol = 1.0e-12;  end
 
 % solve
-%x0 = 0.1 * ones(n,1);  % strictly feasible
-dx = 1/(n+1);
-x0 = uexact(dx:dx:1-dx) + 1;
-[xk,lamk,xklist,lamklist] = popdip(x0,@obstaclefcn,tol);
-fprintf('%d iterations\n',size(xklist,2))
-
-% plot iterates
-subplot(1,2,1)
+u0 = 0.1 * ones(n,1);  % strictly feasible
 dx = 1/(n+1);
 x = dx:dx:1-dx;
-K = min(50,size(xklist,2));
+%u0 = uexact(dx:dx:1-dx) + 0.001;
+[uk,lamk,uklist,lamklist] = popdip(u0,@obstaclefcn,tol);
+%format long, uklist'
+fprintf('%d iterations\n',size(uklist,2))
+uex = uexact(x)';
+fprintf('||u-uexact|| = %.3e\n',norm(uk-uex,'inf'))
+
+% plot iterates
+figure(1), clf
+subplot(1,2,1)
+K = size(uklist,2);
 for j = 1:K-1
-    plot(x,xklist(:,j),'k'), hold on
+    plot(x,uklist(:,j),'k'), hold on
 end
-plot(x,xk,'r')
+plot(x,uk,'r')
 xlabel x, grid on
 
 % plot exact solution and final iterate
 subplot(1,2,2)
-plot(x,xk,'r')
+plot(x,uk,'r')
 hold on
 xf = 0:.001:1;
 plot(xf,uexact(xf),'b')
@@ -41,3 +44,4 @@ end % function
     uu(abs(x-0.5) >= a) = 0;
     uu = 100 * uu;
     end % function
+
