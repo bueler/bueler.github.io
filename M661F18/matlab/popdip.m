@@ -67,8 +67,8 @@ for k = 1:maxiters
     dlam = p(n+1:2*n);
     kappa = max(kappabar,1.0-meritk);   % formula page 646
     alphaP = ratiotest(xk,dx,kappa);
-    alphaD = ratiotest(lamk,dx,kappa);
-    alpha = min(alphaP,alphaD);
+    alphaD = ratiotest(lamk,dlam,kappa);
+    alpha = min(alphaP,alphaD);   % one could use the separate alphas ...
     xk = xk + alpha * dx;
     lamk = lamk + alpha * dlam;
     if nargout > 2
