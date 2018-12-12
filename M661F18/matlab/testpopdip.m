@@ -16,6 +16,7 @@ for k = 1:N
     fprintf('%3d: %20.15f %20.15f\n',k,xklist(1,k),xklist(2,k));
 end
 
+figure(1),  clf
 plot(xklist(1,:),xklist(2,:),'-ko')
 maxx = max(xklist(1,:));
 maxy = max(xklist(2,:));

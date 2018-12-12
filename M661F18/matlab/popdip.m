@@ -41,6 +41,12 @@ if nargout > 2
 end
 
 for k = 1:maxiters
+    if any(xk <= 0)
+        error('strict primal feasibility violated at iteration %d',k)
+    end
+    if any(lamk <= 0)
+        error('strict dual feasibility violated at iteration %d',k)
+    end
     [fxk, dfxk, Hfxk] = f(xk);
     meritk = merit(xk,lamk,dfxk);
     if k == 1
@@ -53,7 +59,7 @@ for k = 1:maxiters
     mu = min(theta*meritk,meritk^2);    % formula page 646
     M = [Hfxk,       -eye(n,n);
          diag(lamk), diag(xk)];
-    %cond(M)  <-- suddenly goes bad around n=22 for obstacle ... so precond M
+    %cond(M)  %<-- suddenly goes bad around n=22 for obstacle ... so precond M
     c = [-dfxk + lamk;
          - lamk .* xk + mu];
     p = M \ c;                  % presumably Gaussian elimination: O(n^3)
@@ -62,8 +68,9 @@ for k = 1:maxiters
     kappa = max(kappabar,1.0-meritk);   % formula page 646
     alphaP = ratiotest(xk,dx,kappa);
     alphaD = ratiotest(lamk,dx,kappa);
-    xk = xk + alphaP * dx;
-    lamk = lamk + alphaD * dlam;
+    alpha = min(alphaP,alphaD);
+    xk = xk + alpha * dx;
+    lamk = lamk + alpha * dlam;
     if nargout > 2
         xklist = [xklist xk];
         lamklist = [lamklist lamk];
