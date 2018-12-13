@@ -1,7 +1,7 @@
 function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,maxiters,theta,kappabar)
 % POPDIP  POsitive-variables Primal-Dual Interior Point method.  This is a
 % version of Algorithm 16.1 in section 16.7 of Griva, Nash, Sofer (2009).
-% Uses mu_k and kappa formulas in section 16.7.2.  It appears the convergence
+% Uses mu and kappa formulas in section 16.7.2.  It appears the convergence
 % of this algorithm it quadratic; it should be governed by Theorem 16.17.
 % This implementation does not use back-tracking; only the ratio test
 % for positivity, both primal and dual, adjusts the step size.  This
@@ -10,7 +10,7 @@ function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,maxiters,theta,kappabar)
 %
 % Documented by: http://bueler.github.io/M661F18/popdip/doc.pdf
 %
-% Example:   See TESTPOPDIP.
+% Example:   See TESTPOPDIP and OBSTACLE.
 
 if nargin < 3,  tol = 1.0e-4;    end
 if nargin < 4,  maxiters = 200;  end
@@ -22,24 +22,24 @@ if any(x0 <= 0.0),  error('initial iterate must be strictly feasible'),  end
 xk = x0(:);                      % force into column shape
 n = length(xk);
 
-% initialize dual variables:  if  (grad f(x0))_i > 0  then use for lam0_i
-%                             otherwise guess a mu value
-[tmp, lamk] = f(xk);
-lamk = lamk(:);                  % force into column shape
-if length(lamk) ~= n,  error('gradient f(x) must be same size as x'),  end
-if all(lamk <= 0)
+% initialize dual variables:  if some components satisfy  (grad f(x0))_i > 0
+% then average to generate a scale  mu0;  otherwise guess  mu0 = 1
+[tmp, y0] = f(xk);  y0 = y0(:);  % force into column shape
+if length(y0) ~= n,  error('gradient f(x) must be same size as x'),  end
+if all(y0 <= 0)
     mu0 = 1.0;
 else
-    mu0 = sum(lamk(lamk > 0) .* xk(lamk > 0)) / n;  % on average:  lam * x = mu0
+    mu0 = sum(y0(y0 > 0) .* xk(y0 > 0)) / n;  % on average:  y0*x0 = mu0
 end
-lamk = mu0 ./ xk;
+lamk = mu0 ./ xk;                % actually initialize dual variables
 
-% initialize output lists if requested
+% start output lists if requested
 if nargout > 2
     xklist = [xk];
     lamklist = [lamk];
 end
 
+% loop: primal-dual interior point method uses Newton steps on barrier equations
 for k = 1:maxiters
     if any(xk <= 0)
         error('strict primal feasibility violated at iteration %d',k)
@@ -59,18 +59,14 @@ for k = 1:maxiters
     mu = min(theta*meritk,meritk^2);    % formula page 646
     M = [Hfxk,       -eye(n,n);
          diag(lamk), diag(xk)];
-    %cond(M)  %<-- suddenly goes bad around n=22 for obstacle ... so precond M
+    %cond(M)
     c = [-dfxk + lamk;
          - lamk .* xk + mu];
-    p = M \ c;                  % presumably Gaussian elimination: O(n^3)
-    dx = p(1:n);
-    dlam = p(n+1:2*n);
+    p = M \ c;                          % presumably Gaussian elimination: O(n^3)
     kappa = max(kappabar,1.0-meritk);   % formula page 646
-    alphaP = ratiotest(xk,dx,kappa);
-    alphaD = ratiotest(lamk,dlam,kappa);
-    alpha = min(alphaP,alphaD);   % one could use the separate alphas ...
-    xk = xk + alpha * dx;
-    lamk = lamk + alpha * dlam;
+    alpha = ratiotest([xk;lamk],p,kappa);
+    xk = xk + alpha * p(1:n);
+    lamk = lamk + alpha * p(n+1:2*n);
     if nargout > 2
         xklist = [xklist xk];
         lamklist = [lamklist lamk];

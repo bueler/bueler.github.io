@@ -143,7 +143,7 @@ However, a primal-dual method for this NCP would re-introduce the dual variables
 
 \subsection*{Algorithm design}
 
-Algorithm 16.1 \cite{GrivaNashSofer2009} applies to \eqref{minproblem}.  The POPDIP algorithm proposed below is the simplification for $g_i(x)=x_i$.  All primal-dual interior point algorithms compute approximate solutions to systems like \eqref{firstordersystem} for a sequence $\{\mu_k>0\}$ going to zero.  The limit where $\mu=0$, never achieved because the algorithm is terminated after a finite number of steps, solves the KKT conditions \eqref{KKT}.
+Algorithm 16.1 \cite{GrivaNashSofer2009} applies to \eqref{minproblem}.  The POPDIP algorithm proposed below is the simplification for $g_i(x)=x_i$.  All such primal-dual interior point algorithms \cite{NocedalWright2006} compute approximate solutions to systems like \eqref{firstordersystem} for a sequence $\{\mu_k>0\}$ going to zero.  The limit where $\mu=0$, never achieved because the algorithm is terminated after a finite number of steps, solves the KKT conditions \eqref{KKT}.
 
 Each step of the algorithm is a Newton step for the equalities in \eqref{firstordersystem}, namely
 \begin{align}
@@ -181,12 +181,10 @@ Here $I$ is the $n\times n$ identity matrix and the other notation is as follows
 
 Given a solution of \eqref{newtonstep} the update formulas are
 \begin{align*}
-x_{k+1} &= x_k + \alpha_P \Delta x \\
-\lambda_{k+1} &= \lambda_k + \alpha_D \Delta \lambda
+x_{k+1} &= x_k + \alpha \Delta x \\
+\lambda_{k+1} &= \lambda_k + \alpha \Delta \lambda
 \end{align*}
-The maximum step sizes $\alpha_P,\alpha_D$ for the primal and dual variables are determined by separate ratio tests to achieve (strict) positivity of $x_{k+1}$ and $\lambda_{k+1}$, respectively.  (A ratio test suffices to keep $x$ feasible, in common with how the slack variables are limited in a general primal-dual interior point method \cite[subsection 16.7.2]{GrivaNashSofer2009}.  Said another way, back-tracking is not needed to maintain feasibility of the primal variables because of the linearity of the constraint functions in \eqref{minproblem}, namely $g_i(x)=x_i$.)
-
-Because this is a Newton search one uses $\alpha_P=\alpha_D=1$ for the largest allowed step.  However, in general we do not use $p=(\Delta x,\Delta \lambda) \in \RR^{2n}$ as a search direction because of the separate ratio tests for the primal and dual variables.
+A single maximum step size $\alpha$ for both the primal and dual variables is determined by a condition of (strict) positivity for both $x_{k+1}$ and $\lambda_{k+1}$ \cite{NocedalWright2006}.  (A ratio test suffices to keep $x$ feasible, in common with how the slack variables are limited in a general primal-dual interior point method \cite[subsection 16.7.2]{GrivaNashSofer2009}.  Back-tracking is not needed to maintain feasibility of the primal variables because of the linearity of the constraint functions in \eqref{minproblem}, namely $g_i(x)=x_i$.)  Because this is a Newton search one uses $\alpha=1$ for the largest allowed step.  Note we use $p=(\Delta x,\Delta \lambda) \in \RR^{2n}$ as a search direction.
 
 The optimality test is the same as in Algorithm 16.1 \cite{GrivaNashSofer2009}.  It uses the merit function
 \begin{equation}
@@ -215,15 +213,18 @@ We can now present a pseudocode for our algorithm.
 \item[\emph{inputs}]  primal initial values $x_0$ such that $x_0 > 0$
 \item[]  smooth function $f$ returning $f(x)$, $\grad f(x)$, and $\grad^2 f(x)$
 \item[\emph{parameters}]  $0<\text{\texttt{tol}}$ [default $\text{\texttt{tol}}=10^{-4}$]
+\item[]  $\text{\texttt{maxiters}}>0$ [default $\text{\texttt{maxiters}}=200$]
 \item[]  $0<\theta<1$ [default $\theta=0.1$]
 \item[]  $0<\bar\kappa<1$ [default $\bar\kappa=0.9$]
 \item[\emph{output}]  an estimate $(x_k,\lambda_k)$ of the solution
 \item  determine initial dual variables:
     \renewcommand{\labelenumi}{(\roman{enumi})}
     \begin{enumerate}
-    \item FIXME $(\lambda_0)_i = \mu_0 / (x_0)_i$
+    \item $y_0 = \grad f(x_0)$
+    \item if $y_0 \le 0$ then $\mu_0=1$; otherwise $\mu_0$ is average of those products $(x_0)_i (y_0)i$ where $(y_0)_i > 0$
+    \item $(\lambda_0)_i = \mu_0 / (x_0)_i$ for $i=1,\dots,n$
     \end{enumerate}
-\item  for $k=0,1,2,\dots$
+\item  for $k=0,1,2,\dots,\text{\texttt{maxiters}}-1$
     \renewcommand{\labelenumi}{(\roman{enumi})}
     \begin{enumerate}
     \item optimality test: if $\nu(x_k,\lambda_k)<\text{\texttt{tol}}$ then stop
@@ -245,23 +246,24 @@ We can now present a pseudocode for our algorithm.
     \item ratio test for step sizes to keep $x_{k+1},\lambda_{k+1}$ positive:
 \begin{align*}
 \kappa &= \max\{\bar\kappa,1-\nu(x_k,\lambda_k)\} \\
-\alpha_P &= \min_{1\le i\le n} \left\{1, \,-\kappa \frac{(x_k)_i}{(\Delta x)_i} \,:\, (\Delta x)_i < 0\right\} \\
-\alpha_D &= \min_{1\le i\le n} \left\{1, \,-\kappa \frac{(\lambda_k)_i}{(\Delta \lambda)_i} \,:\, (\Delta \lambda)_i < 0\right\}
+\alpha &= \min_{1\le i\le n} \left\{1, \,-\kappa \frac{(x_k)_i}{(\Delta x)_i} \,:\, (\Delta x)_i < 0, \,-\kappa \frac{(\lambda_k)_i}{(\Delta \lambda)_i} \,:\, (\Delta \lambda)_i < 0\right\}
 \end{align*}
     \item the update:
 \begin{align*}
-x_{k+1} &= x_k + \alpha_P \Delta x \\
-\lambda_{k+1} &= \lambda_k + \alpha_D \Delta \lambda
+x_{k+1} &= x_k + \alpha \Delta x \\
+\lambda_{k+1} &= \lambda_k + \alpha \Delta \lambda
 \end{align*}
     \end{enumerate}
 \end{itemize}
 \end{quote}
 
 This algorithm is implemented by a \Matlab code with signature
-\begin{center}
-\texttt{function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,theta,kappabar)}
-\end{center}
-Only inputs \texttt{x0,f} are required.  The parameters have the default values listed above.  If the outputs \texttt{xklist} and \texttt{lamklist} are not requested then they are not saved.
+
+\medskip
+\noindent \mbox{\texttt{function [xk,lamk,xklist,lamklist] = popdip(x0,f,tol,maxiters,theta,kappabar)}}
+
+\medskip
+\noindent Only inputs \texttt{x0,f} are required.  The parameters have the default values listed above.  If the outputs \texttt{xklist} and \texttt{lamklist} are not requested then they are not saved.
 
 Download the code at
 \begin{center}
@@ -269,7 +271,7 @@ Download the code at
 \end{center}
 
 
-\subsection*{Testing}
+\subsection*{Example 1}
 
 We first try an easy 2D test problem in \href{http://bueler.github.io/M661F18/matlab/testpopdip.m}{\texttt{testpopdip.m}}:
 \begin{equation}
@@ -278,7 +280,7 @@ We first try an easy 2D test problem in \href{http://bueler.github.io/M661F18/ma
 \text{subject to} \qquad & x \ge 0
 \end{matrix} \label{testoneproblem}
 \end{equation}
-For this objective function $f$ the unconstrained minimum is the infeasible point $\hat x =(1,-1)^\top$.  A sketch shows the exact solution of the constrained problem is $x_*=(1,0)^\top$.  Running the code with the given initial iterate $x_0=(2,2)^\top$ and \texttt{tol} $=10^{-14}$, and otherwise using the default parameters in POPDIP, gives
+For this objective function $f$ the unconstrained minimum is the infeasible point $\hat x =(1,-1)^\top$.  A sketch shows that the exact solution of the constrained problem is $x_*=(1,0)^\top$.  Running the code with the given initial iterate $x_0=(2,2)^\top$ and \texttt{tol} $=10^{-14}$, and otherwise using the default parameters in POPDIP, gives
 \begin{Verbatim}[fontsize=\small]
 >> testpopdip([2 2]',1.0e-14)
   1:    2.000000000000000    2.000000000000000
@@ -298,6 +300,39 @@ The printed columns are $(x_k)_1$ and $(x_k)_2$.  Note the apparent quadratic, o
 \includegraphics[width=0.6\textwidth]{testpopdip}
 \end{center}
 
+
+\subsection*{Example 2}
+
+FIXME obstacle problem in 1D
+
+\begin{equation}
+    f[u] = \int_0^1 \frac{1}{2} |u'(x)|^2 - q(x) u(x)\,dx \label{obstaclefunctional}
+\end{equation}
+
+$\Delta x = 1 / (n+1)$
+\begin{equation}
+    f(u) = \Delta x \sum_{i=0}^n \left(\frac{1}{2} \left(\frac{u_{i+1}-u_i}{\Delta x}\right)^2 - q(x_{i+1/2}) \frac{u_i + u_{i+1}}{2}\right) \label{obstacleobjective}
+\end{equation}
+where $u_0=0$ and $u_{n+1}=0$ when they appear
+
+gradient components for $i=1,\dots,n$
+\begin{equation}
+\grad f(u)_i = \frac{1}{\Delta x} \left\{\begin{matrix}
+2 u_1 - u_2 & (i=1) \\
+-u_{i-1} + 2 u_i - u_{i+1} & (1<i<n) \\
+-u_{n-1} + 2 u_n & (i=n) \\
+\end{matrix} \right\} - \frac{\Delta x}{2} (q(x_{i-1/2}) + q(x_{i+1/2}))
+\end{equation}
+
+Hessian matrix
+\begin{equation}
+\grad^2 f(u) = \frac{1}{\Delta x} \begin{bmatrix}
+2  & -1 &    &    \\
+-1 &  2 & -1 &    \\
+   &    & \ddots &\\
+   &    & -1 &  2
+\end{bmatrix}
+\end{equation}
 
 \subsection*{Possible improvements}
 
