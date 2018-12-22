@@ -1,0 +1,22 @@
+sidenav_title: 'Math 302'
+
+docs:
+
+- title: Syllabus
+  url: assets/general/Spring2019/MATH251-Syllabus.pdf
+
+- title: Schedule
+  url: assets/general/Spring2019/MATH251-Schedule.pdf
+
+- title: Week 1
+  url: week1.html
+
+- title: Written Homework
+  url: writtenhomework.html
+
+- title: Quizzes
+  url: quizzes.html
+
+- title: Exams
+  url: exams.html
+
