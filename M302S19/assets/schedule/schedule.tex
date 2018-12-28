@@ -1,0 +1,58 @@
+\documentclass[12pt]{article}
+\usepackage[top=0.9in, bottom=0.9in, left=0.9in, right=1.1in]{geometry}
+
+\usepackage{graphicx,color,enumitem,tabularx}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+\usepackage{tikz}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\makeatletter
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F302 UX1 Spring 2019 (Bueler)}
+\docdate{version: \today}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\centerline{Schedule}
+
+\begin{tabularx}{\textwidth}{X|X|X|X|X|X|}
+Week & M & T & W & Th & F \\ \hline
+1 &  &  &  &  & \\ \hline
+2 &  &  &  &  & \\ \hline
+3 &  &  &  &  & \\ \hline
+4 &  &  &  &  & \\ \hline
+5 &  &  &  &  & \\ \hline
+6 &  &  &  &  & \\ \hline
+7 &  &  &  &  & \\ \hline
+8 &  &  &  &  & \\ \hline
+9 &  \multicolumn{4}{c}{\textbf{Spring Break}} & \\ \hline
+10 &  &  &  &  & \\ \hline
+11 &  &  &  &  & \\ \hline
+12 &  &  &  &  & \\ \hline
+13 &  &  &  &  & \\ \hline
+14 &  &  &  &  & \\ \hline
+15 &  &  &  &  & \\ \hline
+final &  &  &  &  & 
+\end{tabularx}
+
+\end{document}
