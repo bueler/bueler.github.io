@@ -3,16 +3,16 @@ sidenav_title: 'Math 302'
 docs:
 
 - title: Syllabus
-  url: assets/general/Spring2019/MATH251-Syllabus.pdf
+  url: FIXME
 
 - title: Schedule
-  url: assets/general/Spring2019/MATH251-Schedule.pdf
+  url: assets/schedule/schedule.pdf
 
 - title: Week 1
   url: week1.html
 
-- title: Written Homework
-  url: writtenhomework.html
+- title: WebAssign
+  url: FIXME
 
 - title: Quizzes
   url: quizzes.html

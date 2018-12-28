@@ -5,7 +5,7 @@ title: Exams
 
 ## Exams
 
-Exams and solutions from this semester will be available here as they are completed.  See the [schedule]() for all exam dates.
+Exams and solutions from this semester will be available here as they are completed.  See the [schedule](assets/schedule/schedule.pdf) for all exam dates.
 
 Exams from past semesters are also available below.
 
