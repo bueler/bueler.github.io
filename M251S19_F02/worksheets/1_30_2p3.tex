@@ -1,0 +1,130 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx,color,enumerate,multicol}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+
+%% Use Minion fonts if available.  Otherwise Times.
+%\IfFileExists{MinionPro.sty}{\usepackage[lf]{MinionPro}}{}
+\usepackage{amsmath,amsthm,amsbsy}
+%\IfFileExists{MinionPro.sty}{}{\usepackage{times,txfonts}}
+\usepackage{palatino}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Sections 2.3 Worksheet}
+\docdate{30 January 2019}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+
+\aproblem Sketch the graph $y=f(x)$ of a function which has all of the following properties; do not worry about any \emph{formula} for $f(x)$:
+
+\hspace{-0.35in}
+\begin{minipage}{0.6\textwidth}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item $f(0)=3$
+\item $\lim_{x\to 0} f(x) = 0$
+\item $\lim_{x\to -2^-} f(x) = 1$
+\item $\lim_{x\to -2^+} f(x) = -1$
+\item $\lim_{x\to 5^-} f(x)$ d.n.e.
+\item $\lim_{x\to 5^+} f(x) = -\infty$
+\item the domain of $f$ is $(-\infty,\infty)$
+\end{enumerate}
+\end{minipage}
+\vfill
+
+\aproblem  Evaluate the limit, if it exists:
+    $$\lim_{h\to 0} \frac{(2+h)^3 - 8}{h} = \hspace{4.0in}$$
+\vfill
+
+\aproblem  Evaluate the limit, if it exists:
+    $$\lim_{u\to 2} \frac{\sqrt{4u+1} - 3}{u-2} = \hspace{4.0in}$$
+\vfill
+
+\newpage
+\aproblem  Evaluate the limit, if it exists:
+    $$\lim_{t\to 0} \left(\frac{1}{t\sqrt{1+t}} - \frac{1}{t}\right) = \hspace{4.0in}$$
+\vfill
+
+\aproblem  Evaluate the limit, if it exists:
+    $$\lim_{x\to 3} \frac{\frac{1}{x} - \frac{1}{3}}{x-3} = \hspace{4.0in}$$
+\vfill
+
+\aproblem  Evaluate the limits, if they exist, and otherwise explain why they do not:
+
+\hspace{-0.35in}
+\begin{minipage}{0.6\textwidth}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item
+    $$\lim_{x\to 0^-} \left(\frac{1}{x} - \frac{1}{|x|}\right) = \hspace{4.0in}$$
+\item
+    $$\lim_{x\to 0^+} \left(\frac{1}{x} - \frac{1}{|x|}\right) = \hspace{4.0in}$$
+\end{enumerate}
+\end{minipage}\vfill
+
+\aproblem  \emph{Challenge problem.}  Consider the following function:
+    $$f(x) = \begin{cases} 1, & \text{ if } x \text{ is rational} \\
+                           0, & \text{ if } x \text{ is irrational}\end{cases} \hspace{3.0in}$$
+Evaluate the limit $\lim_{x\to 0} f(x)$ if it exists.  If it does not exist, explain why.
+
+
+\end{aproblems}
+
+\end{document}
