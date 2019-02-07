@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+
+\usepackage{graphicx,color,enumerate,multicol}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Section 2.7 Worksheet}
+\docdate{Thursday 7 February 2019}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+
+\aproblem  Find $f'(a)$ using the definition of the derivative:
+    $$f(t) = 2 t^2 + t \hspace{4.0in}$$
+\vfill
+
+\aproblem  Find $f'(3)$ using the definition of the derivative:
+    $$f(x) = x^{-2} \hspace{4.0in}$$
+\vfill
+
+\aproblem  Find $f'(a)$ using the definition of the derivative:
+    $$f(x) = \sqrt{1+5 x} \hspace{4.0in}$$
+\vfill
+
+\newpage
+\aproblem  Find an equation of the tangent line to the curve at the given point:
+    $$f(x) = \frac{x+1}{x-1},  \qquad (2,3)$$
+Also sketch both the curve $y=f(x)$ and the tangent line.
+\vspace{4.0in}
+
+\aproblem  A particle moves a distance $s = f(t)$ along a straight line, where $s$ is measured in meters and $t$ is in seconds:
+    $$f(t) = 40 t - 5 t^2$$
+Find the velocity and speed when $t=4$.
+\vfill
+
+\end{aproblems}
+
+\end{document}
