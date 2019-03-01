@@ -1,0 +1,115 @@
+\documentclass[12pt]{article}
+\usepackage[top=0.9in, bottom=0.5in, left=0.9in, right=1.1in]{geometry}
+
+\usepackage{graphicx,color,enumitem}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Sections 3.7 and 3.6 Worksheet}
+\docdate{Friday 1 March 2019}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+% 3.7 #20
+\aproblem Newton's Law of Gravitation says that the magnitude $F$ of the force exerted by a body of mass $m$ on a body of mass $M$ is 
+    $$F = \frac{G m M}{r^2}$$
+where $G$ is the gravitational constant and $r$ is the distance between the bodies.
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item Find $dF/dr$ and explain its meaning.  What does the minus indicate?
+\vfill
+
+\item Assume we measure mass in kilograms, distance in meters, and force in Newtons.  What are the units of $dF/dr$?
+\vspace{0.5in}
+
+\item Find $dF/dm$ and explain its meaning and units.
+\vfill
+\end{enumerate}
+
+% 3.7 #18
+\aproblem  A tank holds 5000 gallons of water which drains from the bottom of the tank in 40 minutes.  The volume of water remaining in the tank after $t$ minutes is
+    $$V = 5000 \left(1-\frac{1}{40} t\right)^2$$
+for $0\le t\le 40$.  Find the rate at which water is draining from the tank after (a) 5 min, (b) 20 min, and (c) 40 min.  Which is fastest/slowest?
+\vspace{2.5in}
+
+\clearpage\newpage
+% 3.6 #6, 21, uses arcsin, one more
+\aproblem  Differentiate the functions.
+\begin{itemize}
+\item[]
+    $$y = \frac{1}{\log_3 x} \hspace{5.0in}$$
+\vfill
+
+\item[]
+    $$y = \tan\left[\ln(ax+b)\right] \hspace{4.5in}$$
+\vfill
+
+\item[]
+    $$H(z) = 7^z \arctan z \hspace{4.5in}$$
+\vfill
+
+\item[]
+    $$g(t) = \frac{\ln t}{\arcsin(t^2)+1} \hspace{4.5in}$$
+\vfill
+\end{itemize}
+
+\end{aproblems}
+
+\end{document}
