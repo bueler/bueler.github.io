@@ -1,0 +1,109 @@
+\documentclass[12pt]{article}
+\usepackage[top=0.9in, bottom=0.7in, left=0.9in, right=1.0in]{geometry}
+
+\usepackage{graphicx,color,enumitem}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 5pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+\doclabel{Math F251: Section 4.5 Worksheet}
+\docdate{Thursday 28 March 2019}
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\small
+Recall the guidelines:
+\renewcommand{\labelenumi}{\Alph{enumi}.}
+\begin{enumerate}[nolistsep]
+\item domain
+\item intercepts
+\item symmetry
+\item asymptotes
+\item increase/decrease (and critical numbers)
+\item local maxima/minima
+\item concavity (and inflection points)
+\item sketch the graph
+\end{enumerate}
+\hrulefill
+
+\normalsize
+\begin{aproblems}
+
+% 4.5 # 40 with given derivs
+%    $$y = \frac{\sin x}{2 + \cos x}, \qquad 0 \le x \le 2\pi \hspace{4.0in}$$
+
+% 4.5 # 14
+\aproblem  Sketch the graph by applying the guidelines:
+    $$y = \frac{1}{x^2 - 4} \hspace{5.0in}$$
+\vfill
+
+\newpage
+\thispagestyle{plain}
+
+% 4.5 # 5
+\aproblem  Sketch the graph by applying the guidelines:
+    $$y = x(x-4)^3 \hspace{5.0in}$$
+\vspace{3.0in}
+
+% 4.5 # 25
+\aproblem  Sketch the graph by applying the guidelines:
+    $$y = \frac{x}{\sqrt{x^2+1}} \hspace{5.0in}$$
+\vfill
+
+
+\end{aproblems}
+
+\end{document}
