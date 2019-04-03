@@ -1,0 +1,98 @@
+\documentclass[12pt]{article}
+\usepackage[top=0.9in, bottom=0.9in, left=0.9in, right=1.1in]{geometry}
+
+\usepackage{graphicx,color,enumitem}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+\usepackage{tikz}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Section 4.7 Worksheet}
+\docdate{Wednesday 3 April 2019}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+
+% 4.7 # 21
+\aproblem  Find the point on the line $y=2x+3$ which is closest to the origin.
+\vspace{3.0in}
+
+% 4.7 # 35
+\aproblem  The top and bottom margins of a poster are each 6 cm and the side margins are 4 cm.  If the area of the printed material on the poster is fixed at 384 $\text{cm}^2$, find the dimensions of the poster with the smallest total area.
+\vfill
+
+\newpage
+\thispagestyle{plain}
+
+% 4.7 # 41
+%\aproblem  A cone-shaped drinking cup is made from a circular piece of waxed paper of radius $R$ by cutting out a sector, as shown, and joining the edges $CA$ and $CB$.  Find the maximum capacity of the cup.
+%\begin{tikzpicture}[scale=1.0]
+%  \draw (0,0) node[yshift=3mm] {$A$} arc (120:420:2.0) node[yshift=3mm] {$B$} -- node[midway,xshift=-2mm,yshift=2mm] {$R$} (1.0,-1.7321) node[yshift=-3mm] {$C$} -- (0.0,0.0);
+%\end{tikzpicture}
+
+% 4.7 # 31
+\aproblem A right circular cylinder is inscribed in a sphere of radius $r$.  Find the largest possible volume of such a cylinder.
+\vfill
+
+
+\vfill
+\end{aproblems}
+
+\end{document}
