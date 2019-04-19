@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+\usepackage[top=0.9in, bottom=0.9in, left=0.9in, right=1.1in]{geometry}
+
+\usepackage{graphicx,color,enumitem}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+\usepackage{tikz}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Section 5.5 Worksheet (indefinite integrals)}
+\docdate{Friday 19 April 2019}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+% 5.5 % 4,5
+\aproblem Evaluate the integral by making the given substitution.
+\renewcommand{\labelenumi}{\textbf{(\alph{enumi})}}
+\begin{enumerate}
+\item  $u=\sin\theta$:
+    $$\int \sin^2 \theta \cos \theta\,d\theta = \hspace{5.5in}$$
+\vfill
+
+\item  $u=x^4-5$:
+    $$\int \frac{x^3}{x^4-5}\,dx = \hspace{5.5in}$$
+\vfill
+\end{enumerate}
+
+% 5.5 % 25
+\aproblem Evaluate the indefinite integral by substitution.  What should you choose as $u$?:
+    $$\int e^x \sqrt{1+e^x}\,dx = \hspace{4.5in}$$
+\vfill
+
+\newpage
+\thispagestyle{plain}
+
+% 5.5 % 29, 44 and  indefinite versions of 5.5 % 54, 62
+\aproblem Evaluate the indefinite integrals:
+\renewcommand{\labelenumi}{\textbf{(\alph{enumi})}}
+\begin{enumerate}
+\item
+    $$\int 5^t \sin(5^t)\,dt = \hspace{4.5in}$$
+\vfill
+
+\item
+    $$\int \frac{x}{1+x^4}\,dx = \hspace{5.5in}$$
+\vfill
+
+\item
+    $$\int (3t-1)^{50}\,dt = \hspace{6.0in}$$
+\vfill
+
+\item
+    $$\int \cos x\,\sin(\sin(x))\,dx = \hspace{5.5in}$$
+\vfill
+\end{enumerate}
+\end{aproblems}
+
+\end{document}
