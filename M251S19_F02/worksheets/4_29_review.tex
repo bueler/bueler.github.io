@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+\usepackage[top=0.9in, bottom=0.9in, left=0.9in, right=1.1in]{geometry}
+
+\usepackage{graphicx,color,enumitem}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+\usepackage{tikz}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: constructing exam problems, and review problems}
+\docdate{Monday 29 April 2019}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+\aproblem (\emph{See examples and exercises in} \S 2.2 and \S 2.6.)  Give an example of a graph $y=f(x)$ with a vertical asymptote at $x=-1$ and a horizontal asymptote at $y=2$.
+\vfill
+
+\aproblem (\emph{See} \S 3.4.)  Build an example of a complicated chain rule derivative question.  That is, write down $f(x)$ and compute the derivative $f'(x)$.
+\vspace{1.5in}
+
+\aproblem (\emph{See} \S 5.5.)  Write the previous example as an indefinite integration question.  Give a substitution which will solve it.  Complete the integration.
+\vspace{2.0in}
+
+\hrulefill
+
+Some advice for the actual Final Exam: \qquad \large 
+
+\centerline{\textbf{Read the question.  Don't just guess it is of a certain type.}}
+
+\normalsize
+
+\newpage
+\aproblem (\emph{See} \S 4.7.)  A steel cylindrical can is to hold 1 L of oil.  Find the dimensions of the can that will minimize the amount of steel.
+\vfill
+
+\aproblem (\emph{See} \S 5.1 and \S 5.2.)  For the integral $\displaystyle \int_0^6 \frac{1}{1+x^4}\,dx$, compute the Riemann sums with $n=3$ rectangles and both left and right endpoints.
+\vspace{2.0in}
+
+\newpage
+\aproblem (\emph{See} \S 4.3 and \S 4.5.)  Find the critical points, intervals of increase and decrease, and points of inflection of $f(x)=x^3-3x-1$.  Then sketch the graph $y=f(x)$.
+\vfill
+
+\aproblem (\emph{See} \S 4.8.)  In the graph above there is a solution of $f(x)=0$ near $x=2$.  Approximate it using one step of Newton's method, and add that to your sketch.
+\vfill
+
+\aproblem (\emph{See} \S 3.5.)  Find $dy/dx$ by implicit differentiation: \qquad $y \cos x = x^2 + y^2$
+\vspace{2.0in}
+
+\end{aproblems}
+
+\end{document}
