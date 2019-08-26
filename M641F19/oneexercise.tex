@@ -1,0 +1,54 @@
+\documentclass[12pt]{amsart}
+%prepared in AMSLaTeX, under LaTeX2e
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+
+\theoremstyle{plain}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{thm}{Theorem}
+
+\theoremstyle{remark}
+\newtheorem*{example}{Example}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\eps}{\epsilon}
+
+
+\begin{document}
+\noindent \footnotesize 26 August 2019  % REPLACE HERE
+\normalsize \hfill Ed Bueler  % REPLACE HERE
+
+
+\thispagestyle{empty}  % no need for a page number on this page
+
+\bigskip
+
+\Large\centerline{\textbf{Exercise 0 in Chapter 0}}  % REPLACE HERE
+\normalsize
+
+
+\bigskip
+% REPLACE EVERYTHING BELOW HERE:
+You can write text to explain something, if needed, but you should write in complete sentences.  Here we need a definition.
+
+\begin{defn} A real number $x$ is \emph{irrational} if $x\notin \QQ$.
+\end{defn}
+
+Lemmas, propositions, and theorems do not need to be numbered, but please \emph{do} use the theorem and proof environments as shown here.
+
+\begin{thm} $\sqrt{2}$ is irrational.
+\end{thm}
+
+\begin{proof} Suppose $x=\sqrt{2} \in \QQ$.  Then there exist $m,n\in\ZZ$ so that $x=m/n$ and $m,n$ have no common factors.  But then $2=m^2/n^2$ so $m^2=2n^2$.  Since $m^2$ has a factor of $2$, and because $2$ is prime, it follows that $2|m$, so $m=2k$ for some $k\in\ZZ$.  Now $(2k)^2=2n^2$ or $2k^2=n^2$ after simplification.  Since $n^2$ has a factor of $2$ it follows that $2|n$, but that means both $m$ and $n$ had a factor of $2$.  This contradicts the assumption that $x$ was rational (and was represented without common factors).
+\end{proof}
+
+% EXCEPT LEAVE THIS:
+\end{document}
