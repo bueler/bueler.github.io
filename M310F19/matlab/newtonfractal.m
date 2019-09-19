@@ -27,9 +27,9 @@ xrange = linspace(-2,2,N);
 
 % first figure shows the intersecting curves and the roots
 figure(1),  clf()
-contour(xx,yy,f1(xx,yy),'c',[0 0])
+contour(xx,yy,f1(xx,yy),[0 0],'c')
 hold on
-contour(xx,yy,f2(xx,yy),'m',[0 0])
+contour(xx,yy,f2(xx,yy),[0 0],'m')
 plot(xstar(1),ystar(1),'g.','markersize',28)
 plot(xstar(2),ystar(2),'r.','markersize',28)
 plot(xstar(3),ystar(3),'b.','markersize',28)
