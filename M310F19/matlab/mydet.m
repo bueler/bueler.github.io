@@ -22,4 +22,3 @@ else
         z = z + (-1)^(j-1) * A(1,j) * mydet(Aminor);
     end
 end
-
