@@ -29,15 +29,24 @@ hold off,  grid on
 if nargin == 3
     figure(2),  clf
     yy = zeros(size(xx));
+    F = [];
     for k = 0:n
         if abs((k/n)-x) >= delta
+            F = [F k];
             yy = yy + p(n,k,xx);
         end
     end
+    F = sort(F);
+    fprintf('F = %s\n',num2str(F))
     plot(xx,yy,'b'),  hold on
     plot([x,x],[-0.02,0.02],'k')
     text(x,-0.05,'x')
-    plot(x,1/(4*n*delta^2),'ro')
+    ydelta = 1/(4*n*delta^2);
+    if ydelta > 1
+        warning('sum over F_x not small!')
+    else
+        plot(x,ydelta,'ro')
+    end
     axis([0,1,-0.1,1])
     hold off,  grid on
 end
