@@ -1,13 +1,10 @@
 function z = mysqrt(x)
 % MYSQRT  Computes the square root z of a positive (or zero) x:
 %    z = mysqrt(x)
-%
-% This code exploits the internal floating point representation
-% of the number x.  The exponent of z is computed by integer
-% operations.  It then uses Newton's method to get accurate digits
-% fast.  Note that some operations have very fast implementations
+% by exploiting the floating-point form of x = v 2^k.  The exponent
+% of z is computed by integer operations.  The root of v is computed
+% by Newton's method.  Some operations have fast implementations
 % as bit operations, namely multiplying and dividing by two.
-%
 % Example comparisons to built-in:
 %   >> format long
 %   >> mysqrt(19), sqrt(19)
@@ -34,9 +31,9 @@ end
 % write  x = v 2^k  with  1 <= v < 2  and  k an integer
 [v,k] = ieeeparts(x);
 
-% compute sqrt(v) by Newton's method
-z = 1.2;                % middle of interval [1,sqrt(2)]
-for j = 1:4             % testing suggests need 4 iterations
+% compute sqrt(v) by Newton's method on f(x) = x^2 - v
+z = 1.2;                % initial iterate near midpoint of [1,sqrt(2)]
+for j = 1:4             % testing suggests 4 iterations
   z = 0.5 * (z + v / z);
 end
 
