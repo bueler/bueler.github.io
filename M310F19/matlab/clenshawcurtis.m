@@ -2,8 +2,7 @@ function I = clenshawcurtis(f,n)
 % CLENSHAWCURTIS  Compute n+1 point Clenshaw-Curtis quadrature
 % on the fixed interval [-1,1].  From  Trefethen, L. N. (2008),
 % "Is Gauss quadrature better than Clenshaw–Curtis?", SIAM Review
-% 50 (1), 67–87.
-% Example:
+% 50 (1), 67–87.  Example:
 %   >> I = clenshawcurtis(@cos,11)
 %   >> abs(I - 2*sin(1))
 
