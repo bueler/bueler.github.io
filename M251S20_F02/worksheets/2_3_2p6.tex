@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+\usepackage[top=1in, bottom=0.75in, left=0.7in, right=1.00in]{geometry}
+
+\usepackage{graphicx,color,enumerate,multicol}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Section 2.6 Worksheet}
+\docdate{3 February 2020}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+% 2.6 #
+
+\begin{aproblems}
+
+\aproblem  FIXME list of limit problems
+
+\aproblem  Find all the vertical and horizontal asymptotes of the graph
+    $$y = \frac{2x^2 + x - 1}{x^2 + x - 2},$$
+and clearly state limits which justify these asymptotes.  (\emph{Also make a rough sketch of the graph.  You may be able to confirm your work by graphing calculator.})
+
+\aproblem  Sketch the graph of a function that satisfies all of the given conditions:
+\begin{itemize}
+\item $f$ is even
+\item $f(0)=0$
+\item $\lim_{x\to -\infty} f(x) = 0$
+\item $\lim_{x\to 3^+} = 2$
+\item $\lim_{x\to 3^-} f(x) = \infty$
+\item $f$ is discontinuous at $x=4$
+\end{itemize}
+
+\vfill
+
+
+
+\end{aproblems}
+
+\end{document}
