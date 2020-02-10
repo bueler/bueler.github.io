@@ -1,9 +1,9 @@
-function [U,P] = polar(A)
-% POLAR  For a square matrix A, compute the polar decomposition  A = U P  where
-% U is unitary and P is hermitian and nonnegative-definite.  Note P is the
-% unique nonnegative square root of A'*A.  For example:
+function [U,P] = polarform(A)
+% POLARFORM  For a square matrix A, compute the polar decomposition  A = U P
+% where U is unitary and P is hermitian and nonnegative-definite.  Note P is
+% the unique nonnegative square root of A'*A.  For example:
 %   >> A = randn(4,4);
-%   >> [U,P] = polar(A);
+%   >> [U,P] = polarform(A);
 %   >> norm(U*P-A), norm(P*P-A'*A), norm(U'*U-eye(4))
 % Computation is by SVD, thus stable but not necessarily efficient.
 % See https://en.wikipedia.org/wiki/Polar_decomposition
