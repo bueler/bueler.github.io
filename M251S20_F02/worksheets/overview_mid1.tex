@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+\usepackage[top=1in, bottom=0.7in, left=1.05in, right=1.05in]{geometry}
+
+\usepackage{graphicx,color,enumerate,multicol}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Midterm I Overview}
+\docdate{Monday 10 February 2020}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+The midterm will mostly cover Chapter 2, but Chapter 1 skills are needed at all times.  The questions will be like WebAssign and Written Homework problems in Chapter 2.  Note section 2.4 is skipped, along with the ``precise definitions'' material in section 2.6.
+
+\medskip
+There are many old versions of Midterm Exam 1 on the ``Exams'' tab on the website.  Print them out and do them, then check your work!
+
+\medskip
+Here are important topics which you should review and make sure you understand, with the sections where they appear.  Find and do example problems from each topic!
+\begin{itemize}
+\setlength\itemsep{1pt}
+\item average velocity and secant line slope \hfill \emph{\S 2.1}
+\item the sentence definition of the basic (two-sided) limit $\lim_{x\to a} f(x)$ \hfill\emph{\S 2.2}
+\item one-sided limits  \hfill \emph{\S 2.2}
+\item infinite limits  \hfill \emph{\S 2.2}
+\item limits at infinity  \hfill \emph{\S 2.6}
+\item vertical and horizontal asymptotes are defined by limits  \hfill \emph{\S 2.2, 2.6}
+\item using values close to $x=a$ to estimate the limit  \hfill \emph{\S 2.2}
+\item using algebra and limit laws to compute limits  \hfill \emph{\S 2.3, 2.5, 2.6, 2.7, 2.8}
+    \begin{itemize}
+    \item[$\circ$] you need to do algebra for ``$\frac{0}{0}$,'' ``$\frac{\infty}{\infty}$,'' and ``$\infty - \infty$'' limits
+    \item[$\circ$] your basic approach is to cancel zeros, by cancelling, factoring, finding common denominators, or multiplying by conjugates
+    \end{itemize}
+\item getting limits from a given graph  \hfill \emph{\S 2.2, 2.3, 2.5, 2.6}
+\item given limits and values, generate (sketch) a graph  \hfill \emph{\S 2.2, 2.3, 2.5, 2.6}
+\item definition of continuity  \hfill \emph{\S 2.5}
+    \begin{itemize}
+    \item[$\circ$] if a function $f$ is continuous at $x=a$ then the limit $\lim_{x\to a} f(x)$ is easy \dots just plug in $a$
+    \end{itemize}
+\item common functions are continuous on their domains  \hfill \emph{\S 2.5}
+\item using the Intermediate Value Theorem to show equations have solutions \hfill \emph{\S 2.5}
+\item the derivative is defined as a limit  \hfill \emph{\S 2.7}
+\item computing a derivative from the definition  \hfill \emph{\S 2.7, 2.8}
+\item tangent line slope and instantaneous velocity: they are derivatives  \hfill \emph{\S 2.7}
+\item find equation of a tangent line  \hfill \emph{\S 2.7}
+\item the derivative as a new function derived from $f(x)$  \hfill \emph{\S 2.8}
+\item sketching $f'(x)$ based on $f(x)$  \hfill \emph{\S 2.8}
+\item notation: $f'(x)=y'=\frac{df}{dx}=\frac{dy}{dx}$  \hfill \emph{\S 2.8}
+\item higher derivatives (and notation for them)  \hfill \emph{\S 2.8}
+\end{itemize}
+
+
+\end{document}

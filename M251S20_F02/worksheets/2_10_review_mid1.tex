@@ -1,0 +1,103 @@
+\documentclass[12pt]{article}
+\usepackage[top=1in, bottom=0.7in, left=1.05in, right=1.05in]{geometry}
+
+\usepackage{graphicx,color,enumerate,multicol}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Worksheet for Midterm I review}
+\docdate{Monday 10 February 2019}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+\aproblem (\S 2.6 \#9) \quad  Sketch the graph of a function that satisfies all these conditions:
+    $$f(0)=3, \, \lim_{x\to 0^-} f(x) = 4, \, \lim_{x\to 0^+} f(x) = 2, \, \lim_{x\to-\infty} f(x) = -\infty, \hspace{3.0in}$$
+    $$\lim_{x\to 4^+} f(x) = \infty, \, \lim_{x\to\infty} f(x) = 3 \hspace{4.0in}$$
+\vfill
+
+\aproblem  Find $f'(x)$ using the definition if $f(x)=\sqrt{x}$.
+\vfill
+
+\aproblem (\S 2.7 \#7) \quad  Using the result of the last problem, find an equation of the tangent line to $y=\sqrt{x}$ at the point $(1,1)$.
+\vfill
+
+\newpage
+\aproblem (\S 2.6 \#50) \quad  Find the horizontal and vertical asymptotes of the curve, and state the limits which justify these asymptotes:
+    $$y = \frac{1+x^4}{x^2-x^4} \hspace{4.5in}$$
+\vfill
+
+\aproblem (\S 2.3 \#49) \quad  Let $g(x) = \frac{x^2+x-6}{|x-2|}$.
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item Find $\lim_{x\to 2^-} g(x)$ and $\lim_{x\to 2^+} g(x)$.
+\item Does $\lim_{x\to 2} g(x)$ exist?
+\end{enumerate}
+\vfill
+
+\aproblem (like \S 2.7 \#53) \quad  The cost of producing $x$ ounces of gold from a new mine is $C=f(x)$ dollars.
+\begin{enumerate}
+\item What is the meaning of the derivative $f'(x)$?  What are its units?
+\item What does the statement $f'(80,000)=17$ mean?
+\end{enumerate}
+\vfill
+
+\end{aproblems}
+
+\end{document}
