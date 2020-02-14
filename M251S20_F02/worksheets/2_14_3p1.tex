@@ -1,0 +1,115 @@
+\documentclass[12pt]{article}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+
+\usepackage{graphicx,color,enumerate,multicol}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Section 3.1 and 3.2 Worksheet}
+\docdate{Friday 14 February 2020}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+
+\aproblem  Differentiate the functions.
+\begin{itemize}
+% 3.1 # 19
+\item[] $\d y = 3 e^x + \frac{4}{\sqrt[3]{x}}$
+\vfill
+
+% 3.1 # 27
+\item[] $\d G(q) = \left(1+q^{-1}\right)^2$
+\vfill
+
+% 3.2 # 14, 4 (like), 26
+\item[] $\d y = \frac{\sqrt{x}}{2+x}$
+\vfill
+
+\item[] $\d g(x) = (\pi^{1/2} + 5\sqrt{x})\, e^x$
+\vfill
+
+\item[] $\d f(x) = \frac{ax + b}{cx + d}$
+\vfill
+\end{itemize} 
+
+\newpage
+% like 3.2 #1
+\aproblem  Find the derivative of $f(x) = (x + x^2) (x^{-1} + 3)$ in two ways:
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{enumerate}
+\item by the product rule:
+
+\vfill
+\item by first expanding the product:
+
+\vfill
+\end{enumerate}
+
+% #58 in 3.1
+\aproblem  Find an equation of a tangent line to the curve $y=x^4+1$ which is parallel to the line $32x-y=15$.
+\vfill
+
+% 3.2 #46
+\aproblem If $h(2)=4$ and $h'(2)=-3$, find
+    $$\frac{d}{dx}\left(\frac{h(x)}{x}\right)\Big|_{x=2}= \hspace{5.0in}$$ 
+\vfill
+\end{aproblems}
+
+\end{document}
