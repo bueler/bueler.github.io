@@ -1,0 +1,109 @@
+\documentclass[12pt]{article}
+\usepackage[top=1in, bottom=1in, left=0.75in, right=1.0in]{geometry}
+
+\usepackage{graphicx,color,enumitem}
+\usepackage{amsmath,amsthm,amsbsy}
+\usepackage{palatino}
+
+%% Setup aproblem environment, 
+%% aproblem items
+%% subproblems environment
+%% subproblem items
+\makeatletter
+\newcounter{probcount}
+\newcounter{subprobcount}
+\newlength\probsep
+\newlength\pshrinking
+\newif\iffirstprob
+\newenvironment{aproblems}%
+  {\ifhmode\unskip\par\fi\setcounter{probcount}{0}\probsep\parskip
+  \sbox\@tempboxa{\textbf{9.}}\pshrinking\wd\@tempboxa\advance\pshrinking\labelsep
+  \let\hproblem\aproblem
+  \advance\linewidth -\pshrinking
+  \advance\@totalleftmargin\pshrinking
+  \advance\leftskip\pshrinking}%
+  {\ifhmode\unskip \par\fi\advance\leftskip-\pshrinking}%
+
+\newcommand{\aproblem}{%
+  \setcounter{subprobcount}{0}%
+  \stepcounter{probcount}%
+  \def\@currentlabel{\arabic{probcount}}%
+  \ifhmode
+    \unskip \par
+  \fi
+%  \addpenalty{-4000}%
+  \iffirstprob\else\addvspace\probsep\fi
+  \firstprobfalse
+  \hskip -\labelwidth\hskip -\labelsep 
+  \hbox to\labelwidth{\hss\textbf{\arabic{probcount}.}}\hskip\labelsep
+}%
+
+\newcommand{\subprob}{\item\def\@currentlabel{\arabic{probcount}\alph{\thelistlabel}}}
+\newcommand{\skipproblem}{\stepcounter{probcount}}
+
+
+%% The following commands put defined left and right headers on the top, and a page number
+%% on the bottom of all pages beyond page 1
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{\ifnum \value{page} > 1\relax\thepage\fi}
+\fancyhead[L]{\ifx\@doclabel\@empty\else\@doclabel\fi}
+\fancyhead[R]{\ifx\@docdate\@empty\else\@docdate\fi}
+\headheight 15pt
+\def\doclabel#1{\gdef\@doclabel{#1}}
+\def\docdate#1{\gdef\@docdate{#1}}
+\makeatother
+
+%% General formatting parameters
+\parindent 0pt
+\parskip 6pt plus 1pt
+
+
+\doclabel{Math F251: Section 3.4 Worksheet}
+\docdate{Thursday 20 February 2020}
+
+
+\begin{document}
+\renewcommand{\d}{\displaystyle}
+
+\begin{aproblems}
+\aproblem  Find the derivative of the function.  You do not need to simplify your answer.
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+% like 3.4 #22
+\item \quad $\d y = \left(x + \frac{1}{x}\right)^7$
+
+\vfill
+% #11
+\item \quad $\d f(\theta) = \cos(\theta^2)$
+
+\vfill
+% #24
+\item \quad $\d g(t) = e^{(t^3)}$
+
+\vfill
+% #42
+\item \quad $\d y = \sqrt{x + \sqrt{x + \sqrt{x}}}$
+
+\vfill
+\end{enumerate}
+
+
+\clearpage \newpage
+% 3.4 #52
+\aproblem  Find an equation of the tangent line to the curve at the given point.
+    $$y = \sqrt{1+x^3}, \quad (2,3) \hspace{4.0in}$$
+\vfill
+
+% #61
+\aproblem  If $F(x) = f(g(x))$, and if $f(-2)=8$, $f'(-2)=4$, $f'(5)=3$, $g(5)=-2$, and $g'(5)=6$, find $F'(5)$.
+\vfill
+
+% like #78
+\aproblem  Find the 49th derivative of $f(x) = x\, e^{-x}$.
+\vfill
+
+
+\end{aproblems}
+
+\end{document}
