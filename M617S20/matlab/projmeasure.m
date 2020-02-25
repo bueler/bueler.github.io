@@ -1,20 +1,20 @@
 function [P, Qh] = projmeasure(A,rect);
 % PROJMEASURE  Given a square, n x n, normal matrix A, implements a
-% projection-valued "measure" on the complex plane, at least for rectangular
+% projector-valued "measure" on the complex plane, for rectangular
 % regions.
-%   First generates a plot of the eigenvalues in the complex plane.  With
-% one input argument and one output argument,
+%   First generates a plot of the eigenvalues in the complex plane.
+% With one input argument and one output argument,
 %    P = projmeasure(A)
-% prompts the user to use the mouse to mark the upper-left and lower-right
-% corners of a rectangle containing eigenvalues of interest.  The resulting
-% projection P is the same size as A but projects onto the span of the
-% eigenvectors corresponding to eigenvalues in the selected rectangle.
-%   In general it has 2 input and 2 output arguments.  The second input
-% argument is the rectangle and the second output argument is matrix Qh
+% ask user to use the mouse to mark the upper-left and lower-right
+% corners of a rectangle containing eigenvalues of interest.  The
+% resulting projector P is the same size as A but projects onto the
+% span of the eigenvectors for eigenvalues in the rectangle.  In
+% general it takes 2 input and 2 output arguments.  The second input
+% is the rectangle and the second output argument is matrix Qh
 % formed from the (orthonormal) eigenvectors:
 %    [P, Qh] = projmeasure(A,rect)
-% Note Qh has m <= n columns which span the invariant subspace for eigenvalues
-% inside rect, and P = Qh * Qh' is the corresponding orthogonal projection.
+% Note Qh has m <= n columns which span the invariant subspace
+% and P = Qh * Qh' is the corresponding orthogonal projector.
 % Example 1:
 %   >> A = gennormal(100);
 %   >> P = projmeasure(A);   % <-- user input with mouse
@@ -27,7 +27,7 @@ function [P, Qh] = projmeasure(A,rect);
 %   >> [Qh,P] = projmeasure(A);   % <-- choose m (e.g. m=5) eigs with mouse
 %   >> B = Qh'*A*Qh;              % m x m diagonal matrix
 %   >> lB = eig(B);  plot(real(lB),imag(lB),'o')  % ... has same eigs
-% See also GENNORMAL.
+% See also GENNORMAL, GENHERM.
 
 % A must be square
 [m n] = size(A);
@@ -52,16 +52,17 @@ fprintf('computing eigenvalues ...\n')
 [X,lam] = eig(A,'vector');
 lam = lam';
 
-% plot eigenvalues with tolerable scaling
+% try to plot eigenvalues with tolerable scaling
 plot(real(lam),imag(lam),'bo')
 pb = [min(real(lam)), max(real(lam)), min(imag(lam)), max(imag(lam))];
 sc = max(abs(lam))/2;
-pb = [pb(1)-sc,pb(2)+sc,pb(3)-sc,pb(4)+sc];
 if herm
-    axis([pb(1) pb(2) -1.0 1.0])
+    axis([pb(1)-sc pb(2)+sc -1.0 1.0])
 else
     th = 0:.01:2*pi;
     hold on,  plot(cos(th),sin(th),'g'),  hold off   % plot unit circle
+    pb = [min([-1.1 pb(1)-sc]),max([1.1 pb(2)+sc]),...
+          min([-1.1 pb(3)-sc]),max([1.1 pb(4)+sc])];
     axis(pb)
     axis equal
 end
