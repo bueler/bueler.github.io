@@ -1,0 +1,174 @@
+\documentclass[11pt]{article}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.75in} 
+\addtolength{\evensidemargin}{-.75in}
+\addtolength{\topmargin}{-.6in}
+\addtolength{\textwidth}{1.4in}
+\addtolength{\textheight}{1.3in}
+
+\renewcommand{\baselinestretch}{1.075}
+
+\usepackage{verbatim,fancyvrb}
+
+\usepackage{palatino,amsmath,amssymb,amsthm}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\mtt}{\texttt}
+\usepackage{alltt,xspace}
+
+%\usepackage[final]{graphicx}
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=blue, citecolor=red, urlcolor=blue]{hyperref}
+
+% macros
+\newcommand{\bc}{\mathbf{c}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+
+%\renewcommand{\det}{\operatorname{det}}
+\newcommand{\onull}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\prob}[1]{\bigskip\noindent\textbf{#1.}\quad }
+\newcommand{\exer}[2]{\prob{Exercise #2 in Lecture #1}}
+
+\newcommand{\pts}[1]{(\emph{#1 pts}) }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\quad }
+\newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
+
+\newcommand{\Julia}{\textsc{Julia}\xspace}
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Octave}{\textsc{Octave}\xspace}
+\newcommand{\Python}{\textsc{Python}\xspace}
+
+\DefineVerbatimEnvironment{mVerb}{Verbatim}{numbersep=2mm,
+frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
+
+\newcommand{\ema}{\emach}
+\newcommand{\emach}{\eps_{\!_{\text{m}}}}
+
+\title{FIXME  Starting Hilbert spaces the right way}
+\author{Ed Bueler}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+I believe this is the right sequence, better than Muscat and close to Reed \& Simon:
+\begin{enumerate}
+\item define $\CC$-\emph{inner product space} $(X,\ip{\cdot}{\cdot})$; sequilinear and positive-definite
+
+\item $\|x\|=\sqrt{\ip{x}{x}}$ \dots but we don't have triangle inequality yet
+
+\item define \emph{orthogonal} and \emph{ON set}
+
+\item Pythagorean Theorem. if $u,v\in X$ are orthogonal then $\|u+v\|^2 = \|u\|^2 + \|v\|^2$
+
+\item Corollary. if $\{u_i\}_{i=1}^n$ is a finite ON set and $x\in X$ then
+    $$\|x\|^2 = \sum_{i=1}^n |\ip{u_i}{x}|^2 + \left\|x - \sum_{i=1}^n \ip{u_i}{x} u_i\right\|^2$$
+
+proof. $x = \sum_{i=1}^n \ip{u_i}{x} u_i - \left(x - \sum_{i=1}^n \ip{u_i}{x} u_i\right)$ is $x=u+v$.  check $\ip{u}{v}=0$. result follows
+
+\item Bessel's inequality (another corollary). if $\{u_i\}_{i=1}^n$ is a finite ON set and $x\in X$ then
+    $$\|x\|^2 \ge \sum_{i=1}^n |\ip{u_i}{x}|^2$$
+
+\item Cauchy-Schwarz (another corollary). $|\ip{x}{y}| \le \|x\|\|y\|$
+
+proof. for $y\ne 0$, $\{y/\|y\|\}$ is an ON set with one element so by Bessel
+    $$\|x\|^2 \ge |\ip{y/\|y\|}{x}|^2 = \frac{|\ip{y}{x}|}{\|y\|^2}$$
+
+\item Triangle inequality (another corollary). $\|x+y\| \le \|x\|+\|y\|$
+
+proof. by Cauchy-Schwarz,
+   $$\|x+y\|^2 = \|x\|^2 + 2 \operatorname{Re}\ip{x}{y} + \|y\|^2 \le \|x\|^2 + 2 \|x\|\|y\| + \|y\|^2 = \left(\|x\|+\|y\|\right)^2$$
+
+\item Corollary. an inner product space is a normed space
+
+\item Parallelogram law. if $x,y\in X$ where $(X,\ip{x}{y})$ is an inner product space, then
+    $$\|x+y\|^2 + \|x-y\|^2 = 2 \|x\|^2 + 2 \|y\|^2$$
+
+proof. computation; see Muscat Prop 10.8
+
+side note. that this characterizes inner product spaces among normed vector spaces was proven by P.~Jordan \& J. von Neumann (1935) \dots but don't get distracted now
+
+\item definition.  a $\CC$-inner product space $(X,\ip{\cdot}{\cdot})$ is a \emph{Hilbert space} if it is complete as a normed vector space
+
+\item definition. for a normed vector space $X$, $A\subset X$ is \emph{convex} if $0\le \lambda \le 1$ and $u,v\in A$ imply $\lambda u + (1-\lambda) v\in A$
+
+\item Fundamental Theorem of Optimization. if $A \subset H$ is a closed, convex subset of a Hilbert space $H$ and if $x\in H$ then there is a unique $y_* \in A$ such that $\|x-y_*\| \le \|x-y\|$ for all $y\in A$
+
+proof. see Muscat; uses parallelogram law, completeness of $H$, closedness of $A$, convexity of $A$
+
+\item definition.  given a subset $A\subset X$ of an inner product space,
+    $$A^\perp = \left\{x\in X \,:\, \ip{x}{a}=0 \text{ for all } a \in A\right\}$$
+
+\item lemma. $A^\perp$ is a closed linear subspace of $X$
+
+proof. Prop 10.9 in Muscat
+
+\item Theorem. if $M\subset H$ is a closed linear subspace of a Hilbert space, and if $x\in H$, then
+    $$\left(y_* \text{ is the closest point in $M$ to } x\right) \iff x-y_* \in M^\perp$$
+furthermore, $H=M\oplus M^\perp$ and $P:x\mapsto y_*$ defines $P\in B(H)$, an orthogonal projection onto $M$
+
+proof. see Theorem 10.12 in Muscat
+
+\item calculation. if $(X,\ip{\cdot}{\cdot})$ is an inner product space and $x\in X$ then $\phi(y) = \ip{x}{y}$ defines a continuous linear functional $\phi\in X^*$ because
+    $$|\phi(y)| = |\ip{x}{y}| \le \|x\|\|y\|$$
+so $\|\phi\|\le \|x\|$
+
+\item definition:
+    $$J:H \to H^*, \qquad x \mapsto \left[y\mapsto \ip{x}{y}\right]$$
+is the Riesz map
+
+\item Riesz Representation Theorem: the Riesz map is bijective, conjugate-linear, and isometric
+
+proof. see Muscat Theorem 10.16; uses closedness of $\ker \phi$, definition of $M^\perp$, fact $H=M\oplus M^\perp$
+
+\item definition. given $T\in B(X,Y)$ define $T^*\in B(Y,X)$, the \emph{adjoint of $T$}, by $T^*y=w$ where $w$ represents functional $\phi(x) = \ip{y}{Tx}_X$, thus
+    $$\ip{T^*y}{x} = \ip{y}{Tx}$$
+
+\item FIXME: selection of other facts about adjoints
+
+\item Gram-Schmidt process.  any sequence of vectors in an inner product space $(X,\ip{\cdot}{\cdot})$ can be replaced by an ON set with same span
+
+\item definition. $\{u_i\}_{i\in I} \subset X$, where $(X,\ip{\cdot}{\cdot})$ is an inner product space, is an \emph{ON basis} if it is ON set and the span (\underline{finite} linear combinations) is dense; note index set $I$ is arbitrary, possibly uncountable
+
+\item Theorem. every Hilbert space has an ON basis
+
+proof. page 202 Muscat; better situation than Banach spaces because not all Banach spaces have Schauder bases
+
+\item Lemma.  if $\{e_i\}$ is a countable ON set in a Hilbert space $H$ then
+    $$\left(\sum_i \alpha_i e_i \text{ converges in $H$ for $\alpha_i\in \CC$}\right) \iff (\alpha_i)\in \ell^2$$
+
+proof. Prop 10.30 in Muscat; uses completeness of $H$ and $\ell^2$
+
+\item Parseval's identity. if $\{e_i\}$ is a countable ON basis of a Hilbert space $H$, and if $x\in H$ then
+    $$x = \sum_i \ip{e_i}{x}e_i, \qquad \|x\|^2 = \sum_i |\ip{e_i}{x}|^2$$
+
+proof. uses Bessel's inequality and previous lemma
+
+\end{enumerate}
+\end{document}
+
