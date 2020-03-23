@@ -1,10 +1,10 @@
 \documentclass[11pt]{article}
 %prepared in AMSLaTeX, under LaTeX2e
-\addtolength{\oddsidemargin}{-.75in} 
-\addtolength{\evensidemargin}{-.75in}
-\addtolength{\topmargin}{-.6in}
-\addtolength{\textwidth}{1.4in}
-\addtolength{\textheight}{1.3in}
+\addtolength{\oddsidemargin}{-.8in} 
+\addtolength{\evensidemargin}{-.8in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textwidth}{1.6in}
+\addtolength{\textheight}{1.5in}
 
 \renewcommand{\baselinestretch}{1.075}
 
@@ -72,25 +72,25 @@ frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
 \newcommand{\ema}{\emach}
 \newcommand{\emach}{\eps_{\!_{\text{m}}}}
 
-\title{A Hilbert Space Alphabet \\ (or \emph{the correct sequence in which to introduce Hilbert spaces})}
-\author{Ed Bueler\footnote{\today}}
+\title{A Hilbert Space Alphabet \\ (or: \emph{the correct sequence in which to introduce Hilbert spaces})}
+\author{\Large Ed Bueler \, {\small \emph{(\today)}}}
 %\date{\today}
 \date{}
 
 \begin{document}
 \maketitle
 
-I have already made video lectures for this material, and this is \emph{not} a revision!  You do not have to read it, but it might be useful for review or clarification.
+I have already made video lectures for this material, and this is \emph{not} a replacement for that material!  Indeed, you do not have to read it, but it might be useful for review or clarification.
 
-Looking back, I did not do things in the correct sequence.  This short document shows a better sequence in which to introduce Hilbert spaces, up to the point where we start discussing operators on such spaces.  It is superior to how our textbook by Muscat\footnote{J.~Muscat, \emph{Functional Analysis: An Introduction to Metric Spaces, Hilbert Spaces, and Banach Algebras}, Springer, 2014} did it.  (How Muscat names things, e.g.~confusing Bessel's inequality and Parseval's identity, irritates me.)  It is certainly more efficient than the way I did it in the video lectures.  The sequence here is close to the way the material is presented by Reed \& Simon,\footnote{M.~Reed and B.~Simon, \emph{Functional Analysis}, Methods of Modern Math.~Phys.~I, Academic Press 1980} an excellent textbook.
+Looking back, I did not do things in the correct sequence.  This short document shows a better sequence in which to introduce Hilbert spaces, up to the point where we start discussing operators on such spaces.  The sequence here is superior to how our textbook by Muscat\footnote{J.~Muscat, \emph{Functional Analysis: An Introduction to Metric Spaces, Hilbert Spaces, and Banach Algebras}, Springer, 2014} did it.  (How Muscat names things, e.g.~confusing Bessel's inequality and Parseval's identity, irritates me.)  It is certainly more efficient than the way I did it in the video lectures.  The sequence here is close to the way the material is presented by Reed \& Simon,\footnote{M.~Reed and B.~Simon, \emph{Functional Analysis}, Methods of Modern Math.~Phys.~I, Academic Press 1980} an excellent textbook.
 
-Often the proof or presentation given by Muscat is just fine, so I just cite it.  Regarding which material is more efficient here, see \textbf{D}--\textbf{G} and FIXME: ON basis material
+Often the proof or presentation given by Muscat is just fine, so I just cite it.  Regarding which material is different, and more efficient, see \textbf{D}--\textbf{G} and \textbf{U}--\textbf{Z}.
 
 \vspace{0.25in}
 
 \begin{enumerate}
 \renewcommand{\labelenumi}{{\Large \textbf{\Alph{enumi}.}}\,}
-\item Define a $\CC$-\emph{inner product space} $(X,\ip{\cdot}{\cdot})$.  The inner product is a sequilinear and positive-definite form.  See Muscat page 171.
+\item Define a $\CC$-\emph{inner product space} $(X,\ip{\cdot}{\cdot})$.  The inner product is a sequilinear and positive-definite form; it is conjugate-linear in the first position.  See Muscat page 171.
 
 \item Define the norm symbols $\|x\|=\sqrt{\ip{x}{x}}$.  However, this is not a norm because we have not proven triangle inequality (yet).
 
@@ -108,12 +108,12 @@ Often the proof or presentation given by Muscat is just fine, so I just cite it.
 \item \emph{Corollary (Bessel's inequality).}  If $X$ is an inner product space and $\{e_i\}_{i=1}^n$ is a finite ON set and $x\in X$ then
     $$\|x\|^2 \ge \sum_{i=1}^n |\ip{e_i}{x}|^2$$
 
-\emph{proof.}  Drop a term in the previous corollary.
+\emph{proof.}  Drop a term in the previous result.
 
 \item \emph{Corollary (Cauchy-Schwarz).}  If $X$ is an inner product space and $x,y\in X$ then
     $$|\ip{x}{y}| \le \|x\|\|y\|.$$
 
-\emph{proof.}  If $y=0$ the result is immediate.  Otherwise, $\{y/\|y\|\}$ is an ON set with one element.  Thus by Bessel's inequality, $\|x\|^2 \ge \left|\ip{\frac{y}{\|y\|}}{x}\right|^2 = \frac{|\ip{y}{x}|^2}{\|y\|^2}$.  The result follows by clearing denominators and taking square roots.
+\emph{proof.}  If $y=0$ the result is immediate.  Otherwise, $\{y/\|y\|\}$ is an ON set with one element.  Thus by Bessel's inequality, $\|x\|^2 \ge \left|\ip{\frac{y}{\|y\|}}{x}\right|^2 = \frac{|\ip{y}{x}|^2}{\|y\|^2}$.  The result follows by clearing denominators.
 
 \item \emph{Corollary (Triangle inequality).}  If $X$ is an inner product space and $x,y\in X$ then
     $$\|x+y\| \le \|x\|+\|y\|.$$
@@ -128,7 +128,7 @@ Often the proof or presentation given by Muscat is just fine, so I just cite it.
 
 \emph{proof.} This is an easy computation: expand the left side and get the right side.
 
-\emph{note.}  In fact, the parallelogram law characterizes inner product spaces among the normed vector spaces.  This was proven by P.~Jordan \& J. von Neumann (1935).  However, don't get distracted by that; keep going!
+\emph{note.}  In fact, the parallelogram law characterizes inner product spaces among the normed vector spaces.  This was proven by P.~Jordan \& J. von Neumann (1935).  And there is a fancy polarization formula. However, \emph{don't} get distracted by that; keep going!
 
 \item Define \emph{Hilbert space}:  A $\CC$-inner product space $(X,\ip{\cdot}{\cdot})$ is a \emph{Hilbert space} if it is complete as a normed vector space.
 
@@ -138,7 +138,7 @@ Often the proof or presentation given by Muscat is just fine, so I just cite it.
 
 \emph{proof.}  This is Theorem 10.11 in Muscat.  The proof uses the parallelogram law, the completeness of $H$, the closedness of $A$, and the convexity of $A$.
 
-\emph{note.}  I assert this is a good name for the theorem, but it is not universal.
+\emph{note.}  I assert this is a good name for the theorem, especially in infinite dimensions, but it is not universal.
 
 \item Define \emph{$A$-perp}:  If $X$ is an inner product space and $A\subset X$ is any subset then
     $$A^\perp = \left\{x\in X \,:\, \ip{x}{a}=0 \text{ for all } a \in A\right\}.$$
@@ -151,9 +151,9 @@ Often the proof or presentation given by Muscat is just fine, so I just cite it.
     $$\left(y \text{ is the closest point in $M$ to } x\right) \iff x-y \in M^\perp.$$
 Furthermore, $H=M\oplus M^\perp$.  Finally, $P:x\mapsto y$, where $y$ is the closest point in $M$ to $x$, defines $P\in B(H)$, an orthogonal projection onto $M$.
 
-\emph{proof.}  This is Theorem 10.12 in Muscat.  The proof uses the Pythagorean theorem.  The fundamental theorem of optimization (and the completeness of $H$ and closedness of $M$) is needed so that a closest point exists.
+\emph{proof.}  This is Theorem 10.12 in Muscat.  The proof starts with the Pythagorean theorem.  The fundamental theorem of optimization (and the completeness of $H$ and closedness of $M$) is needed so that a closest point exists.
 
-\emph{note.}  The definition of ``orthogonal projection onto $M$'' is that $M=\image P$, $P^2=P$, and for all $x\in H$ we have $x-Px \perp M$.  Later we can simplify the last condition to $P^*=P$.
+\emph{note.}  The definition of ``orthogonal projection onto $M$'' is that $M=\image P$, $P^2=P$, and for all $x\in H$ we have $x-Px \perp M$.  Once adjoints are defined, one shows that the last condition is equivalent to $P^*=P$.
 
 \item \emph{Lemma.}  If $X$ is an inner product space, $X^*$ is the dual space of continuous linear functionals, and $x\in X$ then $\phi(y) = \ip{x}{y}$ defines $\phi\in X^*$, and furthermore $\|\phi\| = \|x\|$.
 
@@ -165,33 +165,47 @@ J:X &\to X^* \\
   x &\mapsto \big[\,x^*: y\mapsto \ip{x}{y}\,\big]
 \end{align*}
 
-\item \emph{Riesz Representation Theorem}  If $H$ is a Hilbert space then the Riesz map $J:H \to H^*$ is bijective, conjugate-linear, and isometric.
+\item \emph{Riesz Representation Theorem.}  If $H$ is a Hilbert space then the Riesz map $J:H \to H^*$ is bijective, conjugate-linear, and isometric.
 
-\emph{proof.}  This is Theorem 10.16 in Muscat.  The proof uses the definition of $M^\perp$ for $M=\ker \phi$ and $\phi \in H^*$.  The continuity of $\phi$ shows $M$ is closed so $H=M\oplus M^\perp$ because $H$ is a Hilbert space (so we can use orthogonal decomposition).  Thus $J$ is onto.  The Lemma shows $J$ is isometric.  The remaining properties of $J$ follow from easy calculations.
+\emph{proof.}  This is Theorem 10.16 in Muscat.  The proof uses the definition of $M^\perp$ for $M=\ker \phi$ and $\phi \in H^*$.  The continuity of $\phi$ shows $M$ is closed so $H=M\oplus M^\perp$ because $H$ is a Hilbert space.  (We can use orthogonal decomposition.)  Thus $J$ is onto.  The Lemma shows $J$ is isometric.  The remaining properties of $J$ follow from easy calculations.
 
-\item Gram-Schmidt process.  any sequence of vectors in an inner product space $(X,\ip{\cdot}{\cdot})$ can be replaced by an ON set with same span
+\emph{note.}  Thus every continuous linear functional on $H$ has a unique representative in $H$.
 
-\item definition. $\{u_i\}_{i\in I} \subset X$, where $(X,\ip{\cdot}{\cdot})$ is an inner product space, is an \emph{ON basis} if it is ON set and the span (\underline{finite} linear combinations) is dense; note index set $I$ is arbitrary, possibly uncountable
+\item \emph{Gram-Schmidt process.}  Recall that if $X$ is an inner product space and $(v_i)$ is any sequence in $X$, finite or countable, then we can construct an ON set $\{e_i\}$ with same span as $\{v_i\}$.  Thus ON sets are plentiful, but the question is whether any ON set is big enough to be a ``basis''.
 
-\item Theorem. every Hilbert space has an ON basis
+\item Define \emph{orthonormal (ON) basis}:  If $X$ is an inner product space and $S=\{e_i\}_{i\in I} \subset X$ is an ON set then we say $S$ is an \emph{orthonormal basis} if the span of $S$ is dense, \,$\overline{\operatorname{span} S} = X$.
 
-proof. page 202 Muscat; better situation than Banach spaces because not all Banach spaces have Schauder bases
+\emph{note.}  The index set $I$ here is arbitrary, possibly uncountable.  Recall that $\operatorname{span} S$ is the set of \emph{finite} linear combinations, while $\overline{\operatorname{span} S}$ includes (countably) infinite sums.
 
-\item Lemma.  if $\{e_i\}$ is a countable ON set in a Hilbert space $H$ then
-    $$\left(\sum_i \alpha_i e_i \text{ converges in $H$ for $\alpha_i\in \CC$}\right) \iff (\alpha_i)\in \ell^2$$
+\item \emph{Theorem.}  Every Hilbert space has an ON basis.
 
-proof. Prop 10.30 in Muscat; uses completeness of $H$ and $\ell^2$
+\emph{proof.}  The proof is summarized on page 202 of Muscat.  This is a Hausdorff maximality principle argument, that is, it uses the Axiom of Choice.  Note that if the Hilbert space is infinite-dimensional then the ON basis might have uncountably-many elements.  Completeness is used to show that if $E^\perp=0$ then $\overline{\operatorname{span} E} = H$.
 
-\item Parseval's identity. if $\{e_i\}$ is a countable ON basis of a Hilbert space $H$, and if $x\in H$ then
-    $$x = \sum_i \ip{e_i}{x}e_i, \qquad \|x\|^2 = \sum_i |\ip{e_i}{x}|^2$$
+\item \emph{Lemma.}  If $H$ is a Hilbert space and $\{e_i\}$ is a countable ON set then
+    $$\left(\sum_{i=1}^\infty \alpha_i e_i \text{ converges in $H$ for $\alpha_i\in \CC$}\right) \iff (\alpha_i)\in \ell^2.$$
 
-proof. uses Bessel's inequality and previous lemma
+\emph{proof.} This is Proposition 10.30 in Muscat.  The proof uses the Pythagorean theorem and the completeness of $H$ and $\ell^2$.
 
-\item definition. given $T\in B(X,Y)$ define $T^*\in B(Y,X)$, the \emph{adjoint of $T$}, by $T^*y=w$ where $w$ represents functional $\phi(x) = \ip{y}{Tx}_X$, thus
-    $$\ip{T^*y}{x} = \ip{y}{Tx}$$
+\item \emph{Theorem.}  If $H$ is a Hilbert space, $\{e_i\}$ is a countable ON basis, and $x\in H$ then
+    $$x = \sum_{i=1}^\infty \ip{e_i}{x} e_i.$$
 
-\item FIXME: selection of other facts about adjoints
+\emph{proof.}  Bessel's inequality is used to show that the partial sums converge (because they are Cauchy) to some $y \in H$.  But $x-y \in \{e_i\}^\perp$, which is $\{0\}$ because $\operatorname{span} \{e_i\}$ is dense.  (Compare Theorem 10.31 in Muscat.)
 
+\emph{note.}  The hypotheses here require $H$ to be a separable Hilbert space.
+
+\item \emph{Parseval's identities.}  If $H$ is a Hilbert space, $\{e_i\}$ is a countable ON basis, and $x,y\in H$ then
+    $$\|x\|^2 = \sum_{i=1}^\infty |\ip{e_i}{x}|^2, \qquad \ip{x}{y} = \sum_{i=1}^\infty \ip{x}{e_i} \ip{e_i}{y}$$
+
+\emph{proof.}  This is Proposition 10.29 in Muscat.
+
+\emph{note.}  Now we know that every separable Hilbert space is isometrically isomorphic to $\ell^2$.
+
+\item \emph{Corollary.}  A countable ON basis of a Hilbert space is a Schauder basis.  Every separable Hilbert space has a Schauder basis.
+
+\emph{note.}  This is a better situation than with Banach and other normed vector spaces, because not every separable Banach space has a Schauder basis (Enflo, 1973).  Recall that a sequence $(e_i)$ in a normed vector space $X$ is a \emph{Schauder basis} if $\|e_i\|=1$ and if for any $x\in X$ there are unique coefficients $\alpha_i \in \CC$ so that $x=\sum_{i=1}^\infty \alpha_i e_i$.  If $X$ has a Schauder basis then $X$ is separable.
 \end{enumerate}
+
+That is the end because I have run out of letters.  However, this is also the point at which one starts looking at operators.  One defines the \emph{adjoint} by saying that if $T\in B(X,Y)$, for Hilbert spaces $X,Y$, and if $y\in Y$ then $T^*y=w \in X$ where $w$ represents (i.e.~Riesz theorem) $\phi(x) = \ip{y}{Tx}$, $\phi\in X^*$.  Thus $T^*\in B(Y,X)$ and $\ip{T^*y}{x} = \ip{y}{Tx}$.  One can then define self-adjoint, unitary, and normal elements, and proceed to spectral theory and $C^*$-algebras.  Which we plan to do.
+
 \end{document}
 
