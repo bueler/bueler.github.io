@@ -69,15 +69,23 @@ frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
 \newcommand{\ema}{\emach}
 \newcommand{\emach}{\eps_{\!_{\text{m}}}}
 
-\title{FIXME  Starting Hilbert spaces the right way}
+\title{A Hilbert Space Alphabet \\ (or: the right sequence in which to introduce Hilbert spaces)}
 \author{Ed Bueler}
 \date{\today}
 
 \begin{document}
 \maketitle
 
-I believe this is the right sequence, better than Muscat and close to Reed \& Simon:
+I have already made video lectures for this material, and this is \emph{not} a revision!  You do not have to read it.
+
+However, looking back, I think that this short document shows the right sequence in which to introduce Hilbert spaces, up to the point where we start discussing operators on such spaces.  This order is, I believe, better than our textbook by Muscat,\footnote{J.~Muscat, \emph{Functional Analysis: An Introduction to Metric Spaces, Hilbert Spaces, and Banach Algebras}, Springer, 2014} and it is certainly more efficient than the way I did it in the video lectures.  (The way Muscat names things, e.g.~confusing Bessel's inequality and Parseval's identity, is something that irritates me.)  The sequence here is close to the way the material is presented by Reed \& Simon,\footnote{M.~Reed and B.~Simon, \emph{Functional Analysis}, Methods of Modern Mathematical Physics I, Revised and enlarged edition, Academic Press 1980} an excellent textbook.
+
+In many cases the proof or presentation given by Muscat is just fine; in that case I just cite it.  But certain material is \emph{much} more efficient here, especially the idea of stating a two-vector Pythagorean theorem, then giving Bessel's  inequality, and then Cauchy-Schwarz.
+
+\vspace{0.5in}
+
 \begin{enumerate}
+\renewcommand{\labelenumi}{{\Large \textbf{\Alph{enumi}.}}\,}
 \item define $\CC$-\emph{inner product space} $(X,\ip{\cdot}{\cdot})$; sequilinear and positive-definite
 
 \item $\|x\|=\sqrt{\ip{x}{x}}$ \dots but we don't have triangle inequality yet
