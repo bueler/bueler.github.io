@@ -44,12 +44,15 @@
 \newcommand{\lam}{\lambda}
 \newcommand{\lap}{\triangle}
 
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
 \newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
 
 %\renewcommand{\det}{\operatorname{det}}
 \newcommand{\onull}{\operatorname{null}}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\range}{\operatorname{range}}
+\newcommand{\image}{\operatorname{im}}
 
 \newcommand{\prob}[1]{\bigskip\noindent\textbf{#1.}\quad }
 \newcommand{\exer}[2]{\prob{Exercise #2 in Lecture #1}}
@@ -69,95 +72,102 @@ frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
 \newcommand{\ema}{\emach}
 \newcommand{\emach}{\eps_{\!_{\text{m}}}}
 
-\title{A Hilbert Space Alphabet \\ (or: the right sequence in which to introduce Hilbert spaces)}
-\author{Ed Bueler}
-\date{\today}
+\title{A Hilbert Space Alphabet \\ (or \emph{the correct sequence in which to introduce Hilbert spaces})}
+\author{Ed Bueler\footnote{\today}}
+%\date{\today}
+\date{}
 
 \begin{document}
 \maketitle
 
-I have already made video lectures for this material, and this is \emph{not} a revision!  You do not have to read it.
+I have already made video lectures for this material, and this is \emph{not} a revision!  You do not have to read it, but it might be useful for review or clarification.
 
-However, looking back, I think that this short document shows the right sequence in which to introduce Hilbert spaces, up to the point where we start discussing operators on such spaces.  This order is, I believe, better than our textbook by Muscat,\footnote{J.~Muscat, \emph{Functional Analysis: An Introduction to Metric Spaces, Hilbert Spaces, and Banach Algebras}, Springer, 2014} and it is certainly more efficient than the way I did it in the video lectures.  (The way Muscat names things, e.g.~confusing Bessel's inequality and Parseval's identity, is something that irritates me.)  The sequence here is close to the way the material is presented by Reed \& Simon,\footnote{M.~Reed and B.~Simon, \emph{Functional Analysis}, Methods of Modern Mathematical Physics I, Revised and enlarged edition, Academic Press 1980} an excellent textbook.
+Looking back, I did not do things in the correct sequence.  This short document shows a better sequence in which to introduce Hilbert spaces, up to the point where we start discussing operators on such spaces.  It is superior to how our textbook by Muscat\footnote{J.~Muscat, \emph{Functional Analysis: An Introduction to Metric Spaces, Hilbert Spaces, and Banach Algebras}, Springer, 2014} did it.  (How Muscat names things, e.g.~confusing Bessel's inequality and Parseval's identity, irritates me.)  It is certainly more efficient than the way I did it in the video lectures.  The sequence here is close to the way the material is presented by Reed \& Simon,\footnote{M.~Reed and B.~Simon, \emph{Functional Analysis}, Methods of Modern Math.~Phys.~I, Academic Press 1980} an excellent textbook.
 
-In many cases the proof or presentation given by Muscat is just fine; in that case I just cite it.  But certain material is \emph{much} more efficient here, especially the idea of stating a two-vector Pythagorean theorem, then giving Bessel's  inequality, and then Cauchy-Schwarz.
+Often the proof or presentation given by Muscat is just fine, so I just cite it.  Regarding which material is more efficient here, see \textbf{D}--\textbf{G} and FIXME: ON basis material
 
-\vspace{0.5in}
+\vspace{0.25in}
 
 \begin{enumerate}
 \renewcommand{\labelenumi}{{\Large \textbf{\Alph{enumi}.}}\,}
-\item define $\CC$-\emph{inner product space} $(X,\ip{\cdot}{\cdot})$; sequilinear and positive-definite
+\item Define a $\CC$-\emph{inner product space} $(X,\ip{\cdot}{\cdot})$.  The inner product is a sequilinear and positive-definite form.  See Muscat page 171.
 
-\item $\|x\|=\sqrt{\ip{x}{x}}$ \dots but we don't have triangle inequality yet
+\item Define the norm symbols $\|x\|=\sqrt{\ip{x}{x}}$.  However, this is not a norm because we have not proven triangle inequality (yet).
 
-\item define \emph{orthogonal} and \emph{ON set}
+\item Define \emph{orthogonal vectors}: $\ip{u}{v}=0$.  Define \emph{orthonormal (ON) set}: $\{e_i\}_{i\in I}$ such that $\ip{e_i}{e_j}=0$ if $i\ne j$ and $\|e_i\|=1$.  Note that the index set $I$ in this definition can be any set, even uncountable.
 
-\item Pythagorean Theorem. if $u,v\in X$ are orthogonal then $\|u+v\|^2 = \|u\|^2 + \|v\|^2$
+\item \emph{Pythagorean Theorem.}  If $X$ is an inner product space and $u,v\in X$ are orthogonal then $\|u+v\|^2 = \|u\|^2 + \|v\|^2$.
 
-\item Corollary. if $\{u_i\}_{i=1}^n$ is a finite ON set and $x\in X$ then
-    $$\|x\|^2 = \sum_{i=1}^n |\ip{u_i}{x}|^2 + \left\|x - \sum_{i=1}^n \ip{u_i}{x} u_i\right\|^2$$
+\emph{proof.}  $\ip{u+v}{u+v} = \ip{u}{u} + 2 \Re\ip{u}{v} + \ip v v = \ip{u}{u} + \ip v v$.
 
-proof. $x = \sum_{i=1}^n \ip{u_i}{x} u_i - \left(x - \sum_{i=1}^n \ip{u_i}{x} u_i\right)$ is $x=u+v$.  check $\ip{u}{v}=0$. result follows
+\item \emph{Corollary (extended Pythagorean Theorem).}  If $X$ is an inner product space, $\{e_i\}_{i=1}^n$ is a finite ON set, and $x\in X$ then
+    $$\|x\|^2 = \sum_{i=1}^n |\ip{e_i}{x}|^2 + \left\|x - \sum_{i=1}^n \ip{e_i}{x} e_i\right\|^2$$
 
-\item Bessel's inequality (another corollary). if $\{u_i\}_{i=1}^n$ is a finite ON set and $x\in X$ then
-    $$\|x\|^2 \ge \sum_{i=1}^n |\ip{u_i}{x}|^2$$
+\emph{proof.}  Let $u = \sum_{i=1}^n \ip{e_i}{x} e_i$ and $v = x - \sum_{i=1}^n \ip{e_i}{x} e_i$.  Clearly $x=u+v$.  Easy calculations show that $\ip{u}{v}=0$ and that $\|u\|^2 = \sum_{i=1}^n |\ip{e_i}{x}|^2$.  The result follows by the Pythagorean Theorem.
 
-\item Cauchy-Schwarz (another corollary). $|\ip{x}{y}| \le \|x\|\|y\|$
+\item \emph{Corollary (Bessel's inequality).}  If $X$ is an inner product space and $\{e_i\}_{i=1}^n$ is a finite ON set and $x\in X$ then
+    $$\|x\|^2 \ge \sum_{i=1}^n |\ip{e_i}{x}|^2$$
 
-proof. for $y\ne 0$, $\{y/\|y\|\}$ is an ON set with one element so by Bessel
-    $$\|x\|^2 \ge |\ip{y/\|y\|}{x}|^2 = \frac{|\ip{y}{x}|}{\|y\|^2}$$
+\emph{proof.}  Drop a term in the previous corollary.
 
-\item Triangle inequality (another corollary). $\|x+y\| \le \|x\|+\|y\|$
+\item \emph{Corollary (Cauchy-Schwarz).}  If $X$ is an inner product space and $x,y\in X$ then
+    $$|\ip{x}{y}| \le \|x\|\|y\|.$$
 
-proof. by Cauchy-Schwarz,
-   $$\|x+y\|^2 = \|x\|^2 + 2 \operatorname{Re}\ip{x}{y} + \|y\|^2 \le \|x\|^2 + 2 \|x\|\|y\| + \|y\|^2 = \left(\|x\|+\|y\|\right)^2$$
+\emph{proof.}  If $y=0$ the result is immediate.  Otherwise, $\{y/\|y\|\}$ is an ON set with one element.  Thus by Bessel's inequality, $\|x\|^2 \ge \left|\ip{\frac{y}{\|y\|}}{x}\right|^2 = \frac{|\ip{y}{x}|^2}{\|y\|^2}$.  The result follows by clearing denominators and taking square roots.
 
-\item Corollary. an inner product space is a normed space
+\item \emph{Corollary (Triangle inequality).}  If $X$ is an inner product space and $x,y\in X$ then
+    $$\|x+y\| \le \|x\|+\|y\|.$$
 
-\item Parallelogram law. if $x,y\in X$ where $(X,\ip{x}{y})$ is an inner product space, then
+\emph{proof.} By Cauchy-Schwarz,
+   $$\|x+y\|^2 = \|x\|^2 + 2 \operatorname{Re}\ip{x}{y} + \|y\|^2 \le \|x\|^2 + 2 \|x\|\|y\| + \|y\|^2 = \left(\|x\|+\|y\|\right)^2.$$
+
+\item \emph{Corollary.}  An inner product space is a normed vector space, thus a metric space.  The inner product is continuous.
+
+\item \emph{Parallelogram law.}  If $X$ is an inner product space and $x,y\in X$ then
     $$\|x+y\|^2 + \|x-y\|^2 = 2 \|x\|^2 + 2 \|y\|^2$$
 
-proof. computation; see Muscat Prop 10.8
+\emph{proof.} This is an easy computation: expand the left side and get the right side.
 
-side note. that this characterizes inner product spaces among normed vector spaces was proven by P.~Jordan \& J. von Neumann (1935) \dots but don't get distracted now
+\emph{note.}  In fact, the parallelogram law characterizes inner product spaces among the normed vector spaces.  This was proven by P.~Jordan \& J. von Neumann (1935).  However, don't get distracted by that; keep going!
 
-\item definition.  a $\CC$-inner product space $(X,\ip{\cdot}{\cdot})$ is a \emph{Hilbert space} if it is complete as a normed vector space
+\item Define \emph{Hilbert space}:  A $\CC$-inner product space $(X,\ip{\cdot}{\cdot})$ is a \emph{Hilbert space} if it is complete as a normed vector space.
 
-\item definition. for a normed vector space $X$, $A\subset X$ is \emph{convex} if $0\le \lambda \le 1$ and $u,v\in A$ imply $\lambda u + (1-\lambda) v\in A$
+\item Define \emph{convex}:  Given a normed vector space $X$, a subset $A\subset X$ is \emph{convex} if $0\le \lambda \le 1$ and $u,v\in A$ imply $\lambda u + (1-\lambda) v\in A$.
 
-\item Fundamental Theorem of Optimization. if $A \subset H$ is a closed, convex subset of a Hilbert space $H$ and if $x\in H$ then there is a unique $y_* \in A$ such that $\|x-y_*\| \le \|x-y\|$ for all $y\in A$
+\item \emph{Fundamental Theorem of Optimization.}  If $H$ is a Hilbert space,  $A \subset H$ is a closed and convex subset, and $x\in H$ then there is a unique $y_* \in A$ such that $\|x-y_*\| \le \|x-y\|$ for all $y\in A$.
 
-proof. see Muscat; uses parallelogram law, completeness of $H$, closedness of $A$, convexity of $A$
+\emph{proof.}  This is Theorem 10.11 in Muscat.  The proof uses the parallelogram law, the completeness of $H$, the closedness of $A$, and the convexity of $A$.
 
-\item definition.  given a subset $A\subset X$ of an inner product space,
-    $$A^\perp = \left\{x\in X \,:\, \ip{x}{a}=0 \text{ for all } a \in A\right\}$$
+\emph{note.}  I assert this is a good name for the theorem, but it is not universal.
 
-\item lemma. $A^\perp$ is a closed linear subspace of $X$
+\item Define \emph{$A$-perp}:  If $X$ is an inner product space and $A\subset X$ is any subset then
+    $$A^\perp = \left\{x\in X \,:\, \ip{x}{a}=0 \text{ for all } a \in A\right\}.$$
 
-proof. Prop 10.9 in Muscat
+\item \emph{Lemma.} If $X$ is an inner product space and $A\subset X$ is any subset then $A^\perp$ is a closed linear subspace of $X$ and $A^\perp = \overline{(\operatorname{span} A)}^\perp$.
 
-\item Theorem. if $M\subset H$ is a closed linear subspace of a Hilbert space, and if $x\in H$, then
-    $$\left(y_* \text{ is the closest point in $M$ to } x\right) \iff x-y_* \in M^\perp$$
-furthermore, $H=M\oplus M^\perp$ and $P:x\mapsto y_*$ defines $P\in B(H)$, an orthogonal projection onto $M$
+\emph{proof.} This is Proposition 10.9 in Muscat.  The proof uses the continuity of the inner product.
 
-proof. see Theorem 10.12 in Muscat
+\item \emph{Theorem (orthogonal decomposition and projection).}  If $H$ is a Hilbert space, $M\subset H$ is a closed linear subspace, $x\in H$, and $y\in M$ then
+    $$\left(y \text{ is the closest point in $M$ to } x\right) \iff x-y \in M^\perp.$$
+Furthermore, $H=M\oplus M^\perp$.  Finally, $P:x\mapsto y$, where $y$ is the closest point in $M$ to $x$, defines $P\in B(H)$, an orthogonal projection onto $M$.
 
-\item calculation. if $(X,\ip{\cdot}{\cdot})$ is an inner product space and $x\in X$ then $\phi(y) = \ip{x}{y}$ defines a continuous linear functional $\phi\in X^*$ because
-    $$|\phi(y)| = |\ip{x}{y}| \le \|x\|\|y\|$$
-so $\|\phi\|\le \|x\|$
+\emph{proof.}  This is Theorem 10.12 in Muscat.  The proof uses the Pythagorean theorem.  The fundamental theorem of optimization (and the completeness of $H$ and closedness of $M$) is needed so that a closest point exists.
 
-\item definition:
-    $$J:H \to H^*, \qquad x \mapsto \left[y\mapsto \ip{x}{y}\right]$$
-is the Riesz map
+\emph{note.}  The definition of ``orthogonal projection onto $M$'' is that $M=\image P$, $P^2=P$, and for all $x\in H$ we have $x-Px \perp M$.  Later we can simplify the last condition to $P^*=P$.
 
-\item Riesz Representation Theorem: the Riesz map is bijective, conjugate-linear, and isometric
+\item \emph{Lemma.}  If $X$ is an inner product space, $X^*$ is the dual space of continuous linear functionals, and $x\in X$ then $\phi(y) = \ip{x}{y}$ defines $\phi\in X^*$, and furthermore $\|\phi\| = \|x\|$.
 
-proof. see Muscat Theorem 10.16; uses closedness of $\ker \phi$, definition of $M^\perp$, fact $H=M\oplus M^\perp$
+\emph{proof.} By Cauchy-Schwarz, $|\phi(y)| = |\ip{x}{y}| \le \|x\|\|y\|$, thus $\phi$ is continuous and $\|\phi\|\le \|x\|$.  Also $\|\phi\|=\sup_{y\ne 0} \frac{|\ip{x}{y}|}{\|y\|} \ge \|x\|$ by choosing $y=x$.
 
-\item definition. given $T\in B(X,Y)$ define $T^*\in B(Y,X)$, the \emph{adjoint of $T$}, by $T^*y=w$ where $w$ represents functional $\phi(x) = \ip{y}{Tx}_X$, thus
-    $$\ip{T^*y}{x} = \ip{y}{Tx}$$
+\item Define the \emph{Riesz map}:  If $X$ is an inner product space then
+\begin{align*}
+J:X &\to X^* \\
+  x &\mapsto \big[\,x^*: y\mapsto \ip{x}{y}\,\big]
+\end{align*}
 
-\item FIXME: selection of other facts about adjoints
+\item \emph{Riesz Representation Theorem}  If $H$ is a Hilbert space then the Riesz map $J:H \to H^*$ is bijective, conjugate-linear, and isometric.
+
+\emph{proof.}  This is Theorem 10.16 in Muscat.  The proof uses the definition of $M^\perp$ for $M=\ker \phi$ and $\phi \in H^*$.  The continuity of $\phi$ shows $M$ is closed so $H=M\oplus M^\perp$ because $H$ is a Hilbert space (so we can use orthogonal decomposition).  Thus $J$ is onto.  The Lemma shows $J$ is isometric.  The remaining properties of $J$ follow from easy calculations.
 
 \item Gram-Schmidt process.  any sequence of vectors in an inner product space $(X,\ip{\cdot}{\cdot})$ can be replaced by an ON set with same span
 
@@ -176,6 +186,11 @@ proof. Prop 10.30 in Muscat; uses completeness of $H$ and $\ell^2$
     $$x = \sum_i \ip{e_i}{x}e_i, \qquad \|x\|^2 = \sum_i |\ip{e_i}{x}|^2$$
 
 proof. uses Bessel's inequality and previous lemma
+
+\item definition. given $T\in B(X,Y)$ define $T^*\in B(Y,X)$, the \emph{adjoint of $T$}, by $T^*y=w$ where $w$ represents functional $\phi(x) = \ip{y}{Tx}_X$, thus
+    $$\ip{T^*y}{x} = \ip{y}{Tx}$$
+
+\item FIXME: selection of other facts about adjoints
 
 \end{enumerate}
 \end{document}
