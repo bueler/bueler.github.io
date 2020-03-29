@@ -1,0 +1,72 @@
+\documentclass[10pt,hyperref]{beamer}
+
+% various settings for beamer; note there is a red color theme:
+\usetheme{Madrid}
+\usecolortheme{beaver}
+\setbeamercovered{transparent}
+\setbeamerfont{frametitle}{size=\large}
+\hypersetup{colorlinks}
+\usepackage{times}  % looks better than the default
+\setbeamercolor*{block title}{bg=red!10}
+\setbeamercolor*{block body}{bg=red!5}
+
+% possibly useful:
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ip}[2]{\left<#1,#2\right>}
+
+
+% PLEASE JUST CHANGE THE AUTHOR LINE AND LEAVE THE REST OF THE PREAMBLE:
+\title{Consequences of the Baire theorem}  % KEEP THIS TITLE
+\author{XXX YYY}  % PUT YOUR NAME HERE
+\date{\today}  % KEEP THIS
+
+
+\begin{document}
+\beamertemplatenavigationsymbolsempty  % RECOMMENDED TO KEEP
+
+% KEEP THE TITLE SLIDE:
+\begin{frame}
+  \maketitle
+\end{frame}
+
+
+% SUGGESTED FIRST SLIDE ... RECOMMENDED TO KEEP THIS AS IS
+\begin{frame}{the Baire theorem}
+
+\begin{definition}
+if $(X,d)$ is a metric space and $S \subset X$ then we say $S$ is \emph{nowhere dense} if the closure $\overline{S}$ contains no (positive radius) balls
+\end{definition}
+
+\begin{itemize}
+\item equivalently, the interior of the closure ${(\overline{S})}^\circ$ is empty
+\end{itemize}
+
+\begin{theorem}[Baire 1899]
+a nonempty complete metric space is not a countable union of nowhere dense sets
+\end{theorem}
+
+\begin{itemize}
+\item that is, if $(X,d)$ is complete and $X=\bigcup_{n=1}^\infty A_n$ then there exists a subset $A_n$ whose closure contains a ball: \quad $B_r(x) \subset \overline{A_n}$ for $x\in X$ and $r>0$
+\item the proof of the Baire theorem requires the axiom of choice
+\end{itemize}
+\end{frame}
+
+
+% DUPLICATE AND MODIFY THE FOLLOWING SLIDE (FRAME) AS NEEDED
+\begin{frame}{TITLE}
+
+CONTENT
+
+\begin{itemize}
+\item IT IS OFTEN GOOD TO USE ITEMS FOR SLIDES
+\end{itemize}
+
+% block environments you might use inside a frame:
+%\begin{definition} CONTENT \end{definition}
+%\begin{theorem} CONTENT \end{theorem}
+%\begin{lemma} CONTENT \end{lemma}
+%\begin{corollary} CONTENT \end{corollary}
+\end{frame}
+
+\end{document}
