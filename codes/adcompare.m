@@ -1,5 +1,5 @@
-function advectcompare(m,tf,ic)
-% ADVECTCOMPARE  Solve the scalar, constant-coefficient advection equation
+function adcompare(m,tf,ic)
+% ADCOMPARE  Solve the scalar, constant-coefficient advection equation
 %     u_t + a u_x = 0
 % for u(x,t), with periodic boundary conditions on [0,1].  Choice of
 % two initial conditions u(x,0): 'square' and 'hump'.  Uses m+1 grid points
@@ -9,10 +9,10 @@ function advectcompare(m,tf,ic)
 %     upwind
 %     Lax-Wendroff
 % each subject to CFL.  Computes time-step k by version of CFL:
-%     nu = a k / h = C    where C = .9 < 1
-% Usage:  >> advectcompare(m,tf,ic)
-% Examples:  >> advectcompare
-%            >> advectcompare(100,2,'hump')
+%     nu = a dt / dx = C    where C = .9 < 1
+% Usage:  >> adcompare(m,tf,ic)
+% Examples:  >> adcompare
+%            >> adcompare(100,2,'hump')
 
 if nargin < 3,  ic = 'square';  end
 if nargin < 2,  tf = 1.0;       end
@@ -25,17 +25,17 @@ x = 0:h:1.0-h;        % interpret as periodic grid
 C = 0.9;              % use this Courant number
 k = C * h / a;        % k = dt;  CFL says |a| k <= h
 NN = ceil(tf / k);    % fix k so integer number of steps
-printf('solving with dx = %.5f, dt = %.5f, and N = %d steps ...\n',h,k,NN)
+printf('solving with dx = %.5f, dt = %.5f, and N = %d steps ...\n',h,k,NN);
 
 % initial condition
-if ic == 'square'
+if strcmp(ic,'square')
     U = ones(size(x));  U(x < 0.4) = 0.0;  U(x > 0.6) = 0.0;
 else
     U = sin(pi * x).^20;
 end
 
 % solve advection equation
-Uup = U;  Ulf = U;  Ulw = U;
+Uup = U;  Ulw = U;
 if NN > 0
     k = tf / NN;
     nu = a * k / h;
@@ -53,9 +53,9 @@ subplot(2,1,1),  plot(x,Uup,'k-o'),  axis(axisbox),  grid on,  title('upwind')
 subplot(2,1,2),  plot(x,Ulw,'k-o'),  axis(axisbox),  grid on,  title('Lax-Wendroff')
 
 % add exact solution if appropriate
-if abs(mod(tf + 1.0e-10,1.0)) < 2.0e-10
+if abs(mod(tf + 1.0e-10,1.0)) < 2.0e-10   % did we wrap an integer number of times?
     xfine = linspace(0,1,1001);
-    if ic == 'square'
+    if strcmp(ic,'square')
         Ufine = ones(size(xfine));  Ufine(xfine < 0.4) = 0.0;  Ufine(xfine > 0.6) = 0.0;
     else
         Ufine = sin(pi * xfine).^20;
@@ -74,3 +74,4 @@ end
     end
 
 end % function
+
