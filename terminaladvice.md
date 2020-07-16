@@ -37,3 +37,6 @@ Now you can use the alias to open the file
 
 When using linux I do something very similar.
 
+
+
+
