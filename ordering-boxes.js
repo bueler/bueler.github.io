@@ -33,17 +33,22 @@ window.onload = function (evt) {
             document.getElementById("checkBox").checked = true;
         }
 
+        // determine width available for floating boxes
+        // the sidebar width is defined in new-style.css
         var k, obj, collom,
-            wW = width - 310;
+            //wW = width - 310;  // for .sidebar.width = 250px
+            wW = width - 360;  // for .sidebar.width = 300px
             if (width<=1100 || !sidebarChange){
                 wW = width-40;
                 document.getElementById("m").style.left = 20+'px'
                 document.getElementById("m").style.width = wW+'px'
                 document.getElementById("n").style.left = 10+'px'
             } else{
-                document.getElementById("m").style.left = 280+'px'
+                // document.getElementById("m").style.left = 280+'px'  // for .sidebar.width = 250px
+                document.getElementById("m").style.left = 330+'px'  // for .sidebar.width = 300px
                 document.getElementById("m").style.width = wW+'px'
-                document.getElementById("n").style.left = 270+'px'
+                //document.getElementById("n").style.left = 270+'px'  // for .sidebar.width = 250px
+                document.getElementById("n").style.left = 320+'px'  // for .sidebar.width = 300px
             }
         for(i = 1; i <post.length+1; i++) {
             id = 'p' + i;
