@@ -26,7 +26,7 @@
 
 \begin{document}
 
-\title{Comparison of programming languages \\ for the numerical analysis classroom}
+\title{Programming languages \\ for the numerical analysis classroom}
 
 \author{Ed Bueler}
 
@@ -38,11 +38,9 @@
 
 \newcommand{\hrf}[2]{\href{#1}{\texttt{#2}}}
 
-On the next page are two algorithms each in \Matlab/\Octave (left column) and \Python (right column).  To download these examples, go to \hrf{http://bueler.github.io/M310F19}{bueler.github.io/M310F19} and follow the links in the left column.
+\Matlab (``matrix laboratory''; see \hrf{http://www.mathworks.com/}{mathworks.com}) was created in the late 1970s by Cleve Moler for teaching numerical linear algebra without requiring FORTRAN programming.  It has since become a powerful programming language and engineering tool.  A large fraction of upper-division and graduate students at UAF are already familiar with it, and it is available through UAF.  The ``Matlab student'' version at \hrf{https://www.mathworks.com/academia/student_version.html}{\texttt{www.mathworks.com/academia/ student\_version.html}}, works fine for the numerical mathematics classes I teach.  It works well, looks good, and I like it.
 
-A bit of background is useful.  \Matlab (``matrix laboratory''; see \hrf{http://www.mathworks.com/}{mathworks.com}) was created in the late 1970s by Cleve Moler for teaching numerical linear algebra without directly using FORTRAN calls.  It has since become a powerful programming language and engineering tool.  A large fraction of upper-division and graduate students at UAF, at least in technical majors, are already familiar with it.  It is available in many labs and graduate student offices at UAF.  It works well, looks good, and I like it.  Note the ``Matlab student'' version at \hrf{https://www.mathworks.com/academia/student_version.html}{\texttt{www.mathworks.com/academia/ student\_version.html}}, for \$49, works fine for the numerical mathematics classes I teach.
-
-\Matlab is recommended if you have no existing preference, but I prefer free and open source software.  Among the free alternatives to \Matlab are three which work very well for my courses:
+\Matlab is recommended if you have no existing preference, but I prefer free and open source software.  Among the alternatives are three which work very well for numerical courses:
 \renewcommand{\labelenumi}{\arabic{enumi}.}
 \begin{enumerate}
 \item \Octave is a \Matlab clone.  Download it at
@@ -51,18 +49,28 @@ A bit of background is useful.  \Matlab (``matrix laboratory''; see \hrf{http://
 \item The Julia language (\hrf{https://julialang.org/}{julialang.org}) is a modern redesign of \Matlab, but it is not a compatible clone like \Octave.  It easy to learn.  Equivalent codes run much faster than in \Matlab or \Octave.
 \end{enumerate}
 
-Here are some brief ``how-to'' comments for the \Matlab/\Octave examples: Program \texttt{gaussint.m} is a \emph{script}.  A script is run by starting \Matlab/\Octave, usually in the directory containing the script you want to run.  Then type the name of the script at the prompt, without the \texttt{.m}:
+On the next page are two algorithms each in \Matlab/\Octave (left column) and \Python (right column); see me for the corresponding Julia examples.  To download these examples, go to
+
+\smallskip
+
+\centerline{\hrf{http://bueler.github.io/M614F21}{bueler.github.io/M614F21}}
+
+\noindent and look in the left column.  Next are some brief ``how-to'' comments.
+
+Program \texttt{gaussint.m} is a \emph{script}.  A script is run by starting \Matlab/\Octave, usually in the directory containing the script you want to run.  Then type the name of the script at the prompt, without the \texttt{.m}:
 
 \verb|>> gaussint|
 
-\noindent Typing \,\verb|help gaussint|\, at the \Matlab/\Octave prompt shows the block of comments as documentation.  The second code \verb|bis.m| is a \emph{function} which needs inputs.  At the prompt enter
+\noindent Typing \,\verb|help gaussint|\, at the \Matlab/\Octave prompt shows the first block of comments.
+
+\verb|bis.m| is a \emph{function} which needs inputs.  At the prompt enter, for example,
 \begin{Verbatim}
 >> f = @(x) cos(x) - x
 >> bis(0,1,f)
 \end{Verbatim}
-for example.  We have given \verb|bis.m| three arguments; the last is a function.
+Note we have given \verb|bis.m| three arguments; the last is a function.
 
-For the \Python codes:  You can do \verb|python gaussint.py| directly from a shell.  Alternatively, from the \Python or \ipython prompt, type \verb|import gaussint|.  For the function \verb|bis.py|, first do: \verb|from bis import bis|.  Then run the example as shown in the docstring.  (In \ipython you can type \verb|bis?| to print the docstring.)
+For the \Python codes:  You can do \verb|python gaussint.py| directly from a shell.  Alternatively, from the \Python or \ipython prompt, type \verb|run gaussint|.  For the function \verb|bis.py|, first do: \verb|from bis import bis|.  Then run the example as shown in the docstring; in \ipython you can type \verb|bis?| to print the docstring.
 
 \vfill
 
