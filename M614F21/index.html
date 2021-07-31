@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ed Bueler">
+  <meta name="description" content="course page for Math 614 in Fall 2021 taught by Bueler">
+  <title>Math 614 Numerical Linear Algebra Fall 2021 (Bueler)</title>
+  <link href="../style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<br>
+<h1>Math 614 Numerical Linear Algebra</h1>
+
+<h2>Fall 2021, UAF</h2>
+
+<h2><span style="color: DarkRed">UNDER CONSTRUCTION</span></h2>
+
+<center>
+
+<table style="width:99%;">
+    <col style="width:15%;">
+    <col style="width:40%;">
+    <tr>
+      <td style="vertical-align: top;  padding-right:40px;">
+
+        <div align="left">
+        <span style="font-weight: bold;"><a href="../index.html">Ed Bueler</a></span><br>
+        <a href="mailto:elbueler@alaska.edu">elbueler@alaska.edu</a><br><br>
+
+        <span style="font-weight: bold;">Office</span>: Chapman 306C (<a href="../OffHrs.htm">hours</a>)<br><br>
+
+        <span style="font-weight: bold;">Sections</span>:<br>
+        in person: &nbsp; F01, crn 74997<br>
+        online: &nbsp; FXA, crn 75737<br><br>
+
+        <span style="font-weight: bold;">Class times and room</span>:<br>
+        MWF 10:30--11:30am<br>
+        Chapman 107 (or web-based)<br><br>
+
+        <h3><a href="syllabus.htm">FIXME Syllabus</a>  &nbsp; and &nbsp;  <a href="advert.htm">Advertisement</a></h3>
+        <br>
+
+      <span style="font-weight: bold;">Parts of the course:</span><br><br>
+      <table border="1" cellpadding="2" cellspacing="2" width="100%">
+          <tr>
+            <td valign="top">A<br>
+            </td>
+            <td valign="top">matrix mechanics & vector spaces<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">B<br>
+            </td>
+            <td valign="top"> geometric linear algebra</td>
+          </tr>
+          <tr>
+            <td valign="top">C<br>
+            </td>
+            <td valign="top">SVD<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">D<br>
+            </td>
+            <td valign="top">QR & least squares<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">E<br>
+            </td>
+            <td valign="top">conditioning & stability<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">F<br>
+            </td>
+            <td valign="top">systems of equations<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">G<br>
+            </td>
+            <td valign="top">computing eigenvalues<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top">H<br>
+            </td>
+            <td valign="top">iterative methods<br>
+            </td>
+          </tr>
+      </table>
+      <br><br>
+
+        <span style="font-weight: bold;">Required text</span>: L. Trefethen and D. Bau, <span style="font-style: italic;">Numerical Linear Algebra</span>, SIAM Press 1997.  (<span style="font-style: italic;">at UAF bookstore or <a href="http://bookstore.siam.org/ot50/">$74 at bookstore.siam.org</a></span>)<br><br>
+
+        Three other texts are <span style="font-weight: bold;">recommended</span>.&nbsp; The first is a great Matlab tutorial which is freely-available online.  The second is a standard reference for numerical linear algebra.  The third is a next course if you want to do research in this area.</small> 
+        <ul>
+          <li><a href="https://www.mathworks.com/moler/index_ncm.html">C. Moler, <span style="font-style: italic;">Numerical
+            Computing with MATLAB</span>, SIAM Press 2004</a></li>
+          <li>G. Golub & C. van Loan, <span style="font-style: italic;">Matrix Computations</span>, 4th Ed., Johns Hopkins U. Press 2013</li>
+          <li>N. Higham, <span style="font-style: italic;">Accuracy and Stability of Numerical Algorithms</span>, SIAM Press 2002</li>
+        </ul>
+
+        <br>
+        <span style="font-weight: bold;">Matlab/Octave codes:</span><br> 
+        <ul>
+          <li><a href="../bis.m">bis.m</a></li>
+          <li><a href="../gaussint.m">gaussint.m</a></li>
+        </ul>
+
+        <br>
+        <span style="font-weight: bold;">a few Python codes:</span><br>
+        <ul>
+          <li><a href="../bis.py">bis.py</a></li>
+          <li><a href="../gaussint.py">gaussint.py</a></li>
+        </ul>
+
+        <br>
+        <span style="font-weight: bold;">Links:</span><br>
+
+        <ul>
+          <li><a href="../M614F15/index.html">previous version of course: Math 614 in Fall 2015</a></li>
+          <li>the <a href="http://www.mathworks.com/academia/student_version/">student version of <span style="font-style: italic;">MATLAB</span></a> works fine for this course</li>
+        </ul>
+        </div>
+      </td>
+
+      <td style="vertical-align: top;">
+        <center><h4>Schedule: (version 30 July)</h4></center>
+
+<!--     BIG TABLE HERE:  -->
+
+<table border="1">
+    <col style="width:5%;">
+    <col style="width:15%;">
+    <col style="width:10%;">
+    <col style="width:45%;">
+    <col style="width:25%;">
+    <tr>
+        <th>Part</th>
+        <th>Day</th>
+        <th>Section</th>
+        <th>Topic / Materials</th>
+        <th>Due / Assigned</th>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>A</td>
+        <td>Mon 8/23</td>
+        <td></td>
+        <td>intro to Matlab/Octave
+            <ul>
+              <li> <a href="compareMOP.pdf"><span style="font-style: italic;">FIXME MATLAB/Octave/Python</span> compared</a></li>
+            </ul>
+            </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>A</td>
+        <td>Wed 8/25</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>A</td>
+        <td>Fri 8/27</td>
+        <td>1</td>
+        <td>matrix/vector thinking</td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>A</td>
+        <td>Mon 8/30</td>
+        <td></td>
+        <td>vector spaces, bases</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>B</td>
+        <td>Wed 9/1</td>
+        <td>2</td>
+        <td>inner products and orthogonality</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>B</td>
+        <td>Fri 9/3</td>
+        <td>3</td>
+        <td>norms of vectors and matrices</td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td></td>
+        <td>Mon 9/6</td>
+        <td></td>
+        <td><span style="color: rgb(0, 153, 0);">no class: Labor Day</span></td>
+        <td><span style="color: rgb(0, 153, 0);">no class</span></td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <td>Wed 9/8</td>
+        <td>4</td>
+        <td>the singular value decomposition (SVD)</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <td>Fri 9/10</td>
+        <td></td>
+        <td>SVD existence theorem</td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>C</td>
+        <td>Mon 9/13</td>
+        <td></td>
+        <td>...</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <td>Wed 9/15</td>
+        <td></td>
+        <td>by-hand calculation of SVD</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <td>Fri 9/17</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>C</td>
+        <td>Mon 9/20</td>
+        <td>5</td>
+        <td>applications of SVD</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <td>Wed 9/22</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>D</td>
+        <td>Fri 9/24</td>
+        <td>6</td>
+        <td>projectors</td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>D</td>
+        <td>Mon 9/27</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>D</td>
+        <td>Wed 9/29</td>
+        <td>7</td>
+        <td>Gram-Schmidt process and QR factorization</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>D</td>
+        <td>Fri 10/1</td>
+        <td></td>
+        <td>...</td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>D</td>
+        <td>Mon 10/4</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>D</td>
+        <td>Wed 10/6</td>
+        <td>8</td>
+        <td>modified Gram-Schmidt/operation count</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>D</td>
+        <td>Fri 10/8</td>
+        <td>10</td>
+        <td>Householder reflections</td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>D</td>
+        <td>Mon 10/11</td>
+        <td></td>
+        <td>...</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>D</td>
+        <td>Wed 10/13</td>
+        <td>11</td>
+        <td>least squares (by QR, SVD and normal eqns)</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>D</td>
+        <td>Fri 10/15</td>
+        <td></td>
+        <td>...</td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>E</td>
+        <td>Mon 10/18</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>E</td>
+        <td>Wed 10/20</td>
+        <td>12</td>
+        <td>conditioning of problems</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>E</td>
+        <td>Fri 10/22</td>
+        <td></td>
+        <td>...</td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>E</td>
+        <td>Mon 10/25</td>
+        <td>13</td>
+        <td>floating point arithmetic</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>E</td>
+        <td>Wed 10/27</td>
+        <td>14</td>
+        <td>backward stability of algorithms</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>E</td>
+        <td>Fri 10/29</td>
+        <td>15</td>
+        <td>a fundamental theorem</td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>E</td>
+        <td>Mon 11/1</td>
+        <td>16</td>
+        <td>backward stability of Householder QR</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>E</td>
+        <td>Wed 11/3</td>
+        <td>17</td>
+        <td>backward stability of back-substitution</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>Fri 11/5</td>
+        <td>20</td>
+        <td>Gauss elimination as LU</td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>F</td>
+        <td>Mon 11/8</td>
+        <td>21</td>
+        <td>LU with w. partial pivoting</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>Wed 11/10</td>
+        <td>22</td>
+        <td>stability of  LU</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>Fri 11/12</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>F</td>
+        <td>Mon 11/15</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>F</td>
+        <td>Wed 11/17</td>
+        <td>23</td>
+        <td>Cholesky</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>G</td>
+        <td>Fri 11/19</td>
+        <td>24</td>
+        <td>eigenvalues</td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>G</td>
+        <td>Mon 11/22</td>
+        <td>25</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Wed 11/24</td>
+        <td></td>
+        <td><span style="color: rgb(0, 153, 0);">no class: Thanksgiving</span></td>
+        <td><span style="color: rgb(0, 153, 0);">no class</span></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Fri 11/26</td>
+        <td></td>
+        <td><span style="color: rgb(0, 153, 0);">no class: Thanksgiving</span></td>
+        <td><span style="color: rgb(0, 153, 0);">no class</span></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td>G, H</td>
+        <td>Mon 11/29</td>
+        <td>26, 27, 28, 32</td>
+        <td>QR algorithm for eigenvalues<br>
+            iterative methods: overview</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>H</td>
+        <td>Wed 12/1</td>
+        <td>35, 33</td>
+        <td>GMRES</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>H</td>
+        <td>Fri 12/3</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr style="border-top: 4px solid #000;">
+        <td></td>
+        <td>Mon 12/6</td>
+        <td></td>
+        <td><em>study for Final Exam :-)</em></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Wed 12/8</td>
+        <td></td>
+        <td><span style="color: DarkRed">Final Exam 10:15am-12:15pm</span></td>
+        <td><span style="color: DarkRed;">Final Exam</span></td>
+    </tr>
+</table>
+<br>
+    </td>
+</table>
+</center>
+
+</body>
+</html>
