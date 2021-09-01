@@ -1,0 +1,82 @@
+\documentclass{amsart}
+
+
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{palatino}
+
+% inclusion/figure macros
+\usepackage{graphicx}
+
+\usepackage{amsmath}
+% macros
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bg}{\mathbf{g}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\complex}{\mathbf{C}}
+\newcommand{\Div}{\nabla\cdot}
+\newcommand{\DivH}{\nabla_H\cdot}
+\newcommand{\ddx}[1]{\frac{\partial #1}{\partial x}}
+\newcommand{\ddy}[1]{\frac{\partial #1}{\partial y}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\gradH}{\nabla_H}
+\newcommand{\ip}[2]{\left<#1,#2\right>}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+%\newcommand{\qed}{\emph{ q.e.d.}}
+\newcommand{\real}{\mathbf{R}}
+\newcommand{\vf}{\varphi}
+%\renewcommand{\note}[1]{\tiny{\textbf{NOTE: #1}.}}
+
+\newcommand{\alert}[1]{{\color{red} #1}}
+
+\begin{document}
+
+\Huge
+\centerline{Matrix Norm Essentials}
+
+\thispagestyle{empty}
+
+\bigskip\bigskip\bigskip\bigskip\bigskip
+\LARGE
+\begin{itemize}
+\setlength\itemsep{1em}
+\item Matrix norms have vector norm \alert{properties}:
+  \begin{itemize}
+  \item[$\circ$] $\|A\| \ge 0$ and $\|A\|=0 \,\implies \,A=0$
+  \item[$\circ$] $\|A+B\| \le \|A\| + \|B\|$
+  \item[$\circ$] $\|\alpha A\| = |\alpha|\,\|A\|$
+  \end{itemize}
+\item Induced norms, and the Frobenius norm, have additional \alert{multiplicative} property
+  \begin{itemize}
+  \item[$\circ$] $\|A B\|\le \|A\|\|B\|$
+  \end{itemize}
+\item Really only \alert{four} norms to know:
+  $$\|\cdot\|_1, \quad \|\cdot\|_2, \quad \|\cdot\|_\infty, \quad \|\cdot\|_{\mathrm{Frob}}$$
+  \begin{itemize}
+  \item[$\circ$] 3 have \alert{easy-to-compute formulas}: \quad $1,\infty,\mathrm{Frob}$
+  \item[$\circ$] 3 are \alert{induced} from vector norms: \quad $1,2,\infty$
+  \end{itemize}
+\item Induced norms have $\rho(A)\le \|A\|$.
+  \begin{itemize}
+  \item[$\circ$] But \alert{expect} $\rho(A)<\|A\|$ in general, and sometimes $\rho(A)\ll\|A\|$.
+  \end{itemize}
+\item $\|\cdot\|_2$ norm best for \alert{Euclidean ideas} and \alert{hermitian/normal matrices}.  Reasons: 
+  \begin{itemize}
+  \item[$\circ$]  $\|QA\|_2 = \|A\|_2$ if $Q$ is unitary ($Q^* Q = I$).
+  \item[$\circ$]  $\sigma_1(A) = \|A\|_2$.
+  \item[$\circ$]  If $A^*=A$ then $\rho(A)=\|A\|_2$.
+  \end{itemize}
+\item \alert{Iteration} $v, Av, A^2v, \dots$ converges if and only if
+    $$\rho(A)<1.$$
+  \begin{itemize}
+  \item[$\circ$] Thus \alert{if} $\|A\|<1$ \alert{then} convergence.  Not conversely!
+  \end{itemize}
+\end{itemize}
+
+\end{document}
+
