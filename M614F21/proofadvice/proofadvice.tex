@@ -1,0 +1,101 @@
+\documentclass[12pt]{amsart}
+%\pagestyle{empty} 
+\setlength{\topmargin}{-0.3in} % usually -0.25in
+\addtolength{\textheight}{.75in} % usually 1.25in
+\addtolength{\oddsidemargin}{-1.0in}
+\addtolength{\evensidemargin}{-1.0in}
+\addtolength{\textwidth}{2.0in} %\setlength{\parindent}{0pt}
+
+% macros
+\usepackage{amssymb,xspace}
+\usepackage[final]{graphicx}
+\usepackage{hyperref}
+
+\newcommand{\regfigure}[3]{\includegraphics[height=#2in,width=#3in]{#1.eps}}
+
+\newtheorem*{lem*}{Lemma}
+
+\newcommand{\mtt}{\texttt}
+\newcommand{\mtl}[1]{{\texttt{>>#1}}}
+\usepackage{alltt}
+\usepackage{verbatim} % for "comment" environment
+\newcommand{\mfile}[1]
+{\medskip\begin{quote} \begin{alltt}\input{C:/MATLABR11/work/#1.m}\end{alltt} \end{quote}\medskip}
+
+\newcommand{\CC}{{\mathbb{C}}}
+\newcommand{\RR}{{\mathbb{R}}}
+\newcommand{\eps}{\epsilon}
+\newcommand{\ZZ}{{\mathbb{Z}}}
+\newcommand{\ZZn}{{\mathbb{Z}}_n}
+\newcommand{\NN}{{\mathbb{N}}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\ip}[2]{\mathrm{\left<#1,#2\right>}}
+\newcommand{\erf}{\operatorname{erf}}
+\newcommand{\spn}{\operatorname{span}}
+
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+\newcommand{\Octave}{\textsc{Octave}\xspace}
+\newcommand{\pylab}{\textsc{pylab}\xspace}
+\newcommand{\MOP}{\textsc{Matlab}\big|\textsc{Octave}\big|\textsc{pylab}\xspace}
+
+\newcommand{\prob}[1]{\bigskip\bigskip\noindent\large\textbf{#1.} \normalsize}
+\newcommand{\bookprob}[1]{\bigskip\bigskip\noindent\large\textbf{Exercise #1.} \normalsize}
+\newcommand{\ppart}[1]{\medskip\noindent\large\textbf{\emph{#1})}\normalsize}
+
+\newcommand{\textbook}{\textsc{Trefethen \& Bau}}
+
+\begin{document}
+\scriptsize \noindent Math 614 Numerical Linear Algebra (Bueler) \hfill \today
+\normalsize
+
+\bigskip\bigskip
+
+\Large\textbf{\centerline{On proving, and on writing proofs}}
+\normalsize
+\medskip
+
+\thispagestyle{empty}
+
+On assignments you are asked to ``show that \dots'' or ``prove that \dots''.  To do so you should clearly understand the full range of cases you are addressing.  You need to understand what assumptions you may make and the conclusion you wish to draw.  (Looking at some particular cases is often the way to get these understandings, but it is not the proof!)  Then you should make a general, precise, and complete argument which shows that your assumptions imply your conclusion.
+
+\medskip
+That is, you need to \emph{prove}.  A proof is a careful argument, aimed at a human audience (\emph{me}!), that reflects complete logical understanding of a situation.
+\medskip
+
+For example, suppose an exercise says:
+\newcommand{\nprob}[1]{\medskip\noindent\textbf{#1.}}
+\begin{quote}
+\nprob{Exercise 666}  Show that if $A$ is an invertible $m\times m$ matrix and if $B$ is an $m\times n$ matrix of full rank, with $n\le m$, then $AB$ has full rank.
+\end{quote}
+
+\medskip
+\noindent An appropriate \textbf{solution} starts with a restatement of what is proved:
+
+\bigskip
+
+\begin{quote}
+\nprob{Exercise 666}  Suppose $m\ge n$.  Suppose $A\in \CC^{m\times m}$ is an invertible matrix and $B\in \CC^{m\times n}$ is a matrix with full rank.  If $C=AB$ then $C$ has rank $n$.
+
+\begin{proof}  Note that $C\in\CC^{m\times n}$.  Let $v_1,v_2$ be distinct vectors in $\CC^n$.  By Theorem 1.2 in \textbook, because $B$ has full rank, $w_1=B v_1$ and $w_2 = B v_2$ are distinct vectors in $\CC^m$.  By Theorem 1.3, $A$ has full rank, so, by Theorem 1.2, $z_1=Aw_1$ and $z_2=Aw_2$ are distinct vectors.  But
+	$$z_i = A w_i = A(B v_i) = (AB) v_i = C v_i$$
+for $i=1,2$.  Thus $C$ maps distinct vectors $v_1,v_2$ to distinct vectors $z_1,z_2$.  Again by Theorem 1.2, $C$ has full rank.
+\end{proof}
+
+\end{quote}\bigskip
+
+\noindent Note these style elements:
+\begin{itemize}
+\item What I assume is clearly stated.  Do not be afraid to restate the exercise.
+\item What I intend to prove (i.e.~the claim ``$C$ has rank $n$'') is clearly stated.
+\item The proof is separated from the claim, and its beginning and end are indicated.
+\end{itemize}
+\medskip
+
+Such a concrete style helps when I am grading your homework.  It helps me determine if your argument does or does not prove the claim, but this style also helps you.  For instance, if you find you cannot prove the most general statement, but you can prove something which (for instance) has stronger assumptions but the same conclusion, then that situation is \emph{clear}.  And you will get an appropriate amount of credit.  I will give much less credit for either a confused statement of what has been proved, or for confused logic inside the proof.
+\medskip
+
+I recommend the style of proof used here, as it has been proven to be an effective style by generations of mathematicians who communicate effectively to each other.  You are not obliged to use this style, but you must still make the careful and complete argument.
+
+\end{document}
+
