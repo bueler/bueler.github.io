@@ -16,7 +16,7 @@ end
 sum = 0.0;
 for k = 1:n
   if k < n
-    sum = sum + x(k) * y(k+1) - x(k+1) * y(k);    
+    sum = sum + x(k) * y(k+1) - x(k+1) * y(k);
   else
     sum = sum + x(k) * y(1) - x(1) * y(k);
   end
