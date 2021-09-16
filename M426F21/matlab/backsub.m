@@ -1,6 +1,6 @@
 function x = backsub(U,b)
 % BACKSUB   Solve an upper triangular linear system.
-% (Corrected by ELB to work in Octave.)
+% (Corrected by ELB.  Checked in Octave.)
 % Input:
 %   U    upper triangular square matrix (n by n)
 %   b    right-hand side vector (n by 1)   

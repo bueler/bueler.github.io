@@ -1,6 +1,6 @@
 function x = forwardsub(L,b)
 % FORWARDSUB   Solve a lower triangular linear system.
-% (Corrected by ELB to work in Octave.)
+% (Corrected by ELB.  Checked in Octave.)
 % Input:
 %   L    lower triangular square matrix (n by n)
 %   b    right-hand side vector (n by 1)   
