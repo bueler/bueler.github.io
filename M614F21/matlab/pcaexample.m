@@ -9,7 +9,7 @@ n = 200;
 M = randn(3,3);  [Q,R] = qr(M);   % generate a random rotation Q of 3-space
 X = 5 * sqrt(abs([100 * randn(n,2), 20 * rand(n,1).^5 + pi])) * Q;
 
-% plot the raw data, and indicate the mean
+% plot the raw data, and mark the mean
 figure(1)
 scatter3(X(:,1), X(:,2), X(:,3))
 hold on
