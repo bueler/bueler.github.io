@@ -1,13 +1,17 @@
-% PIECOMPRESS  Read PIE.MAT and compress this monochrome image using
-% the SVD.
+% PIECOMPRESS  Compress a monochrome image using the SVD.
 
-load pie.mat    % >> whos   --> observe that A is 150 x 200 array
+% read the image
+Acolor = imread('pie.png');
+A = double(Acolor(:,:,2));  % grab green channel and make into double
+% whos                      % observe that A is 150 x 200 array
+
+% my Octave imread() has a bug; here is an alternate way to load:
+%load pie.mat
 
 % original image
 figure(1)
 colormap('gray'),  imagesc(A),  axis off
-rank(A)
-title('rank 150: uncompressed')
+title(sprintf('rank %d: uncompressed',rank(A)))
 [m, n] = size(A);
 sizeA = m * n;    % number of entries in A
 
