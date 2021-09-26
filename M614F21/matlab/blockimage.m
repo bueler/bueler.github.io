@@ -4,5 +4,5 @@ function blockimage(A)
 %   >> blockimage(magic(5))
 
 colormap('gray')      % make a monochrome image
-imagesc(A)            % treat A as an image (scaled shading)
+imagesc(A)            % show A as an image using scaled shading
 axis equal, axis off  % each entry is a square; declutter
