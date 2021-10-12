@@ -1,6 +1,6 @@
-% HILBTABLE  Produce a table, and a figure, of *computed* condition numbers
-% for some Hilbert matrices.  The computed condition numbers are garbage
-% once they reach 10^16 or so.
+% HILBTABLE  Produce a table, and a figure, of *computed* condition
+% numbers for some Hilbert matrices.  The computed condition numbers
+% are inaccurate garbage once they reach 10^16 or so.
 
 for n = 2:16
     A = hilb(n);
