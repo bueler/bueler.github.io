@@ -1,0 +1,183 @@
+\documentclass[11pt]{amsart}
+%prepared in AMSLaTeX, under LaTeX2e
+\addtolength{\oddsidemargin}{-.75in} 
+\addtolength{\evensidemargin}{-.75in}
+\addtolength{\topmargin}{-.4in}
+\addtolength{\textwidth}{1.6in}
+\addtolength{\textheight}{.9in}
+
+\renewcommand{\baselinestretch}{1.05}
+
+\usepackage{verbatim,fancyvrb}
+
+\usepackage{tikz,palatino,amssymb}
+
+\newtheorem*{thm}{Theorem}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+\newtheorem*{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\mtt}{\texttt}
+\usepackage{alltt,xspace}
+\newcommand{\mfile}[1]
+{\medskip\begin{quote}\scriptsize \begin{alltt}\input{#1.m}\end{alltt} \normalsize\end{quote}\medskip}
+
+%\usepackage[final]{graphicx}
+
+\usepackage[pdftex, colorlinks=true, plainpages=false, linkcolor=blue, citecolor=red, urlcolor=blue]{hyperref}
+
+% macros
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+\newcommand{\eps}{\epsilon}
+\newcommand{\grad}{\nabla}
+\newcommand{\lam}{\lambda}
+\newcommand{\lap}{\triangle}
+
+\newcommand{\ip}[2]{\ensuremath{\left<#1,#2\right>}}
+
+%\renewcommand{\det}{\operatorname{det}}
+\newcommand{\onull}{\operatorname{null}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\range}{\operatorname{range}}
+
+\newcommand{\prob}[1]{\bigskip\noindent\textbf{#1.}\quad }
+\newcommand{\exer}[2]{\prob{Exercise #2 in Lecture #1}}
+
+\newcommand{\pts}[1]{(\emph{#1 pts}) }
+\newcommand{\epart}[1]{\medskip\noindent\textbf{(#1)}\quad }
+\newcommand{\ppart}[1]{\,\textbf{(#1)}\quad }
+
+\newcommand{\Matlab}{\textsc{Matlab}\xspace}
+
+\DefineVerbatimEnvironment{mVerb}{Verbatim}{numbersep=2mm,
+frame=lines,framerule=0.1mm,framesep=2mm,xleftmargin=4mm,fontsize=\footnotesize}
+
+
+\begin{document}
+\scriptsize \noindent Math 614 Numerical Linear Algebra (Bueler) \hfill 20 October, 2021
+\normalsize
+
+\medskip\bigskip
+\LARGE\centerline{IEEE 754: What it means for humanity and your computer}
+
+\bigskip
+\normalsize
+
+\thispagestyle{empty}
+
+The textbook\footnote{L.~Trefethen and D. Bau, \emph{Numerical Linear Algebra}, SIAM Press, 1997.} has an idealized view of floating point, which I think is wise.  However, in this separate document I lay out the basic details of how floating point numbers are \emph{actually} implemented on a computer.  They conform to the ``IEEE 754'' standard.
+
+\bigskip
+\begin{itemize}
+\setlength\itemsep{1em}
+\item Computer memories are organized into \emph{bytes}, that is, groups of 8 \emph{bits}.  A \emph{bit} is a binary digit, the irreducible atom of memory, always in either of two states $\{0,1\}$.
+
+\item \emph{Integers} are represented on computers using 1, 2, 4, or 8 bytes.  However, the way this is done is exact, easy, and not relevant to our algorithms of interest.
+
+\item The IEEE 754 standard is about how \emph{real} numbers are approximately represented in memory, that is, how \emph{floating point} numbers are represented.  ``Floating point'' is essentially just scientific notation, but using only finitely-many bits and thus representing only a finite subset of real numbers.  ``IEEE'' stands for ``Institute of Electrical and Electronics Engineers''.  For more information on the standard than described below, see the wikipedia page
+
+ \centerline{\url{en.wikipedia.org/wiki/IEEE_754}}
+
+
+\item The two best-known floating point representations use 32 (``\texttt{single}'') and 64 (``\texttt{double}'') bits, or 4 and 8 bytes, respectively.  These are called binary32 and binary64 in the standard.  In binary32, a.k.a.~\texttt{single}, the number
+       $$x = (-1)^s \times \left(1.d_1 d_2 d_3 \dots d_{23}\right)_{2} \times 2^{\left(e_1\dots e_8\right)_2 - 127}$$
+is represented by 32 bits this way:
+
+\medskip
+\hspace{-30mm}
+    \begin{tikzpicture}[scale=0.6]
+    \draw[xstep=1.0,ystep=1.0,gray,thin] (0.0,0.0) grid (32.0,1.0);
+    \node at (0.5,0.5) {\scriptsize $s$};
+    \foreach \x in {1,...,8} {
+      \node at (0.5 + \x * 1.0,0.5) {\scriptsize $e_{\x}$};
+    }
+    \foreach \x in {1,...,23} {
+      \node at (8.5 + \x * 1.0,0.5) {\scriptsize $d_{\x}$};
+    }
+    \end{tikzpicture}
+
+\noindent In binary64, a.k.a.~\texttt{double}, the number
+       $$x = (-1)^s \times \left(1.d_1 d_2 d_3 \dots d_{52}\right)_{2} \times 2^{\left(e_1\dots e_{11}\right)_2 - 1023}$$
+is represented by 64 bits this way:
+
+\medskip
+    \begin{tikzpicture}[scale=0.6]
+    \draw[xstep=1.0,ystep=1.0,gray,thin] (0.0,0.0) grid (25.0,1.0);
+    \node at (0.5,0.5) {\scriptsize $s$};
+    \foreach \x in {1,...,11} {
+      \node at (0.5 + \x * 1.0,0.5) {\scriptsize $e_{\x}$};
+    }
+    \foreach \x in {1,...,10} {
+      \node at (11.5 + \x * 1.0,0.5) {\scriptsize $d_{\x}$};
+    }
+    \node at (22.5,0.5) {\scriptsize $\dots$};
+    \node at (23.5,0.5) {\scriptsize $d_{51}$};
+    \node at (24.5,0.5) {\scriptsize $d_{52}$};
+    \end{tikzpicture}
+
+\item Note that the ``$1.$'' in the above representations, which appears before the $d_i$ bits, is always present and therefore it does \emph{not} use a bit of memory!  It is called the ``implicit leading bit''.
+
+\item The IEEE 754 standard uses more abstract language than the concrete way the bits are arranged above.  The standard says that every representable \emph{nonzero} number is of the form
+\begin{equation}
+x = (-1)^s \times \frac{m}{\beta^{t-1}} \times \beta^e  \label{ieeeform}
+\end{equation}
+for fixed positive integers $\beta$ (the \emph{base}) and $t$ (the \emph{precision}).  The other symbols, namely $s\in\{0,1\}$ (the \emph{sign}), the integer $m$ (the \emph{mantissa}), and the integer $e$ (the \emph{exponent}), depend on, and determine, $x$.  These satisfy
+\begin{equation}
+\beta^{t-1} \le m \le \beta^t - 1, \qquad e_{min} \le e \le e_{max}.  \label{ieeeconstraint}
+\end{equation}
+
+\item Unlike the system $\mathbb{F}$ in the textbook, in any actual floating-point representation there are only finitely-many allowed values of the exponent $e$, and thus only finitely-many representable floating point numbers.
+
+\item In the current version of the standard, namely IEEE 754-2008 if one ignores a minor revision in 2019, there are a number of formats but we ignore the \emph{decimal} standards with $\beta=10$, which are rarely used, and we look only at \emph{binary} formats with $\beta=2$.
+
+\item The four formats that matter most use 16, 32, 64, or 128 bits, respectively.  We have already shown how the first two are implemented in memory.  In terms of form \eqref{ieeeform} and constraints \eqref{ieeeconstraint}, they follow this table:
+
+\bigskip
+\small
+\begin{tabular}{lllllll}
+name     & common name & precision $t$ & exponent bits & exponent bias & $e_{min}$ & $e_{max}$ \\ \hline
+binary16 &      \texttt{half} & 11 &  5 &      $2^4-1=15$ &   -14 &   +15 \\
+binary32 &    \texttt{single} & 24 &  8 &     $2^7-1=127$ &  -126 &  +127 \\
+binary64 &    \texttt{double} & 53 & 11 & $2^{10}-1=1023$ & -1022 & +1023 \\
+binary128 &\texttt{quadruple} &113 & 15 &$2^{14}-1=16383$ &-16382 &+16383
+\end{tabular}
+\normalsize
+\medskip
+
+\item If you convert the precision and exponent limits to decimal you get these heuristic values:
+
+\bigskip
+\small
+\begin{tabular}{llll}
+name & decimal precision & decimal $e_{max}$ & decimal $e_{min}$ \\ \hline
+binary16 & 1.13 & 4.51 & -4.21 \\
+binary32 & 7.22 & 38.23 & -37.93 \\
+binary64 & 15.95 & 307.95 & -307.65 \\
+binary128 & 34.02 & 4931.77 & -4931.47
+\end{tabular}
+\normalsize
+\medskip
+
+\item Regarding the exponent, if all bits $e_i$ are zero or all are one then the number has special meaning.  That is, for normal numbers in \texttt{single} the standard requires $\left(e_1\dots e_8\right)_2 \in \{1,2,\dots,254\}$ and in \texttt{double} the standard requires $\left(e_1\dots e_{11}\right)_2 \in \{1,2,\dots,2046\}$.
+
+\item Representing the number zero, which  is \emph{not} in form \eqref{ieeeform}, is an example of ``special meaning.''  It is done by setting all bits other than $s$ to zero.  Because the sign bit is not determined, this means ``$+0$'' and ``$-0$'' exist as separate representations.  (Strange but true!)
+
+\item Also there are representations of $+\infty$ and $-\infty$, things that are ``not a number'' (``\texttt{NaN}''), and things called ``subnormal'' numbers.  For a subnormal number in the \texttt{single} representation, for example, the exponent is $\left(e_1\dots e_8\right)_2 = 0$ but then not all bits $d_i$ are zero.
+
+\item The IEEE 754 standard also addresses the rounding errors which occur with operations (addition, multiplication, etc.).  The goal is that axiom (13.7) in the textbook applies, but this topic is beyond the scope of this note.
+
+\item It is safe to assume your laptop implements IEEE-compliant binary64 floating point operations \emph{in hardware}.  Other types are commonly implemented in software, especially binary128, which is thus much slower on current computers.  The smaller binary16 and binary32 formats are typically used for \emph{storing} numbers, which increases storage capacity, but processor floating-point operations on these numbers might be done in binary64.
+
+\end{itemize}
+
+\end{document}
+
