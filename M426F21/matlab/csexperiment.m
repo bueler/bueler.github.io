@@ -1,10 +1,10 @@
 % CSEXPERIMENT  Plot and compare accuracy of piecewise-linear (PL) and
 % cubic spline (CS) interpolation of  f(x) = sin(5x)  on [0,3].
 
-nn = [10 20 40 80 160];
+nn = [10 20 40 80 160 320];
 plerr = zeros(size(nn));
 cserr = plerr;
-for q = 1:5
+for q = 1:length(nn)
     n = nn(q);
     t = linspace(0,3,n+1);     % nodes
     y = sin(5*t);              % points are (t(k),y(k))
@@ -30,4 +30,5 @@ legend(sprintf('PL error is O(n^{%.2f})',ppl(1)),...
        sprintf('CS error is O(n^{%.2f})',pcs(1)),...
        'location','southwest')
 xlabel n,  ylabel('uniform error')
+set(gca,'xtick',nn)
 axis tight
