@@ -91,7 +91,7 @@ li:hover ul {
 input {
       display: block;
       width: 40px;
-      height: 46px;
+      height: 60px;
       position: absolute;
       top: 10px;
       left: 5px;
@@ -203,7 +203,7 @@ a:link {   /* unvisited link */
 h2.hamburgerTag {
     position:absolute;
     font-size:1.3em;
-    top:0px;
+    top: 15px;
     left: 70px;
     z-index:1000;
 }
