@@ -53,12 +53,17 @@ window.onload = function (evt) {
         for(i = 1; i <post.length+1; i++) {
             id = 'p' + i;
             k = clums.indexOf(clums.min());
-            obj = document.getElementById(id).style;
-            obj.position = "absolute";
-            obj.top = clums[k] + 'px';
-            obj.width = (wW-25*colls)/colls + 'px';
-            obj.left = (wW/colls)*k + 20 +'px';
-            clums[k] += post[i].offsetHeight + 20;
+            if (document.getElementById(id)) {
+                obj = document.getElementById(id).style;
+                obj.position = "absolute";
+                obj.top = clums[k] + 'px';
+                obj.width = (wW-25*colls)/colls + 'px';
+                obj.left = (wW/colls)*k + 20 +'px';
+            }
+            clums[k] += 20;
+            if (post[i]) {
+                clums[k] += post[i].offsetHeight;
+            }
         }
     }
     $(window).resize(function(){
