@@ -240,6 +240,10 @@ img.centered {
     border-radius: 7px;
 }
 
+.picadjustable img {
+    border-radius: 7px;
+}
+
 .socialmedia {
     position: absolute;
     top:-5px;
