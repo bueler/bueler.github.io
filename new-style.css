@@ -236,11 +236,12 @@ img.centered {
 }
 
 .pic img {
-    width: 80%;
+    width: 90%;
     border-radius: 7px;
 }
 
-.picfixedwidth img {
+.picsmall img {
+    width: 70%;
     border-radius: 7px;
 }
 
