@@ -1,5 +1,8 @@
 all:
 
+compareMOP.zip:
+	zip compareMOP.zip gaussint.* bis.* compareMOP.pdf
+
 .PHONY: clean
 
 clean:
