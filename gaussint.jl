@@ -6,18 +6,18 @@
 # by left-hand, right-hand, and
 # trapezoid rules
 # example:
-#   julia> include("expint.jl")
+#   julia> include("gaussint.jl")
 
-Pkg.add("PyPlot")
-using PyPlot
+using Plots
+using Printf
+using SpecialFunctions
 
 N = 1000
 dx = (1 - 0) / N;
-x = linspace(0,1,N+1)
-y = exp(- x.^2 / pi)
+x = range(0, 1, length=N+1)
+y = exp.(- x.^2 / pi)
 
-plot(x,y)
-savefig("expint-julia.png")
+display(plot(x, y))
 
 lhand = dx * sum(y[1:end-1])
 @printf("lhand = %.15f\n", lhand)
@@ -28,3 +28,5 @@ trap  = (dx/2) * sum(y[1:end-1] + y[2:end])
 exact = (pi/2) * erf(1/sqrt(pi))
 @printf("exact = %.15f\n", exact)
 
+println("Press Enter to continue...")
+readline()
